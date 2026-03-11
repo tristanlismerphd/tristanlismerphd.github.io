@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tristan — Quantum Optics</title>
+  <title>Tristan Lismer — Quantum Optics</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,8 +31,8 @@
       pointer-events: none; z-index: 9999;
       transform: translate(-50%,-50%); mix-blend-mode: exclusion;
     }
-    #cur { width: 10px; height: 10px; background: var(--sun); }
-    #cur-ring { width: 34px; height: 34px; border: 1.5px solid var(--sun); }
+    #cur { width: 20px; height: 20px; background: var(--sun); }
+    #cur-ring { width: 56px; height: 56px; border: 2px solid var(--sun); }
 
     /* NAV */
     nav {
@@ -141,8 +141,8 @@
         linear-gradient(90deg, rgba(72,202,228,.07) 1px, transparent 1px);
       background-size: 28px 28px;
     }
-    
-    <img src="DSCF7754.jpg" style="width:100%;height:100%;object-fit:cover"> */
+    /* To use your own photo: replace the .photo-inner content with
+       <img src="your-photo.jpg" style="width:100%;height:100%;object-fit:cover"> */
     .photo-sil {
       position: relative; z-index: 1;
       display: flex; flex-direction: column; align-items: center; gap: .6rem; opacity: .45;
@@ -386,7 +386,7 @@
 <div id="cur-ring"></div>
 
 <nav>
-  <div class="nav-logo">T·M</div>
+  <div class="nav-logo">T·L</div>
   <ul>
     <li><a href="#about">About</a></li>
     <li><a href="#work">Work</a></li>
@@ -403,8 +403,8 @@
     <p class="hero-eyebrow">PhD Candidate · Quantum Optics · IQC Waterloo</p>
     <h1>
       <span class="c-sun">TRISTAN</span><br>
-      <span class="c-out">MAC</span><br>
-      DONALD
+      <span class="c-out">LIS</span><br>
+      MER
     </h1>
     <p class="hero-desc">
       Experimentally probing the foundations of quantum mechanics — one photon at a time. Based at the Institute for Quantum Computing, Waterloo.
@@ -644,7 +644,7 @@
     <div class="cl reveal">
       <p>Interested in quantum foundations, photonic experiments, or GPT theory? Want to collaborate, ask about the lab, or just talk physics? Reach out.</p>
       <div class="clinks">
-        <a href="mailto:tristan@uwaterloo.ca" class="clink"><span>→</span> tristan@uwaterloo.ca</a>
+        <a href="/cdn-cgi/l/email-protection#4337312a3037222d033634223726312f2c2c6d2022" class="clink"><span>→</span> <span class="__cf_email__" data-cfemail="6410160d1710050a24111305100116080b0b4a0705">[email&#160;protected]</span></a>
         <a href="https://iqc.uwaterloo.ca" target="_blank" class="clink"><span>→</span> IQC Waterloo</a>
         <a href="https://perimeterinstitute.ca" target="_blank" class="clink"><span>→</span> Perimeter Institute</a>
         <a href="https://github.com" target="_blank" class="clink"><span>→</span> GitHub</a>
@@ -664,7 +664,7 @@
   <p>Built with light &amp; coffee</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // CURSOR
   const cur = document.getElementById('cur');
   const ring = document.getElementById('cur-ring');
@@ -678,11 +678,4 @@
   })();
 
   // SCROLL REVEAL
-  const io = new IntersectionObserver(
-    entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
-    { threshold: .12 }
-  );
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-</script>
-</body>
-</html>
+  const io
