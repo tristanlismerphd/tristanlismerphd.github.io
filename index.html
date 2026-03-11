@@ -31,8 +31,8 @@
       pointer-events: none; z-index: 9999;
       transform: translate(-50%,-50%); mix-blend-mode: exclusion;
     }
-    #cur { width: 20px; height: 20px; background: var(--sun); }
-    #cur-ring { width: 56px; height: 56px; border: 2px solid var(--sun); }
+    #cur { width: 28px; height: 28px; background: var(--sun); opacity: .8; transition: transform .2s ease, border-color .2s; }
+    #cur-ring { width: 72px; height: 72px; border: 2px solid var(--sun); opacity: .45; transition: transform .25s ease, border-color .25s; }
 
     /* NAV */
     nav {
@@ -67,8 +67,12 @@
     }
     .hero-panel {
       position: absolute; inset: 0;
-      background: linear-gradient(155deg, var(--rock) 48%, #1a2e22 48.05%);
+      background: linear-gradient(180deg, #090912 0%, #0b1510 55%, #0f1f14 100%);
       z-index: 0;
+    }
+    .hero-mountains {
+      position: absolute; inset: 0; z-index: 1;
+      pointer-events: none;
     }
     .hero-left {
       display: flex; flex-direction: column; justify-content: flex-end;
@@ -81,8 +85,8 @@
     }
     h1 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(4.5rem, 9vw, 8.5rem);
-      line-height: .92; letter-spacing: .02em;
+      font-size: clamp(3.8rem, 7.5vw, 7.5rem);
+      line-height: .95; letter-spacing: .02em;
       opacity: 0; animation: fadeUp .7s .5s forwards;
     }
     h1 .c-sun    { color: var(--sun); }
@@ -398,13 +402,25 @@
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-panel"></div>
+  <div class="hero-panel">
+    <!-- minimalist mountains -->
+    <svg class="hero-mountains" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+      <!-- far range — faintest -->
+      <polygon points="0,700 0,420 180,260 340,380 500,210 660,350 820,190 980,320 1140,230 1300,340 1440,250 1440,700" fill="#0d1f15" opacity="0.9"/>
+      <!-- mid range -->
+      <polygon points="0,700 0,520 120,400 280,480 440,340 580,440 720,300 880,410 1020,330 1160,430 1300,360 1440,420 1440,700" fill="#0f2418" opacity="0.95"/>
+      <!-- foreground ridge — darkest, sharpest -->
+      <polygon points="0,700 0,620 100,560 220,600 360,510 480,570 600,490 740,555 860,480 980,540 1100,470 1220,530 1340,490 1440,520 1440,700" fill="#0c1c10"/>
+      <!-- subtle peak lines -->
+      <polyline points="180,260 340,380 500,210 660,350 820,190 980,320 1140,230 1300,340" fill="none" stroke="rgba(72,202,228,0.07)" stroke-width="1"/>
+      <polyline points="360,510 480,570 600,490 740,555 860,480 980,540 1100,470" fill="none" stroke="rgba(45,106,79,0.12)" stroke-width="1"/>
+    </svg>
+  </div>
   <div class="hero-left">
     <p class="hero-eyebrow">PhD Candidate · Quantum Optics · IQC Waterloo</p>
     <h1>
       <span class="c-sun">TRISTAN</span><br>
-      <span class="c-out">LIS</span><br>
-      MER
+      <span class="c-out">LISMER</span>
     </h1>
     <p class="hero-desc">
       Experimentally probing the foundations of quantum mechanics — one photon at a time. Based at the Institute for Quantum Computing, Waterloo.
@@ -424,15 +440,8 @@
     -->
     <div class="photo-frame">
       <div class="photo-inner">
-        <div class="photo-sil">
-          <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="32" r="22"/>
-            <path d="M10,110 Q10,72 50,68 Q90,72 90,110 Z"/>
-          </svg>
-          <span>Your photo here</span>
-        </div>
+        <img src="DSCF7754.jpg" style="width:100%;height:100%;object-fit:cover;object-position:top">
       </div>
-      <div class="photo-badge">Add photo →</div>
     </div>
   </div>
 
@@ -670,6 +679,19 @@
   const ring = document.getElementById('cur-ring');
   let mx=0, my=0, rx=0, ry=0;
   document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+  // grow cursor on interactive elements
+  document.querySelectorAll('a, button, .btn, .card, .pi, .cvi').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cur.style.transform  = 'translate(-50%,-50%) scale(1.8)';
+      ring.style.transform = 'translate(-50%,-50%) scale(1.5)';
+      ring.style.borderColor = 'var(--sky)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cur.style.transform  = 'translate(-50%,-50%) scale(1)';
+      ring.style.transform = 'translate(-50%,-50%) scale(1)';
+      ring.style.borderColor = 'var(--sun)';
+    });
+  });
   (function tick() {
     cur.style.left=mx+'px'; cur.style.top=my+'px';
     rx+=(mx-rx)*.13; ry+=(my-ry)*.13;
