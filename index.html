@@ -1,82 +1,688 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Tristan Lismer</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tristan — Quantum Optics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet"/>
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --sun:    #F5A623;
+      --pine:   #2D6A4F;
+      --sky:    #48CAE4;
+      --aurora: #9B5DE5;
+      --rock:   #0f0f1a;
+      --rock2:  #16162a;
+      --snow:   #F0EFE9;
+      --ember:  #F94144;
+      --muted:  rgba(240,239,233,0.55);
+    }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      max-width: 900px;
-      margin: 60px auto;
-      padding: 20px;
-      line-height: 1.6;
-      color: #222;
+      background: var(--rock); color: var(--snow);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden; cursor: none;
     }
 
+    /* CURSOR */
+    #cur, #cur-ring {
+      position: fixed; top: 0; left: 0; border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%); mix-blend-mode: exclusion;
+    }
+    #cur { width: 10px; height: 10px; background: var(--sun); }
+    #cur-ring { width: 34px; height: 34px; border: 1.5px solid var(--sun); }
+
+    /* NAV */
     nav {
-      margin-bottom: 40px;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.3rem 3.5rem;
+      background: linear-gradient(to bottom, rgba(15,15,26,.96) 0%, transparent 100%);
+      backdrop-filter: blur(4px);
     }
-
-    nav a {
-      margin-right: 20px;
-      text-decoration: none;
-      color: #0366d6;
-      font-weight: 500;
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem; letter-spacing: .12em; color: var(--sun);
     }
+    nav ul { list-style: none; display: flex; gap: 2.2rem; }
+    nav ul li a {
+      font-family: 'Space Mono', monospace; font-size: .68rem;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--snow); text-decoration: none; opacity: .6;
+      transition: opacity .2s, color .2s; position: relative; padding-bottom: 3px;
+    }
+    nav ul li a::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 0; height: 1.5px; background: var(--sun); transition: width .3s;
+    }
+    nav ul li a:hover { opacity: 1; color: var(--sun); }
+    nav ul li a:hover::after { width: 100%; }
 
+    /* HERO */
+    #hero {
+      min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+      position: relative; overflow: hidden;
+    }
+    .hero-panel {
+      position: absolute; inset: 0;
+      background: linear-gradient(155deg, var(--rock) 48%, #1a2e22 48.05%);
+      z-index: 0;
+    }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 9rem 3.5rem 5.5rem; position: relative; z-index: 2;
+    }
+    .hero-eyebrow {
+      font-family: 'Space Mono', monospace; font-size: .68rem;
+      letter-spacing: .22em; text-transform: uppercase; color: var(--sky);
+      margin-bottom: 1.4rem; opacity: 0; animation: fadeUp .7s .3s forwards;
+    }
     h1 {
-      font-size: 2.8rem;
-      margin-bottom: 0.3rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4.5rem, 9vw, 8.5rem);
+      line-height: .92; letter-spacing: .02em;
+      opacity: 0; animation: fadeUp .7s .5s forwards;
+    }
+    h1 .c-sun    { color: var(--sun); }
+    h1 .c-out {
+      -webkit-text-stroke: 2px var(--aurora); color: transparent;
+    }
+    .hero-desc {
+      margin-top: 1.8rem; max-width: 400px;
+      font-size: 1rem; font-weight: 300; line-height: 1.8; color: var(--muted);
+      opacity: 0; animation: fadeUp .7s .7s forwards;
+    }
+    .hero-btns {
+      display: flex; gap: 1rem; margin-top: 2.5rem;
+      opacity: 0; animation: fadeUp .7s .9s forwards;
+    }
+    .btn {
+      font-family: 'Space Mono', monospace; font-size: .7rem;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: .85rem 1.9rem; text-decoration: none; cursor: none;
+      transition: transform .2s, box-shadow .2s; display: inline-block;
+    }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-fill {
+      background: var(--sun); color: var(--rock); font-weight: 700;
+      box-shadow: 5px 5px 0 var(--aurora);
+    }
+    .btn-fill:hover { box-shadow: 9px 9px 0 var(--aurora); }
+    .btn-line { border: 1.5px solid rgba(240,239,233,.28); color: var(--snow); }
+    .btn-line:hover { border-color: var(--sky); color: var(--sky); }
+
+    /* PHOTO FRAME */
+    .hero-right {
+      position: relative; z-index: 2;
+      display: flex; align-items: flex-end; justify-content: center;
+    }
+    .photo-frame {
+      position: relative; width: min(320px, 78%);
+      aspect-ratio: 3/4; align-self: flex-end;
+      opacity: 0; animation: fadeUp .8s .6s forwards;
+    }
+    .photo-frame::before {
+      content: ''; position: absolute;
+      inset: -12px -12px 12px 12px;
+      border: 2px solid var(--sun); z-index: 0;
+    }
+    .photo-inner {
+      position: relative; z-index: 1; width: 100%; height: 100%;
+      background: linear-gradient(160deg, #1e3a2f 0%, #0f1f1a 100%);
+      overflow: hidden; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+    }
+    .photo-inner::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(72,202,228,.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(72,202,228,.07) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    
+    <img src="DSCF7754.jpg" style="width:100%;height:100%;object-fit:cover"> */
+    .photo-sil {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center; gap: .6rem; opacity: .45;
+    }
+    .photo-sil svg { width: 88px; fill: var(--sky); }
+    .photo-sil span {
+      font-family: 'Space Mono', monospace; font-size: .58rem;
+      letter-spacing: .18em; text-transform: uppercase; color: var(--sky);
+    }
+    .photo-badge {
+      position: absolute; bottom: 1.2rem; right: -1px;
+      background: var(--sun); color: var(--rock);
+      font-family: 'Space Mono', monospace; font-size: .56rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: .32rem .75rem; z-index: 2;
     }
 
-    .subtitle {
-      color: #666;
-      margin-bottom: 2rem;
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 3.5rem;
+      font-family: 'Space Mono', monospace; font-size: .6rem;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(240,239,233,.3);
+      display: flex; align-items: center; gap: .8rem;
+      opacity: 0; animation: fadeUp .7s 1.1s forwards; z-index: 2;
+    }
+    .hero-scroll::before {
+      content: ''; display: block; width: 36px; height: 1px;
+      background: rgba(240,239,233,.25);
     }
 
-    section {
-      margin-bottom: 3rem;
+    /* COMMONS */
+    section { position: relative; }
+    .s-label {
+      font-family: 'Space Mono', monospace; font-size: .65rem;
+      letter-spacing: .25em; text-transform: uppercase; color: var(--sun);
+      margin-bottom: 1.2rem; display: block;
+    }
+    h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem); line-height: .95; letter-spacing: .03em;
+    }
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ABOUT */
+    #about { display: grid; grid-template-columns: 5fr 6fr; min-height: 80vh; }
+    .about-l {
+      background: var(--rock2); padding: 7rem 3.5rem;
+      display: flex; flex-direction: column; justify-content: center;
+      border-right: 1px solid rgba(240,239,233,.06);
+    }
+    .about-l h2 { margin-bottom: 2rem; }
+    .about-l p {
+      font-size: .95rem; font-weight: 300; line-height: 1.9;
+      color: var(--muted); margin-bottom: 1rem; max-width: 380px;
+    }
+    .pills { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.8rem; }
+    .pill {
+      font-family: 'Space Mono', monospace; font-size: .58rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: .28rem .75rem; border: 1px solid;
+    }
+    .p-sun    { border-color: var(--sun);    color: var(--sun); }
+    .p-sky    { border-color: var(--sky);    color: var(--sky); }
+    .p-aur    { border-color: var(--aurora); color: var(--aurora); }
+    .p-emb    { border-color: var(--ember);  color: var(--ember); }
+    .p-grn    { border-color: #5aad86;       color: #5aad86; }
+
+    .about-r {
+      padding: 7rem 4rem;
+      display: flex; flex-direction: column; justify-content: center; gap: 2.5rem;
+    }
+    .afact { border-left: 3px solid var(--sun); padding-left: 1.5rem; }
+    .afact:nth-child(2) { border-color: var(--sky); }
+    .afact:nth-child(3) { border-color: var(--aurora); }
+    .afact:nth-child(4) { border-color: #5aad86; }
+    .afact h3 {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem;
+      letter-spacing: .06em; margin-bottom: .4rem;
+    }
+    .afact p { font-size: .9rem; font-weight: 300; line-height: 1.75; color: var(--muted); }
+
+    /* WORK */
+    #work { padding: 8rem 3.5rem; }
+    .work-hd { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; }
+    .card-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1px; background: rgba(240,239,233,.07);
+    }
+    .card {
+      background: var(--rock); padding: 2.8rem 2.4rem;
+      position: relative; overflow: hidden; transition: background .3s;
+    }
+    .card:hover { background: var(--rock2); }
+    .card-n {
+      font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem;
+      color: rgba(240,239,233,.05); position: absolute;
+      top: .8rem; right: 1.2rem; line-height: 1; user-select: none;
+    }
+    .card-ico { font-size: 1.8rem; margin-bottom: 1.2rem; }
+    .card h3 {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem;
+      letter-spacing: .05em; margin-bottom: .7rem;
+    }
+    .card p { font-size: .85rem; font-weight: 300; line-height: 1.8; color: var(--muted); }
+    .cbar {
+      position: absolute; bottom: 0; left: 0;
+      height: 2.5px; width: 0; transition: width .4s;
+    }
+    .card:hover .cbar { width: 100%; }
+
+    /* STATS */
+    .stats-band {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      background: var(--sun); color: var(--rock);
+    }
+    .sc {
+      padding: 2.8rem 2.5rem;
+      border-right: 2px solid rgba(15,15,26,.15);
+    }
+    .sc:last-child { border-right: none; }
+    .sn { font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; line-height: 1; }
+    .sl {
+      font-family: 'Space Mono', monospace; font-size: .6rem;
+      letter-spacing: .15em; text-transform: uppercase; opacity: .6; margin-top: .3rem;
+    }
+
+    /* PERSONAL */
+    #personal { padding: 8rem 3.5rem; background: var(--rock2); }
+    .pg { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3.5rem; }
+    .pi {
+      display: flex; gap: 1.5rem; align-items: flex-start;
+      padding: 2rem; border: 1px solid rgba(240,239,233,.07);
+      transition: border-color .3s, background .3s;
+    }
+    .pi:hover { border-color: rgba(245,166,35,.3); background: rgba(245,166,35,.03); }
+    .pi-ico { font-size: 2rem; flex-shrink: 0; width: 50px; text-align: center; }
+    .pi h3 {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;
+      letter-spacing: .05em; margin-bottom: .5rem;
+    }
+    .pi p { font-size: .88rem; font-weight: 300; line-height: 1.8; color: var(--muted); }
+
+    /* CV */
+    #cv { padding: 8rem 3.5rem; }
+    .cv-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: rgba(240,239,233,.07); margin-top: 3.5rem;
+    }
+    .cvb { background: var(--rock); padding: 3rem 2.8rem; }
+    .cvb h3 {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem;
+      letter-spacing: .08em; color: var(--sky); margin-bottom: 1.5rem;
+    }
+    .cvi {
+      margin-bottom: 1.6rem; padding-bottom: 1.6rem;
+      border-bottom: 1px solid rgba(240,239,233,.07);
+    }
+    .cvi:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .cvy {
+      font-family: 'Space Mono', monospace; font-size: .6rem;
+      letter-spacing: .14em; color: var(--sun); margin-bottom: .3rem;
+    }
+    .cvi h4 { font-size: .95rem; font-weight: 600; margin-bottom: .2rem; }
+    .cvi p { font-size: .82rem; font-weight: 300; color: var(--muted); line-height: 1.6; }
+    .cv-dl { margin-top: 3rem; text-align: center; }
+
+    /* CONTACT */
+    #contact { padding: 8rem 3.5rem; background: var(--rock2); }
+    .cg { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 3.5rem; }
+    .cl p {
+      font-size: .98rem; font-weight: 300; line-height: 1.85;
+      color: var(--muted); margin-bottom: 2.5rem; max-width: 400px;
+    }
+    .clinks { display: flex; flex-direction: column; gap: .9rem; }
+    .clink {
+      font-family: 'Space Mono', monospace; font-size: .7rem;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--snow); text-decoration: none;
+      display: flex; align-items: center; gap: 1rem;
+      opacity: .6; transition: opacity .2s, color .2s;
+    }
+    .clink span { color: var(--sun); }
+    .clink:hover { opacity: 1; color: var(--sky); }
+    .cr {
+      background: linear-gradient(135deg,#152a1e,#0d1f16);
+      padding: 3.5rem; position: relative; overflow: hidden;
+    }
+    .cr::after {
+      content: 'λ'; font-family: 'Bebas Neue', sans-serif;
+      font-size: 18rem; line-height: 1; color: rgba(255,255,255,.03);
+      position: absolute; bottom: -3rem; right: 0; user-select: none;
+    }
+    .cr blockquote {
+      font-size: 1.02rem; font-style: italic; font-weight: 300;
+      line-height: 1.9; color: rgba(240,239,233,.72); position: relative; z-index: 1;
+    }
+    .cr cite {
+      display: block; margin-top: 1.5rem;
+      font-family: 'Space Mono', monospace; font-size: .62rem;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--sky); font-style: normal;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 1.8rem 3.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(240,239,233,.07);
+    }
+    footer p {
+      font-family: 'Space Mono', monospace; font-size: .58rem;
+      letter-spacing: .12em; text-transform: uppercase; color: rgba(240,239,233,.25);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 860px) {
+      #hero, #about, .cg, .pg, .cv-grid { grid-template-columns: 1fr; }
+      .hero-right { min-height: 360px; padding: 3rem 0 0; justify-content: center; }
+      .photo-frame { width: 210px; }
+      .hero-panel { background: linear-gradient(180deg, var(--rock) 55%, #1a2e22 55.1%); }
+      nav { padding: 1rem 1.5rem; }
+      nav ul { gap: 1.2rem; }
+      .card-grid { grid-template-columns: 1fr; }
+      .stats-band { grid-template-columns: 1fr 1fr; }
+      #work, #personal, #cv, #contact { padding: 5rem 1.5rem; }
+      .about-l, .about-r { padding: 4rem 2rem; }
     }
   </style>
 </head>
-
 <body>
 
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
 <nav>
-  <a href="index.html">Home</a>
-  <a href="research.html">Research</a>
-  <a href="publications.html">Publications</a>
-  <a href="cv.html">CV</a>
+  <div class="nav-logo">T·M</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#personal">Personal</a></li>
+    <li><a href="#cv">CV</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 </nav>
 
-<h1>Tristan Lismer</h1>
-<div class="subtitle">
-  PhD Candidate in Quantum Optics | Institute for Quantum Computing
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-panel"></div>
+  <div class="hero-left">
+    <p class="hero-eyebrow">PhD Candidate · Quantum Optics · IQC Waterloo</p>
+    <h1>
+      <span class="c-sun">TRISTAN</span><br>
+      <span class="c-out">MAC</span><br>
+      DONALD
+    </h1>
+    <p class="hero-desc">
+      Experimentally probing the foundations of quantum mechanics — one photon at a time. Based at the Institute for Quantum Computing, Waterloo.
+    </p>
+    <div class="hero-btns">
+      <a href="#work" class="btn btn-fill">My Research</a>
+      <a href="#contact" class="btn btn-line">Get In Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <!--
+      TO ADD YOUR PHOTO:
+      Replace everything inside .photo-inner with:
+      <img src="your-photo.jpg" style="width:100%;height:100%;object-fit:cover;object-position:top">
+      and remove the .photo-badge element.
+    -->
+    <div class="photo-frame">
+      <div class="photo-inner">
+        <div class="photo-sil">
+          <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="32" r="22"/>
+            <path d="M10,110 Q10,72 50,68 Q90,72 90,110 Z"/>
+          </svg>
+          <span>Your photo here</span>
+        </div>
+      </div>
+      <div class="photo-badge">Add photo →</div>
+    </div>
+  </div>
+
+  <p class="hero-scroll">Scroll to explore</p>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-l reveal">
+    <span class="s-label">// About</span>
+    <h2>WHO<br>I<br><span style="color:var(--sky)">AM</span></h2>
+    <p>Second-year PhD candidate at the Institute for Quantum Computing, working jointly with Kevin Resch and Rob Spekkens at Perimeter Institute.</p>
+    <p>My research lives at the intersection of quantum foundations and experimental photonics — building apparatus to ask nature its deepest questions.</p>
+    <div class="pills">
+      <span class="pill p-sun">Quantum Foundations</span>
+      <span class="pill p-sky">Photonics</span>
+      <span class="pill p-aur">GPT Theory</span>
+      <span class="pill p-emb">Interferometry</span>
+      <span class="pill p-grn">Born's Rule</span>
+      <span class="pill p-sky">SPDC Sources</span>
+    </div>
+  </div>
+  <div class="about-r">
+    <div class="afact reveal">
+      <h3>The Research</h3>
+      <p>Experimentally testing higher-order interference across multi-slit configurations to probe Born's rule. Extracting Sorkin parameters using a GPT rank-fitting pipeline with ICCD camera data.</p>
+    </div>
+    <div class="afact reveal">
+      <h3>The Theory</h3>
+      <p>Developing a framework for epistemic restrictions in Generalised Probabilistic Theories — asking what constraints on knowledge are sufficient to recover quantum-like structure.</p>
+    </div>
+    <div class="afact reveal">
+      <h3>The Lab</h3>
+      <p>Ti:Sapphire at 790 nm, Sagnac SPDC sources, phase-encoded microscope-slide masks, PiMax 4 ICCD camera. Making quantum mechanics visible, one fringe pattern at a time.</p>
+    </div>
+    <div class="afact reveal">
+      <h3>The People</h3>
+      <p>Advised by Kevin Resch (IQC) and Rob Spekkens (Perimeter Institute). Active in outreach — giving quantum optics talks to high school students across Ontario.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="work-hd reveal">
+    <div>
+      <span class="s-label">// Research &amp; Work</span>
+      <h2>WHAT I<br>BUILD</h2>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card reveal">
+      <div class="card-n">01</div>
+      <div class="card-ico">🔬</div>
+      <h3>Multi-Slit Interference</h3>
+      <p>Three and four-slit photonic experiments measuring the Sorkin parameter I₃ — testing whether quantum mechanics permits higher-order interference beyond Born's rule.</p>
+      <div class="cbar" style="background:var(--sun)"></div>
+    </div>
+    <div class="card reveal">
+      <div class="card-n">02</div>
+      <div class="card-ico">📐</div>
+      <h3>GPT Rank Fitting</h3>
+      <p>Truncated SVD pipeline fitting GPT state spaces to experimental data across 2–4 slit configurations. Identified rank-4 structure consistent with a qubit.</p>
+      <div class="cbar" style="background:var(--sky)"></div>
+    </div>
+    <div class="card reveal">
+      <div class="card-n">03</div>
+      <div class="card-ico">💡</div>
+      <h3>Photonic Sources</h3>
+      <p>Design and construction of Sagnac-loop SPDC entangled photon sources, interferometer alignment, and Ti:Sapphire laser operation at 790 nm.</p>
+      <div class="cbar" style="background:var(--aurora)"></div>
+    </div>
+    <div class="card reveal">
+      <div class="card-n">04</div>
+      <div class="card-ico">∿</div>
+      <h3>Epistemic Restrictions</h3>
+      <p>Theoretical paper on the knowledge-balance principle on the gbit. Novel Trichotomy Theorem characterising which GPTs admit epistemic interpretations.</p>
+      <div class="cbar" style="background:var(--ember)"></div>
+    </div>
+    <div class="card reveal">
+      <div class="card-n">05</div>
+      <div class="card-ico">🎓</div>
+      <h3>Outreach &amp; Teaching</h3>
+      <p>Quantum optics presentations to high school students across Ontario. Senior mentoring in the Resch lab. Coursework in quantum sensing and optomechanics.</p>
+      <div class="cbar" style="background:#5aad86"></div>
+    </div>
+    <div class="card reveal">
+      <div class="card-n">06</div>
+      <div class="card-ico">⚙️</div>
+      <h3>HPC &amp; Computation</h3>
+      <p>Python pipelines on Compute Canada clusters (Narval, Nibi) via SLURM for large-scale interference data processing and GPT state space fitting.</p>
+      <div class="cbar" style="background:var(--snow)"></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="sc"><div class="sn">790</div><div class="sl">nm — Ti:Sapphire</div></div>
+  <div class="sc"><div class="sn">4</div><div class="sl">slit configurations</div></div>
+  <div class="sc"><div class="sn">I₃</div><div class="sl">Sorkin parameter</div></div>
+  <div class="sc"><div class="sn">∞</div><div class="sl">questions remaining</div></div>
 </div>
 
-<section>
-  <p>
-    I am a PhD candidate at the Institute for Quantum Computing in Waterloo.
-    My research focuses on experimental tests of quantum foundations,
-    generalized probabilistic theories, and higher-order interference using photonic systems.
-  </p>
-
-  <p>
-    I work jointly with Kevin Resch and Rob Spekkens.
-  </p>
+<!-- PERSONAL -->
+<section id="personal">
+  <span class="s-label reveal">// Personal</span>
+  <h2 class="reveal">BEYOND<br>THE <span style="color:var(--sun)">LAB</span></h2>
+  <div class="pg">
+    <div class="pi reveal">
+      <div class="pi-ico">🏃</div>
+      <div>
+        <h3>Ultramarathon</h3>
+        <p>Training for a 100-mile race in October 2026. Long miles and big elevation build the same mental endurance that drives good research.</p>
+      </div>
+    </div>
+    <div class="pi reveal">
+      <div class="pi-ico">🚴</div>
+      <div>
+        <h3>Triathlon</h3>
+        <p>Active in the university triathlon club. Swim, bike, run — multi-discipline training keeps the mind and body working in parallel.</p>
+      </div>
+    </div>
+    <div class="pi reveal">
+      <div class="pi-ico">🌲</div>
+      <div>
+        <h3>The Outdoors</h3>
+        <p>Trail running, backcountry days, time in wild places. Nature and physics share a quality: they both reward patient, careful attention.</p>
+      </div>
+    </div>
+    <div class="pi reveal">
+      <div class="pi-ico">📡</div>
+      <div>
+        <h3>Optical Computing</h3>
+        <p>Long-standing fascination with one-way quantum computing and linear optical computing — where the lab meets the future of information.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section>
-  <h2>Current Focus</h2>
-  <ul>
-    <li>Experimental tests of quantum mechanical axioms</li>
-    <li>Three-slit interference experiments</li>
-    <li>Generalized probability theory frameworks</li>
-    <li>Photonic qubit state preparation and measurement</li>
-  </ul>
+<!-- CV -->
+<section id="cv">
+  <span class="s-label reveal">// Curriculum Vitae</span>
+  <h2 class="reveal">EXPERIENCE &amp;<br><span style="color:var(--sky)">EDUCATION</span></h2>
+  <div class="cv-grid">
+    <div class="cvb reveal">
+      <h3>Education</h3>
+      <div class="cvi">
+        <div class="cvy">2023 — Present</div>
+        <h4>PhD, Quantum Optics</h4>
+        <p>Institute for Quantum Computing, University of Waterloo. Supervised by Kevin Resch &amp; Rob Spekkens (Perimeter Institute).</p>
+      </div>
+      <div class="cvi">
+        <div class="cvy">2019 — 2023</div>
+        <h4>BSc, Physics</h4>
+        <p>Undergraduate studies with honours. First exposure to quantum foundations and optical computing.</p>
+      </div>
+    </div>
+    <div class="cvb reveal">
+      <h3>Research</h3>
+      <div class="cvi">
+        <div class="cvy">2023 — Present</div>
+        <h4>Higher-Order Interference Experiment</h4>
+        <p>Multi-slit photonic setup to extract Sorkin parameters and test Born's rule using a GPT rank-fitting pipeline.</p>
+      </div>
+      <div class="cvi">
+        <div class="cvy">2024 — Present</div>
+        <h4>Epistemic Restrictions in GPTs</h4>
+        <p>Theoretical paper on knowledge-balance principles and the Trichotomy Theorem for generalised probabilistic theories.</p>
+      </div>
+    </div>
+    <div class="cvb reveal">
+      <h3>Skills &amp; Tools</h3>
+      <div class="cvi">
+        <div class="cvy">Experimental</div>
+        <h4>Photonics &amp; Optics</h4>
+        <p>Ti:Sapphire lasers, SPDC/Sagnac sources, interferometers, ICCD cameras, phase masks, free-space alignment.</p>
+      </div>
+      <div class="cvi">
+        <div class="cvy">Computational</div>
+        <h4>Scientific Computing</h4>
+        <p>Python (NumPy, SciPy, CVXPY), SLURM/HPC on Compute Canada, LaTeX, SVD methods, data pipelines.</p>
+      </div>
+    </div>
+    <div class="cvb reveal">
+      <h3>Outreach &amp; Service</h3>
+      <div class="cvi">
+        <div class="cvy">Ongoing</div>
+        <h4>High School Outreach</h4>
+        <p>Quantum optics presentations to students across Ontario — beginner and advanced audiences at IQC events.</p>
+      </div>
+      <div class="cvi">
+        <div class="cvy">Ongoing</div>
+        <h4>Lab Mentorship</h4>
+        <p>Senior student role in the Resch group. Onboarding new members, experimental troubleshooting, code review.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cv-dl reveal">
+    <a href="cv.pdf" class="btn btn-fill" style="margin-top:1rem">Download Full CV (PDF)</a>
+  </div>
 </section>
 
+<!-- CONTACT -->
+<section id="contact">
+  <span class="s-label reveal">// Contact</span>
+  <h2 class="reveal">LET'S<br><span style="color:var(--sun)">TALK</span></h2>
+  <div class="cg">
+    <div class="cl reveal">
+      <p>Interested in quantum foundations, photonic experiments, or GPT theory? Want to collaborate, ask about the lab, or just talk physics? Reach out.</p>
+      <div class="clinks">
+        <a href="mailto:tristan@uwaterloo.ca" class="clink"><span>→</span> tristan@uwaterloo.ca</a>
+        <a href="https://iqc.uwaterloo.ca" target="_blank" class="clink"><span>→</span> IQC Waterloo</a>
+        <a href="https://perimeterinstitute.ca" target="_blank" class="clink"><span>→</span> Perimeter Institute</a>
+        <a href="https://github.com" target="_blank" class="clink"><span>→</span> GitHub</a>
+      </div>
+    </div>
+    <div class="cr reveal">
+      <blockquote>
+        "The wave function is not a description of reality — it is a description of what we know about reality. The question is whether those two things can ever be the same."
+      </blockquote>
+      <cite>— on quantum foundations</cite>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Tristan Lismer — Quantum Optics, IQC Waterloo</p>
+  <p>Built with light &amp; coffee</p>
+</footer>
+
+<script>
+  // CURSOR
+  const cur = document.getElementById('cur');
+  const ring = document.getElementById('cur-ring');
+  let mx=0, my=0, rx=0, ry=0;
+  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+  (function tick() {
+    cur.style.left=mx+'px'; cur.style.top=my+'px';
+    rx+=(mx-rx)*.13; ry+=(my-ry)*.13;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(tick);
+  })();
+
+  // SCROLL REVEAL
+  const io = new IntersectionObserver(
+    entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
+    { threshold: .12 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
 </body>
 </html>
