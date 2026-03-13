@@ -145,8 +145,6 @@
         linear-gradient(90deg, rgba(72,202,228,.07) 1px, transparent 1px);
       background-size: 28px 28px;
     }
-    /* To use your own photo: replace the .photo-inner content with
-       <img src="your-photo.jpg" style="width:100%;height:100%;object-fit:cover"> */
     .photo-sil {
       position: relative; z-index: 1;
       display: flex; flex-direction: column; align-items: center; gap: .6rem; opacity: .45;
@@ -338,11 +336,7 @@
       background: linear-gradient(135deg,#152a1e,#0d1f16);
       padding: 3.5rem; position: relative; overflow: hidden;
     }
-    .cr::after {
-      content: 'λ'; font-family: 'Bebas Neue', sans-serif;
-      font-size: 18rem; line-height: 1; color: rgba(255,255,255,.03);
-      position: absolute; bottom: -3rem; right: 0; user-select: none;
-    }
+
     .cr blockquote {
       font-size: 1.02rem; font-style: italic; font-weight: 300;
       line-height: 1.9; color: rgba(240,239,233,.72); position: relative; z-index: 1;
@@ -403,15 +397,10 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-panel">
-    <!-- minimalist mountains -->
     <svg class="hero-mountains" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-      <!-- far range — faintest -->
       <polygon points="0,700 0,420 180,260 340,380 500,210 660,350 820,190 980,320 1140,230 1300,340 1440,250 1440,700" fill="#0d1f15" opacity="0.9"/>
-      <!-- mid range -->
       <polygon points="0,700 0,520 120,400 280,480 440,340 580,440 720,300 880,410 1020,330 1160,430 1300,360 1440,420 1440,700" fill="#0f2418" opacity="0.95"/>
-      <!-- foreground ridge — darkest, sharpest -->
       <polygon points="0,700 0,620 100,560 220,600 360,510 480,570 600,490 740,555 860,480 980,540 1100,470 1220,530 1340,490 1440,520 1440,700" fill="#0c1c10"/>
-      <!-- subtle peak lines -->
       <polyline points="180,260 340,380 500,210 660,350 820,190 980,320 1140,230 1300,340" fill="none" stroke="rgba(72,202,228,0.07)" stroke-width="1"/>
       <polyline points="360,510 480,570 600,490 740,555 860,480 980,540 1100,470" fill="none" stroke="rgba(45,106,79,0.12)" stroke-width="1"/>
     </svg>
@@ -432,12 +421,6 @@
   </div>
 
   <div class="hero-right">
-    <!--
-      TO ADD YOUR PHOTO:
-      Replace everything inside .photo-inner with:
-      <img src="your-photo.jpg" style="width:100%;height:100%;object-fit:cover;object-position:top">
-      and remove the .photo-badge element.
-    -->
     <div class="photo-frame">
       <div class="photo-inner">
         <img src="DSCF7754.jpg" style="width:100%;height:100%;object-fit:cover;object-position:top">
@@ -653,7 +636,7 @@
     <div class="cl reveal">
       <p>Interested in quantum foundations, photonic experiments, or GPT theory? Want to collaborate, ask about the lab, or just talk physics? Reach out.</p>
       <div class="clinks">
-        <a href="/cdn-cgi/l/email-protection#4337312a3037222d033634223726312f2c2c6d2022" class="clink"><span>→</span> <span class="__cf_email__" data-cfemail="6410160d1710050a24111305100116080b0b4a0705">[email&#160;protected]</span></a>
+        <a href="mailto:tlismer@uwaterloo.ca" class="clink"><span>→</span> tlismer@uwaterloo.ca</a>
         <a href="https://iqc.uwaterloo.ca" target="_blank" class="clink"><span>→</span> IQC Waterloo</a>
         <a href="https://perimeterinstitute.ca" target="_blank" class="clink"><span>→</span> Perimeter Institute</a>
         <a href="https://github.com" target="_blank" class="clink"><span>→</span> GitHub</a>
@@ -661,9 +644,9 @@
     </div>
     <div class="cr reveal">
       <blockquote>
-        "The wave function is not a description of reality — it is a description of what we know about reality. The question is whether those two things can ever be the same."
+        "The most important step a man can take. It's not the first one, is it? It's the next one. Always the next one."
       </blockquote>
-      <cite>— on quantum foundations</cite>
+      <cite>— Brandon Sanderson, Oathbringer</cite>
     </div>
   </div>
 </section>
@@ -712,3 +695,5 @@
 
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
+</body>
+</html>
