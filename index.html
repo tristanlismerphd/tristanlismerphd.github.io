@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tristan Lismer — Quantum Optics</title>
+  <title>Tristan Lismer — Quantum Physicist</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -94,7 +94,7 @@
       -webkit-text-stroke: 2px var(--aurora); color: transparent;
     }
     .hero-desc {
-      margin-top: 1.8rem; max-width: 400px;
+      margin-top: 1.8rem; max-width: 420px;
       font-size: 1rem; font-weight: 300; line-height: 1.8; color: var(--muted);
       opacity: 0; animation: fadeUp .7s .7s forwards;
     }
@@ -336,7 +336,14 @@
       background: linear-gradient(135deg,#152a1e,#0d1f16);
       padding: 3.5rem; position: relative; overflow: hidden;
     }
-
+    .cr::after {
+      content: '';
+      position: absolute; bottom: -1rem; right: 1.5rem;
+      width: 220px; height: 220px; opacity: 0.07;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cline x1='50' y1='4' x2='50' y2='22' stroke='white' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='50' y1='78' x2='50' y2='96' stroke='white' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='4' y1='50' x2='22' y2='50' stroke='white' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='78' y1='50' x2='96' y2='50' stroke='white' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='16.3' y1='16.3' x2='28.8' y2='28.8' stroke='white' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='71.2' y1='71.2' x2='83.7' y2='83.7' stroke='white' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='83.7' y1='16.3' x2='71.2' y2='28.8' stroke='white' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='28.8' y1='71.2' x2='16.3' y2='83.7' stroke='white' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='28' y1='8' x2='33' y2='24' stroke='white' stroke-width='1.5' stroke-linecap='round' opacity='0.7'/%3E%3Cline x1='72' y1='8' x2='67' y2='24' stroke='white' stroke-width='1.5' stroke-linecap='round' opacity='0.7'/%3E%3Cline x1='92' y1='28' x2='76' y2='33' stroke='white' stroke-width='1.5' stroke-linecap='round' opacity='0.7'/%3E%3Cline x1='92' y1='72' x2='76' y2='67' stroke='white' stroke-width='1.5' stroke-linecap='round' opacity='0.7'/%3E%3Cline x1='72' y1='92' x2='67' y2='76' stroke='white' stroke-width='1.5' stroke-linecap='round' opacity='0.7'/%3E%3Cline x1='28' y1='92' x2='33' y2='76' stroke='white' stroke-width='1.5' stroke-linecap='round' opacity='0.7'/%3E%3Cline x1='8' y1='72' x2='24' y2='67' stroke='white' stroke-width='1.5' stroke-linecap='round' opacity='0.7'/%3E%3Cline x1='8' y1='28' x2='24' y2='33' stroke='white' stroke-width='1.5' stroke-linecap='round' opacity='0.7'/%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='1.8' opacity='0.9'/%3E%3Ccircle cx='50' cy='50' r='18' fill='none' stroke='white' stroke-width='1.4' opacity='0.7'/%3E%3Ccircle cx='50' cy='50' r='4.5' fill='white' opacity='1'/%3E%3Ccircle cx='50' cy='50' r='9' fill='none' stroke='white' stroke-width='1' opacity='0.5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-size: contain;
+      z-index: 0; user-select: none; pointer-events: none;
+    }
     .cr blockquote {
       font-size: 1.02rem; font-style: italic; font-weight: 300;
       line-height: 1.9; color: rgba(240,239,233,.72); position: relative; z-index: 1;
@@ -406,13 +413,13 @@
     </svg>
   </div>
   <div class="hero-left">
-    <p class="hero-eyebrow">PhD Candidate</p>
+    <p class="hero-eyebrow">Fourth-Year PhD · Quantum Optics · IQC Waterloo</p>
     <h1>
       <span class="c-sun">TRISTAN</span><br>
-      <span class="c-sun">LISMER</span>
+      <span class="c-out">LISMER</span>
     </h1>
     <p class="hero-desc">
-      Experimentally probing the foundations of quantum mechanics — one photon at a time. Based at the Institute for Quantum Computing, Waterloo.
+      I design experiments that test whether the axioms of quantum mechanics are actually true. Not in simulation — in the lab, with real photons. Based at the Institute for Quantum Computing, Waterloo.
     </p>
     <div class="hero-btns">
       <a href="#work" class="btn btn-fill">My Research</a>
@@ -436,33 +443,35 @@
   <div class="about-l reveal">
     <span class="s-label">// About</span>
     <h2>WHO<br>I<br><span style="color:var(--sky)">AM</span></h2>
-    <p>Second-year PhD candidate at the Institute for Quantum Computing, working jointly with Kevin Resch and Rob Spekkens at Perimeter Institute.</p>
-    <p>My research lives at the intersection of quantum foundations and experimental photonics — building apparatus to ask nature its deepest questions.</p>
+    <p>Fourth-year PhD candidate at the Institute for Quantum Computing, co-supervised by Kevin Resch and Rob Spekkens (Perimeter Institute).</p>
+    <p>I do both sides of the work — I derive the theory, then I go into the lab and test it. My goal is to find out whether the rules we think govern reality are actually the rules.</p>
     <div class="pills">
       <span class="pill p-sun">Quantum Foundations</span>
-      <span class="pill p-sky">Photonics</span>
+      <span class="pill p-sky">Interferometry</span>
       <span class="pill p-aur">GPT Theory</span>
-      <span class="pill p-emb">Interferometry</span>
-      <span class="pill p-grn">Born's Rule</span>
-      <span class="pill p-sky">SPDC Sources</span>
+      <span class="pill p-emb">Born's Rule</span>
+      <span class="pill p-grn">SNSPDs / APDs</span>
+      <span class="pill p-sky">Python · LabVIEW</span>
+      <span class="pill p-sun">Mathematica</span>
+      <span class="pill p-aur">HOM / Mach-Zehnder</span>
     </div>
   </div>
   <div class="about-r">
     <div class="afact reveal">
-      <h3>The Research</h3>
-      <p>Experimentally testing higher-order interference across multi-slit configurations to probe Born's rule. Extracting Sorkin parameters using a GPT rank-fitting pipeline with ICCD camera data.</p>
+      <h3>The Experiment</h3>
+      <p>Building 3 and 4-slit photonic experiments to measure the Sorkin parameter — directly testing whether quantum probability obeys Born's rule or admits higher-order interference. If the answer is no, physics needs new foundations.</p>
+    </div>
+    <div class="afact reveal">
+      <h3>The Analysis</h3>
+      <p>Developed a cross-validated GPT rank-fitting pipeline using ALS matrix factorisation to characterise quantum state spaces from experimental data. Identifies the rank of the measurement matrix directly — no assumptions about the theory needed.</p>
+    </div>
+    <div class="afact reveal">
+      <h3>The Lab Craft</h3>
+      <p>Expert in free-space interferometer alignment — HOM, Mach-Zehnder, Sagnac. Fluent with SNSPDs, APDs, ICCD cameras, and Ti:Sapphire systems. LabVIEW for instrument control, Python for analysis, Mathematica for theory.</p>
     </div>
     <div class="afact reveal">
       <h3>The Theory</h3>
-      <p>Developing a framework for epistemic restrictions in Generalised Probabilistic Theories — asking what constraints on knowledge are sufficient to recover quantum-like structure.</p>
-    </div>
-    <div class="afact reveal">
-      <h3>The Lab</h3>
-      <p>Ti:Sapphire at 790 nm, Sagnac SPDC sources, phase-encoded microscope-slide masks, PiMax 4 ICCD camera. Making quantum mechanics visible, one fringe pattern at a time.</p>
-    </div>
-    <div class="afact reveal">
-      <h3>The People</h3>
-      <p>Advised by Kevin Resch (IQC) and Rob Spekkens (Perimeter Institute). Active in outreach — giving quantum optics talks to high school students across Ontario.</p>
+      <p>Parallel theoretical work on epistemic restrictions in Generalised Probabilistic Theories. A Trichotomy Theorem characterising which GPTs admit a knowledge-limit interpretation — the kind of result you can prove and also build an experiment around.</p>
     </div>
   </div>
 </section>
@@ -479,43 +488,43 @@
     <div class="card reveal">
       <div class="card-n">01</div>
       <div class="card-ico">🔬</div>
-      <h3>Multi-Slit Interference</h3>
-      <p>Three and four-slit photonic experiments measuring the Sorkin parameter I₃ — testing whether quantum mechanics permits higher-order interference beyond Born's rule.</p>
+      <h3>Testing Born's Rule</h3>
+      <p>Designed and built a 4-slit photonic experiment to measure the Sorkin parameter I₃, directly probing whether quantum interference is truly second-order. A non-zero result would mean the textbooks are wrong.</p>
       <div class="cbar" style="background:var(--sun)"></div>
     </div>
     <div class="card reveal">
       <div class="card-n">02</div>
       <div class="card-ico">📐</div>
       <h3>GPT Rank Fitting</h3>
-      <p>Truncated SVD pipeline fitting GPT state spaces to experimental data across 2–4 slit configurations. Identified rank-4 structure consistent with a qubit.</p>
+      <p>Cross-validated ALS rank-sweep pipeline that extracts the rank of experimental interference matrices across all slit configurations — characterising the GPT state space directly from data, without assuming the theory.</p>
       <div class="cbar" style="background:var(--sky)"></div>
     </div>
     <div class="card reveal">
       <div class="card-n">03</div>
-      <div class="card-ico">💡</div>
-      <h3>Photonic Sources</h3>
-      <p>Design and construction of Sagnac-loop SPDC entangled photon sources, interferometer alignment, and Ti:Sapphire laser operation at 790 nm.</p>
+      <div class="card-ico">⚗️</div>
+      <h3>Interferometer Mastery</h3>
+      <p>Precision alignment of HOM, Mach-Zehnder, and Sagnac interferometers. SNSPDs, APDs, ICCD cameras, Ti:Sapphire at 790 nm, Sagnac SPDC entangled photon sources. Years of hands-on optical expertise.</p>
       <div class="cbar" style="background:var(--aurora)"></div>
     </div>
     <div class="card reveal">
       <div class="card-n">04</div>
       <div class="card-ico">∿</div>
       <h3>Epistemic Restrictions</h3>
-      <p>Theoretical paper on the knowledge-balance principle on the gbit. Novel Trichotomy Theorem characterising which GPTs admit epistemic interpretations.</p>
+      <p>Theoretical work on knowledge-balance principles in GPTs. Novel Trichotomy Theorem: a complete characterisation of which generalised probabilistic theories admit an epistemic interpretation.</p>
       <div class="cbar" style="background:var(--ember)"></div>
     </div>
     <div class="card reveal">
       <div class="card-n">05</div>
-      <div class="card-ico">🎓</div>
-      <h3>Outreach &amp; Teaching</h3>
-      <p>Quantum optics presentations to high school students across Ontario. Senior mentoring in the Resch lab. Coursework in quantum sensing and optomechanics.</p>
+      <div class="card-ico">💻</div>
+      <h3>Scientific Computing</h3>
+      <p>Python (NumPy, SciPy, joblib), LabVIEW for instrument control, Mathematica for symbolic computation. SLURM pipelines on Compute Canada for large-scale interference data. Built for performance and reproducibility.</p>
       <div class="cbar" style="background:#5aad86"></div>
     </div>
     <div class="card reveal">
       <div class="card-n">06</div>
-      <div class="card-ico">⚙️</div>
-      <h3>HPC &amp; Computation</h3>
-      <p>Python pipelines on Compute Canada clusters (Narval, Nibi) via SLURM for large-scale interference data processing and GPT state space fitting.</p>
+      <div class="card-ico">🎓</div>
+      <h3>Outreach &amp; Mentorship</h3>
+      <p>Quantum optics presentations to high school students across Ontario. Senior mentor in the Resch group — onboarding, troubleshooting, code review. Strong science needs to reach beyond the lab.</p>
       <div class="cbar" style="background:var(--snow)"></div>
     </div>
   </div>
@@ -523,10 +532,10 @@
 
 <!-- STATS -->
 <div class="stats-band">
-  <div class="sc"><div class="sn">790</div><div class="sl">nm — Ti:Sapphire</div></div>
-  <div class="sc"><div class="sn">4</div><div class="sl">slit configurations</div></div>
-  <div class="sc"><div class="sn">I₃</div><div class="sl">Sorkin parameter</div></div>
-  <div class="sc"><div class="sn">∞</div><div class="sl">questions remaining</div></div>
+  <div class="sc"><div class="sn">226</div><div class="sl">km — Ironman finished</div></div>
+  <div class="sc"><div class="sn">Y4</div><div class="sl">PhD in progress</div></div>
+  <div class="sc"><div class="sn">80K</div><div class="sl">ultra — in training</div></div>
+  <div class="sc"><div class="sn">3⁴</div><div class="sl">phase configurations</div></div>
 </div>
 
 <!-- PERSONAL -->
@@ -535,31 +544,31 @@
   <h2 class="reveal">BEYOND<br>THE <span style="color:var(--sun)">LAB</span></h2>
   <div class="pg">
     <div class="pi reveal">
-      <div class="pi-ico">🏃</div>
+      <div class="pi-ico">🏅</div>
       <div>
-        <h3>Ultramarathon</h3>
-        <p>Training for a 100-mile race in October 2026. Long miles and big elevation build the same mental endurance that drives good research.</p>
+        <h3>Ironman Finisher</h3>
+        <p>3.8 km swim, 180 km bike, 42.2 km run. The same obsessive focus that gets you across an Ironman finish line is what keeps you going when an experiment breaks for the fourth time in a row.</p>
       </div>
     </div>
     <div class="pi reveal">
-      <div class="pi-ico">🚴</div>
+      <div class="pi-ico">🏔️</div>
       <div>
-        <h3>Triathlon</h3>
-        <p>Active in the university triathlon club. Swim, bike, run — multi-discipline training keeps the mind and body working in parallel.</p>
+        <h3>80K Ultra in Training</h3>
+        <p>Currently building toward an 80 km mountain ultra. Big vertical, early mornings, long runs through terrain that doesn't care about your schedule. Endurance sport and research share the same engine.</p>
       </div>
     </div>
     <div class="pi reveal">
       <div class="pi-ico">🌲</div>
       <div>
-        <h3>The Outdoors</h3>
-        <p>Trail running, backcountry days, time in wild places. Nature and physics share a quality: they both reward patient, careful attention.</p>
+        <h3>Trail Running</h3>
+        <p>Trails over roads, always. Long runs are where ideas settle. There's something about moving through wild places that resets the physics brain and puts the hard problems in perspective.</p>
       </div>
     </div>
     <div class="pi reveal">
       <div class="pi-ico">📡</div>
       <div>
-        <h3>Optical Computing</h3>
-        <p>Long-standing fascination with one-way quantum computing and linear optical computing — where the lab meets the future of information.</p>
+        <h3>Quantum Tech</h3>
+        <p>Deep interest in the road from quantum foundations to quantum advantage. The state spaces I study daily are the substrate for photonic quantum computing — foundational work with a real industrial horizon.</p>
       </div>
     </div>
   </div>
@@ -573,53 +582,53 @@
     <div class="cvb reveal">
       <h3>Education</h3>
       <div class="cvi">
-        <div class="cvy">2023 — Present</div>
+        <div class="cvy">2022 — Present</div>
         <h4>PhD, Quantum Optics</h4>
-        <p>Institute for Quantum Computing, University of Waterloo. Supervised by Kevin Resch &amp; Rob Spekkens (Perimeter Institute).</p>
+        <p>Institute for Quantum Computing, University of Waterloo. Supervised by Kevin Resch (IQC) &amp; Rob Spekkens (Perimeter Institute). Experimental and theoretical quantum foundations.</p>
       </div>
       <div class="cvi">
-        <div class="cvy">2019 — 2023</div>
-        <h4>BSc, Physics</h4>
-        <p>Undergraduate studies with honours. First exposure to quantum foundations and optical computing.</p>
+        <div class="cvy">2018 — 2022</div>
+        <h4>BSc, Physics (Honours)</h4>
+        <p>Undergraduate degree with honours. Foundation in quantum mechanics, optics, and mathematical physics. First research exposure in quantum foundations and optical computing.</p>
       </div>
     </div>
     <div class="cvb reveal">
       <h3>Research</h3>
       <div class="cvi">
-        <div class="cvy">2023 — Present</div>
+        <div class="cvy">2022 — Present</div>
         <h4>Higher-Order Interference Experiment</h4>
-        <p>Multi-slit photonic setup to extract Sorkin parameters and test Born's rule using a GPT rank-fitting pipeline.</p>
+        <p>Multi-slit photonic setup (3 &amp; 4 slits, 81 phase configurations) measuring the Sorkin parameter to test Born's rule. GPT rank-fitting pipeline for state space characterisation.</p>
       </div>
       <div class="cvi">
-        <div class="cvy">2024 — Present</div>
+        <div class="cvy">2023 — Present</div>
         <h4>Epistemic Restrictions in GPTs</h4>
-        <p>Theoretical paper on knowledge-balance principles and the Trichotomy Theorem for generalised probabilistic theories.</p>
+        <p>Theoretical paper on knowledge-balance principles. Novel Trichotomy Theorem characterising which generalised probabilistic theories admit an epistemic interpretation.</p>
       </div>
     </div>
     <div class="cvb reveal">
-      <h3>Skills &amp; Tools</h3>
+      <h3>Experimental Skills</h3>
       <div class="cvi">
-        <div class="cvy">Experimental</div>
-        <h4>Photonics &amp; Optics</h4>
-        <p>Ti:Sapphire lasers, SPDC/Sagnac sources, interferometers, ICCD cameras, phase masks, free-space alignment.</p>
+        <div class="cvy">Photonics</div>
+        <h4>Optics &amp; Laser Systems</h4>
+        <p>Ti:Sapphire at 790 nm, Sagnac SPDC entangled photon sources, free-space interferometer alignment (HOM, Mach-Zehnder, Sagnac), ICCD cameras, phase masks.</p>
       </div>
       <div class="cvi">
-        <div class="cvy">Computational</div>
-        <h4>Scientific Computing</h4>
-        <p>Python (NumPy, SciPy, CVXPY), SLURM/HPC on Compute Canada, LaTeX, SVD methods, data pipelines.</p>
+        <div class="cvy">Detectors</div>
+        <h4>Single-Photon Detection</h4>
+        <p>SNSPDs (superconducting nanowire), APDs (avalanche photodiodes), coincidence counting, timing electronics, low-light optical systems.</p>
       </div>
     </div>
     <div class="cvb reveal">
-      <h3>Outreach &amp; Service</h3>
+      <h3>Computational Skills</h3>
       <div class="cvi">
-        <div class="cvy">Ongoing</div>
-        <h4>High School Outreach</h4>
-        <p>Quantum optics presentations to students across Ontario — beginner and advanced audiences at IQC events.</p>
+        <div class="cvy">Languages</div>
+        <h4>Python · LabVIEW · Mathematica</h4>
+        <p>Python for data analysis and pipelines (NumPy, SciPy, joblib, matplotlib). LabVIEW for instrument control and data acquisition. Mathematica for symbolic computation and theory.</p>
       </div>
       <div class="cvi">
-        <div class="cvy">Ongoing</div>
-        <h4>Lab Mentorship</h4>
-        <p>Senior student role in the Resch group. Onboarding new members, experimental troubleshooting, code review.</p>
+        <div class="cvy">HPC</div>
+        <h4>Compute Canada Clusters</h4>
+        <p>SLURM job scheduling on Narval and Nibi. Parallelised cross-validation and matrix factorisation pipelines for large-scale experimental data processing.</p>
       </div>
     </div>
   </div>
@@ -634,12 +643,12 @@
   <h2 class="reveal">LET'S<br><span style="color:var(--sun)">TALK</span></h2>
   <div class="cg">
     <div class="cl reveal">
-      <p>Interested in quantum foundations, photonic experiments, or GPT theory? Want to collaborate, ask about the lab, or just talk physics? Reach out.</p>
+      <p>Building experiments that test the rules of reality — and always interested in connecting with people doing the same. Whether you're in quantum tech, research, or just curious about what the foundations of physics actually are, reach out.</p>
       <div class="clinks">
         <a href="mailto:tlismer@uwaterloo.ca" class="clink"><span>→</span> tlismer@uwaterloo.ca</a>
         <a href="https://iqc.uwaterloo.ca" target="_blank" class="clink"><span>→</span> IQC Waterloo</a>
         <a href="https://perimeterinstitute.ca" target="_blank" class="clink"><span>→</span> Perimeter Institute</a>
-        <a href="https://github.com" target="_blank" class="clink"><span>→</span> GitHub</a>
+        <a href="https://github.com/tristanlismerphd" target="_blank" class="clink"><span>→</span> GitHub</a>
       </div>
     </div>
     <div class="cr reveal">
@@ -657,7 +666,6 @@
 </footer>
 
 <script>
-  // CURSOR
   const cur = document.getElementById('cur');
   const ring = document.getElementById('cur-ring');
   let mx=0, my=0, rx=0, ry=0;
@@ -683,7 +691,6 @@
     requestAnimationFrame(tick);
   })();
 
-  // SCROLL REVEAL
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
