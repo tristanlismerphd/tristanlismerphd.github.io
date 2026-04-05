@@ -3,147 +3,244 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tristan Lismer</title>
+  <title>Tristan Lismer — Quantum Physicist</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:      #080810;
-      --bg2:     #0f0f1c;
-      --border:  rgba(255,255,255,0.07);
-      --text:    #e8e8f0;
-      --muted:   rgba(232,232,240,0.45);
-      --accent:  #f5a623;
-      --blue:    #48cae4;
+      --bg:     #07070f;
+      --bg2:    #0d0d1a;
+      --bg3:    #12121f;
+      --border: rgba(255,255,255,0.07);
+      --text:   #eaeaf2;
+      --muted:  rgba(234,234,242,0.45);
+      --accent: #f5a623;
+      --blue:   #48cae4;
+      --green:  #52d68a;
     }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 15px; line-height: 1.65; overflow-x: hidden; }
+    body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.7; overflow-x: hidden; }
 
+    /* ── NAV ── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 1.25rem 2.5rem;
+      padding: 1.1rem 3rem;
+      transition: background .3s, border-color .3s;
       border-bottom: 1px solid transparent;
-      transition: border-color .3s, background .3s;
     }
-    nav.scrolled { background: rgba(8,8,16,.92); border-color: var(--border); backdrop-filter: blur(12px); }
-    .nav-name { font-weight: 600; font-size: .9rem; letter-spacing: .02em; color: var(--text); text-decoration: none; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: .85rem; transition: color .2s; }
+    nav.scrolled { background: rgba(7,7,15,.95); border-color: var(--border); backdrop-filter: blur(16px); }
+    .nav-name { font-weight: 600; font-size: .85rem; color: var(--text); text-decoration: none; letter-spacing: .02em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: .78rem; transition: color .2s; }
     .nav-links a:hover { color: var(--text); }
+    .nav-open {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .72rem; color: var(--green); letter-spacing: .06em;
+    }
+    .nav-open::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--green); display: block;
+      box-shadow: 0 0 8px var(--green); animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
 
-    section { padding: 6rem 2.5rem; max-width: 900px; margin: 0 auto; }
-
+    /* ── HERO ── */
     #hero {
-      min-height: 100vh; display: grid; grid-template-columns: 1fr auto;
-      align-items: center; gap: 4rem;
-      padding-top: 8rem; padding-bottom: 6rem;
+      min-height: 100vh; display: grid; grid-template-columns: 1fr 300px;
+      gap: 5rem; align-items: center; max-width: 1100px;
+      margin: 0 auto; padding: 9rem 3rem 6rem;
+      position: relative;
     }
-    .hero-photo {
-      width: 260px; aspect-ratio: 3/4; flex-shrink: 0;
-      position: relative; align-self: flex-end;
+    #hero::before {
+      content: ''; position: fixed; inset: 0; z-index: -1;
+      background-image: radial-gradient(circle, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
     }
-    .hero-photo::before {
-      content: ''; position: absolute; inset: -8px -8px 8px 8px;
-      border: 1px solid var(--accent); z-index: 0;
+    .hero-glow {
+      position: absolute; top: 20%; left: -10%; width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(245,166,35,.06) 0%, transparent 70%);
+      pointer-events: none; z-index: -1;
     }
-    .hero-photo img {
-      position: relative; z-index: 1;
-      width: 100%; height: 100%; object-fit: cover; object-position: top;
-      display: block;
+    .hero-eyebrow {
+      font-size: .72rem; font-weight: 500; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 1.4rem;
+      display: flex; align-items: center; gap: .75rem;
     }
-    .hero-tag {
-      display: inline-block; font-size: .75rem; font-weight: 500;
-      letter-spacing: .1em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 1.5rem;
-    }
+    .hero-eyebrow::before { content: '//'; opacity: .4; }
     h1 {
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      font-weight: 600; line-height: 1.1; letter-spacing: -.02em;
-      margin-bottom: 1.5rem;
+      font-size: clamp(2.6rem, 5.5vw, 4.4rem); font-weight: 600;
+      line-height: 1.08; letter-spacing: -.02em; margin-bottom: 1.6rem;
     }
     h1 em { color: var(--accent); font-style: normal; }
     .hero-sub {
-      font-size: 1.05rem; font-weight: 300; color: var(--muted);
-      max-width: 520px; line-height: 1.8; margin-bottom: 2.5rem;
+      font-size: .95rem; font-weight: 300; color: var(--muted);
+      max-width: 500px; line-height: 1.85; margin-bottom: 2.5rem;
     }
-    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .hero-actions { display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
     .btn {
-      display: inline-block; text-decoration: none;
-      font-size: .82rem; font-weight: 500; letter-spacing: .04em;
-      padding: .7rem 1.6rem; transition: all .2s;
+      display: inline-block; text-decoration: none; font-family: inherit;
+      font-size: .75rem; font-weight: 500; letter-spacing: .06em;
+      padding: .65rem 1.5rem; transition: all .2s; cursor: pointer; border: none;
     }
-    .btn-primary { background: var(--accent); color: #080810; }
-    .btn-primary:hover { background: #ffc04a; }
+    .btn-primary { background: var(--accent); color: var(--bg); }
+    .btn-primary:hover { background: #ffc04a; transform: translateY(-2px); }
     .btn-ghost { border: 1px solid var(--border); color: var(--muted); }
-    .btn-ghost:hover { border-color: rgba(255,255,255,.25); color: var(--text); }
-    .hero-stats {
-      display: flex; gap: 3rem; margin-top: 4rem;
-      padding-top: 3rem; border-top: 1px solid var(--border);
-      flex-wrap: wrap;
+    .btn-ghost:hover { border-color: rgba(255,255,255,.22); color: var(--text); transform: translateY(-2px); }
+    .hero-meta {
+      display: flex; gap: 2.5rem; padding-top: 2.5rem;
+      border-top: 1px solid var(--border); flex-wrap: wrap;
     }
-    .stat-val { font-size: 1.8rem; font-weight: 600; color: var(--text); line-height: 1; }
-    .stat-label { font-size: .75rem; color: var(--muted); margin-top: .3rem; letter-spacing: .04em; }
+    .meta-item .val { font-size: 1.6rem; font-weight: 600; line-height: 1; }
+    .meta-item .lbl { font-size: .68rem; color: var(--muted); margin-top: .25rem; letter-spacing: .04em; }
 
-    .divider { height: 1px; background: var(--border); max-width: 900px; margin: 0 auto; }
-
-    .section-label {
-      font-size: .72rem; font-weight: 500; letter-spacing: .12em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;
+    /* hero photo */
+    .hero-photo { position: relative; align-self: flex-end; }
+    .hero-photo::before {
+      content: ''; position: absolute; inset: -10px -10px 10px 10px;
+      border: 1px solid rgba(245,166,35,.35); z-index: 0;
     }
-    h2 { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 600; letter-spacing: -.02em; line-height: 1.15; margin-bottom: 2.5rem; }
+    .hero-photo::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 40%; background: linear-gradient(to top, var(--bg) 0%, transparent 100%);
+      z-index: 2;
+    }
+    .hero-photo img {
+      position: relative; z-index: 1;
+      width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top; display: block;
+    }
 
-    .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin-top: 2.5rem; }
-    .r-card { background: var(--bg); padding: 2.2rem; transition: background .2s; }
-    .r-card:hover { background: var(--bg2); }
-    .r-num { font-size: .72rem; color: var(--muted); letter-spacing: .08em; margin-bottom: 1rem; font-weight: 500; }
-    .r-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: .6rem; line-height: 1.3; }
-    .r-card p { font-size: .88rem; color: var(--muted); line-height: 1.75; }
-    .r-tag { display: inline-block; margin-top: 1rem; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--blue); font-weight: 500; }
+    /* ── PILLARS ── */
+    .pillars {
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      background: var(--bg2);
+    }
+    .pillar {
+      padding: 2.2rem 2rem; border-right: 1px solid var(--border);
+      transition: background .2s;
+    }
+    .pillar:last-child { border-right: none; }
+    .pillar:hover { background: var(--bg3); }
+    .pillar-icon { font-size: 1.2rem; margin-bottom: .8rem; }
+    .pillar h3 { font-size: .88rem; font-weight: 600; margin-bottom: .4rem; color: var(--text); }
+    .pillar p { font-size: .75rem; color: var(--muted); line-height: 1.7; }
 
-    .skills-wrap { max-width: 900px; margin: 0 auto; padding: 6rem 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-    .section-label { display: block; }
-    .skill-group { margin-bottom: 2rem; }
-    .skill-group-label { font-size: .72rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .8rem; font-weight: 500; }
-    .skill-list { display: flex; flex-wrap: wrap; gap: .4rem; }
-    .skill { font-size: .78rem; padding: .28rem .75rem; border: 1px solid var(--border); color: var(--muted); transition: border-color .2s, color .2s; }
-    .skill:hover { border-color: rgba(255,255,255,.2); color: var(--text); }
+    /* ── SECTIONS ── */
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; }
+    .s-label {
+      font-size: .68rem; font-weight: 500; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: .8rem;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .s-label::before { content: '//'; opacity: .4; }
+    h2 {
+      font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 600;
+      letter-spacing: -.02em; line-height: 1.1; margin-bottom: 2.5rem;
+    }
 
-    .personal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.5rem; }
-    .p-card { padding: 1.5rem; border: 1px solid var(--border); transition: border-color .2s; }
-    .p-card:hover { border-color: rgba(245,166,35,.25); }
-    .p-icon { font-size: 1.3rem; margin-bottom: .8rem; }
-    .p-card h3 { font-size: .95rem; font-weight: 600; margin-bottom: .4rem; }
-    .p-card p { font-size: .83rem; color: var(--muted); line-height: 1.65; }
+    /* ── RESEARCH ── */
+    .research-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--border); margin-top: .5rem;
+    }
+    .r-card {
+      background: var(--bg); padding: 2.2rem; position: relative;
+      overflow: hidden; transition: background .25s, box-shadow .25s;
+    }
+    .r-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: var(--accent);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .35s ease;
+    }
+    .r-card:hover { background: var(--bg2); box-shadow: inset 0 0 40px rgba(245,166,35,.03); }
+    .r-card:hover::after { transform: scaleX(1); }
+    .r-num { font-size: .65rem; color: var(--muted); letter-spacing: .1em; margin-bottom: .9rem; }
+    .r-card h3 { font-size: .98rem; font-weight: 600; margin-bottom: .6rem; line-height: 1.35; }
+    .r-card p { font-size: .82rem; color: var(--muted); line-height: 1.8; }
+    .r-tag { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1.2rem; font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); }
+    .r-tag::before { content: '→'; }
 
-    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 2.5rem; }
-    .contact-text { font-size: .95rem; color: var(--muted); line-height: 1.8; max-width: 360px; margin-bottom: 2rem; }
-    .contact-links { display: flex; flex-direction: column; gap: 0; }
-    .contact-link { display: flex; align-items: center; gap: .75rem; text-decoration: none; font-size: .85rem; color: var(--muted); transition: color .2s; padding: .6rem 0; border-bottom: 1px solid var(--border); }
-    .contact-link:hover { color: var(--text); }
-    .contact-link .arrow { color: var(--accent); }
-    .quote-block { padding: 2rem; border-left: 2px solid var(--accent); background: var(--bg2); }
-    .quote-block blockquote { font-size: .92rem; font-style: italic; font-weight: 300; color: var(--muted); line-height: 1.85; }
-    .quote-block cite { display: block; margin-top: 1rem; font-style: normal; font-size: .72rem; letter-spacing: .08em; color: var(--blue); text-transform: uppercase; }
+    /* ── SKILLS ── */
+    #skills { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+    .skill-group { margin-bottom: 1.8rem; }
+    .skill-group-lbl { font-size: .65rem; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; margin-bottom: .7rem; }
+    .skill-chips { display: flex; flex-wrap: wrap; gap: .35rem; }
+    .chip {
+      font-size: .72rem; padding: .22rem .7rem;
+      border: 1px solid var(--border); color: var(--muted);
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .chip:hover { border-color: rgba(245,166,35,.4); color: var(--accent); background: rgba(245,166,35,.04); }
 
-    footer { padding: 2rem 2.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: .75rem; color: var(--muted); max-width: 900px; margin: 0 auto; }
+    /* ── PERSONAL ── */
+    .personal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: .5rem; }
+    .p-card {
+      background: var(--bg); padding: 2rem; transition: background .2s;
+      display: flex; flex-direction: column;
+    }
+    .p-card:hover { background: var(--bg2); }
+    .p-big { font-size: 2.2rem; font-weight: 600; line-height: 1; color: var(--text); margin-bottom: .3rem; }
+    .p-unit { font-size: .7rem; color: var(--muted); margin-bottom: 1.2rem; }
+    .p-icon { font-size: 1.1rem; margin-bottom: .6rem; }
+    .p-card h3 { font-size: .9rem; font-weight: 600; margin-bottom: .4rem; }
+    .p-card p { font-size: .78rem; color: var(--muted); line-height: 1.75; }
 
-    .fade { opacity: 0; transform: translateY(14px); transition: opacity .55s ease, transform .55s ease; }
+    /* ── CONTACT ── */
+    #contact { background: var(--bg); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; margin-top: .5rem; }
+    .contact-lede { font-size: .92rem; color: var(--muted); line-height: 1.85; margin-bottom: 2rem; max-width: 380px; }
+    .contact-links { display: flex; flex-direction: column; }
+    .clink {
+      display: flex; align-items: center; gap: .8rem; text-decoration: none;
+      font-size: .78rem; color: var(--muted); padding: .75rem 0;
+      border-bottom: 1px solid var(--border); transition: color .2s;
+    }
+    .clink:first-child { border-top: 1px solid var(--border); }
+    .clink:hover { color: var(--text); }
+    .clink .arr { color: var(--accent); }
+    .open-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .72rem; color: var(--green); padding: .4rem .9rem;
+      border: 1px solid rgba(82,214,138,.2); margin-bottom: 1.5rem;
+      background: rgba(82,214,138,.04);
+    }
+    .open-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); animation: pulse 2s infinite; }
+    .quote-box {
+      border-left: 2px solid var(--accent); padding: 2rem 2rem 2rem 2.2rem;
+      background: var(--bg2);
+    }
+    .quote-box blockquote { font-size: .88rem; font-style: italic; font-weight: 300; color: var(--muted); line-height: 1.9; }
+    .quote-box cite { display: block; margin-top: 1.2rem; font-style: normal; font-size: .65rem; letter-spacing: .1em; color: var(--blue); text-transform: uppercase; }
+
+    /* ── FOOTER ── */
+    footer {
+      max-width: 1100px; margin: 0 auto; padding: 1.8rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid var(--border); font-size: .68rem; color: var(--muted);
+    }
+
+    /* ── DIVIDER ── */
+    hr { border: none; height: 1px; background: var(--border); }
+
+    /* ── FADE ── */
+    .fade { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
     .fade.in { opacity: 1; transform: none; }
 
-    @media (max-width: 720px) {
-      nav { padding: 1rem 1.25rem; }
-      section { padding: 4rem 1.25rem; }
-      #hero { grid-template-columns: 1fr; padding: 7rem 1.25rem 4rem; }
-      .hero-photo { width: 160px; align-self: auto; margin: 0 auto; }
-      h1 { font-size: 2.2rem; }
-      .research-grid, .skills-wrap, .personal-grid, .contact-inner { grid-template-columns: 1fr; }
-      .skills-wrap { padding: 4rem 1.25rem; gap: 3rem; }
-      .personal-grid { gap: .75rem; }
-      .contact-inner { gap: 3rem; }
-      .hero-stats { gap: 2rem; }
-      footer { flex-direction: column; gap: .4rem; }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      nav { padding: 1rem 1.5rem; }
+      #hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 4rem; gap: 3rem; }
+      .hero-photo { width: 180px; margin: 0 auto; }
+      .pillars { grid-template-columns: 1fr 1fr; }
+      .wrap { padding: 4.5rem 1.5rem; }
+      .research-grid, .skills-grid, .personal-grid, .contact-grid { grid-template-columns: 1fr; }
+      .skills-grid { gap: 3rem; }
+      footer { flex-direction: column; gap: .4rem; text-align: center; }
     }
   </style>
 </head>
@@ -156,13 +253,16 @@
     <li><a href="#skills">Skills</a></li>
     <li><a href="#personal">Personal</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><span class="nav-open">Open to roles</span></li>
   </ul>
 </nav>
 
+<!-- HERO -->
 <section id="hero">
+  <div class="hero-glow"></div>
   <div>
-    <span class="hero-tag">PhD Candidate · Quantum Optics · IQC Waterloo</span>
-    <h1>Testing the <em>axioms</em> of quantum mechanics.</h1>
+    <p class="hero-eyebrow">PhD Candidate · Quantum Optics · IQC Waterloo</p>
+    <h1>Testing the <em>axioms</em><br>of quantum mechanics.</h1>
     <p class="hero-sub">
       I design and build experiments that probe whether the rules governing reality are actually what we think they are. Fourth-year PhD at the Institute for Quantum Computing, co-supervised by Kevin Resch and Rob Spekkens (Perimeter Institute).
     </p>
@@ -171,9 +271,10 @@
       <a href="#contact" class="btn btn-ghost">Get In Touch</a>
       <a href="cv_tristan_lismer.pdf" class="btn btn-ghost">Download CV</a>
     </div>
-    <div class="hero-stats">
-      <div><div class="stat-val">Y4</div><div class="stat-label">PhD in progress</div></div>
-      <div><div class="stat-val">3⁴</div><div class="stat-label">phase configurations</div></div>
+    <div class="hero-meta">
+      <div class="meta-item"><div class="val">Y4</div><div class="lbl">PhD in progress</div></div>
+      <div class="meta-item"><div class="val">3⁴</div><div class="lbl">phase configurations</div></div>
+      <div class="meta-item"><div class="val">2</div><div class="lbl">active experiments</div></div>
     </div>
   </div>
   <div class="hero-photo">
@@ -181,140 +282,169 @@
   </div>
 </section>
 
-<div class="divider"></div>
+<!-- PILLARS -->
+<div class="pillars">
+  <div class="pillar fade">
+    <div class="pillar-icon">⚗️</div>
+    <h3>Theory + Experiment</h3>
+    <p>Derives the framework, then goes into the lab and tests it. Most physicists do one or the other.</p>
+  </div>
+  <div class="pillar fade">
+    <div class="pillar-icon">💻</div>
+    <h3>Full-Stack Science</h3>
+    <p>Python · LabVIEW · Mathematica · HPC pipelines. Builds analysis tools from scratch, not just runs them.</p>
+  </div>
+  <div class="pillar fade">
+    <div class="pillar-icon">🏅</div>
+    <h3>Elite Discipline</h3>
+    <p>Ironman finisher. 80K ultra in training. The same engine that crosses a finish line keeps an experiment running.</p>
+  </div>
+  <div class="pillar fade">
+    <div class="pillar-icon">🎙️</div>
+    <h3>Communicates at Any Level</h3>
+    <p>Explains quantum mechanics to high schoolers and publishes theory with Perimeter Institute. Range matters.</p>
+  </div>
+</div>
 
-<section id="research">
-  <p class="section-label fade">Research</p>
+<!-- RESEARCH -->
+<div class="wrap" id="research">
+  <p class="s-label fade">Research</p>
   <h2 class="fade">What I work on.</h2>
   <div class="research-grid">
     <div class="r-card fade">
-      <div class="r-num">01</div>
+      <div class="r-num">01 / EXPERIMENTAL</div>
       <h3>Testing Born's Rule</h3>
       <p>Designed and built a 4-slit photonic experiment to measure the Sorkin parameter I₃ — directly probing whether quantum interference is second-order. A non-zero result would require rewriting the foundations of quantum mechanics.</p>
-      <span class="r-tag">Experimental · Quantum Foundations</span>
+      <span class="r-tag">Quantum Foundations</span>
     </div>
     <div class="r-card fade">
-      <div class="r-num">02</div>
+      <div class="r-num">02 / COMPUTATIONAL</div>
       <h3>GPT Rank Fitting</h3>
       <p>Cross-validated ALS rank-sweep pipeline extracting the rank of experimental interference matrices — characterising the GPT state space directly from data, without assuming the theory upfront.</p>
       <span class="r-tag">Data Analysis · State Space Theory</span>
     </div>
     <div class="r-card fade">
-      <div class="r-num">03</div>
+      <div class="r-num">03 / THEORETICAL</div>
       <h3>Epistemic Restrictions in GPTs</h3>
-      <p>Theoretical work on knowledge-balance principles in Generalised Probabilistic Theories. Novel Trichotomy Theorem: a complete characterisation of which GPTs admit an epistemic interpretation.</p>
-      <span class="r-tag">Theory · GPT Framework</span>
+      <p>Knowledge-balance principles in Generalised Probabilistic Theories. Novel Trichotomy Theorem: a complete characterisation of which GPTs admit an epistemic interpretation.</p>
+      <span class="r-tag">GPT Framework</span>
     </div>
     <div class="r-card fade">
-      <div class="r-num">04</div>
+      <div class="r-num">04 / EXPERIMENTAL</div>
       <h3>Interferometer Expertise</h3>
-      <p>Precision alignment of HOM, Mach-Zehnder, and Sagnac interferometers. SNSPDs, APDs, ICCD cameras, Ti:Sapphire at 790 nm, Sagnac SPDC entangled photon sources. Years of hands-on optical lab expertise.</p>
-      <span class="r-tag">Experimental · Photonics</span>
+      <p>Precision alignment of HOM, Mach-Zehnder, and Sagnac interferometers. SNSPDs, APDs, ICCD cameras, Ti:Sapphire at 790 nm, Sagnac SPDC entangled photon sources.</p>
+      <span class="r-tag">Photonics · Optics</span>
     </div>
   </div>
-</section>
+</div>
 
-<div class="divider"></div>
-
-<div class="skills-wrap" id="skills">
-  <div>
-    <p class="section-label fade">Experimental</p>
-    <h2 class="fade">Lab skills.</h2>
-    <div class="skill-group fade">
-      <div class="skill-group-label">Optics &amp; Lasers</div>
-      <div class="skill-list">
-        <span class="skill">Ti:Sapphire (790 nm)</span>
-        <span class="skill">Sagnac SPDC</span>
-        <span class="skill">HOM Interferometer</span>
-        <span class="skill">Mach-Zehnder</span>
-        <span class="skill">Free-space alignment</span>
-        <span class="skill">Phase masks</span>
+<!-- SKILLS -->
+<div id="skills">
+  <div class="wrap">
+    <p class="s-label fade">Skills</p>
+    <h2 class="fade">What I bring.</h2>
+    <div class="skills-grid">
+      <div>
+        <div class="skill-group fade">
+          <div class="skill-group-lbl">Optics &amp; Lasers</div>
+          <div class="skill-chips">
+            <span class="chip">Ti:Sapphire (790 nm)</span>
+            <span class="chip">Sagnac SPDC</span>
+            <span class="chip">HOM Interferometer</span>
+            <span class="chip">Mach-Zehnder</span>
+            <span class="chip">Free-space alignment</span>
+            <span class="chip">Phase masks</span>
+          </div>
+        </div>
+        <div class="skill-group fade">
+          <div class="skill-group-lbl">Detectors &amp; Electronics</div>
+          <div class="skill-chips">
+            <span class="chip">SNSPDs</span>
+            <span class="chip">APDs</span>
+            <span class="chip">ICCD cameras</span>
+            <span class="chip">Coincidence counting</span>
+            <span class="chip">Timing electronics</span>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="skill-group fade">
-      <div class="skill-group-label">Detectors &amp; Electronics</div>
-      <div class="skill-list">
-        <span class="skill">SNSPDs</span>
-        <span class="skill">APDs</span>
-        <span class="skill">ICCD cameras</span>
-        <span class="skill">Coincidence counting</span>
-        <span class="skill">Timing electronics</span>
-      </div>
-    </div>
-  </div>
-  <div>
-    <p class="section-label fade">Computational</p>
-    <h2 class="fade">Software skills.</h2>
-    <div class="skill-group fade">
-      <div class="skill-group-label">Languages</div>
-      <div class="skill-list">
-        <span class="skill">Python</span>
-        <span class="skill">LabVIEW</span>
-        <span class="skill">Mathematica</span>
-        <span class="skill">LaTeX</span>
-      </div>
-    </div>
-    <div class="skill-group fade">
-      <div class="skill-group-label">Libraries &amp; Tools</div>
-      <div class="skill-list">
-        <span class="skill">NumPy / SciPy</span>
-        <span class="skill">joblib</span>
-        <span class="skill">matplotlib</span>
-        <span class="skill">SLURM / HPC</span>
-        <span class="skill">Compute Canada</span>
-        <span class="skill">Git</span>
+      <div>
+        <div class="skill-group fade">
+          <div class="skill-group-lbl">Languages</div>
+          <div class="skill-chips">
+            <span class="chip">Python</span>
+            <span class="chip">LabVIEW</span>
+            <span class="chip">Mathematica</span>
+            <span class="chip">LaTeX</span>
+          </div>
+        </div>
+        <div class="skill-group fade">
+          <div class="skill-group-lbl">Libraries &amp; Infrastructure</div>
+          <div class="skill-chips">
+            <span class="chip">NumPy / SciPy</span>
+            <span class="chip">joblib</span>
+            <span class="chip">matplotlib</span>
+            <span class="chip">SLURM</span>
+            <span class="chip">Compute Canada</span>
+            <span class="chip">Git</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="divider"></div>
-
-<section id="personal">
-  <p class="section-label fade">Personal</p>
+<!-- PERSONAL -->
+<div class="wrap" id="personal">
+  <p class="s-label fade">Personal</p>
   <h2 class="fade">Beyond the lab.</h2>
   <div class="personal-grid">
     <div class="p-card fade">
-      <div class="stat-val" style="font-size:2rem;margin-bottom:.5rem;">226<span style="font-size:1rem;color:var(--muted);font-weight:400;"> km</span></div>
+      <div class="p-big">226<span style="font-size:1rem;font-weight:400;color:var(--muted)"> km</span></div>
+      <div class="p-unit">Total Ironman distance</div>
       <div class="p-icon">🏅</div>
       <h3>Ironman Finisher</h3>
-      <p>3.8 km swim, 180 km bike, 42.2 km run. The obsessive focus required to finish an Ironman is the same thing that keeps you in the lab when an experiment breaks for the fourth time.</p>
+      <p>3.8 km swim · 180 km bike · 42.2 km run. The obsessive consistency required to cross that finish line is the same thing that keeps an experiment running when nothing works.</p>
     </div>
     <div class="p-card fade">
-      <div class="stat-val" style="font-size:2rem;margin-bottom:.5rem;">80K</div>
+      <div class="p-big">80K</div>
+      <div class="p-unit">Mountain ultra — in training</div>
       <div class="p-icon">🏔️</div>
-      <h3>Ultra in Training</h3>
-      <p>Building toward an 80 km mountain ultra. Big vert, early mornings, long miles through terrain that doesn't care about your schedule. Endurance and research share the same engine.</p>
+      <h3>Ultra Runner</h3>
+      <p>Building toward an 80 km mountain ultra. Big vertical, early mornings, long miles in terrain that doesn't negotiate. Endurance sport and research run on the same engine.</p>
     </div>
     <div class="p-card fade">
+      <div class="p-big" style="font-size:1.6rem;margin-bottom:.9rem;">Quantum<br>Tech</div>
+      <div class="p-unit">Where I want to go</div>
       <div class="p-icon">📡</div>
-      <h3>Quantum Tech</h3>
-      <p>Fascinated by the road from quantum foundations to quantum advantage. The state spaces I study are the substrate for photonic quantum computing — foundational work with a real industrial horizon.</p>
+      <h3>Industry Horizon</h3>
+      <p>The state spaces I study are the substrate for photonic quantum computing. Foundational work with a real industrial horizon — I want to be in the room where it gets built.</p>
     </div>
   </div>
-</section>
+</div>
 
-<div class="divider"></div>
-
-<section id="contact">
-  <p class="section-label fade">Contact</p>
-  <h2 class="fade">Let's talk.</h2>
-  <div class="contact-inner">
-    <div class="fade">
-      <p class="contact-text">Building experiments that test the rules of reality — and always interested in connecting with people doing the same. Whether you're in quantum tech, research, or just curious about what physics actually is, reach out.</p>
-      <div class="contact-links">
-        <a href="mailto:tlismer@uwaterloo.ca" class="contact-link"><span class="arrow">→</span> tlismer@uwaterloo.ca</a>
-        <a href="https://iqc.uwaterloo.ca" target="_blank" class="contact-link"><span class="arrow">→</span> IQC Waterloo</a>
-        <a href="https://perimeterinstitute.ca" target="_blank" class="contact-link"><span class="arrow">→</span> Perimeter Institute</a>
-        <a href="https://github.com/tristanlismerphd" target="_blank" class="contact-link"><span class="arrow">→</span> GitHub</a>
+<!-- CONTACT -->
+<div id="contact">
+  <div class="wrap">
+    <p class="s-label fade">Contact</p>
+    <h2 class="fade">Let's talk.</h2>
+    <div class="contact-grid">
+      <div class="fade">
+        <div class="open-badge">Open to industry roles in quantum tech</div>
+        <p class="contact-lede">Building experiments that test the rules of reality — and always interested in connecting with people doing the same. Whether you're hiring, collaborating, or just curious, reach out.</p>
+        <div class="contact-links">
+          <a href="mailto:tlismer@uwaterloo.ca" class="clink"><span class="arr">→</span> tlismer@uwaterloo.ca</a>
+          <a href="https://iqc.uwaterloo.ca" target="_blank" class="clink"><span class="arr">→</span> IQC Waterloo</a>
+          <a href="https://perimeterinstitute.ca" target="_blank" class="clink"><span class="arr">→</span> Perimeter Institute</a>
+          <a href="https://github.com/tristanlismerphd" target="_blank" class="clink"><span class="arr">→</span> GitHub</a>
+        </div>
+      </div>
+      <div class="quote-box fade">
+        <blockquote>"The most important step a man can take. It's not the first one, is it? It's the next one. Always the next one."</blockquote>
+        <cite>— Brandon Sanderson, Oathbringer</cite>
       </div>
     </div>
-    <div class="quote-block fade">
-      <blockquote>"The most important step a man can take. It's not the first one, is it? It's the next one. Always the next one."</blockquote>
-      <cite>— Brandon Sanderson, Oathbringer</cite>
-    </div>
   </div>
-</section>
+</div>
 
 <footer>
   <span>© 2026 Tristan Lismer</span>
@@ -324,12 +454,12 @@
 <script>
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 40);
+    nav.classList.toggle('scrolled', window.scrollY > 50);
   }, { passive: true });
 
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.08 });
   document.querySelectorAll('.fade').forEach(el => obs.observe(el));
 </script>
 </body>
