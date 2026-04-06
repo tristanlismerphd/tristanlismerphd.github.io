@@ -160,13 +160,12 @@
 
     /* PERSONAL */
     .personal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
-    .p-card { background: var(--bg); padding: 2rem; transition: background .2s; display: flex; flex-direction: column; }
+    .p-card { background: var(--bg); padding: 1.2rem 1.4rem; transition: background .2s; display: flex; flex-direction: column; gap: .25rem; }
     .p-card:hover { background: var(--bg2); }
-    .p-big { font-size: 2.2rem; font-weight: 600; line-height: 1; color: var(--text); margin-bottom: .3rem; }
-    .p-unit { font-size: .67rem; color: var(--muted); margin-bottom: 1.2rem; }
-    .p-icon { font-size: 1.1rem; margin-bottom: .6rem; }
-    .p-card h3 { font-size: .88rem; font-weight: 600; margin-bottom: .4rem; }
-    .p-card p { font-size: .77rem; color: var(--muted); line-height: 1.78; }
+    .p-big { font-size: 1.6rem; font-weight: 600; line-height: 1; color: var(--text); }
+    .p-unit { font-size: .63rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: .4rem; }
+    .p-card h3 { font-size: .82rem; font-weight: 600; margin-bottom: .2rem; }
+    .p-card p { font-size: .75rem; color: var(--muted); line-height: 1.65; }
 
     /* CONTACT */
     #contact { background: var(--bg); }
@@ -358,25 +357,22 @@
   <h2 class="fade">Beyond the lab.</h2>
   <div class="personal-grid">
     <div class="p-card fade">
-      <div class="p-big">226<span style="font-size:.9rem;font-weight:400;color:var(--muted)"> km</span></div>
-      <div class="p-unit">Total Ironman distance</div>
-      <div class="p-icon">🏅</div>
-      <h3>Ironman Finisher</h3>
-      <p>Swam 3.8 km, biked 180 km, ran 42.2 km. Turns out training for an Ironman is excellent preparation for experimental physics — both involve a lot of suffering and a stubborn refusal to stop.</p>
+      <div class="p-big">226 km</div>
+      <div class="p-unit">Ironman Finisher</div>
+      <h3>3.8 swim · 180 bike · 42.2 run</h3>
+      <p>Both involve a lot of suffering and a stubborn refusal to stop.</p>
     </div>
     <div class="p-card fade">
       <div class="p-big">80K</div>
-      <div class="p-unit">Mountain ultra — in training</div>
-      <div class="p-icon">🏔️</div>
-      <h3>Ultra Runner</h3>
-      <p>Now building toward an 80 km mountain race. Because apparently finishing an Ironman wasn't a strong enough signal that I enjoy suffering. The early mornings and big vertical are honestly good for thinking.</p>
+      <div class="p-unit">Ultra Runner — in training</div>
+      <h3>Mountain ultra</h3>
+      <p>Because apparently an Ironman wasn't a strong enough signal that I enjoy suffering.</p>
     </div>
     <div class="p-card fade">
-      <div class="p-big" style="font-size:1.5rem;line-height:1.2;margin-bottom:.9rem;">Quantum<br>Industry</div>
+      <div class="p-big">Quantum<br>Industry</div>
       <div class="p-unit">Where I want to go next</div>
-      <div class="p-icon">📡</div>
       <h3>Industry Horizon</h3>
-      <p>The state spaces I study in the lab are the substrate for photonic quantum computing. I want to be in the room where it gets built commercially — ideally while still understanding exactly why it works.</p>
+      <p>I want to be in the room where photonic quantum computing gets built commercially.</p>
     </div>
   </div>
 </div>
