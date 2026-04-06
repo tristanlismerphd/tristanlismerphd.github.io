@@ -167,6 +167,19 @@
     .p-card h3 { font-size: .82rem; font-weight: 600; margin-bottom: .2rem; }
     .p-card p { font-size: .75rem; color: var(--muted); line-height: 1.65; }
 
+    /* TIMELINE */
+    #timeline { border-top: 1px solid var(--border); }
+    .tl { position: relative; padding-left: 2rem; }
+    .tl::before { content: ''; position: absolute; left: 0; top: .35rem; bottom: 0; width: 1px; background: var(--border); }
+    .tl-entry { position: relative; padding: 0 0 2.2rem 2rem; }
+    .tl-entry:last-child { padding-bottom: 0; }
+    .tl-dot { position: absolute; left: -2rem; top: .35rem; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); transform: translateX(-3px); }
+    .tl-dot.muted { background: var(--border); }
+    .tl-year { font-size: .63rem; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .3rem; }
+    .tl-year.muted { color: var(--muted); }
+    .tl-title { font-size: .9rem; font-weight: 600; margin-bottom: .15rem; }
+    .tl-sub { font-size: .75rem; color: var(--muted); }
+
     /* CONTACT */
     #contact { background: var(--bg); }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
@@ -345,6 +358,40 @@
       <div class="p-unit">Where I want to go next</div>
       <h3>Industry Horizon</h3>
       <p>I want to be in the room where photonic quantum computing gets built commercially.</p>
+    </div>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div id="timeline">
+  <div class="wrap">
+    <p class="s-label fade">Timeline</p>
+    <h2 class="fade">How I got here.</h2>
+    <div class="tl fade">
+      <div class="tl-entry">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2022 — Present</div>
+        <div class="tl-title">PhD Candidate · Quantum Optics</div>
+        <div class="tl-sub">Institute for Quantum Computing, University of Waterloo</div>
+      </div>
+      <div class="tl-entry">
+        <div class="tl-dot muted"></div>
+        <div class="tl-year muted">Summer 2020 · 2021 · 2022</div>
+        <div class="tl-title">Research Scientist (Intern)</div>
+        <div class="tl-sub">Canadian Nuclear Safety Commission</div>
+      </div>
+      <div class="tl-entry">
+        <div class="tl-dot muted"></div>
+        <div class="tl-year muted">Summer 2019</div>
+        <div class="tl-title">Research Scientist (Intern)</div>
+        <div class="tl-sub">Natural Resources Canada</div>
+      </div>
+      <div class="tl-entry">
+        <div class="tl-dot muted"></div>
+        <div class="tl-year muted">2018 — 2022</div>
+        <div class="tl-title">BScH Astrophysics</div>
+        <div class="tl-sub">Queen's University, Kingston</div>
+      </div>
     </div>
   </div>
 </div>
