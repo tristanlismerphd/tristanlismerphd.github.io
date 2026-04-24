@@ -40,7 +40,7 @@
     .nav-open::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); display: block; box-shadow: 0 0 8px var(--green); animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
 
-    /* HERO — full-bleed split */
+    /* HERO */
     #hero {
       display: grid;
       grid-template-columns: 55% 45%;
@@ -73,7 +73,6 @@
       background: linear-gradient(to right, var(--bg) 0%, transparent 20%),
                   linear-gradient(to top, var(--bg) 0%, transparent 15%);
     }
-
     .hero-eyebrow {
       font-size: .7rem; font-weight: 500; letter-spacing: .14em;
       text-transform: uppercase; color: var(--accent); margin-bottom: 1.4rem;
@@ -129,6 +128,57 @@
     .s-label::before { content: '//'; opacity: .35; }
     h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 600; letter-spacing: -.02em; line-height: 1.1; margin-bottom: 2.5rem; }
 
+    /* TRAINING */
+    #training { border-top: 1px solid var(--border); }
+    .sy-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); margin-bottom: 3rem; }
+    .sy-card { background: var(--bg2); padding: 1.6rem 1.8rem; transition: background .2s; }
+    .sy-card:hover { background: var(--bg3); }
+    .sy-val { font-size: 1.9rem; font-weight: 600; line-height: 1; }
+    .sy-unit { font-size: .63rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin: .35rem 0 .2rem; }
+    .sy-sub { font-size: .68rem; color: var(--muted); }
+    .sy-run .sy-val { color: var(--accent); }
+    .sy-ride .sy-val { color: var(--blue); }
+    .sy-elev .sy-val { color: var(--green); }
+
+    /* PMC */
+    .pmc-summary { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); margin-bottom: 2.5rem; }
+    .pmc-kpi { background: var(--bg2); padding: 1.4rem 1.8rem; transition: background .2s; }
+    .pmc-kpi:hover { background: var(--bg3); }
+    .pmc-val { font-size: 1.6rem; font-weight: 600; line-height: 1; }
+    .pmc-lbl { font-size: .62rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-top: .3rem; }
+    .pmc-wrap { background: var(--bg2); border: 1px solid var(--border); padding: 1.4rem 1.4rem .8rem; margin-bottom: 1.5rem; }
+    .pmc-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .6rem; margin-bottom: 1rem; font-size: .61rem; color: var(--muted); letter-spacing: .07em; text-transform: uppercase; }
+    .chart-legend { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+    .chart-legend-item { display: flex; align-items: center; gap: .4rem; font-size: .6rem; color: var(--muted); }
+    .chart-legend-line { width: 20px; height: 2px; flex-shrink: 0; }
+    .chart-legend-bar { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+    .shm-scroll { overflow-x: auto; padding-bottom: .5rem; margin-bottom: 3rem; }
+    .shm-scroll::-webkit-scrollbar { height: 3px; }
+    .shm-scroll::-webkit-scrollbar-track { background: transparent; }
+    .shm-scroll::-webkit-scrollbar-thumb { background: var(--border); }
+    .shm-legend { display: flex; gap: 1.2rem; align-items: center; margin-bottom: 1rem; }
+    .shm-legend-item { display: flex; align-items: center; gap: .4rem; font-size: .62rem; color: var(--muted); }
+    .shm-legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+    .act-scroll { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem; -webkit-overflow-scrolling: touch; }
+    .act-scroll::-webkit-scrollbar { height: 3px; }
+    .act-scroll::-webkit-scrollbar-track { background: transparent; }
+    .act-scroll::-webkit-scrollbar-thumb { background: var(--border); }
+    .act-card { flex: 0 0 250px; background: var(--bg2); border: 1px solid var(--border); transition: border-color .2s, transform .2s; }
+    .act-card:hover { border-color: rgba(255,255,255,.18); transform: translateY(-2px); }
+    .act-map { height: 150px; background: var(--bg3); }
+    .act-info { padding: .9rem 1rem; }
+    .act-type-badge { font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: .3rem; font-weight: 500; }
+    .act-type-run { color: var(--accent); }
+    .act-type-ride { color: var(--blue); }
+    .act-type-other { color: var(--green); }
+    .act-name { font-size: .8rem; font-weight: 600; margin-bottom: .25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .act-date { font-size: .62rem; color: var(--muted); margin-bottom: .75rem; }
+    .act-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .3rem; }
+    .act-stat .v { font-size: .82rem; font-weight: 600; line-height: 1; }
+    .act-stat .u { font-size: .55rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin-top: .12rem; }
+    .leaflet-container { background: #07070f !important; }
+
     /* RESEARCH */
     .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
     .r-card {
@@ -166,42 +216,17 @@
     .p-card h3 { font-size: .82rem; font-weight: 600; margin-bottom: .2rem; }
     .p-card p { font-size: .75rem; color: var(--muted); line-height: 1.65; }
 
-    /* TRAINING */
-    #training { border-top: 1px solid var(--border); }
-    .sy-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); margin-bottom: 3rem; }
-    .sy-card { background: var(--bg2); padding: 1.6rem 1.8rem; transition: background .2s; }
-    .sy-card:hover { background: var(--bg3); }
-    .sy-val { font-size: 1.9rem; font-weight: 600; line-height: 1; }
-    .sy-unit { font-size: .63rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin: .35rem 0 .2rem; }
-    .sy-sub { font-size: .68rem; color: var(--muted); }
-    .sy-run .sy-val { color: var(--accent); }
-    .sy-ride .sy-val { color: var(--blue); }
-    .sy-elev .sy-val { color: var(--green); }
-    .shm-scroll { overflow-x: auto; padding-bottom: .5rem; margin-bottom: 3rem; }
-    .shm-scroll::-webkit-scrollbar { height: 3px; }
-    .shm-scroll::-webkit-scrollbar-track { background: transparent; }
-    .shm-scroll::-webkit-scrollbar-thumb { background: var(--border); }
-    .shm-legend { display: flex; gap: 1.2rem; align-items: center; margin-bottom: 1rem; }
-    .shm-legend-item { display: flex; align-items: center; gap: .4rem; font-size: .62rem; color: var(--muted); }
-    .shm-legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
-    .act-scroll { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem; -webkit-overflow-scrolling: touch; }
-    .act-scroll::-webkit-scrollbar { height: 3px; }
-    .act-scroll::-webkit-scrollbar-track { background: transparent; }
-    .act-scroll::-webkit-scrollbar-thumb { background: var(--border); }
-    .act-card { flex: 0 0 250px; background: var(--bg2); border: 1px solid var(--border); transition: border-color .2s, transform .2s; }
-    .act-card:hover { border-color: rgba(255,255,255,.18); transform: translateY(-2px); }
-    .act-map { height: 150px; background: var(--bg3); }
-    .act-info { padding: .9rem 1rem; }
-    .act-type-badge { font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: .3rem; font-weight: 500; }
-    .act-type-run { color: var(--accent); }
-    .act-type-ride { color: var(--blue); }
-    .act-type-other { color: var(--green); }
-    .act-name { font-size: .8rem; font-weight: 600; margin-bottom: .25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .act-date { font-size: .62rem; color: var(--muted); margin-bottom: .75rem; }
-    .act-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .3rem; }
-    .act-stat .v { font-size: .82rem; font-weight: 600; line-height: 1; }
-    .act-stat .u { font-size: .55rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin-top: .12rem; }
-    .leaflet-container { background: #07070f !important; }
+    /* PROJECTS */
+    #projects { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
+    .proj-card { background: var(--bg2); padding: 2.2rem; position: relative; overflow: hidden; transition: background .25s; text-decoration: none; display: block; color: inherit; }
+    .proj-card:hover { background: var(--bg3); }
+    .proj-card-placeholder { background: var(--bg2); padding: 2.2rem; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: .3; }
+    .proj-tag { font-size: .62rem; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .7rem; font-weight: 500; }
+    .proj-card h3 { font-size: .95rem; font-weight: 600; margin-bottom: .6rem; line-height: 1.35; color: var(--text); }
+    .proj-card > p { font-size: .8rem; color: var(--muted); line-height: 1.82; }
+    .proj-link { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1.1rem; font-size: .63rem; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); }
+    .proj-link::before { content: '→'; }
 
     /* TIMELINE */
     #timeline { border-top: 1px solid var(--border); }
@@ -248,6 +273,9 @@
       .research-grid, .skills-grid, .personal-grid, .contact-grid { grid-template-columns: 1fr; }
       .skills-grid { gap: 3rem; }
       .sy-grid { grid-template-columns: 1fr 1fr; }
+      .pmc-summary { grid-template-columns: 1fr 1fr; }
+      .pmc-header { flex-direction: column; align-items: flex-start; }
+      .proj-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; gap: .4rem; }
     }
   </style>
@@ -257,10 +285,11 @@
 <nav id="nav">
   <a href="#hero" class="nav-name">Tristan Lismer</a>
   <ul class="nav-links">
+    <li><a href="#training">Training</a></li>
     <li><a href="#research">Research</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#personal">Personal</a></li>
-    <li><a href="#training">Training</a></li>
+    <li><a href="#projects">Projects</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><span class="nav-open">Open to roles</span></li>
   </ul>
@@ -286,6 +315,116 @@
   </div>
 </div>
 
+<!-- PILLARS -->
+<div class="pillars">
+  <div class="pillar">
+    <div class="pillar-icon">⚛</div>
+    <h3>Quantum Foundations</h3>
+    <p>Testing Born's rule and the axioms of QM with 4-slit photonic interferometers.</p>
+  </div>
+  <div class="pillar">
+    <div class="pillar-icon">📊</div>
+    <h3>Data Analysis</h3>
+    <p>Cross-validated rank-sweep pipelines, ALS fitting, GPT state space characterisation.</p>
+  </div>
+  <div class="pillar">
+    <div class="pillar-icon">🏃</div>
+    <h3>Endurance Athlete</h3>
+    <p>Ironman finisher. Bromont 80K ultra in training. Garmin data nerd at heart.</p>
+  </div>
+  <div class="pillar">
+    <div class="pillar-icon">🔭</div>
+    <h3>Industry Horizon</h3>
+    <p>Photonic quantum computing, sports tech, anywhere precision measurement matters.</p>
+  </div>
+</div>
+
+<!-- TRAINING -->
+<div id="training">
+  <div class="wrap">
+    <p class="s-label fade">Training</p>
+    <h2 class="fade">2026 in motion.</h2>
+
+    <div class="sy-grid fade">
+      <div class="sy-card sy-run">
+        <div class="sy-val" id="sy-run-km">—</div>
+        <div class="sy-unit">km run</div>
+        <div class="sy-sub" id="sy-run-sub">loading…</div>
+      </div>
+      <div class="sy-card sy-ride">
+        <div class="sy-val" id="sy-ride-km">—</div>
+        <div class="sy-unit">km ridden</div>
+        <div class="sy-sub" id="sy-ride-sub">loading…</div>
+      </div>
+      <div class="sy-card">
+        <div class="sy-val" id="sy-hours">—</div>
+        <div class="sy-unit">hours moving</div>
+        <div class="sy-sub" id="sy-hours-sub">run + ride combined</div>
+      </div>
+      <div class="sy-card sy-elev">
+        <div class="sy-val" id="sy-elev-val">—</div>
+        <div class="sy-unit">metres climbed</div>
+        <div class="sy-sub" id="sy-elev-sub">run + ride elevation</div>
+      </div>
+    </div>
+
+    <p class="s-label fade" style="margin-top:1rem;margin-bottom:1.5rem;">Performance Management · Bromont 80K Build</p>
+
+    <div class="pmc-summary fade">
+      <div class="pmc-kpi">
+        <div class="pmc-val" id="pmc-ctl" style="color:var(--blue)">—</div>
+        <div class="pmc-lbl">Fitness · CTL</div>
+      </div>
+      <div class="pmc-kpi">
+        <div class="pmc-val" id="pmc-atl" style="color:var(--accent)">—</div>
+        <div class="pmc-lbl">Fatigue · ATL</div>
+      </div>
+      <div class="pmc-kpi">
+        <div class="pmc-val" id="pmc-tsb">—</div>
+        <div class="pmc-lbl">Form · TSB</div>
+      </div>
+      <div class="pmc-kpi">
+        <div class="pmc-val" id="pmc-weeks" style="color:var(--green)">—</div>
+        <div class="pmc-lbl">Weeks to Bromont</div>
+      </div>
+    </div>
+
+    <div class="pmc-wrap fade">
+      <div class="pmc-header">
+        <span>Fitness · Fatigue · Form — Banister (1975) / Coggan (2003) model · LTHR = 175 bpm</span>
+        <div class="chart-legend">
+          <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--blue)"></div>CTL (Fitness)</div>
+          <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--accent);opacity:.7"></div>ATL (Fatigue)</div>
+          <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(82,214,138,0.45)"></div>TSB (Form)</div>
+        </div>
+      </div>
+      <canvas id="pmc-chart" height="90"></canvas>
+    </div>
+
+    <div class="pmc-wrap fade">
+      <div class="pmc-header">
+        <span>Weekly Training Volume</span>
+        <div class="chart-legend">
+          <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(245,166,35,0.75)"></div>Run km</div>
+          <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(72,202,228,0.6)"></div>Ride km</div>
+        </div>
+      </div>
+      <canvas id="weekly-chart" height="60"></canvas>
+    </div>
+
+    <div class="shm-legend fade">
+      <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--accent)"></div>Run / Trail</div>
+      <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--blue)"></div>Ride</div>
+      <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--green)"></div>Other</div>
+    </div>
+    <div class="shm-scroll fade">
+      <div id="strava-heatmap"></div>
+    </div>
+
+    <p class="s-label fade" style="margin-bottom:1.5rem;">Recent Activities</p>
+    <div class="act-scroll fade" id="strava-activities"></div>
+  </div>
+</div>
 
 <!-- RESEARCH -->
 <div class="wrap" id="research">
@@ -364,6 +503,9 @@
             <span class="chip">NumPy / SciPy</span>
             <span class="chip">joblib</span>
             <span class="chip">matplotlib</span>
+            <span class="chip">Plotly</span>
+            <span class="chip">Chart.js</span>
+            <span class="chip">Strava API</span>
             <span class="chip">SLURM</span>
             <span class="chip">Compute Canada</span>
             <span class="chip">Git</span>
@@ -400,46 +542,30 @@
   </div>
 </div>
 
-<!-- TRAINING -->
-<div id="training">
+<!-- PROJECTS -->
+<div id="projects">
   <div class="wrap">
-    <p class="s-label fade">Training</p>
-    <h2 class="fade">2026 in motion.</h2>
-
-    <div class="sy-grid fade">
-      <div class="sy-card sy-run">
-        <div class="sy-val" id="sy-run-km">—</div>
-        <div class="sy-unit">km run</div>
-        <div class="sy-sub" id="sy-run-sub">loading…</div>
-      </div>
-      <div class="sy-card sy-ride">
-        <div class="sy-val" id="sy-ride-km">—</div>
-        <div class="sy-unit">km ridden</div>
-        <div class="sy-sub" id="sy-ride-sub">loading…</div>
-      </div>
-      <div class="sy-card">
-        <div class="sy-val" id="sy-hours">—</div>
-        <div class="sy-unit">hours moving</div>
-        <div class="sy-sub" id="sy-hours-sub">run + ride combined</div>
-      </div>
-      <div class="sy-card sy-elev">
-        <div class="sy-val" id="sy-elev-val">—</div>
-        <div class="sy-unit">metres climbed</div>
-        <div class="sy-sub" id="sy-elev-sub">run + ride elevation</div>
+    <p class="s-label fade">Projects</p>
+    <h2 class="fade">Side projects.</h2>
+    <div class="proj-grid">
+      <a href="https://github.com/tristanlismerphd/bromont-80k-analysis" class="proj-card fade" target="_blank" rel="noopener">
+        <div class="proj-tag">Sports Data Science</div>
+        <h3>Bromont 80K — Training Analytics</h3>
+        <p>Full Performance Management Chart pipeline computed from real Strava heart rate data. Implements the ATL/CTL/TSB model (Banister et al., 1975 / Coggan 2003) — the same model underlying Garmin Training Status, Strava Fitness &amp; Freshness, and Wahoo SYSTM. hrTSS computed per activity, aggregated daily, visualised with Plotly.</p>
+        <div class="skill-chips" style="margin-top:.9rem;">
+          <span class="chip">Python</span>
+          <span class="chip">Strava API</span>
+          <span class="chip">hrTSS</span>
+          <span class="chip">EMA filtering</span>
+          <span class="chip">Plotly</span>
+        </div>
+        <span class="proj-link">View on GitHub</span>
+      </a>
+      <div class="proj-card-placeholder fade">
+        <div style="font-size:2rem;margin-bottom:1rem;color:var(--muted)">+</div>
+        <p style="font-size:.78rem;color:var(--muted);text-align:center;line-height:1.8;">More projects coming as the ultra build progresses.</p>
       </div>
     </div>
-
-    <div class="shm-legend fade">
-      <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--accent)"></div>Run / Trail</div>
-      <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--blue)"></div>Ride</div>
-      <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--green)"></div>Other</div>
-    </div>
-    <div class="shm-scroll fade">
-      <div id="strava-heatmap"></div>
-    </div>
-
-    <p class="s-label fade" style="margin-bottom:1.5rem;">Recent Activities</p>
-    <div class="act-scroll fade" id="strava-activities"></div>
   </div>
 </div>
 
@@ -484,8 +610,8 @@
     <h2 class="fade">Let's talk!</h2>
     <div class="contact-grid">
       <div class="fade">
-        <div class="open-badge">Open to roles in quantum tech</div>
-        <p class="contact-lede">If you're building something in quantum technology and want someone who can do the physics, write the code, and run an ultramarathon before the team standup — reach out. Always happy to talk research too.</p>
+        <div class="open-badge">Open to roles in quantum tech &amp; sports tech</div>
+        <p class="contact-lede">If you're building something in quantum technology or sports data science and want someone who can do the physics, write the code, and run an ultramarathon before the team standup — reach out. Always happy to talk research too.</p>
         <div class="contact-email">tlismer@uwaterloo.ca</div>
       </div>
       <div class="quote-box fade">
@@ -502,7 +628,9 @@
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
+  // ── Polyline decoder ──────────────────────────────────────────────────────
   function decodePolyline(str) {
     const coords = [];
     let index = 0, lat = 0, lng = 0;
@@ -530,6 +658,7 @@
   function typeColor(t) { return isRun(t) ? '#f5a623' : isRide(t) ? '#48cae4' : '#52d68a'; }
   function typeClass(t) { return isRun(t) ? 'act-type-run' : isRide(t) ? 'act-type-ride' : 'act-type-other'; }
 
+  // ── Heatmap ───────────────────────────────────────────────────────────────
   function renderHeatmap(heatmap, year) {
     const priority = { Run:4, TrailRun:4, Ride:3, VirtualRide:3, GravelRide:3 };
     const dayMap = {};
@@ -540,7 +669,6 @@
         dayMap[e.date] = e;
       }
     }
-
     const startOfYear = new Date(year, 0, 1);
     const endOfYear = new Date(year, 11, 31);
     const startDay = startOfYear.getDay();
@@ -568,7 +696,6 @@
 
     const container = document.getElementById('strava-heatmap');
     container.innerHTML = '';
-
     const mRow = document.createElement('div');
     mRow.style.cssText = 'display:flex; padding-left:24px; margin-bottom:4px;';
     let lastWi = 0;
@@ -585,7 +712,6 @@
 
     const body = document.createElement('div');
     body.style.cssText = 'display:flex; gap:2px;';
-
     const dCol = document.createElement('div');
     dCol.style.cssText = 'display:flex; flex-direction:column; gap:2px; margin-right:2px; padding-top:1px; width:20px;';
     ['','Mon','','Wed','','Fri',''].forEach(lbl => {
@@ -624,6 +750,7 @@
     container.appendChild(body);
   }
 
+  // ── Activity cards ────────────────────────────────────────────────────────
   function renderActivities(activities) {
     const container = document.getElementById('strava-activities');
     activities.forEach((act, i) => {
@@ -672,6 +799,7 @@
     });
   }
 
+  // ── Strava loader ─────────────────────────────────────────────────────────
   async function loadStrava() {
     let data;
     try {
@@ -687,13 +815,154 @@
     document.getElementById('sy-run-sub').textContent = `${ys.run_count} runs · ${Math.round(ys.run_elevation).toLocaleString()} m elevation`;
     document.getElementById('sy-ride-sub').textContent = `${ys.ride_count} rides · ${Math.round(ys.ride_elevation).toLocaleString()} m elevation`;
     document.getElementById('sy-hours-sub').textContent = `${ys.run_time_hrs}h run + ${ys.ride_time_hrs}h ride`;
-    document.getElementById('sy-elev-sub').textContent = 'run + ride combined';
 
     renderHeatmap(data.heatmap, data.year);
     renderActivities(data.recent_activities);
   }
 
+  // ── Training analytics (PMC + weekly charts) ──────────────────────────────
+  async function loadTrainingAnalytics() {
+    let data;
+    try {
+      const res = await fetch('/training_analytics.json?v=' + Date.now());
+      data = await res.json();
+    } catch(e) { return; }
+
+    const today = new Date().toISOString().slice(0, 10);
+
+    // KPI cards
+    document.getElementById('pmc-ctl').textContent = data.current.ctl.toFixed(1);
+    document.getElementById('pmc-atl').textContent = data.current.atl.toFixed(1);
+    const tsbEl = document.getElementById('pmc-tsb');
+    const tsb = data.current.tsb;
+    tsbEl.textContent = (tsb >= 0 ? '+' : '') + tsb.toFixed(1);
+    tsbEl.style.color = tsb >= 0 ? 'var(--green)' : '#ff6b6b';
+    document.getElementById('pmc-weeks').textContent = data.weeks_to_race;
+
+    // Filter PMC to today
+    const pmc = data.pmc.filter(d => d.date <= today);
+
+    // Downsample for chart performance
+    const stride = pmc.length > 150 ? 2 : 1;
+    const sp = pmc.filter((_, i) => i % stride === 0);
+
+    const fmtLabel = ds => {
+      const parts = ds.split('-');
+      return parts[1] + '/' + parts[2];
+    };
+
+    const TOOLTIP_STYLE = {
+      backgroundColor: 'rgba(13,13,26,0.95)',
+      borderColor: 'rgba(255,255,255,0.07)',
+      borderWidth: 1,
+      titleColor: '#eaeaf2',
+      bodyColor: 'rgba(234,234,242,0.6)',
+      padding: 10,
+      titleFont: { family: "'JetBrains Mono', monospace", size: 11 },
+      bodyFont: { family: "'JetBrains Mono', monospace", size: 11 },
+    };
+    const TICK_STYLE = { color: 'rgba(234,234,242,0.3)', font: { family: "'JetBrains Mono', monospace", size: 10 } };
+    const GRID_COLOR = 'rgba(255,255,255,0.04)';
+
+    // PMC chart
+    const pmcCtx = document.getElementById('pmc-chart').getContext('2d');
+    new Chart(pmcCtx, {
+      data: {
+        labels: sp.map(d => fmtLabel(d.date)),
+        datasets: [
+          {
+            type: 'bar',
+            label: 'Form (TSB)',
+            data: sp.map(d => d.tsb),
+            backgroundColor: sp.map(d => d.tsb >= 0 ? 'rgba(82,214,138,0.35)' : 'rgba(255,107,107,0.35)'),
+            borderColor: sp.map(d => d.tsb >= 0 ? 'rgba(82,214,138,0.55)' : 'rgba(255,107,107,0.55)'),
+            borderWidth: 1,
+            yAxisID: 'y',
+            order: 3
+          },
+          {
+            type: 'line',
+            label: 'Fitness (CTL)',
+            data: sp.map(d => d.ctl),
+            borderColor: '#48cae4',
+            backgroundColor: 'rgba(72,202,228,0.07)',
+            borderWidth: 2.5,
+            pointRadius: 0,
+            fill: true,
+            tension: 0.4,
+            yAxisID: 'y',
+            order: 1
+          },
+          {
+            type: 'line',
+            label: 'Fatigue (ATL)',
+            data: sp.map(d => d.atl),
+            borderColor: 'rgba(245,166,35,0.8)',
+            backgroundColor: 'transparent',
+            borderWidth: 2,
+            pointRadius: 0,
+            borderDash: [5, 4],
+            tension: 0.4,
+            yAxisID: 'y',
+            order: 2
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: { ...TOOLTIP_STYLE, callbacks: { label: item => ` ${item.dataset.label}: ${item.parsed.y.toFixed(1)}` } }
+        },
+        scales: {
+          x: { grid: { color: GRID_COLOR }, ticks: { ...TICK_STYLE, maxTicksLimit: 8 } },
+          y: { grid: { color: GRID_COLOR }, ticks: TICK_STYLE }
+        }
+      }
+    });
+
+    // Weekly volume chart
+    const weekly = data.weekly.filter(w => w.week <= today);
+    const weekCtx = document.getElementById('weekly-chart').getContext('2d');
+    new Chart(weekCtx, {
+      type: 'bar',
+      data: {
+        labels: weekly.map(w => w.week.slice(5)),
+        datasets: [
+          {
+            label: 'Run km',
+            data: weekly.map(w => w.run_km),
+            backgroundColor: 'rgba(245,166,35,0.75)',
+            borderColor: 'rgba(245,166,35,0.9)',
+            borderWidth: 1
+          },
+          {
+            label: 'Ride km',
+            data: weekly.map(w => w.ride_km),
+            backgroundColor: 'rgba(72,202,228,0.55)',
+            borderColor: 'rgba(72,202,228,0.75)',
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: TOOLTIP_STYLE
+        },
+        scales: {
+          x: { stacked: true, grid: { color: GRID_COLOR }, ticks: TICK_STYLE },
+          y: { stacked: true, grid: { color: GRID_COLOR }, ticks: TICK_STYLE }
+        }
+      }
+    });
+  }
+
   loadStrava();
+  loadTrainingAnalytics();
 </script>
 <script>
   const nav = document.getElementById('nav');
