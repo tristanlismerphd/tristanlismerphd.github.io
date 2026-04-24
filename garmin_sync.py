@@ -5,17 +5,7 @@ garmin_sync.py
 Fetch Garmin Connect health metrics and write garmin_data.json for the
 training dashboard.
 
-Fetches (last DAYS_BACK days):
-  - Sleep score + duration
-  - HRV (last-night avg, ms)
-  - Resting heart rate (bpm)
-
-Joins each sleep entry with the previous day's TSS from training_analytics.json
-so the dashboard can plot the TSS → sleep correlation without a browser-side join.
-
-Usage
------
-  GARMIN_EMAIL=you@example.com GARMIN_PASSWORD=secret python3 garmin_sync.py
+Fetches from Jan 1 of the current year by default (or --days to override).
 
 Env vars
 --------
@@ -38,9 +28,8 @@ except ImportError:
     sys.exit(1)
 
 # ── Config ────────────────────────────────────────────────────────────────────
-DAYS_BACK = 60
-PMC_FILE  = os.environ.get("PMC_FILE", "training_analytics.json")
-OUTPUT    = os.environ.get("OUTPUT",   "garmin_data.json")
+PMC_FILE = os.environ.get("PMC_FILE", "training_analytics.json")
+OUTPUT   = os.environ.get("OUTPUT",   "garmin_data.json")
 
 
 # ── Auth ──────────────────────────────────────────────────────────────────────
@@ -134,23 +123,27 @@ def load_pmc_tss() -> dict[str, float]:
 # ── Main ──────────────────────────────────────────────────────────────────────
 def main() -> None:
     parser = argparse.ArgumentParser(description="Sync Garmin Connect data to garmin_data.json")
-    parser.add_argument("--days", type=int, default=DAYS_BACK,
-                        help=f"Days of history to fetch (default {DAYS_BACK})")
+    parser.add_argument("--days", type=int, default=None,
+                        help="Days of history to fetch (default: Jan 1 of current year)")
     args = parser.parse_args()
 
+    today = date.today()
+    if args.days is not None:
+        start = today - timedelta(days=args.days - 1)
+    else:
+        start = date(today.year, 1, 1)
+
+    days = (today - start).days + 1
+    dates = [start + timedelta(days=i) for i in range(days)]
+
     api = login()
-
-    end   = date.today()
-    start = end - timedelta(days=args.days - 1)
-    dates = [start + timedelta(days=i) for i in range(args.days)]
-
     pmc_tss = load_pmc_tss()
 
     sleep_rows: list[dict] = []
     hrv_rows:   list[dict] = []
     rhr_rows:   list[dict] = []
 
-    print(f"\nFetching {args.days} days ({start} → {end})...")
+    print(f"\nFetching {days} days ({start} → {today})...")
     for d in dates:
         print(f"  {d}", end=" ", flush=True)
 
@@ -175,7 +168,7 @@ def main() -> None:
         print(", ".join(parts) if parts else "(no data)")
 
     out = {
-        "generated":  end.isoformat(),
+        "generated":  today.isoformat(),
         "sleep":      sleep_rows,
         "hrv":        hrv_rows,
         "resting_hr": rhr_rows,
