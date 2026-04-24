@@ -497,10 +497,10 @@
       <canvas id="cumulative-chart" height="65"></canvas>
     </div>
 
-    <!-- Long run progression -->
+    <!-- Long run progression (>=20km only) -->
     <div class="pmc-wrap fade">
       <div class="pmc-header">
-        <span>Long Run Progression — Bromont 80K Build</span>
+        <span>Long Run Progression ≥ 20 km — Bromont 80K Build</span>
         <div class="chart-legend">
           <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--orange)"></div>Distance (km)</div>
           <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(74,222,128,0.45)"></div>Elevation (m)</div>
@@ -509,8 +509,8 @@
       <canvas id="longrun-chart" height="75"></canvas>
     </div>
 
-    <!-- Long Runs Table -->
-    <p class="s-label fade" style="margin-bottom:1.2rem;">Long Run Log</p>
+    <!-- Long Runs Table (>=20km only) -->
+    <p class="s-label fade" style="margin-bottom:1.2rem;">Long Run Log <span style="font-weight:400;opacity:.5;font-size:.6rem;letter-spacing:.06em;">≥ 20 km</span></p>
     <div class="lr-table-wrap fade">
       <table class="lr-table">
         <thead>
@@ -691,7 +691,6 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
-  // Race dates to mark on heatmap
   const RACE_DAYS = { '2026-10-17': 'Bromont 80K Ultra' };
 
   function decodePolyline(str) {
@@ -896,7 +895,6 @@
         scales:{ x:{stacked:true,grid:{color:GRID},ticks:TICK}, y:{stacked:true,grid:{color:GRID},ticks:{...TICK,callback:v=>v+'km'}} } }
     });
 
-    // ── Weekly elevation ──
     new Chart(document.getElementById('weekly-elev-chart').getContext('2d'), {
       type: 'bar',
       data: { labels: wlabels, datasets: [
@@ -908,7 +906,6 @@
         scales:{ x:{grid:{color:GRID},ticks:{...TICK,maxTicksLimit:6}}, y:{grid:{color:GRID},ticks:{...TICK,callback:v=>v+'m'}} } }
     });
 
-    // ── Weekly TSS ──
     new Chart(document.getElementById('weekly-tss-chart').getContext('2d'), {
       type: 'bar',
       data: { labels: wlabels, datasets: [
@@ -930,7 +927,7 @@
     new Chart(document.getElementById('cumulative-chart').getContext('2d'), {
       type: 'line',
       data: { labels: wlabels, datasets: [
-        { label:'Run (km)', data:cumData.map(d=>d.run),
+        { label:'Run (km)',  data:cumData.map(d=>d.run),
           borderColor:'#fb923c', backgroundColor:'rgba(251,146,60,0.08)', borderWidth:2.5, pointRadius:3, pointBackgroundColor:'#fb923c', fill:true, tension:0.3 },
         { label:'Ride (km)', data:cumData.map(d=>d.ride),
           borderColor:'#a78bfa', backgroundColor:'rgba(167,139,250,0.06)', borderWidth:2.5, pointRadius:3, pointBackgroundColor:'#a78bfa', fill:true, tension:0.3 }
@@ -940,8 +937,9 @@
         scales:{ x:{grid:{color:GRID},ticks:TICK}, y:{grid:{color:GRID},ticks:{...TICK,callback:v=>v+'km'}} } }
     });
 
-    // ── Long run progression ──
-    const lr = data.long_runs || [];
+    // ── Long run progression + table — >= 20km only ──
+    const lr = (data.long_runs || []).filter(r => r.distance_km >= 20);
+
     if (lr.length) {
       new Chart(document.getElementById('longrun-chart').getContext('2d'), {
         data: {
@@ -966,7 +964,6 @@
       });
     }
 
-    // ── Long runs table ──
     const fmtPace = p => { const m = Math.floor(p), s = Math.round((p % 1) * 60); return `${m}:${String(s).padStart(2,'0')}/km`; };
     const tbody = document.getElementById('lr-tbody');
     [...lr].reverse().forEach(r => {
