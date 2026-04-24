@@ -481,6 +481,42 @@
       <canvas id="tss-sleep-chart" height="80"></canvas>
     </div>
 
+    <!-- ── TRAINING × RECOVERY CROSS-ANALYSIS ── -->
+    <p class="s-label fade" style="margin-top:2.5rem;margin-bottom:1.5rem;">Training × Recovery · Cross-Analysis</p>
+
+    <div class="pmc-wrap fade">
+      <div class="pmc-header">
+        <span>Fatigue (ATL) vs HRV — training load suppresses recovery markers</span>
+        <div class="chart-legend">
+          <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--orange);opacity:.85"></div>Fatigue (ATL)</div>
+          <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--purple)"></div>HRV (ms)</div>
+        </div>
+      </div>
+      <canvas id="atl-hrv-chart" height="80"></canvas>
+    </div>
+
+    <div class="chart-2col fade">
+      <div class="pmc-wrap">
+        <div class="pmc-header">
+          <span>Weekly Load vs Sleep — TSS and avg nightly sleep score</span>
+          <div class="chart-legend">
+            <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(56,189,248,0.5)"></div>Weekly TSS</div>
+            <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--green)"></div>Avg Sleep</div>
+          </div>
+        </div>
+        <canvas id="weekly-tss-sleep-chart" height="120"></canvas>
+      </div>
+      <div class="pmc-wrap">
+        <div class="pmc-header">
+          <span>Daily Readiness Score — composite of sleep, HRV, resting HR</span>
+          <div class="chart-legend">
+            <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--cyan)"></div>Readiness (0–100)</div>
+          </div>
+        </div>
+        <canvas id="readiness-chart" height="120"></canvas>
+      </div>
+    </div>
+
     <!-- Heatmap -->
     <div class="shm-legend fade">
       <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--orange)"></div>Run / Trail</div>
@@ -881,7 +917,6 @@
 
     // ── TSS → Sleep correlation scatter + linear regression ──
     const corrData = data.sleep.filter(s => s.prev_tss > 0).map(s => ({ x: s.prev_tss, y: s.score }));
-    // Simple linear regression
     const n = corrData.length;
     const sumX = corrData.reduce((a,b)=>a+b.x,0), sumY = corrData.reduce((a,b)=>a+b.y,0);
     const sumXY = corrData.reduce((a,b)=>a+b.x*b.y,0), sumXX = corrData.reduce((a,b)=>a+b.x*b.x,0);
@@ -908,9 +943,146 @@
     });
   }
 
+  async function loadCrossCharts() {
+    let training, garmin;
+    try {
+      [training, garmin] = await Promise.all([
+        fetch('/training_analytics.json?v='+Date.now()).then(r=>r.json()),
+        fetch('/garmin_data.json?v='+Date.now()).then(r=>r.json())
+      ]);
+    } catch(e) { return; }
+
+    const FONT = "'Space Grotesk', sans-serif";
+    const TOOLTIP = { backgroundColor:'rgba(11,20,36,0.97)', borderColor:'rgba(255,255,255,0.07)', borderWidth:1, titleColor:'#e8f0ff', bodyColor:'rgba(232,240,255,0.6)', padding:10, titleFont:{family:FONT,size:11}, bodyFont:{family:FONT,size:11} };
+    const TICK = { color:'rgba(232,240,255,0.28)', font:{family:FONT,size:10} };
+    const GRID = 'rgba(255,255,255,0.04)';
+    const today = new Date().toISOString().slice(0,10);
+
+    // ── 1. ATL vs HRV ──────────────────────────────────────────────────────────
+    // Shows how training fatigue suppresses HRV — the inverse relationship
+    const hrv_map = {};
+    for (const h of garmin.hrv) hrv_map[h.date] = h.hrv_ms;
+
+    const pmc = training.pmc.filter(d => d.date <= today && hrv_map[d.date]);
+    if (pmc.length > 3) {
+      const stride = pmc.length > 120 ? 2 : 1;
+      const pts = pmc.filter((_, i) => i % stride === 0);
+      new Chart(document.getElementById('atl-hrv-chart').getContext('2d'), {
+        data: { labels: pts.map(d => d.date.slice(5)), datasets: [
+          { type:'line', label:'Fatigue (ATL)', data:pts.map(d=>d.atl), yAxisID:'yAtl', order:1,
+            borderColor:'rgba(251,146,60,0.9)', backgroundColor:'rgba(251,146,60,0.06)',
+            borderWidth:2.5, pointRadius:0, fill:true, tension:0.4 },
+          { type:'line', label:'HRV (ms)', data:pts.map(d=>hrv_map[d.date]), yAxisID:'yHrv', order:2,
+            borderColor:'#a78bfa', backgroundColor:'transparent',
+            borderWidth:2, pointRadius:0, fill:false, tension:0.4 }
+        ]},
+        options: { responsive:true, interaction:{mode:'index',intersect:false},
+          plugins:{ legend:{display:false}, tooltip:{...TOOLTIP, callbacks:{
+            label: i => i.datasetIndex===0
+              ? ` ATL: ${i.parsed.y.toFixed(1)}`
+              : ` HRV: ${i.parsed.y.toFixed(1)} ms`
+          }}},
+          scales:{
+            x:{ grid:{color:GRID}, ticks:{...TICK,maxTicksLimit:8} },
+            yAtl:{ grid:{color:GRID}, ticks:{...TICK,callback:v=>v.toFixed(0)}, title:{display:true,text:'ATL (fatigue)',color:'rgba(251,146,60,0.45)',font:{family:FONT,size:9}} },
+            yHrv:{ grid:{display:false}, ticks:{...TICK,callback:v=>v+'ms'}, position:'right', title:{display:true,text:'HRV (ms)',color:'rgba(167,139,250,0.45)',font:{family:FONT,size:9}} }
+          }
+        }
+      });
+    }
+
+    // ── 2. Weekly TSS vs avg sleep score ───────────────────────────────────────
+    const sleepByDate = {};
+    for (const s of garmin.sleep) sleepByDate[s.date] = s.score;
+
+    const weekly = training.weekly.filter(w => w.week <= today);
+    const weeklyWithSleep = weekly.map(w => {
+      const wDate = new Date(w.week);
+      const scores = [];
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(wDate); d.setDate(d.getDate() + i);
+        const ds = d.toISOString().slice(0,10);
+        if (sleepByDate[ds] != null) scores.push(sleepByDate[ds]);
+      }
+      return { ...w, avg_sleep: scores.length ? Math.round(scores.reduce((a,b)=>a+b,0)/scores.length) : null };
+    });
+
+    new Chart(document.getElementById('weekly-tss-sleep-chart').getContext('2d'), {
+      data: { labels: weeklyWithSleep.map(w=>w.week.slice(5)), datasets: [
+        { type:'bar', label:'Weekly TSS', data:weeklyWithSleep.map(w=>w.tss), yAxisID:'yTss', order:2,
+          backgroundColor:'rgba(56,189,248,0.38)', borderColor:'rgba(56,189,248,0.65)', borderWidth:1 },
+        { type:'line', label:'Avg Sleep Score', data:weeklyWithSleep.map(w=>w.avg_sleep), yAxisID:'ySleep', order:1,
+          borderColor:'#4ade80', backgroundColor:'rgba(74,222,128,0.07)', borderWidth:2.5,
+          pointRadius:4, pointBackgroundColor:'#4ade80', pointBorderColor:'rgba(11,20,36,0.8)',
+          pointBorderWidth:2, fill:true, tension:0.4, spanGaps:true }
+      ]},
+      options: { responsive:true, interaction:{mode:'index',intersect:false},
+        plugins:{ legend:{display:false}, tooltip:TOOLTIP },
+        scales:{
+          x:{ grid:{color:GRID}, ticks:{...TICK,maxTicksLimit:6} },
+          yTss:{ grid:{color:GRID}, ticks:TICK, title:{display:true,text:'TSS',color:'rgba(56,189,248,0.4)',font:{family:FONT,size:9}} },
+          ySleep:{ grid:{display:false}, ticks:TICK, position:'right', min:40, max:100,
+            title:{display:true,text:'Avg sleep score',color:'rgba(74,222,128,0.4)',font:{family:FONT,size:9}} }
+        }
+      }
+    });
+
+    // ── 3. Daily Readiness Score ───────────────────────────────────────────────
+    // Composite of sleep (0-100), HRV normalized, RHR inverted-normalized
+    const rhr_map = {};
+    for (const h of garmin.resting_hr) rhr_map[h.date] = h.bpm;
+
+    const hrv_vals = garmin.hrv.map(h=>h.hrv_ms);
+    const hrv_min = Math.min(...hrv_vals), hrv_max = Math.max(...hrv_vals);
+    const rhr_vals = garmin.resting_hr.map(h=>h.bpm);
+    const rhr_min = Math.min(...rhr_vals), rhr_max = Math.max(...rhr_vals);
+
+    const readiness = garmin.sleep.map(s => {
+      const hrv = hrv_map[s.date], rhr = rhr_map[s.date];
+      if (!hrv || !rhr) return null;
+      const hrv_norm  = hrv_max > hrv_min ? ((hrv - hrv_min) / (hrv_max - hrv_min)) * 100 : 50;
+      const rhr_norm  = rhr_max > rhr_min ? ((rhr_max - rhr) / (rhr_max - rhr_min)) * 100 : 50;
+      const score = Math.round((s.score + hrv_norm + rhr_norm) / 3);
+      return { date: s.date, score };
+    }).filter(Boolean);
+
+    if (readiness.length > 3) {
+      new Chart(document.getElementById('readiness-chart').getContext('2d'), {
+        type:'line',
+        data: { labels: readiness.map(r=>r.date.slice(5)), datasets: [{
+          label:'Readiness',
+          data: readiness.map(r=>r.score),
+          borderColor:'#38bdf8',
+          backgroundColor: ctx => {
+            const g = ctx.chart.ctx.createLinearGradient(0, 0, 0, ctx.chart.height);
+            g.addColorStop(0, 'rgba(56,189,248,0.28)');
+            g.addColorStop(1, 'rgba(56,189,248,0.01)');
+            return g;
+          },
+          borderWidth:2.5, pointRadius:0, fill:true, tension:0.4
+        }]},
+        options: { responsive:true, interaction:{mode:'index',intersect:false},
+          plugins:{ legend:{display:false}, tooltip:{...TOOLTIP, callbacks:{
+            label: i => {
+              const v = i.parsed.y;
+              const label = v >= 75 ? 'Ready' : v >= 55 ? 'Moderate' : 'Recovery needed';
+              return ` Readiness: ${v} — ${label}`;
+            }
+          }}},
+          scales:{
+            x:{ grid:{color:GRID}, ticks:{...TICK,maxTicksLimit:8} },
+            y:{ grid:{color:GRID}, ticks:TICK, min:20, max:100,
+              title:{display:true,text:'Readiness score',color:'rgba(56,189,248,0.35)',font:{family:FONT,size:9}} }
+          }
+        }
+      });
+    }
+  }
+
   loadStrava();
   loadTrainingAnalytics();
   loadGarmin();
+  loadCrossCharts();
 </script>
 <script>
   const nav = document.getElementById('nav');
