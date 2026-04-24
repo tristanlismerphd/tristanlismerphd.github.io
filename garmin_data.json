@@ -1,190 +1,833 @@
 {
   "generated": "2026-04-24",
-  "note": "Placeholder data — replace with garmin_sync.py output once Garmin Connect credentials are configured",
   "sleep": [
-    {"date":"2026-02-24","score":66,"duration_hrs":7.1,"prev_tss":101.8},
-    {"date":"2026-02-25","score":82,"duration_hrs":8.1,"prev_tss":0},
-    {"date":"2026-02-26","score":70,"duration_hrs":7.3,"prev_tss":83.5},
-    {"date":"2026-02-27","score":80,"duration_hrs":8.0,"prev_tss":0},
-    {"date":"2026-02-28","score":75,"duration_hrs":7.6,"prev_tss":42.1},
-    {"date":"2026-03-01","score":60,"duration_hrs":6.8,"prev_tss":141.1},
-    {"date":"2026-03-02","score":79,"duration_hrs":7.9,"prev_tss":9.2},
-    {"date":"2026-03-03","score":80,"duration_hrs":8.0,"prev_tss":15.7},
-    {"date":"2026-03-04","score":73,"duration_hrs":7.5,"prev_tss":64.7},
-    {"date":"2026-03-05","score":64,"duration_hrs":7.0,"prev_tss":107.1},
-    {"date":"2026-03-06","score":80,"duration_hrs":8.0,"prev_tss":0},
-    {"date":"2026-03-07","score":69,"duration_hrs":7.2,"prev_tss":85.8},
-    {"date":"2026-03-08","score":75,"duration_hrs":7.6,"prev_tss":50.5},
-    {"date":"2026-03-09","score":81,"duration_hrs":8.1,"prev_tss":11.0},
-    {"date":"2026-03-10","score":64,"duration_hrs":7.0,"prev_tss":106.0},
-    {"date":"2026-03-11","score":78,"duration_hrs":7.8,"prev_tss":24.9},
-    {"date":"2026-03-12","score":73,"duration_hrs":7.5,"prev_tss":56.1},
-    {"date":"2026-03-13","score":82,"duration_hrs":8.2,"prev_tss":8.2},
-    {"date":"2026-03-14","score":71,"duration_hrs":7.3,"prev_tss":72.8},
-    {"date":"2026-03-15","score":82,"duration_hrs":8.2,"prev_tss":9.6},
-    {"date":"2026-03-16","score":65,"duration_hrs":7.0,"prev_tss":96.2},
-    {"date":"2026-03-17","score":80,"duration_hrs":8.0,"prev_tss":0},
-    {"date":"2026-03-18","score":69,"duration_hrs":7.2,"prev_tss":83.1},
-    {"date":"2026-03-19","score":78,"duration_hrs":7.8,"prev_tss":25.6},
-    {"date":"2026-03-20","score":77,"duration_hrs":7.7,"prev_tss":28.4},
-    {"date":"2026-03-21","score":73,"duration_hrs":7.5,"prev_tss":56.4},
-    {"date":"2026-03-22","score":76,"duration_hrs":7.6,"prev_tss":38.2},
-    {"date":"2026-03-23","score":64,"duration_hrs":7.0,"prev_tss":101.4},
-    {"date":"2026-03-24","score":74,"duration_hrs":7.5,"prev_tss":50.4},
-    {"date":"2026-03-25","score":77,"duration_hrs":7.7,"prev_tss":38.7},
-    {"date":"2026-03-26","score":73,"duration_hrs":7.5,"prev_tss":55.6},
-    {"date":"2026-03-27","score":76,"duration_hrs":7.6,"prev_tss":39.8},
-    {"date":"2026-03-28","score":77,"duration_hrs":7.7,"prev_tss":37.6},
-    {"date":"2026-03-29","score":72,"duration_hrs":7.4,"prev_tss":56.4},
-    {"date":"2026-03-30","score":63,"duration_hrs":7.0,"prev_tss":99.1},
-    {"date":"2026-03-31","score":56,"duration_hrs":6.6,"prev_tss":130.2},
-    {"date":"2026-04-01","score":74,"duration_hrs":7.5,"prev_tss":50.8},
-    {"date":"2026-04-02","score":83,"duration_hrs":8.3,"prev_tss":0},
-    {"date":"2026-04-03","score":72,"duration_hrs":7.4,"prev_tss":61.6},
-    {"date":"2026-04-04","score":75,"duration_hrs":7.6,"prev_tss":44.9},
-    {"date":"2026-04-05","score":79,"duration_hrs":7.9,"prev_tss":20.3},
-    {"date":"2026-04-06","score":60,"duration_hrs":6.8,"prev_tss":128.8},
-    {"date":"2026-04-07","score":79,"duration_hrs":7.9,"prev_tss":0},
-    {"date":"2026-04-08","score":80,"duration_hrs":8.0,"prev_tss":23.6},
-    {"date":"2026-04-09","score":72,"duration_hrs":7.4,"prev_tss":67.0},
-    {"date":"2026-04-10","score":78,"duration_hrs":7.8,"prev_tss":29.7},
-    {"date":"2026-04-11","score":80,"duration_hrs":8.0,"prev_tss":23.8},
-    {"date":"2026-04-12","score":75,"duration_hrs":7.6,"prev_tss":48.7},
-    {"date":"2026-04-13","score":45,"duration_hrs":6.2,"prev_tss":336.6},
-    {"date":"2026-04-14","score":62,"duration_hrs":6.9,"prev_tss":14.6},
-    {"date":"2026-04-15","score":54,"duration_hrs":6.5,"prev_tss":135.2},
-    {"date":"2026-04-16","score":66,"duration_hrs":7.1,"prev_tss":91.2},
-    {"date":"2026-04-17","score":72,"duration_hrs":7.4,"prev_tss":65.9},
-    {"date":"2026-04-18","score":77,"duration_hrs":7.7,"prev_tss":29.6},
-    {"date":"2026-04-19","score":68,"duration_hrs":7.2,"prev_tss":80.8},
-    {"date":"2026-04-20","score":77,"duration_hrs":7.7,"prev_tss":29.6},
-    {"date":"2026-04-21","score":84,"duration_hrs":8.4,"prev_tss":0},
-    {"date":"2026-04-22","score":75,"duration_hrs":7.6,"prev_tss":45.5},
-    {"date":"2026-04-23","score":73,"duration_hrs":7.5,"prev_tss":54.6},
-    {"date":"2026-04-24","score":77,"duration_hrs":7.7,"prev_tss":36.9}
+    {
+      "date": "2026-02-25",
+      "score": 85,
+      "duration_hrs": 7.37,
+      "prev_tss": 0
+    },
+    {
+      "date": "2026-02-26",
+      "score": 94,
+      "duration_hrs": 8.53,
+      "prev_tss": 83.5
+    },
+    {
+      "date": "2026-02-27",
+      "score": 77,
+      "duration_hrs": 6.17,
+      "prev_tss": 0
+    },
+    {
+      "date": "2026-02-28",
+      "score": 55,
+      "duration_hrs": 4.76,
+      "prev_tss": 42.1
+    },
+    {
+      "date": "2026-03-01",
+      "score": 91,
+      "duration_hrs": 7.84,
+      "prev_tss": 141.1
+    },
+    {
+      "date": "2026-03-02",
+      "score": 90,
+      "duration_hrs": 8.72,
+      "prev_tss": 9.2
+    },
+    {
+      "date": "2026-03-03",
+      "score": 87,
+      "duration_hrs": 7.55,
+      "prev_tss": 15.7
+    },
+    {
+      "date": "2026-03-04",
+      "score": 92,
+      "duration_hrs": 7.56,
+      "prev_tss": 64.7
+    },
+    {
+      "date": "2026-03-05",
+      "score": 65,
+      "duration_hrs": 6.53,
+      "prev_tss": 107.1
+    },
+    {
+      "date": "2026-03-07",
+      "score": 73,
+      "duration_hrs": 8.03,
+      "prev_tss": 85.8
+    },
+    {
+      "date": "2026-03-08",
+      "score": 89,
+      "duration_hrs": 8.77,
+      "prev_tss": 50.5
+    },
+    {
+      "date": "2026-03-09",
+      "score": 78,
+      "duration_hrs": 6.24,
+      "prev_tss": 11.0
+    },
+    {
+      "date": "2026-03-10",
+      "score": 92,
+      "duration_hrs": 8.32,
+      "prev_tss": 106.0
+    },
+    {
+      "date": "2026-03-11",
+      "score": 85,
+      "duration_hrs": 7.15,
+      "prev_tss": 24.9
+    },
+    {
+      "date": "2026-03-12",
+      "score": 83,
+      "duration_hrs": 7.18,
+      "prev_tss": 56.1
+    },
+    {
+      "date": "2026-03-13",
+      "score": 78,
+      "duration_hrs": 6.11,
+      "prev_tss": 8.2
+    },
+    {
+      "date": "2026-03-14",
+      "score": 79,
+      "duration_hrs": 6.47,
+      "prev_tss": 72.8
+    },
+    {
+      "date": "2026-03-15",
+      "score": 63,
+      "duration_hrs": 5.63,
+      "prev_tss": 9.6
+    },
+    {
+      "date": "2026-03-16",
+      "score": 87,
+      "duration_hrs": 7.67,
+      "prev_tss": 96.2
+    },
+    {
+      "date": "2026-03-17",
+      "score": 80,
+      "duration_hrs": 6.95,
+      "prev_tss": 0
+    },
+    {
+      "date": "2026-03-18",
+      "score": 98,
+      "duration_hrs": 8.32,
+      "prev_tss": 83.1
+    },
+    {
+      "date": "2026-03-19",
+      "score": 94,
+      "duration_hrs": 7.77,
+      "prev_tss": 25.6
+    },
+    {
+      "date": "2026-03-20",
+      "score": 82,
+      "duration_hrs": 6.63,
+      "prev_tss": 28.4
+    },
+    {
+      "date": "2026-03-21",
+      "score": 75,
+      "duration_hrs": 7.12,
+      "prev_tss": 56.4
+    },
+    {
+      "date": "2026-03-22",
+      "score": 95,
+      "duration_hrs": 9.1,
+      "prev_tss": 38.2
+    },
+    {
+      "date": "2026-03-23",
+      "score": 90,
+      "duration_hrs": 7.9,
+      "prev_tss": 101.4
+    },
+    {
+      "date": "2026-03-24",
+      "score": 99,
+      "duration_hrs": 7.68,
+      "prev_tss": 50.4
+    },
+    {
+      "date": "2026-03-25",
+      "score": 93,
+      "duration_hrs": 7.55,
+      "prev_tss": 38.7
+    },
+    {
+      "date": "2026-03-26",
+      "score": 84,
+      "duration_hrs": 7.38,
+      "prev_tss": 55.6
+    },
+    {
+      "date": "2026-03-27",
+      "score": 91,
+      "duration_hrs": 9.38,
+      "prev_tss": 39.8
+    },
+    {
+      "date": "2026-03-28",
+      "score": 84,
+      "duration_hrs": 6.88,
+      "prev_tss": 37.6
+    },
+    {
+      "date": "2026-03-29",
+      "score": 92,
+      "duration_hrs": 7.35,
+      "prev_tss": 56.4
+    },
+    {
+      "date": "2026-03-30",
+      "score": 73,
+      "duration_hrs": 6.68,
+      "prev_tss": 99.1
+    },
+    {
+      "date": "2026-03-31",
+      "score": 67,
+      "duration_hrs": 6.73,
+      "prev_tss": 130.2
+    },
+    {
+      "date": "2026-04-01",
+      "score": 82,
+      "duration_hrs": 7.13,
+      "prev_tss": 50.8
+    },
+    {
+      "date": "2026-04-02",
+      "score": 79,
+      "duration_hrs": 6.33,
+      "prev_tss": 0
+    },
+    {
+      "date": "2026-04-03",
+      "score": 91,
+      "duration_hrs": 9.08,
+      "prev_tss": 61.6
+    },
+    {
+      "date": "2026-04-04",
+      "score": 89,
+      "duration_hrs": 7.78,
+      "prev_tss": 44.9
+    },
+    {
+      "date": "2026-04-05",
+      "score": 84,
+      "duration_hrs": 7.96,
+      "prev_tss": 20.3
+    },
+    {
+      "date": "2026-04-06",
+      "score": 91,
+      "duration_hrs": 8.28,
+      "prev_tss": 128.8
+    },
+    {
+      "date": "2026-04-07",
+      "score": 90,
+      "duration_hrs": 7.7,
+      "prev_tss": 0
+    },
+    {
+      "date": "2026-04-08",
+      "score": 90,
+      "duration_hrs": 7.67,
+      "prev_tss": 23.6
+    },
+    {
+      "date": "2026-04-09",
+      "score": 92,
+      "duration_hrs": 7.52,
+      "prev_tss": 67.0
+    },
+    {
+      "date": "2026-04-10",
+      "score": 79,
+      "duration_hrs": 6.73,
+      "prev_tss": 29.7
+    },
+    {
+      "date": "2026-04-11",
+      "score": 29,
+      "duration_hrs": 2.3,
+      "prev_tss": 23.8
+    },
+    {
+      "date": "2026-04-12",
+      "score": 90,
+      "duration_hrs": 7.72,
+      "prev_tss": 48.7
+    },
+    {
+      "date": "2026-04-13",
+      "score": 76,
+      "duration_hrs": 6.62,
+      "prev_tss": 336.6
+    },
+    {
+      "date": "2026-04-14",
+      "score": 87,
+      "duration_hrs": 9.27,
+      "prev_tss": 14.6
+    },
+    {
+      "date": "2026-04-15",
+      "score": 56,
+      "duration_hrs": 4.45,
+      "prev_tss": 135.2
+    },
+    {
+      "date": "2026-04-16",
+      "score": 96,
+      "duration_hrs": 9.12,
+      "prev_tss": 91.2
+    },
+    {
+      "date": "2026-04-17",
+      "score": 75,
+      "duration_hrs": 6.3,
+      "prev_tss": 65.9
+    },
+    {
+      "date": "2026-04-18",
+      "score": 89,
+      "duration_hrs": 8.27,
+      "prev_tss": 29.6
+    },
+    {
+      "date": "2026-04-19",
+      "score": 89,
+      "duration_hrs": 7.77,
+      "prev_tss": 80.8
+    },
+    {
+      "date": "2026-04-20",
+      "score": 92,
+      "duration_hrs": 8.33,
+      "prev_tss": 29.6
+    },
+    {
+      "date": "2026-04-21",
+      "score": 83,
+      "duration_hrs": 7.03,
+      "prev_tss": 0
+    },
+    {
+      "date": "2026-04-22",
+      "score": 86,
+      "duration_hrs": 7.33,
+      "prev_tss": 45.5
+    },
+    {
+      "date": "2026-04-23",
+      "score": 87,
+      "duration_hrs": 8.65,
+      "prev_tss": 54.6
+    },
+    {
+      "date": "2026-04-24",
+      "score": 89,
+      "duration_hrs": 7.43,
+      "prev_tss": 36.9
+    }
   ],
   "hrv": [
-    {"date":"2026-02-24","hrv_ms":50},
-    {"date":"2026-02-25","hrv_ms":58},
-    {"date":"2026-02-26","hrv_ms":51},
-    {"date":"2026-02-27","hrv_ms":57},
-    {"date":"2026-02-28","hrv_ms":54},
-    {"date":"2026-03-01","hrv_ms":46},
-    {"date":"2026-03-02","hrv_ms":55},
-    {"date":"2026-03-03","hrv_ms":56},
-    {"date":"2026-03-04","hrv_ms":52},
-    {"date":"2026-03-05","hrv_ms":48},
-    {"date":"2026-03-06","hrv_ms":57},
-    {"date":"2026-03-07","hrv_ms":50},
-    {"date":"2026-03-08","hrv_ms":54},
-    {"date":"2026-03-09","hrv_ms":56},
-    {"date":"2026-03-10","hrv_ms":48},
-    {"date":"2026-03-11","hrv_ms":55},
-    {"date":"2026-03-12","hrv_ms":53},
-    {"date":"2026-03-13","hrv_ms":57},
-    {"date":"2026-03-14","hrv_ms":51},
-    {"date":"2026-03-15","hrv_ms":56},
-    {"date":"2026-03-16","hrv_ms":49},
-    {"date":"2026-03-17","hrv_ms":58},
-    {"date":"2026-03-18","hrv_ms":51},
-    {"date":"2026-03-19","hrv_ms":55},
-    {"date":"2026-03-20","hrv_ms":55},
-    {"date":"2026-03-21","hrv_ms":53},
-    {"date":"2026-03-22","hrv_ms":54},
-    {"date":"2026-03-23","hrv_ms":48},
-    {"date":"2026-03-24","hrv_ms":53},
-    {"date":"2026-03-25","hrv_ms":55},
-    {"date":"2026-03-26","hrv_ms":53},
-    {"date":"2026-03-27","hrv_ms":54},
-    {"date":"2026-03-28","hrv_ms":54},
-    {"date":"2026-03-29","hrv_ms":53},
-    {"date":"2026-03-30","hrv_ms":49},
-    {"date":"2026-03-31","hrv_ms":46},
-    {"date":"2026-04-01","hrv_ms":52},
-    {"date":"2026-04-02","hrv_ms":58},
-    {"date":"2026-04-03","hrv_ms":53},
-    {"date":"2026-04-04","hrv_ms":54},
-    {"date":"2026-04-05","hrv_ms":55},
-    {"date":"2026-04-06","hrv_ms":47},
-    {"date":"2026-04-07","hrv_ms":57},
-    {"date":"2026-04-08","hrv_ms":55},
-    {"date":"2026-04-09","hrv_ms":52},
-    {"date":"2026-04-10","hrv_ms":55},
-    {"date":"2026-04-11","hrv_ms":55},
-    {"date":"2026-04-12","hrv_ms":54},
-    {"date":"2026-04-13","hrv_ms":37},
-    {"date":"2026-04-14","hrv_ms":43},
-    {"date":"2026-04-15","hrv_ms":44},
-    {"date":"2026-04-16","hrv_ms":48},
-    {"date":"2026-04-17","hrv_ms":51},
-    {"date":"2026-04-18","hrv_ms":54},
-    {"date":"2026-04-19","hrv_ms":51},
-    {"date":"2026-04-20","hrv_ms":54},
-    {"date":"2026-04-21","hrv_ms":58},
-    {"date":"2026-04-22","hrv_ms":54},
-    {"date":"2026-04-23","hrv_ms":53},
-    {"date":"2026-04-24","hrv_ms":54}
+    {
+      "date": "2026-02-25",
+      "hrv_ms": 120.0
+    },
+    {
+      "date": "2026-02-26",
+      "hrv_ms": 153.0
+    },
+    {
+      "date": "2026-02-27",
+      "hrv_ms": 117.0
+    },
+    {
+      "date": "2026-02-28",
+      "hrv_ms": 72.0
+    },
+    {
+      "date": "2026-03-01",
+      "hrv_ms": 119.0
+    },
+    {
+      "date": "2026-03-02",
+      "hrv_ms": 128.0
+    },
+    {
+      "date": "2026-03-03",
+      "hrv_ms": 110.0
+    },
+    {
+      "date": "2026-03-04",
+      "hrv_ms": 105.0
+    },
+    {
+      "date": "2026-03-05",
+      "hrv_ms": 99.0
+    },
+    {
+      "date": "2026-03-06",
+      "hrv_ms": 71.0
+    },
+    {
+      "date": "2026-03-07",
+      "hrv_ms": 110.0
+    },
+    {
+      "date": "2026-03-08",
+      "hrv_ms": 115.0
+    },
+    {
+      "date": "2026-03-09",
+      "hrv_ms": 141.0
+    },
+    {
+      "date": "2026-03-10",
+      "hrv_ms": 181.0
+    },
+    {
+      "date": "2026-03-11",
+      "hrv_ms": 119.0
+    },
+    {
+      "date": "2026-03-12",
+      "hrv_ms": 133.0
+    },
+    {
+      "date": "2026-03-13",
+      "hrv_ms": 149.0
+    },
+    {
+      "date": "2026-03-14",
+      "hrv_ms": 128.0
+    },
+    {
+      "date": "2026-03-15",
+      "hrv_ms": 67.0
+    },
+    {
+      "date": "2026-03-16",
+      "hrv_ms": 126.0
+    },
+    {
+      "date": "2026-03-17",
+      "hrv_ms": 143.0
+    },
+    {
+      "date": "2026-03-18",
+      "hrv_ms": 158.0
+    },
+    {
+      "date": "2026-03-19",
+      "hrv_ms": 128.0
+    },
+    {
+      "date": "2026-03-20",
+      "hrv_ms": 188.0
+    },
+    {
+      "date": "2026-03-21",
+      "hrv_ms": 102.0
+    },
+    {
+      "date": "2026-03-22",
+      "hrv_ms": 121.0
+    },
+    {
+      "date": "2026-03-23",
+      "hrv_ms": 165.0
+    },
+    {
+      "date": "2026-03-24",
+      "hrv_ms": 128.0
+    },
+    {
+      "date": "2026-03-25",
+      "hrv_ms": 122.0
+    },
+    {
+      "date": "2026-03-26",
+      "hrv_ms": 123.0
+    },
+    {
+      "date": "2026-03-27",
+      "hrv_ms": 132.0
+    },
+    {
+      "date": "2026-03-28",
+      "hrv_ms": 114.0
+    },
+    {
+      "date": "2026-03-29",
+      "hrv_ms": 115.0
+    },
+    {
+      "date": "2026-03-30",
+      "hrv_ms": 106.0
+    },
+    {
+      "date": "2026-03-31",
+      "hrv_ms": 201.0
+    },
+    {
+      "date": "2026-04-01",
+      "hrv_ms": 159.0
+    },
+    {
+      "date": "2026-04-02",
+      "hrv_ms": 135.0
+    },
+    {
+      "date": "2026-04-03",
+      "hrv_ms": 108.0
+    },
+    {
+      "date": "2026-04-04",
+      "hrv_ms": 113.0
+    },
+    {
+      "date": "2026-04-05",
+      "hrv_ms": 107.0
+    },
+    {
+      "date": "2026-04-06",
+      "hrv_ms": 120.0
+    },
+    {
+      "date": "2026-04-07",
+      "hrv_ms": 102.0
+    },
+    {
+      "date": "2026-04-08",
+      "hrv_ms": 125.0
+    },
+    {
+      "date": "2026-04-09",
+      "hrv_ms": 120.0
+    },
+    {
+      "date": "2026-04-10",
+      "hrv_ms": 121.0
+    },
+    {
+      "date": "2026-04-11",
+      "hrv_ms": 94.0
+    },
+    {
+      "date": "2026-04-12",
+      "hrv_ms": 127.0
+    },
+    {
+      "date": "2026-04-13",
+      "hrv_ms": 114.0
+    },
+    {
+      "date": "2026-04-14",
+      "hrv_ms": 161.0
+    },
+    {
+      "date": "2026-04-15",
+      "hrv_ms": 93.0
+    },
+    {
+      "date": "2026-04-16",
+      "hrv_ms": 112.0
+    },
+    {
+      "date": "2026-04-17",
+      "hrv_ms": 132.0
+    },
+    {
+      "date": "2026-04-18",
+      "hrv_ms": 128.0
+    },
+    {
+      "date": "2026-04-19",
+      "hrv_ms": 127.0
+    },
+    {
+      "date": "2026-04-20",
+      "hrv_ms": 122.0
+    },
+    {
+      "date": "2026-04-21",
+      "hrv_ms": 173.0
+    },
+    {
+      "date": "2026-04-22",
+      "hrv_ms": 160.0
+    },
+    {
+      "date": "2026-04-23",
+      "hrv_ms": 117.0
+    },
+    {
+      "date": "2026-04-24",
+      "hrv_ms": 139.0
+    }
   ],
   "resting_hr": [
-    {"date":"2026-02-24","bpm":48},
-    {"date":"2026-02-25","bpm":42},
-    {"date":"2026-02-26","bpm":46},
-    {"date":"2026-02-27","bpm":42},
-    {"date":"2026-02-28","bpm":45},
-    {"date":"2026-03-01","bpm":50},
-    {"date":"2026-03-02","bpm":43},
-    {"date":"2026-03-03","bpm":43},
-    {"date":"2026-03-04","bpm":46},
-    {"date":"2026-03-05","bpm":48},
-    {"date":"2026-03-06","bpm":42},
-    {"date":"2026-03-07","bpm":46},
-    {"date":"2026-03-08","bpm":45},
-    {"date":"2026-03-09","bpm":43},
-    {"date":"2026-03-10","bpm":48},
-    {"date":"2026-03-11","bpm":44},
-    {"date":"2026-03-12","bpm":45},
-    {"date":"2026-03-13","bpm":43},
-    {"date":"2026-03-14","bpm":46},
-    {"date":"2026-03-15","bpm":43},
-    {"date":"2026-03-16","bpm":47},
-    {"date":"2026-03-17","bpm":42},
-    {"date":"2026-03-18","bpm":46},
-    {"date":"2026-03-19","bpm":44},
-    {"date":"2026-03-20","bpm":44},
-    {"date":"2026-03-21","bpm":45},
-    {"date":"2026-03-22","bpm":45},
-    {"date":"2026-03-23","bpm":47},
-    {"date":"2026-03-24","bpm":45},
-    {"date":"2026-03-25","bpm":44},
-    {"date":"2026-03-26","bpm":45},
-    {"date":"2026-03-27","bpm":44},
-    {"date":"2026-03-28","bpm":45},
-    {"date":"2026-03-29","bpm":47},
-    {"date":"2026-03-30","bpm":49},
-    {"date":"2026-03-31","bpm":46},
-    {"date":"2026-04-01","bpm":43},
-    {"date":"2026-04-02","bpm":46},
-    {"date":"2026-04-03","bpm":45},
-    {"date":"2026-04-04","bpm":44},
-    {"date":"2026-04-05","bpm":49},
-    {"date":"2026-04-06","bpm":43},
-    {"date":"2026-04-07","bpm":44},
-    {"date":"2026-04-08","bpm":46},
-    {"date":"2026-04-09","bpm":44},
-    {"date":"2026-04-10","bpm":44},
-    {"date":"2026-04-11","bpm":45},
-    {"date":"2026-04-12","bpm":45},
-    {"date":"2026-04-13","bpm":58},
-    {"date":"2026-04-14","bpm":53},
-    {"date":"2026-04-15","bpm":51},
-    {"date":"2026-04-16","bpm":49},
-    {"date":"2026-04-17","bpm":47},
-    {"date":"2026-04-18","bpm":45},
-    {"date":"2026-04-19","bpm":46},
-    {"date":"2026-04-20","bpm":44},
-    {"date":"2026-04-21","bpm":43},
-    {"date":"2026-04-22","bpm":45},
-    {"date":"2026-04-23","bpm":44},
-    {"date":"2026-04-24","bpm":43}
+    {
+      "date": "2026-02-24",
+      "bpm": 48
+    },
+    {
+      "date": "2026-02-25",
+      "bpm": 43
+    },
+    {
+      "date": "2026-02-26",
+      "bpm": 42
+    },
+    {
+      "date": "2026-02-27",
+      "bpm": 41
+    },
+    {
+      "date": "2026-02-28",
+      "bpm": 49
+    },
+    {
+      "date": "2026-03-01",
+      "bpm": 43
+    },
+    {
+      "date": "2026-03-02",
+      "bpm": 43
+    },
+    {
+      "date": "2026-03-03",
+      "bpm": 42
+    },
+    {
+      "date": "2026-03-04",
+      "bpm": 44
+    },
+    {
+      "date": "2026-03-05",
+      "bpm": 44
+    },
+    {
+      "date": "2026-03-06",
+      "bpm": 44
+    },
+    {
+      "date": "2026-03-07",
+      "bpm": 41
+    },
+    {
+      "date": "2026-03-08",
+      "bpm": 40
+    },
+    {
+      "date": "2026-03-09",
+      "bpm": 38
+    },
+    {
+      "date": "2026-03-10",
+      "bpm": 38
+    },
+    {
+      "date": "2026-03-11",
+      "bpm": 38
+    },
+    {
+      "date": "2026-03-12",
+      "bpm": 39
+    },
+    {
+      "date": "2026-03-13",
+      "bpm": 37
+    },
+    {
+      "date": "2026-03-14",
+      "bpm": 39
+    },
+    {
+      "date": "2026-03-15",
+      "bpm": 42
+    },
+    {
+      "date": "2026-03-16",
+      "bpm": 38
+    },
+    {
+      "date": "2026-03-17",
+      "bpm": 37
+    },
+    {
+      "date": "2026-03-18",
+      "bpm": 37
+    },
+    {
+      "date": "2026-03-19",
+      "bpm": 38
+    },
+    {
+      "date": "2026-03-20",
+      "bpm": 37
+    },
+    {
+      "date": "2026-03-21",
+      "bpm": 42
+    },
+    {
+      "date": "2026-03-22",
+      "bpm": 37
+    },
+    {
+      "date": "2026-03-23",
+      "bpm": 37
+    },
+    {
+      "date": "2026-03-24",
+      "bpm": 39
+    },
+    {
+      "date": "2026-03-25",
+      "bpm": 39
+    },
+    {
+      "date": "2026-03-26",
+      "bpm": 40
+    },
+    {
+      "date": "2026-03-27",
+      "bpm": 39
+    },
+    {
+      "date": "2026-03-28",
+      "bpm": 40
+    },
+    {
+      "date": "2026-03-29",
+      "bpm": 39
+    },
+    {
+      "date": "2026-03-30",
+      "bpm": 39
+    },
+    {
+      "date": "2026-03-31",
+      "bpm": 41
+    },
+    {
+      "date": "2026-04-01",
+      "bpm": 42
+    },
+    {
+      "date": "2026-04-02",
+      "bpm": 39
+    },
+    {
+      "date": "2026-04-03",
+      "bpm": 40
+    },
+    {
+      "date": "2026-04-04",
+      "bpm": 42
+    },
+    {
+      "date": "2026-04-05",
+      "bpm": 42
+    },
+    {
+      "date": "2026-04-06",
+      "bpm": 41
+    },
+    {
+      "date": "2026-04-07",
+      "bpm": 41
+    },
+    {
+      "date": "2026-04-08",
+      "bpm": 39
+    },
+    {
+      "date": "2026-04-09",
+      "bpm": 40
+    },
+    {
+      "date": "2026-04-10",
+      "bpm": 40
+    },
+    {
+      "date": "2026-04-11",
+      "bpm": 44
+    },
+    {
+      "date": "2026-04-12",
+      "bpm": 40
+    },
+    {
+      "date": "2026-04-13",
+      "bpm": 43
+    },
+    {
+      "date": "2026-04-14",
+      "bpm": 38
+    },
+    {
+      "date": "2026-04-15",
+      "bpm": 44
+    },
+    {
+      "date": "2026-04-16",
+      "bpm": 40
+    },
+    {
+      "date": "2026-04-17",
+      "bpm": 40
+    },
+    {
+      "date": "2026-04-18",
+      "bpm": 40
+    },
+    {
+      "date": "2026-04-19",
+      "bpm": 42
+    },
+    {
+      "date": "2026-04-20",
+      "bpm": 42
+    },
+    {
+      "date": "2026-04-21",
+      "bpm": 40
+    },
+    {
+      "date": "2026-04-22",
+      "bpm": 40
+    },
+    {
+      "date": "2026-04-23",
+      "bpm": 40
+    },
+    {
+      "date": "2026-04-24",
+      "bpm": 39
+    }
   ]
 }
