@@ -171,11 +171,29 @@
     .chart-legend-line { width: 20px; height: 2px; flex-shrink: 0; border-radius: 2px; }
     .chart-legend-bar { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
 
+    /* 2-col chart grid */
+    .chart-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .chart-2col .pmc-wrap { margin-bottom: 0; }
+
+    /* Long runs table */
+    .lr-table-wrap { overflow-x: auto; margin-bottom: 3rem; border: 1px solid var(--border); }
+    .lr-table { width: 100%; border-collapse: collapse; font-size: .78rem; }
+    .lr-table th { padding: .65rem 1rem; text-align: left; font-size: .58rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border); background: var(--bg3); white-space: nowrap; }
+    .lr-table td { padding: .72rem 1rem; border-bottom: 1px solid var(--border); color: var(--muted); white-space: nowrap; }
+    .lr-table tbody tr:last-child td { border-bottom: none; }
+    .lr-table tbody tr:hover td { background: var(--bg3); }
+    .lr-table .td-date { color: var(--cyan); font-size: .72rem; font-weight: 500; }
+    .lr-table .td-name { color: var(--text); font-weight: 600; }
+    .lr-table .td-dist { color: var(--orange); font-weight: 700; }
+    .lr-table .td-elev { color: var(--green); font-weight: 600; }
+    .lr-table .td-hr { color: var(--red); }
+    .lr-table .td-tss { color: var(--cyan); }
+
     .shm-scroll { overflow-x: auto; padding-bottom: .5rem; margin-bottom: 3rem; }
     .shm-scroll::-webkit-scrollbar { height: 3px; }
     .shm-scroll::-webkit-scrollbar-track { background: transparent; }
     .shm-scroll::-webkit-scrollbar-thumb { background: var(--border); }
-    .shm-legend { display: flex; gap: 1.2rem; align-items: center; margin-bottom: 1rem; }
+    .shm-legend { display: flex; gap: 1.2rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; }
     .shm-legend-item { display: flex; align-items: center; gap: .4rem; font-size: .65rem; color: var(--muted); font-weight: 500; }
     .shm-legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
     .act-scroll { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem; -webkit-overflow-scrolling: touch; }
@@ -273,6 +291,7 @@
       .sy-grid { grid-template-columns: 1fr 1fr; }
       .pmc-summary { grid-template-columns: 1fr 1fr; }
       .pmc-header { flex-direction: column; align-items: flex-start; }
+      .chart-2col { grid-template-columns: 1fr; }
       .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
       .proj-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; gap: .4rem; text-align: center; }
@@ -406,6 +425,7 @@
       </div>
     </div>
 
+    <!-- PMC Chart -->
     <div class="pmc-wrap fade">
       <div class="pmc-header">
         <span>Fitness · Fatigue · Form — Banister (1975) / Coggan (2003) · LTHR = 175 bpm</span>
@@ -418,6 +438,7 @@
       <canvas id="pmc-chart" height="90"></canvas>
     </div>
 
+    <!-- Weekly Running Volume -->
     <div class="pmc-wrap fade">
       <div class="pmc-header">
         <span>Weekly Running Volume</span>
@@ -429,6 +450,7 @@
       <canvas id="weekly-run-chart" height="55"></canvas>
     </div>
 
+    <!-- Weekly Cycling Volume -->
     <div class="pmc-wrap fade">
       <div class="pmc-header">
         <span>Weekly Cycling Volume</span>
@@ -441,10 +463,77 @@
       <canvas id="weekly-ride-chart" height="55"></canvas>
     </div>
 
+    <!-- Elevation + TSS side by side -->
+    <div class="chart-2col fade">
+      <div class="pmc-wrap">
+        <div class="pmc-header">
+          <span>Weekly Elevation Gain</span>
+          <div class="chart-legend">
+            <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(74,222,128,0.65)"></div>metres climbed</div>
+          </div>
+        </div>
+        <canvas id="weekly-elev-chart" height="120"></canvas>
+      </div>
+      <div class="pmc-wrap">
+        <div class="pmc-header">
+          <span>Weekly Training Stress Score</span>
+          <div class="chart-legend">
+            <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(56,189,248,0.55)"></div>TSS</div>
+          </div>
+        </div>
+        <canvas id="weekly-tss-chart" height="120"></canvas>
+      </div>
+    </div>
+
+    <!-- Cumulative km -->
+    <div class="pmc-wrap fade">
+      <div class="pmc-header">
+        <span>Cumulative Distance — 2026 YTD</span>
+        <div class="chart-legend">
+          <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--orange)"></div>Run (total km)</div>
+          <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--purple)"></div>Ride (total km)</div>
+        </div>
+      </div>
+      <canvas id="cumulative-chart" height="65"></canvas>
+    </div>
+
+    <!-- Long run progression -->
+    <div class="pmc-wrap fade">
+      <div class="pmc-header">
+        <span>Long Run Progression — Bromont 80K Build</span>
+        <div class="chart-legend">
+          <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--orange)"></div>Distance (km)</div>
+          <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(74,222,128,0.45)"></div>Elevation (m)</div>
+        </div>
+      </div>
+      <canvas id="longrun-chart" height="75"></canvas>
+    </div>
+
+    <!-- Long Runs Table -->
+    <p class="s-label fade" style="margin-bottom:1.2rem;">Long Run Log</p>
+    <div class="lr-table-wrap fade">
+      <table class="lr-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Distance</th>
+            <th>Elevation</th>
+            <th>Pace</th>
+            <th>Avg HR</th>
+            <th>TSS</th>
+          </tr>
+        </thead>
+        <tbody id="lr-tbody"></tbody>
+      </table>
+    </div>
+
+    <!-- Heatmap -->
     <div class="shm-legend fade">
       <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--orange)"></div>Run / Trail</div>
       <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--purple)"></div>Ride</div>
       <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--green)"></div>Other</div>
+      <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--cyan);outline:1px solid var(--cyan);outline-offset:1px;"></div>Race day</div>
     </div>
     <div class="shm-scroll fade"><div id="strava-heatmap"></div></div>
 
@@ -602,6 +691,9 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
+  // Race dates to mark on heatmap
+  const RACE_DAYS = { '2026-10-17': 'Bromont 80K Ultra' };
+
   function decodePolyline(str) {
     const coords = []; let index = 0, lat = 0, lng = 0;
     while (index < str.length) {
@@ -668,14 +760,21 @@
       const wEl = document.createElement('div'); wEl.style.cssText = 'display:flex;flex-direction:column;gap:2px;';
       for (const day of wk) {
         const cell = document.createElement('div'); cell.style.cssText = 'width:11px;height:11px;border-radius:2px;';
-        if (!day.inYear) { cell.style.background = 'transparent'; }
-        else if (day.activity) {
+        if (!day.inYear) {
+          cell.style.background = 'transparent';
+        } else if (RACE_DAYS[day.date]) {
+          cell.style.background = '#38bdf8';
+          cell.style.boxShadow = '0 0 5px rgba(56,189,248,0.8)';
+          cell.title = `${day.date} · RACE DAY · ${RACE_DAYS[day.date]}`;
+        } else if (day.activity) {
           const col = typeColor(day.activity.type);
           const maxD = isRun(day.activity.type) ? 20 : isRide(day.activity.type) ? 100 : 15;
           cell.style.background = col;
           cell.style.opacity = Math.min(1, 0.3 + (day.activity.distance_km / maxD) * 0.7);
           cell.title = `${day.date} · ${actTypeLabel(day.activity.type)} · ${day.activity.distance_km} km`;
-        } else { cell.style.background = 'rgba(255,255,255,0.05)'; }
+        } else {
+          cell.style.background = 'rgba(255,255,255,0.05)';
+        }
         wEl.appendChild(cell);
       }
       grid.appendChild(wEl);
@@ -731,6 +830,8 @@
     let data;
     try { const r = await fetch('/training_analytics.json?v='+Date.now()); data = await r.json(); } catch(e) { return; }
     const today = new Date().toISOString().slice(0,10);
+
+    // PMC KPIs
     document.getElementById('pmc-ctl').textContent   = data.current.ctl.toFixed(1);
     document.getElementById('pmc-atl').textContent   = data.current.atl.toFixed(1);
     document.getElementById('pmc-weeks').textContent = data.weeks_to_race;
@@ -738,15 +839,16 @@
     tsbEl.textContent = (tsb >= 0 ? '+' : '') + tsb.toFixed(1);
     tsbEl.style.color = tsb >= 0 ? 'var(--green)' : 'var(--red)';
 
-    const pmc = data.pmc.filter(d => d.date <= today);
-    const stride = pmc.length > 150 ? 2 : 1;
-    const sp = pmc.filter((_, i) => i % stride === 0);
-    const fmtL = ds => { const p = ds.split('-'); return p[1]+'/'+p[2]; };
-
     const FONT = "'Space Grotesk', sans-serif";
     const TOOLTIP = { backgroundColor:'rgba(11,20,36,0.97)', borderColor:'rgba(255,255,255,0.07)', borderWidth:1, titleColor:'#e8f0ff', bodyColor:'rgba(232,240,255,0.6)', padding:10, titleFont:{family:FONT,size:11}, bodyFont:{family:FONT,size:11} };
     const TICK  = { color:'rgba(232,240,255,0.28)', font:{family:FONT,size:10} };
     const GRID  = 'rgba(255,255,255,0.04)';
+
+    // ── PMC chart ──
+    const pmc = data.pmc.filter(d => d.date <= today);
+    const stride = pmc.length > 150 ? 2 : 1;
+    const sp = pmc.filter((_, i) => i % stride === 0);
+    const fmtL = ds => { const p = ds.split('-'); return p[1]+'/'+p[2]; };
 
     new Chart(document.getElementById('pmc-chart').getContext('2d'), {
       data: {
@@ -767,6 +869,7 @@
         scales:{ x:{grid:{color:GRID},ticks:{...TICK,maxTicksLimit:8}}, y:{grid:{color:GRID},ticks:TICK} } }
     });
 
+    // ── Weekly charts ──
     const weekly = data.weekly.filter(w => w.week <= today);
     const wlabels = weekly.map(w => w.week.slice(5));
 
@@ -791,6 +894,92 @@
       options: { responsive:true, interaction:{mode:'index',intersect:false},
         plugins:{ legend:{display:false}, tooltip:TOOLTIP },
         scales:{ x:{stacked:true,grid:{color:GRID},ticks:TICK}, y:{stacked:true,grid:{color:GRID},ticks:{...TICK,callback:v=>v+'km'}} } }
+    });
+
+    // ── Weekly elevation ──
+    new Chart(document.getElementById('weekly-elev-chart').getContext('2d'), {
+      type: 'bar',
+      data: { labels: wlabels, datasets: [
+        { label:'Elevation (m)', data:weekly.map(w=>w.vert_m||0),
+          backgroundColor:'rgba(74,222,128,0.55)', borderColor:'rgba(74,222,128,0.8)', borderWidth:1 }
+      ]},
+      options: { responsive:true, interaction:{mode:'index',intersect:false},
+        plugins:{ legend:{display:false}, tooltip:TOOLTIP },
+        scales:{ x:{grid:{color:GRID},ticks:{...TICK,maxTicksLimit:6}}, y:{grid:{color:GRID},ticks:{...TICK,callback:v=>v+'m'}} } }
+    });
+
+    // ── Weekly TSS ──
+    new Chart(document.getElementById('weekly-tss-chart').getContext('2d'), {
+      type: 'bar',
+      data: { labels: wlabels, datasets: [
+        { label:'TSS', data:weekly.map(w=>w.tss||0),
+          backgroundColor:'rgba(56,189,248,0.5)', borderColor:'rgba(56,189,248,0.75)', borderWidth:1 }
+      ]},
+      options: { responsive:true, interaction:{mode:'index',intersect:false},
+        plugins:{ legend:{display:false}, tooltip:TOOLTIP },
+        scales:{ x:{grid:{color:GRID},ticks:{...TICK,maxTicksLimit:6}}, y:{grid:{color:GRID},ticks:TICK} } }
+    });
+
+    // ── Cumulative km ──
+    let cumRun = 0, cumRide = 0;
+    const cumData = weekly.map(w => {
+      cumRun  += (w.trail_run_km||0) + (w.road_run_km||0);
+      cumRide += (w.road_ride_km||0) + (w.gravel_km||0) + (w.mtb_km||0);
+      return { run: Math.round(cumRun * 10) / 10, ride: Math.round(cumRide * 10) / 10 };
+    });
+    new Chart(document.getElementById('cumulative-chart').getContext('2d'), {
+      type: 'line',
+      data: { labels: wlabels, datasets: [
+        { label:'Run (km)', data:cumData.map(d=>d.run),
+          borderColor:'#fb923c', backgroundColor:'rgba(251,146,60,0.08)', borderWidth:2.5, pointRadius:3, pointBackgroundColor:'#fb923c', fill:true, tension:0.3 },
+        { label:'Ride (km)', data:cumData.map(d=>d.ride),
+          borderColor:'#a78bfa', backgroundColor:'rgba(167,139,250,0.06)', borderWidth:2.5, pointRadius:3, pointBackgroundColor:'#a78bfa', fill:true, tension:0.3 }
+      ]},
+      options: { responsive:true, interaction:{mode:'index',intersect:false},
+        plugins:{ legend:{display:false}, tooltip:TOOLTIP },
+        scales:{ x:{grid:{color:GRID},ticks:TICK}, y:{grid:{color:GRID},ticks:{...TICK,callback:v=>v+'km'}} } }
+    });
+
+    // ── Long run progression ──
+    const lr = data.long_runs || [];
+    if (lr.length) {
+      new Chart(document.getElementById('longrun-chart').getContext('2d'), {
+        data: {
+          labels: lr.map(r => r.date.slice(5)),
+          datasets: [
+            { type:'bar',  label:'Elevation (m)', data:lr.map(r=>r.elevation_m), yAxisID:'y2', order:2,
+              backgroundColor:'rgba(74,222,128,0.3)', borderColor:'rgba(74,222,128,0.55)', borderWidth:1 },
+            { type:'line', label:'Distance (km)', data:lr.map(r=>r.distance_km), yAxisID:'y', order:1,
+              borderColor:'#fb923c', backgroundColor:'rgba(251,146,60,0.1)', borderWidth:2.5,
+              pointRadius:5, pointBackgroundColor:'#fb923c', pointBorderColor:'rgba(11,20,36,0.8)', pointBorderWidth:2,
+              fill:true, tension:0.3 }
+          ]
+        },
+        options: { responsive:true, interaction:{mode:'index',intersect:false},
+          plugins:{ legend:{display:false}, tooltip:TOOLTIP },
+          scales:{
+            x:{grid:{color:GRID},ticks:TICK},
+            y:{grid:{color:GRID},ticks:{...TICK,callback:v=>v+'km'}, title:{display:true,text:'km',color:'rgba(232,240,255,0.25)',font:{family:FONT,size:10}}},
+            y2:{grid:{display:false},ticks:{...TICK,callback:v=>v+'m'}, position:'right', title:{display:true,text:'m elev',color:'rgba(232,240,255,0.25)',font:{family:FONT,size:10}}}
+          }
+        }
+      });
+    }
+
+    // ── Long runs table ──
+    const fmtPace = p => { const m = Math.floor(p), s = Math.round((p % 1) * 60); return `${m}:${String(s).padStart(2,'0')}/km`; };
+    const tbody = document.getElementById('lr-tbody');
+    [...lr].reverse().forEach(r => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="td-date">${r.date}</td>
+        <td class="td-name">${r.name}</td>
+        <td class="td-dist">${r.distance_km} km</td>
+        <td class="td-elev">${Math.round(r.elevation_m)} m</td>
+        <td>${fmtPace(r.pace_min_km)}</td>
+        <td class="td-hr">${Math.round(r.hr)} bpm</td>
+        <td class="td-tss">${Math.round(r.tss)}</td>`;
+      tbody.appendChild(tr);
     });
   }
 
