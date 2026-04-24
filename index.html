@@ -3,154 +3,204 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tristan Lismer — Quantum Physicist</title>
+  <title>Tristan Lismer — Sports Data Scientist</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:     #07070f;
-      --bg2:    #0d0d1a;
-      --bg3:    #12121f;
+      --bg:     #060c18;
+      --bg2:    #0b1424;
+      --bg3:    #111e32;
       --border: rgba(255,255,255,0.07);
-      --text:   #eaeaf2;
-      --muted:  rgba(234,234,242,0.45);
-      --accent: #f5a623;
-      --blue:   #48cae4;
-      --green:  #52d68a;
+      --text:   #e8f0ff;
+      --muted:  rgba(232,240,255,0.48);
+      --cyan:   #38bdf8;
+      --orange: #fb923c;
+      --green:  #4ade80;
+      --purple: #a78bfa;
+      --red:    #f87171;
     }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.7; overflow-x: hidden; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
 
-    /* NAV */
+    /* ── NAV ─────────────────────────────────────────────────────────── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 1.1rem 3rem;
+      padding: 1rem 3rem;
       transition: background .3s, border-color .3s;
       border-bottom: 1px solid transparent;
     }
-    nav.scrolled { background: rgba(7,7,15,.96); border-color: var(--border); backdrop-filter: blur(16px); }
-    .nav-name { font-weight: 600; font-size: .85rem; color: var(--text); text-decoration: none; }
+    nav.scrolled { background: rgba(6,12,24,.95); border-color: var(--border); backdrop-filter: blur(20px); }
+    .nav-logo { font-weight: 700; font-size: .9rem; color: var(--text); text-decoration: none; letter-spacing: -.01em; }
+    .nav-logo span { color: var(--cyan); }
     .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: .78rem; transition: color .2s; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: .82rem; font-weight: 500; transition: color .2s; }
     .nav-links a:hover { color: var(--text); }
-    .nav-open { display: flex; align-items: center; gap: .45rem; font-size: .72rem; color: var(--green); }
-    .nav-open::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); display: block; box-shadow: 0 0 8px var(--green); animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+    .nav-badge {
+      display: flex; align-items: center; gap: .45rem;
+      font-size: .72rem; font-weight: 600; color: var(--green);
+      padding: .3rem .8rem; border: 1px solid rgba(74,222,128,.25);
+      background: rgba(74,222,128,.06);
+    }
+    .nav-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green); box-shadow: 0 0 8px var(--green);
+      animation: blink 2s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
 
-    /* HERO */
+    /* ── HERO ────────────────────────────────────────────────────────── */
     #hero {
       display: grid;
-      grid-template-columns: 55% 45%;
+      grid-template-columns: 56% 44%;
       min-height: 100vh;
     }
     .hero-left {
       display: flex; flex-direction: column; justify-content: center;
-      padding: 9rem 4rem 6rem 5rem;
+      padding: 10rem 4rem 6rem 5rem;
       position: relative;
     }
-    .hero-left::before {
-      content: ''; position: absolute; inset: 0; z-index: -1;
-      background-image: radial-gradient(circle, rgba(255,255,255,.02) 1px, transparent 1px);
-      background-size: 28px 28px;
+    .hero-grid-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(56,189,248,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56,189,248,.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse 80% 80% at 20% 50%, black, transparent);
     }
+    .hero-left > * { position: relative; z-index: 1; }
     .hero-glow {
-      position: absolute; top: 10%; left: -20%; width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(245,166,35,.05) 0%, transparent 65%);
-      pointer-events: none; z-index: -1;
+      position: absolute; top: 5%; left: -15%; width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(56,189,248,.07) 0%, transparent 60%);
+      pointer-events: none; z-index: 0;
     }
     .hero-right { position: relative; }
     .hero-right img {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
       object-fit: cover; object-position: center top;
-      display: block;
     }
     .hero-right::after {
       content: ''; position: absolute; inset: 0; z-index: 1;
-      background: linear-gradient(to right, var(--bg) 0%, transparent 20%),
-                  linear-gradient(to top, var(--bg) 0%, transparent 15%);
+      background:
+        linear-gradient(to right, var(--bg) 0%, transparent 25%),
+        linear-gradient(to top, var(--bg) 0%, transparent 20%),
+        linear-gradient(to bottom, rgba(6,12,24,.3) 0%, transparent 15%);
     }
+
     .hero-eyebrow {
-      font-size: .7rem; font-weight: 500; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 1.4rem;
-      display: flex; align-items: center; gap: .6rem;
+      font-size: .72rem; font-weight: 600; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 1.4rem;
     }
-    .hero-eyebrow::before { content: '//'; opacity: .35; }
     h1 {
-      font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 600;
-      line-height: 1.1; letter-spacing: -.02em; margin-bottom: 1.6rem;
+      font-size: clamp(2.6rem, 4.8vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.06;
+      letter-spacing: -.03em;
+      margin-bottom: 1.6rem;
     }
-    h1 em { color: var(--accent); font-style: normal; }
+    h1 em { color: var(--cyan); font-style: normal; }
     .hero-sub {
-      font-size: .9rem; font-weight: 300; color: var(--muted);
-      max-width: 460px; line-height: 1.9; margin-bottom: 2.5rem;
+      font-size: .95rem; font-weight: 400; color: var(--muted);
+      max-width: 480px; line-height: 1.85; margin-bottom: 2.5rem;
     }
+    .hero-sub strong { color: var(--text); font-weight: 600; }
     .hero-actions { display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
     .btn {
       display: inline-block; text-decoration: none; font-family: inherit;
-      font-size: .75rem; font-weight: 500; letter-spacing: .06em;
-      padding: .65rem 1.5rem; transition: all .2s; border: none; cursor: pointer;
+      font-size: .8rem; font-weight: 600; letter-spacing: .04em;
+      padding: .7rem 1.6rem; transition: all .2s; border: none; cursor: pointer;
     }
-    .btn-primary { background: var(--accent); color: var(--bg); }
-    .btn-primary:hover { background: #ffc04a; transform: translateY(-2px); }
+    .btn-primary { background: var(--cyan); color: var(--bg); }
+    .btn-primary:hover { background: #7dd3fc; transform: translateY(-2px); }
     .btn-ghost { border: 1px solid var(--border); color: var(--muted); }
-    .btn-ghost:hover { border-color: rgba(255,255,255,.25); color: var(--text); transform: translateY(-2px); }
-    .hero-meta {
-      display: flex; gap: 2.5rem; padding-top: 2.5rem;
-      border-top: 1px solid var(--border); flex-wrap: wrap;
+    .btn-ghost:hover { border-color: rgba(255,255,255,.22); color: var(--text); transform: translateY(-2px); }
+    .hero-targets {
+      font-size: .75rem; color: var(--muted); display: flex; align-items: center; gap: .6rem; flex-wrap: wrap;
     }
-    .meta-item .val { font-size: 1.5rem; font-weight: 600; line-height: 1; }
-    .meta-item .lbl { font-size: .65rem; color: var(--muted); margin-top: .25rem; letter-spacing: .04em; }
+    .hero-targets span { color: var(--text); font-weight: 500; }
+    .hero-targets .dot { color: var(--cyan); }
 
-    /* PILLARS */
-    .pillars {
-      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-      display: grid; grid-template-columns: repeat(4, 1fr);
+    /* ── PERSONAL BESTS ──────────────────────────────────────────────── */
+    .pb-strip {
       background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
     }
-    .pillar { padding: 2rem 1.8rem; border-right: 1px solid var(--border); transition: background .2s; }
-    .pillar:last-child { border-right: none; }
-    .pillar:hover { background: var(--bg3); }
-    .pillar-icon { font-size: 1.1rem; margin-bottom: .75rem; }
-    .pillar h3 { font-size: .85rem; font-weight: 600; margin-bottom: .4rem; }
-    .pillar p { font-size: .73rem; color: var(--muted); line-height: 1.75; }
+    .pb-item {
+      padding: 1.8rem 1rem;
+      border-right: 1px solid var(--border);
+      text-align: center;
+      transition: background .2s;
+      position: relative;
+    }
+    .pb-item:last-child { border-right: none; }
+    .pb-item:hover { background: var(--bg3); }
+    .pb-item::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--cyan); transform: scaleX(0); transform-origin: left;
+      transition: transform .3s;
+    }
+    .pb-item:hover::before { transform: scaleX(1); }
+    .pb-event {
+      font-size: .62rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: .55rem;
+    }
+    .pb-time {
+      font-size: 1.55rem; font-weight: 700; line-height: 1;
+      color: var(--text); letter-spacing: -.02em; margin-bottom: .3rem;
+    }
+    .pb-label { font-size: .6rem; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
 
-    /* SECTIONS */
+    /* ── SECTION BASE ────────────────────────────────────────────────── */
     .wrap { max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; }
     .s-label {
-      font-size: .67rem; font-weight: 500; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: .8rem;
-      display: flex; align-items: center; gap: .55rem;
+      font-size: .68rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: .9rem;
+      display: flex; align-items: center; gap: .5rem;
     }
-    .s-label::before { content: '//'; opacity: .35; }
-    h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 600; letter-spacing: -.02em; line-height: 1.1; margin-bottom: 2.5rem; }
+    .s-label::before { content: '//'; opacity: .4; font-weight: 400; }
+    h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700; letter-spacing: -.025em; line-height: 1.1;
+      margin-bottom: 2.5rem;
+    }
 
-    /* TRAINING */
+    /* ── TRAINING ────────────────────────────────────────────────────── */
     #training { border-top: 1px solid var(--border); }
     .sy-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); margin-bottom: 3rem; }
     .sy-card { background: var(--bg2); padding: 1.6rem 1.8rem; transition: background .2s; }
     .sy-card:hover { background: var(--bg3); }
-    .sy-val { font-size: 1.9rem; font-weight: 600; line-height: 1; }
-    .sy-unit { font-size: .63rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin: .35rem 0 .2rem; }
-    .sy-sub { font-size: .68rem; color: var(--muted); }
-    .sy-run .sy-val { color: var(--accent); }
-    .sy-ride .sy-val { color: var(--blue); }
+    .sy-val { font-size: 2rem; font-weight: 700; line-height: 1; letter-spacing: -.02em; }
+    .sy-unit { font-size: .63rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin: .35rem 0 .25rem; }
+    .sy-sub { font-size: .7rem; color: var(--muted); }
+    .sy-run .sy-val { color: var(--orange); }
+    .sy-ride .sy-val { color: var(--purple); }
     .sy-elev .sy-val { color: var(--green); }
 
     /* PMC */
     .pmc-summary { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); margin-bottom: 2.5rem; }
     .pmc-kpi { background: var(--bg2); padding: 1.4rem 1.8rem; transition: background .2s; }
     .pmc-kpi:hover { background: var(--bg3); }
-    .pmc-val { font-size: 1.6rem; font-weight: 600; line-height: 1; }
-    .pmc-lbl { font-size: .62rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-top: .3rem; }
+    .pmc-val { font-size: 1.7rem; font-weight: 700; line-height: 1; letter-spacing: -.02em; }
+    .pmc-lbl { font-size: .62rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-top: .35rem; }
     .pmc-wrap { background: var(--bg2); border: 1px solid var(--border); padding: 1.4rem 1.4rem .8rem; margin-bottom: 1.5rem; }
-    .pmc-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .6rem; margin-bottom: 1rem; font-size: .61rem; color: var(--muted); letter-spacing: .07em; text-transform: uppercase; }
+    .pmc-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .6rem; margin-bottom: 1rem; font-size: .62rem; font-weight: 500; color: var(--muted); letter-spacing: .04em; }
     .chart-legend { display: flex; gap: 1.2rem; flex-wrap: wrap; }
-    .chart-legend-item { display: flex; align-items: center; gap: .4rem; font-size: .6rem; color: var(--muted); }
-    .chart-legend-line { width: 20px; height: 2px; flex-shrink: 0; }
+    .chart-legend-item { display: flex; align-items: center; gap: .4rem; font-size: .6rem; color: var(--muted); font-weight: 500; }
+    .chart-legend-line { width: 20px; height: 2px; flex-shrink: 0; border-radius: 2px; }
     .chart-legend-bar { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
 
     .shm-scroll { overflow-x: auto; padding-bottom: .5rem; margin-bottom: 3rem; }
@@ -158,156 +208,151 @@
     .shm-scroll::-webkit-scrollbar-track { background: transparent; }
     .shm-scroll::-webkit-scrollbar-thumb { background: var(--border); }
     .shm-legend { display: flex; gap: 1.2rem; align-items: center; margin-bottom: 1rem; }
-    .shm-legend-item { display: flex; align-items: center; gap: .4rem; font-size: .62rem; color: var(--muted); }
+    .shm-legend-item { display: flex; align-items: center; gap: .4rem; font-size: .65rem; color: var(--muted); font-weight: 500; }
     .shm-legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
     .act-scroll { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem; -webkit-overflow-scrolling: touch; }
     .act-scroll::-webkit-scrollbar { height: 3px; }
     .act-scroll::-webkit-scrollbar-track { background: transparent; }
     .act-scroll::-webkit-scrollbar-thumb { background: var(--border); }
-    .act-card { flex: 0 0 250px; background: var(--bg2); border: 1px solid var(--border); transition: border-color .2s, transform .2s; }
-    .act-card:hover { border-color: rgba(255,255,255,.18); transform: translateY(-2px); }
+    .act-card { flex: 0 0 255px; background: var(--bg2); border: 1px solid var(--border); transition: border-color .2s, transform .2s; }
+    .act-card:hover { border-color: rgba(56,189,248,.25); transform: translateY(-3px); }
     .act-map { height: 150px; background: var(--bg3); }
     .act-info { padding: .9rem 1rem; }
-    .act-type-badge { font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: .3rem; font-weight: 500; }
-    .act-type-run { color: var(--accent); }
-    .act-type-ride { color: var(--blue); }
+    .act-type-badge { font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .3rem; font-weight: 700; }
+    .act-type-run { color: var(--orange); }
+    .act-type-ride { color: var(--purple); }
     .act-type-other { color: var(--green); }
-    .act-name { font-size: .8rem; font-weight: 600; margin-bottom: .25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .act-date { font-size: .62rem; color: var(--muted); margin-bottom: .75rem; }
+    .act-name { font-size: .83rem; font-weight: 600; margin-bottom: .25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .act-date { font-size: .64rem; color: var(--muted); margin-bottom: .75rem; }
     .act-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .3rem; }
-    .act-stat .v { font-size: .82rem; font-weight: 600; line-height: 1; }
-    .act-stat .u { font-size: .55rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin-top: .12rem; }
-    .leaflet-container { background: #07070f !important; }
+    .act-stat .v { font-size: .85rem; font-weight: 700; line-height: 1; }
+    .act-stat .u { font-size: .56rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-top: .1rem; }
+    .leaflet-container { background: #060c18 !important; }
 
-    /* RESEARCH */
-    .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
-    .r-card {
-      background: var(--bg); padding: 2.2rem; position: relative;
-      overflow: hidden; transition: background .25s;
-    }
-    .r-card::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-      background: var(--accent); transform: scaleX(0); transform-origin: left;
-      transition: transform .35s ease;
-    }
-    .r-card:hover { background: var(--bg2); }
-    .r-card:hover::after { transform: scaleX(1); }
-    .r-num { font-size: .62rem; color: var(--muted); letter-spacing: .1em; margin-bottom: .9rem; }
-    .r-card h3 { font-size: .95rem; font-weight: 600; margin-bottom: .6rem; line-height: 1.35; }
-    .r-card p { font-size: .8rem; color: var(--muted); line-height: 1.82; }
-    .r-tag { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1.2rem; font-size: .63rem; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); }
-    .r-tag::before { content: '→'; }
-
-    /* SKILLS */
-    #skills { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
-    .skill-group { margin-bottom: 1.8rem; }
-    .skill-group-lbl { font-size: .63rem; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; margin-bottom: .7rem; }
-    .skill-chips { display: flex; flex-wrap: wrap; gap: .35rem; }
-    .chip { font-size: .7rem; padding: .22rem .7rem; border: 1px solid var(--border); color: var(--muted); transition: border-color .2s, color .2s, background .2s; }
-    .chip:hover { border-color: rgba(245,166,35,.4); color: var(--accent); background: rgba(245,166,35,.04); }
-
-    /* PERSONAL */
-    .personal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
-    .p-card { background: var(--bg); padding: 1.2rem 1.4rem; transition: background .2s; display: flex; flex-direction: column; gap: .25rem; }
-    .p-card:hover { background: var(--bg2); }
-    .p-big { font-size: 1.6rem; font-weight: 600; line-height: 1; color: var(--text); }
-    .p-unit { font-size: .63rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: .4rem; }
-    .p-card h3 { font-size: .82rem; font-weight: 600; margin-bottom: .2rem; }
-    .p-card p { font-size: .75rem; color: var(--muted); line-height: 1.65; }
-
-    /* PROJECTS */
+    /* ── PROJECTS ────────────────────────────────────────────────────── */
     #projects { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
-    .proj-card { background: var(--bg2); padding: 2.2rem; position: relative; overflow: hidden; transition: background .25s; text-decoration: none; display: block; color: inherit; }
+    .proj-card { background: var(--bg2); padding: 2.4rem; position: relative; overflow: hidden; transition: background .25s; text-decoration: none; display: block; color: inherit; }
+    .proj-card::after {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      background: var(--cyan); transform: scaleY(0); transform-origin: top;
+      transition: transform .35s ease;
+    }
     .proj-card:hover { background: var(--bg3); }
-    .proj-card-placeholder { background: var(--bg2); padding: 2.2rem; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: .3; }
-    .proj-tag { font-size: .62rem; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .7rem; font-weight: 500; }
-    .proj-card h3 { font-size: .95rem; font-weight: 600; margin-bottom: .6rem; line-height: 1.35; color: var(--text); }
-    .proj-card > p { font-size: .8rem; color: var(--muted); line-height: 1.82; }
-    .proj-link { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1.1rem; font-size: .63rem; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); }
+    .proj-card:hover::after { transform: scaleY(1); }
+    .proj-card-placeholder { background: var(--bg2); padding: 2.4rem; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    .proj-tag { font-size: .63rem; font-weight: 700; color: var(--cyan); letter-spacing: .15em; text-transform: uppercase; margin-bottom: .75rem; }
+    .proj-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: .6rem; line-height: 1.3; color: var(--text); }
+    .proj-card > p { font-size: .82rem; color: var(--muted); line-height: 1.8; }
+    .proj-chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: 1rem; }
+    .chip {
+      font-size: .68rem; font-weight: 500; padding: .2rem .65rem;
+      border: 1px solid var(--border); color: var(--muted);
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .chip:hover { border-color: rgba(56,189,248,.35); color: var(--cyan); background: rgba(56,189,248,.05); }
+    .proj-link { display: inline-flex; align-items: center; gap: .45rem; margin-top: 1.2rem; font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--cyan); }
     .proj-link::before { content: '→'; }
 
-    /* TIMELINE */
-    #timeline { border-top: 1px solid var(--border); }
-    .tl { position: relative; padding-left: 2rem; }
-    .tl::before { content: ''; position: absolute; left: 0; top: .35rem; bottom: 0; width: 1px; background: var(--border); }
-    .tl-entry { position: relative; padding: 0 0 2.2rem 2rem; }
-    .tl-entry:last-child { padding-bottom: 0; }
-    .tl-dot { position: absolute; left: -2rem; top: .35rem; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); transform: translateX(-3px); }
-    .tl-dot.muted { background: var(--border); }
-    .tl-year { font-size: .63rem; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .3rem; }
-    .tl-year.muted { color: var(--muted); }
-    .tl-title { font-size: .9rem; font-weight: 600; margin-bottom: .15rem; }
-    .tl-sub { font-size: .75rem; color: var(--muted); }
+    /* ── ABOUT ───────────────────────────────────────────────────────── */
+    #about { border-top: 1px solid var(--border); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .about-bio { font-size: .88rem; color: var(--muted); line-height: 1.9; }
+    .about-bio p { margin-bottom: 1.2rem; }
+    .about-bio p:last-child { margin-bottom: 0; }
+    .about-bio strong { color: var(--text); font-weight: 600; }
+    .about-tl { margin-top: 2rem; }
+    .about-tl-entry { display: flex; gap: 1.2rem; margin-bottom: 1rem; font-size: .8rem; }
+    .about-tl-year { color: var(--cyan); font-weight: 600; font-size: .7rem; white-space: nowrap; margin-top: .05rem; min-width: 80px; }
+    .about-tl-body strong { font-weight: 600; color: var(--text); }
+    .about-tl-body span { color: var(--muted); font-size: .78rem; }
+    .skill-group { margin-bottom: 1.6rem; }
+    .skill-group-lbl { font-size: .63rem; font-weight: 700; color: var(--muted); letter-spacing: .14em; text-transform: uppercase; margin-bottom: .6rem; }
 
-    /* CONTACT */
-    #contact { background: var(--bg); }
+    /* ── CONTACT ─────────────────────────────────────────────────────── */
+    #contact { background: var(--bg2); border-top: 1px solid var(--border); }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
     .contact-lede { font-size: .88rem; color: var(--muted); line-height: 1.9; margin-bottom: 2rem; max-width: 380px; }
-    .contact-email { font-size: 1.4rem; font-weight: 500; color: var(--text); letter-spacing: -.01em; margin-top: .5rem; }
-    .clink { display: flex; align-items: center; gap: .8rem; text-decoration: none; font-size: .78rem; color: var(--muted); padding: .75rem 0; border-bottom: 1px solid var(--border); transition: color .2s; }
+    .contact-email { font-size: 1.5rem; font-weight: 700; color: var(--text); letter-spacing: -.02em; margin-top: .75rem; }
+    .clink { display: flex; align-items: center; gap: .8rem; text-decoration: none; font-size: .8rem; font-weight: 500; color: var(--muted); padding: .8rem 0; border-bottom: 1px solid var(--border); transition: color .2s; }
     .clink:first-child { border-top: 1px solid var(--border); }
     .clink:hover { color: var(--text); }
-    .clink .arr { color: var(--accent); }
-    .open-badge { display: inline-flex; align-items: center; gap: .5rem; font-size: .7rem; color: var(--green); padding: .4rem .9rem; border: 1px solid rgba(82,214,138,.2); margin-bottom: 1.5rem; background: rgba(82,214,138,.04); }
-    .open-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); animation: pulse 2s infinite; }
-    .quote-box { border-left: 2px solid var(--accent); padding: 2rem 2rem 2rem 2.2rem; background: var(--bg2); }
-    .quote-box blockquote { font-size: .86rem; font-style: italic; font-weight: 300; color: var(--muted); line-height: 1.9; }
-    .quote-box cite { display: block; margin-top: 1.2rem; font-style: normal; font-size: .63rem; letter-spacing: .1em; color: var(--blue); text-transform: uppercase; }
+    .clink .arr { color: var(--cyan); }
+    .open-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .72rem; font-weight: 600; color: var(--green);
+      padding: .45rem 1rem; border: 1px solid rgba(74,222,128,.22);
+      margin-bottom: 1.5rem; background: rgba(74,222,128,.05);
+    }
+    .open-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); animation: blink 2s infinite; }
+    .target-list { margin-top: 1.5rem; }
+    .target-item { display: flex; align-items: center; gap: .7rem; font-size: .78rem; color: var(--muted); padding: .5rem 0; border-bottom: 1px solid var(--border); font-weight: 500; }
+    .target-item:first-child { border-top: 1px solid var(--border); }
+    .target-item .arr { color: var(--cyan); font-size: .9rem; }
 
-    footer { max-width: 1100px; margin: 0 auto; padding: 1.8rem 3rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border); font-size: .67rem; color: var(--muted); }
+    footer {
+      max-width: 1100px; margin: 0 auto;
+      padding: 1.8rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid var(--border);
+      font-size: .68rem; color: var(--muted);
+    }
+    footer a { color: var(--muted); text-decoration: none; transition: color .2s; }
+    footer a:hover { color: var(--text); }
 
-    .fade { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
+    .fade { opacity: 0; transform: translateY(14px); transition: opacity .65s ease, transform .65s ease; }
     .fade.in { opacity: 1; transform: none; }
 
     @media (max-width: 860px) {
       nav { padding: 1rem 1.5rem; }
-      .nav-open { display: none; }
+      .nav-badge { display: none; }
       #hero { grid-template-columns: 1fr; }
       .hero-right { min-height: 55vw; order: -1; }
-      .hero-right::after { background: linear-gradient(to top, var(--bg) 0%, transparent 30%); }
+      .hero-right::after { background: linear-gradient(to top, var(--bg) 0%, transparent 35%); }
       .hero-left { padding: 3rem 1.5rem 4rem; }
-      .pillars { grid-template-columns: 1fr 1fr; }
+      .pb-strip { grid-template-columns: repeat(3, 1fr); }
+      .pb-item:nth-child(3) { border-right: none; }
       .wrap { padding: 4.5rem 1.5rem; }
-      .research-grid, .skills-grid, .personal-grid, .contact-grid { grid-template-columns: 1fr; }
-      .skills-grid { gap: 3rem; }
       .sy-grid { grid-template-columns: 1fr 1fr; }
       .pmc-summary { grid-template-columns: 1fr 1fr; }
       .pmc-header { flex-direction: column; align-items: flex-start; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
       .proj-grid { grid-template-columns: 1fr; }
-      footer { flex-direction: column; gap: .4rem; }
+      footer { flex-direction: column; gap: .4rem; text-align: center; }
     }
   </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav id="nav">
-  <a href="#hero" class="nav-name">Tristan Lismer</a>
+  <a href="#hero" class="nav-logo">Tristan<span>.</span>run</a>
   <ul class="nav-links">
     <li><a href="#training">Training</a></li>
-    <li><a href="#research">Research</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#personal">Personal</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><span class="nav-open">Open to roles</span></li>
+    <li><span class="nav-badge">Open to roles</span></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <div id="hero">
   <div class="hero-left">
+    <div class="hero-grid-bg"></div>
     <div class="hero-glow"></div>
-    <p class="hero-eyebrow">PhD Candidate · Quantum Optics · Institute for Quantum Computing</p>
-    <h1>Testing the <em>axioms</em><br>of quantum mechanics.</h1>
+    <p class="hero-eyebrow">Sports Data Scientist · Endurance Athlete</p>
+    <h1>I build the models<br>athletes <em>rely on.</em></h1>
     <p class="hero-sub">
-      Fourth-year PhD at the Institute for Quantum Computing, Waterloo. I use Generalised Probabilistic Theories to map out the space of possible physical theories, then build optical experiments to find out which one nature actually chose.
+      I implement <strong>ATL/CTL/TSB performance models</strong> from raw HR sensor data — the same mathematics behind Garmin Training Status, Strava Fitness &amp; Freshness, and Wahoo SYSTM. Ironman finisher, ultra runner in training, PhD in precision measurement. Looking for a data role where the signal actually matters.
     </p>
     <div class="hero-actions">
-      <a href="#research" class="btn btn-primary">My Research</a>
-      <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+      <a href="#training" class="btn btn-primary">See My Training Data</a>
+      <a href="#projects" class="btn btn-ghost">Projects</a>
       <a href="cv_tristan_lismer.pdf" class="btn btn-ghost">Download CV</a>
+    </div>
+    <div class="hero-targets">
+      Targeting: <span>Garmin</span><span class="dot">·</span><span>Strava</span><span class="dot">·</span><span>Wahoo</span><span class="dot">·</span><span>Zwift</span><span class="dot">·</span><span>TrainingPeaks</span>
     </div>
   </div>
   <div class="hero-right">
@@ -315,34 +360,44 @@
   </div>
 </div>
 
-<!-- PILLARS -->
-<div class="pillars">
-  <div class="pillar">
-    <div class="pillar-icon">⚛</div>
-    <h3>Quantum Foundations</h3>
-    <p>Testing Born's rule and the axioms of QM with 4-slit photonic interferometers.</p>
+<!-- PERSONAL BESTS -->
+<div class="pb-strip fade">
+  <div class="pb-item">
+    <div class="pb-event">5K</div>
+    <div class="pb-time" id="pb-5k">—</div>
+    <div class="pb-label">Personal best</div>
   </div>
-  <div class="pillar">
-    <div class="pillar-icon">📊</div>
-    <h3>Data Analysis</h3>
-    <p>Cross-validated rank-sweep pipelines, ALS fitting, GPT state space characterisation.</p>
+  <div class="pb-item">
+    <div class="pb-event">10K</div>
+    <div class="pb-time" id="pb-10k">—</div>
+    <div class="pb-label">Personal best</div>
   </div>
-  <div class="pillar">
-    <div class="pillar-icon">🏃</div>
-    <h3>Endurance Athlete</h3>
-    <p>Ironman finisher. Bromont 80K ultra in training. Garmin data nerd at heart.</p>
+  <div class="pb-item">
+    <div class="pb-event">Half Marathon</div>
+    <div class="pb-time" id="pb-hm">—</div>
+    <div class="pb-label">Personal best</div>
   </div>
-  <div class="pillar">
-    <div class="pillar-icon">🔭</div>
-    <h3>Industry Horizon</h3>
-    <p>Photonic quantum computing, sports tech, anywhere precision measurement matters.</p>
+  <div class="pb-item">
+    <div class="pb-event">Marathon</div>
+    <div class="pb-time" id="pb-m">—</div>
+    <div class="pb-label">Personal best</div>
+  </div>
+  <div class="pb-item">
+    <div class="pb-event">Ironman 70.3</div>
+    <div class="pb-time" id="pb-703">—</div>
+    <div class="pb-label">Personal best</div>
+  </div>
+  <div class="pb-item">
+    <div class="pb-event">Ironman</div>
+    <div class="pb-time" id="pb-im">—</div>
+    <div class="pb-label">226 km · finisher</div>
   </div>
 </div>
 
 <!-- TRAINING -->
 <div id="training">
   <div class="wrap">
-    <p class="s-label fade">Training</p>
+    <p class="s-label fade">Training Data</p>
     <h2 class="fade">2026 in motion.</h2>
 
     <div class="sy-grid fade">
@@ -364,19 +419,19 @@
       <div class="sy-card sy-elev">
         <div class="sy-val" id="sy-elev-val">—</div>
         <div class="sy-unit">metres climbed</div>
-        <div class="sy-sub" id="sy-elev-sub">run + ride elevation</div>
+        <div class="sy-sub" id="sy-elev-sub">run + ride combined</div>
       </div>
     </div>
 
-    <p class="s-label fade" style="margin-top:1rem;margin-bottom:1.5rem;">Performance Management · Bromont 80K Build</p>
+    <p class="s-label fade" style="margin-bottom:1.5rem;">Performance Management · Bromont 80K Build</p>
 
     <div class="pmc-summary fade">
       <div class="pmc-kpi">
-        <div class="pmc-val" id="pmc-ctl" style="color:var(--blue)">—</div>
+        <div class="pmc-val" id="pmc-ctl" style="color:var(--cyan)">—</div>
         <div class="pmc-lbl">Fitness · CTL</div>
       </div>
       <div class="pmc-kpi">
-        <div class="pmc-val" id="pmc-atl" style="color:var(--accent)">—</div>
+        <div class="pmc-val" id="pmc-atl" style="color:var(--orange)">—</div>
         <div class="pmc-lbl">Fatigue · ATL</div>
       </div>
       <div class="pmc-kpi">
@@ -391,11 +446,11 @@
 
     <div class="pmc-wrap fade">
       <div class="pmc-header">
-        <span>Fitness · Fatigue · Form — Banister (1975) / Coggan (2003) model · LTHR = 175 bpm</span>
+        <span>Fitness · Fatigue · Form — Banister (1975) / Coggan (2003) · LTHR = 175 bpm</span>
         <div class="chart-legend">
-          <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--blue)"></div>CTL (Fitness)</div>
-          <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--accent);opacity:.7"></div>ATL (Fatigue)</div>
-          <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(82,214,138,0.45)"></div>TSB (Form)</div>
+          <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--cyan)"></div>CTL (Fitness)</div>
+          <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--orange);opacity:.8"></div>ATL (Fatigue)</div>
+          <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(74,222,128,0.4)"></div>TSB (Form)</div>
         </div>
       </div>
       <canvas id="pmc-chart" height="90"></canvas>
@@ -405,140 +460,22 @@
       <div class="pmc-header">
         <span>Weekly Training Volume</span>
         <div class="chart-legend">
-          <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(245,166,35,0.75)"></div>Run km</div>
-          <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(72,202,228,0.6)"></div>Ride km</div>
+          <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(251,146,60,0.75)"></div>Run km</div>
+          <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(167,139,250,0.6)"></div>Ride km</div>
         </div>
       </div>
       <canvas id="weekly-chart" height="60"></canvas>
     </div>
 
     <div class="shm-legend fade">
-      <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--accent)"></div>Run / Trail</div>
-      <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--blue)"></div>Ride</div>
+      <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--orange)"></div>Run / Trail</div>
+      <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--purple)"></div>Ride</div>
       <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--green)"></div>Other</div>
     </div>
-    <div class="shm-scroll fade">
-      <div id="strava-heatmap"></div>
-    </div>
+    <div class="shm-scroll fade"><div id="strava-heatmap"></div></div>
 
     <p class="s-label fade" style="margin-bottom:1.5rem;">Recent Activities</p>
     <div class="act-scroll fade" id="strava-activities"></div>
-  </div>
-</div>
-
-<!-- RESEARCH -->
-<div class="wrap" id="research">
-  <p class="s-label fade">Research</p>
-  <h2 class="fade">What I do.</h2>
-  <div class="research-grid">
-    <div class="r-card fade">
-      <div class="r-num">01 / EXPERIMENTAL</div>
-      <h3>Testing Born's Rule</h3>
-      <p>If Born's rule is wrong, every quantum mechanics textbook needs rewriting. I built a 4-slit photonic experiment to measure the Sorkin parameter I₃ and check. So far, quantum mechanics is holding up — but we keep looking.</p>
-      <span class="r-tag">Quantum Foundations</span>
-    </div>
-    <div class="r-card fade">
-      <div class="r-num">02 / COMPUTATIONAL</div>
-      <h3>GPT Rank Fitting</h3>
-      <p>Built a cross-validated ALS rank-sweep pipeline from scratch that characterises quantum state spaces directly from experimental data — no assumption about the underlying theory required. The data tells you the rank.</p>
-      <span class="r-tag">Data Analysis · State Space Theory</span>
-    </div>
-    <div class="r-card fade">
-      <div class="r-num">03 / THEORETICAL</div>
-      <h3>Epistemic Restrictions in GPTs</h3>
-      <p>Proved a Trichotomy Theorem characterising exactly which Generalised Probabilistic Theories can be understood as theories of limited knowledge. The kind of result you can prove and then design an experiment around.</p>
-      <span class="r-tag">GPT Framework</span>
-    </div>
-    <div class="r-card fade">
-      <div class="r-num">04 / EXPERIMENTAL</div>
-      <h3>Interferometer Mastery</h3>
-      <p>HOM, Mach-Zehnder, Sagnac — aligned them all. SNSPDs, APDs, ICCD cameras, Ti:Sapphire at 790 nm. Precision free-space optics is one of those skills that takes years to build and is immediately obvious when someone has it.</p>
-      <span class="r-tag">Photonics · Optics</span>
-    </div>
-  </div>
-</div>
-
-<!-- SKILLS -->
-<div id="skills">
-  <div class="wrap">
-    <p class="s-label fade">Skills</p>
-    <h2 class="fade">What I bring to the (optical) table.</h2>
-    <div class="skills-grid">
-      <div>
-        <div class="skill-group fade">
-          <div class="skill-group-lbl">Optics &amp; Lasers</div>
-          <div class="skill-chips">
-            <span class="chip">Ti:Sapphire (790 nm)</span>
-            <span class="chip">Sagnac SPDC</span>
-            <span class="chip">HOM Interferometer</span>
-            <span class="chip">Mach-Zehnder</span>
-            <span class="chip">Free-space alignment</span>
-            <span class="chip">Phase masks</span>
-          </div>
-        </div>
-        <div class="skill-group fade">
-          <div class="skill-group-lbl">Detectors &amp; Electronics</div>
-          <div class="skill-chips">
-            <span class="chip">SNSPDs</span>
-            <span class="chip">APDs</span>
-            <span class="chip">ICCD cameras</span>
-            <span class="chip">Coincidence counting</span>
-            <span class="chip">Timing electronics</span>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="skill-group fade">
-          <div class="skill-group-lbl">Languages</div>
-          <div class="skill-chips">
-            <span class="chip">Python</span>
-            <span class="chip">LabVIEW</span>
-            <span class="chip">Mathematica</span>
-            <span class="chip">LaTeX</span>
-          </div>
-        </div>
-        <div class="skill-group fade">
-          <div class="skill-group-lbl">Libraries &amp; Infrastructure</div>
-          <div class="skill-chips">
-            <span class="chip">NumPy / SciPy</span>
-            <span class="chip">joblib</span>
-            <span class="chip">matplotlib</span>
-            <span class="chip">Plotly</span>
-            <span class="chip">Chart.js</span>
-            <span class="chip">Strava API</span>
-            <span class="chip">SLURM</span>
-            <span class="chip">Compute Canada</span>
-            <span class="chip">Git</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- PERSONAL -->
-<div class="wrap" id="personal">
-  <p class="s-label fade">Personal</p>
-  <h2 class="fade">Beyond the lab.</h2>
-  <div class="personal-grid">
-    <div class="p-card fade">
-      <div class="p-big">226 km</div>
-      <div class="p-unit">Ironman Finisher</div>
-      <h3>3.8 swim · 180 bike · 42.2 run</h3>
-      <p>Both involve a lot of suffering and a stubborn refusal to stop.</p>
-    </div>
-    <div class="p-card fade">
-      <div class="p-big">80K</div>
-      <div class="p-unit">Ultra Runner — in training</div>
-      <h3>Mountain ultra</h3>
-      <p>Because apparently an Ironman wasn't a strong enough signal that I enjoy suffering.</p>
-    </div>
-    <div class="p-card fade">
-      <div class="p-big">Quantum<br>Industry</div>
-      <div class="p-unit">Where I want to go next</div>
-      <h3>Industry Horizon</h3>
-      <p>I want to be in the room where photonic quantum computing gets built commercially.</p>
-    </div>
   </div>
 </div>
 
@@ -551,53 +488,103 @@
       <a href="https://github.com/tristanlismerphd/bromont-80k-analysis" class="proj-card fade" target="_blank" rel="noopener">
         <div class="proj-tag">Sports Data Science</div>
         <h3>Bromont 80K — Training Analytics</h3>
-        <p>Full Performance Management Chart pipeline computed from real Strava heart rate data. Implements the ATL/CTL/TSB model (Banister et al., 1975 / Coggan 2003) — the same model underlying Garmin Training Status, Strava Fitness &amp; Freshness, and Wahoo SYSTM. hrTSS computed per activity, aggregated daily, visualised with Plotly.</p>
-        <div class="skill-chips" style="margin-top:.9rem;">
+        <p>Full Performance Management Chart pipeline computed from raw Strava heart rate data. Implements the ATL/CTL/TSB model (Banister 1975 / Coggan 2003) — the exact model behind Garmin Training Status, Strava Fitness &amp; Freshness, and Wahoo SYSTM. hrTSS per activity, EMA-filtered daily, visualised with Plotly.</p>
+        <div class="proj-chips">
           <span class="chip">Python</span>
           <span class="chip">Strava API</span>
           <span class="chip">hrTSS</span>
           <span class="chip">EMA filtering</span>
           <span class="chip">Plotly</span>
+          <span class="chip">GitHub Actions</span>
         </div>
         <span class="proj-link">View on GitHub</span>
       </a>
-      <div class="proj-card-placeholder fade">
-        <div style="font-size:2rem;margin-bottom:1rem;color:var(--muted)">+</div>
-        <p style="font-size:.78rem;color:var(--muted);text-align:center;line-height:1.8;">More projects coming as the ultra build progresses.</p>
+      <div class="proj-card-placeholder fade" style="background:var(--bg2);padding:2.4rem;display:flex;flex-direction:column;justify-content:center;align-items:center;border-top:1px solid var(--border);">
+        <div style="font-size:2.5rem;color:var(--border);margin-bottom:1rem;font-weight:700;">+</div>
+        <p style="font-size:.8rem;color:var(--muted);text-align:center;line-height:1.8;max-width:240px;">More projects dropping as the ultra build progresses.</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- TIMELINE -->
-<div id="timeline">
+<!-- ABOUT -->
+<div id="about">
   <div class="wrap">
-    <p class="s-label fade">Timeline</p>
-    <h2 class="fade">How I got here.</h2>
-    <div class="tl fade">
-      <div class="tl-entry">
-        <div class="tl-dot"></div>
-        <div class="tl-year">2022 — Present</div>
-        <div class="tl-title">PhD Candidate · Quantum Optics</div>
-        <div class="tl-sub">Institute for Quantum Computing, University of Waterloo</div>
+    <p class="s-label fade">About</p>
+    <h2 class="fade">Physicist by training.<br>Athlete by compulsion.</h2>
+    <div class="about-grid">
+      <div class="fade">
+        <div class="about-bio">
+          <p>
+            I'm a <strong>fourth-year PhD candidate</strong> at the Institute for Quantum Computing, Waterloo, where I build precision photonic experiments and the data pipelines that make sense of them. The work requires the same thing good sports analytics does: extracting clean signal from noisy, high-dimensional data under time pressure.
+          </p>
+          <p>
+            I'm an <strong>Ironman finisher</strong> (3.8 km swim · 180 km bike · 42.2 km run) and currently in training for the <strong>Bromont 80K ultra marathon</strong> in October 2026. Every long run and recovery ride goes into a dataset I analyse with the same tools that power Garmin and Strava.
+          </p>
+          <p>
+            I'm looking to bring precision science to a <strong>sport tracking company</strong> — modelling training load, processing sensor streams, building the tools that help millions of athletes make smarter decisions.
+          </p>
+        </div>
+        <div class="about-tl">
+          <div class="about-tl-entry">
+            <div class="about-tl-year">2022 – now</div>
+            <div class="about-tl-body"><strong>PhD · Quantum Optics</strong><br><span>Institute for Quantum Computing, Waterloo</span></div>
+          </div>
+          <div class="about-tl-entry">
+            <div class="about-tl-year">2020 – 2022</div>
+            <div class="about-tl-body"><strong>Research Intern</strong><br><span>Canadian Nuclear Safety Commission</span></div>
+          </div>
+          <div class="about-tl-entry">
+            <div class="about-tl-year">2018 – 2022</div>
+            <div class="about-tl-body"><strong>BScH Astrophysics</strong><br><span>Queen's University, Kingston</span></div>
+          </div>
+        </div>
       </div>
-      <div class="tl-entry">
-        <div class="tl-dot muted"></div>
-        <div class="tl-year muted">Summer 2020 · 2021 · 2022</div>
-        <div class="tl-title">Research Scientist (Intern)</div>
-        <div class="tl-sub">Canadian Nuclear Safety Commission</div>
-      </div>
-      <div class="tl-entry">
-        <div class="tl-dot muted"></div>
-        <div class="tl-year muted">Summer 2019</div>
-        <div class="tl-title">Research Scientist (Intern)</div>
-        <div class="tl-sub">Natural Resources Canada</div>
-      </div>
-      <div class="tl-entry">
-        <div class="tl-dot muted"></div>
-        <div class="tl-year muted">2018 — 2022</div>
-        <div class="tl-title">BScH Astrophysics</div>
-        <div class="tl-sub">Queen's University, Kingston</div>
+      <div class="fade">
+        <div class="skill-group">
+          <div class="skill-group-lbl">Data Science</div>
+          <div style="display:flex;flex-wrap:wrap;gap:.35rem;">
+            <span class="chip">Python</span>
+            <span class="chip">NumPy / SciPy</span>
+            <span class="chip">Pandas</span>
+            <span class="chip">Time series</span>
+            <span class="chip">EMA filtering</span>
+            <span class="chip">Signal processing</span>
+            <span class="chip">Cross-validation</span>
+            <span class="chip">Statistical modelling</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-lbl">APIs &amp; Visualisation</div>
+          <div style="display:flex;flex-wrap:wrap;gap:.35rem;">
+            <span class="chip">Strava API</span>
+            <span class="chip">REST APIs</span>
+            <span class="chip">Plotly</span>
+            <span class="chip">Chart.js</span>
+            <span class="chip">matplotlib</span>
+            <span class="chip">Leaflet.js</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-lbl">Infrastructure</div>
+          <div style="display:flex;flex-wrap:wrap;gap:.35rem;">
+            <span class="chip">Git / GitHub</span>
+            <span class="chip">GitHub Actions</span>
+            <span class="chip">SLURM</span>
+            <span class="chip">Compute Canada</span>
+            <span class="chip">joblib</span>
+            <span class="chip">LaTeX</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-lbl">Physics &amp; Optics</div>
+          <div style="display:flex;flex-wrap:wrap;gap:.35rem;">
+            <span class="chip">Precision measurement</span>
+            <span class="chip">Photonics</span>
+            <span class="chip">LabVIEW</span>
+            <span class="chip">Mathematica</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -607,16 +594,42 @@
 <div id="contact">
   <div class="wrap">
     <p class="s-label fade">Contact</p>
-    <h2 class="fade">Let's talk!</h2>
+    <h2 class="fade">Let's build something.</h2>
     <div class="contact-grid">
       <div class="fade">
-        <div class="open-badge">Open to roles in quantum tech &amp; sports tech</div>
-        <p class="contact-lede">If you're building something in quantum technology or sports data science and want someone who can do the physics, write the code, and run an ultramarathon before the team standup — reach out. Always happy to talk research too.</p>
+        <div class="open-badge">Open to data roles — sport tracking &amp; wearables</div>
+        <p class="contact-lede">
+          If you're building athlete-facing data products at a sport tracking company and need someone who can implement the models, process the sensor streams, and has the PRs to prove they actually use the product — reach out.
+        </p>
         <div class="contact-email">tlismer@uwaterloo.ca</div>
+        <div class="target-list">
+          <div class="target-item"><span class="arr">→</span> Garmin</div>
+          <div class="target-item"><span class="arr">→</span> Strava</div>
+          <div class="target-item"><span class="arr">→</span> Wahoo Fitness</div>
+          <div class="target-item"><span class="arr">→</span> Zwift</div>
+          <div class="target-item"><span class="arr">→</span> TrainingPeaks / WKO</div>
+        </div>
       </div>
-      <div class="quote-box fade">
-        <blockquote>"It's the questions we can't answer that teach us the most."</blockquote>
-        <cite>— Patrick Rothfuss, The Name of the Wind</cite>
+      <div class="fade">
+        <div style="border-left:3px solid var(--cyan);padding:2rem 2rem 2rem 2.2rem;background:var(--bg3);">
+          <blockquote style="font-size:.88rem;font-style:italic;font-weight:300;color:var(--muted);line-height:1.9;">
+            "It's the questions we can't answer that teach us the most."
+          </blockquote>
+          <cite style="display:block;margin-top:1.2rem;font-style:normal;font-size:.63rem;letter-spacing:.12em;color:var(--cyan);text-transform:uppercase;font-weight:600;">
+            — Patrick Rothfuss, The Name of the Wind
+          </cite>
+        </div>
+        <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:.5rem;">
+          <a href="https://github.com/tristanlismerphd" class="clink" target="_blank" rel="noopener">
+            <span class="arr">→</span> GitHub — tristanlismerphd
+          </a>
+          <a href="https://www.strava.com" class="clink" target="_blank" rel="noopener">
+            <span class="arr">→</span> Strava profile
+          </a>
+          <a href="cv_tristan_lismer.pdf" class="clink">
+            <span class="arr">→</span> Download CV
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -624,13 +637,13 @@
 
 <footer>
   <span>© 2026 Tristan Lismer</span>
-  <span>Quantum Optics · IQC Waterloo</span>
+  <span>Sports Data Science · <a href="https://uwaterloo.ca/institute-for-quantum-computing/" target="_blank" rel="noopener">IQC Waterloo</a></span>
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
-  // ── Polyline decoder ──────────────────────────────────────────────────────
+  // ── Polyline ──────────────────────────────────────────────────────────────
   function decodePolyline(str) {
     const coords = [];
     let index = 0, lat = 0, lng = 0;
@@ -649,13 +662,13 @@
   function actTypeLabel(type) {
     const labels = { Run:'Run', TrailRun:'Trail Run', Ride:'Ride', VirtualRide:'Virtual Ride',
       GravelRide:'Gravel Ride', Hike:'Hike', NordicSki:'Nordic Ski', AlpineSki:'Alpine Ski',
-      WeightTraining:'Weights', Walk:'Walk', Workout:'Workout', IceSkate:'Ice Skate' };
+      WeightTraining:'Weights', Walk:'Walk', Workout:'Workout' };
     return labels[type] || type;
   }
 
   function isRun(t) { return t === 'Run' || t === 'TrailRun'; }
   function isRide(t) { return t === 'Ride' || t === 'VirtualRide' || t === 'GravelRide'; }
-  function typeColor(t) { return isRun(t) ? '#f5a623' : isRide(t) ? '#48cae4' : '#52d68a'; }
+  function typeColor(t) { return isRun(t) ? '#fb923c' : isRide(t) ? '#a78bfa' : '#4ade80'; }
   function typeClass(t) { return isRun(t) ? 'act-type-run' : isRide(t) ? 'act-type-ride' : 'act-type-other'; }
 
   // ── Heatmap ───────────────────────────────────────────────────────────────
@@ -663,17 +676,14 @@
     const priority = { Run:4, TrailRun:4, Ride:3, VirtualRide:3, GravelRide:3 };
     const dayMap = {};
     for (const e of heatmap) {
-      const ex = dayMap[e.date];
-      const p = priority[e.type] || 1;
-      if (!ex || p > (priority[ex.type] || 1) || (p === (priority[ex.type]||1) && e.distance_km > ex.distance_km)) {
+      const ex = dayMap[e.date], p = priority[e.type] || 1;
+      if (!ex || p > (priority[ex.type]||1) || (p === (priority[ex.type]||1) && e.distance_km > ex.distance_km))
         dayMap[e.date] = e;
-      }
     }
     const startOfYear = new Date(year, 0, 1);
-    const endOfYear = new Date(year, 11, 31);
-    const startDay = startOfYear.getDay();
+    const endOfYear   = new Date(year, 11, 31);
     const firstSunday = new Date(startOfYear);
-    firstSunday.setDate(firstSunday.getDate() - startDay);
+    firstSunday.setDate(firstSunday.getDate() - startOfYear.getDay());
 
     const weeks = [];
     const cur = new Date(firstSunday);
@@ -688,48 +698,42 @@
     }
 
     const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    const monthWeekIdx = [];
-    for (let m = 0; m < 12; m++) {
-      const d = Math.floor((new Date(year, m, 1) - firstSunday) / 86400000);
-      monthWeekIdx.push(Math.floor(d / 7));
-    }
+    const monthWeekIdx = months.map((_, m) => Math.floor((new Date(year, m, 1) - firstSunday) / 86400000 / 7));
 
     const container = document.getElementById('strava-heatmap');
     container.innerHTML = '';
     const mRow = document.createElement('div');
-    mRow.style.cssText = 'display:flex; padding-left:24px; margin-bottom:4px;';
+    mRow.style.cssText = 'display:flex;padding-left:24px;margin-bottom:4px;';
     let lastWi = 0;
-    for (let m = 0; m < 12; m++) {
-      const wi = monthWeekIdx[m];
-      const gap = wi - lastWi;
+    monthWeekIdx.forEach((wi, m) => {
       const span = document.createElement('span');
-      span.style.cssText = `display:inline-block; width:${gap * 13}px; font-size:.58rem; color:rgba(234,234,242,.4); letter-spacing:.06em; text-transform:uppercase; overflow:hidden;`;
+      span.style.cssText = `display:inline-block;width:${(wi-lastWi)*13}px;font-size:.56rem;color:rgba(232,240,255,.35);letter-spacing:.08em;text-transform:uppercase;overflow:hidden;font-weight:600;`;
       span.textContent = months[m];
       mRow.appendChild(span);
       lastWi = wi;
-    }
+    });
     container.appendChild(mRow);
 
     const body = document.createElement('div');
-    body.style.cssText = 'display:flex; gap:2px;';
+    body.style.cssText = 'display:flex;gap:2px;';
     const dCol = document.createElement('div');
-    dCol.style.cssText = 'display:flex; flex-direction:column; gap:2px; margin-right:2px; padding-top:1px; width:20px;';
+    dCol.style.cssText = 'display:flex;flex-direction:column;gap:2px;margin-right:2px;padding-top:1px;width:20px;';
     ['','Mon','','Wed','','Fri',''].forEach(lbl => {
       const el = document.createElement('div');
-      el.style.cssText = 'font-size:.52rem; color:rgba(234,234,242,.3); height:11px; line-height:11px;';
+      el.style.cssText = 'font-size:.52rem;color:rgba(232,240,255,.28);height:11px;line-height:11px;font-weight:500;';
       el.textContent = lbl;
       dCol.appendChild(el);
     });
     body.appendChild(dCol);
 
     const grid = document.createElement('div');
-    grid.style.cssText = 'display:flex; gap:2px;';
+    grid.style.cssText = 'display:flex;gap:2px;';
     for (const week of weeks) {
       const wEl = document.createElement('div');
-      wEl.style.cssText = 'display:flex; flex-direction:column; gap:2px;';
+      wEl.style.cssText = 'display:flex;flex-direction:column;gap:2px;';
       for (const day of week) {
         const cell = document.createElement('div');
-        cell.style.cssText = 'width:11px; height:11px; border-radius:2px;';
+        cell.style.cssText = 'width:11px;height:11px;border-radius:2px;';
         if (!day.inYear) {
           cell.style.background = 'transparent';
         } else if (day.activity) {
@@ -761,7 +765,9 @@
       const h = Math.floor(act.moving_time / 3600);
       const m = Math.floor((act.moving_time % 3600) / 60);
       const s = act.moving_time % 60;
-      const timeStr = h > 0 ? `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}` : `${m}:${String(s).padStart(2,'0')}`;
+      const timeStr = h > 0
+        ? `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`
+        : `${m}:${String(s).padStart(2,'0')}`;
       const mapId = `act-map-${i}`;
       card.innerHTML = `
         <div class="act-map" id="${mapId}"></div>
@@ -782,11 +788,8 @@
           try {
             const coords = decodePolyline(act.polyline);
             if (!coords.length) return;
-            const map = L.map(mapId, {
-              zoomControl: false, dragging: false, scrollWheelZoom: false,
-              doubleClickZoom: false, touchZoom: false, attributionControl: false
-            });
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
+            const map = L.map(mapId, { zoomControl:false, dragging:false, scrollWheelZoom:false, doubleClickZoom:false, touchZoom:false, attributionControl:false });
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom:19 }).addTo(map);
             const poly = L.polyline(coords, { color: typeColor(act.type), weight: 2.5, opacity: 0.9 }).addTo(map);
             map.fitBounds(poly.getBounds(), { padding: [8, 8] });
           } catch(e) {}
@@ -794,169 +797,100 @@
       } else {
         const el = document.getElementById(mapId);
         el.style.cssText = 'height:150px;background:var(--bg3);display:flex;align-items:center;justify-content:center;';
-        el.innerHTML = '<span style="font-size:2rem;opacity:.2">&#x1F4CD;</span>';
+        el.innerHTML = '<span style="font-size:2rem;opacity:.15">📍</span>';
       }
     });
   }
 
-  // ── Strava loader ─────────────────────────────────────────────────────────
+  // ── Strava ────────────────────────────────────────────────────────────────
   async function loadStrava() {
     let data;
-    try {
-      const res = await fetch('/strava_data.json?v=' + Date.now());
-      data = await res.json();
-    } catch(e) { return; }
-
+    try { const r = await fetch('/strava_data.json?v='+Date.now()); data = await r.json(); }
+    catch(e) { return; }
     const ys = data.year_stats;
-    document.getElementById('sy-run-km').textContent = Math.round(ys.run_km).toLocaleString() + ' km';
+    document.getElementById('sy-run-km').textContent  = Math.round(ys.run_km).toLocaleString() + ' km';
     document.getElementById('sy-ride-km').textContent = Math.round(ys.ride_km).toLocaleString() + ' km';
-    document.getElementById('sy-hours').textContent = Math.round(ys.run_time_hrs + ys.ride_time_hrs) + 'h';
+    document.getElementById('sy-hours').textContent   = Math.round(ys.run_time_hrs + ys.ride_time_hrs) + 'h';
     document.getElementById('sy-elev-val').textContent = Math.round(ys.run_elevation + ys.ride_elevation).toLocaleString() + ' m';
-    document.getElementById('sy-run-sub').textContent = `${ys.run_count} runs · ${Math.round(ys.run_elevation).toLocaleString()} m elevation`;
+    document.getElementById('sy-run-sub').textContent  = `${ys.run_count} runs · ${Math.round(ys.run_elevation).toLocaleString()} m elevation`;
     document.getElementById('sy-ride-sub').textContent = `${ys.ride_count} rides · ${Math.round(ys.ride_elevation).toLocaleString()} m elevation`;
     document.getElementById('sy-hours-sub').textContent = `${ys.run_time_hrs}h run + ${ys.ride_time_hrs}h ride`;
-
     renderHeatmap(data.heatmap, data.year);
     renderActivities(data.recent_activities);
   }
 
-  // ── Training analytics (PMC + weekly charts) ──────────────────────────────
+  // ── Training analytics ────────────────────────────────────────────────────
   async function loadTrainingAnalytics() {
     let data;
-    try {
-      const res = await fetch('/training_analytics.json?v=' + Date.now());
-      data = await res.json();
-    } catch(e) { return; }
+    try { const r = await fetch('/training_analytics.json?v='+Date.now()); data = await r.json(); }
+    catch(e) { return; }
 
-    const today = new Date().toISOString().slice(0, 10);
+    const today = new Date().toISOString().slice(0,10);
 
-    // KPI cards
     document.getElementById('pmc-ctl').textContent = data.current.ctl.toFixed(1);
     document.getElementById('pmc-atl').textContent = data.current.atl.toFixed(1);
+    document.getElementById('pmc-weeks').textContent = data.weeks_to_race;
     const tsbEl = document.getElementById('pmc-tsb');
     const tsb = data.current.tsb;
     tsbEl.textContent = (tsb >= 0 ? '+' : '') + tsb.toFixed(1);
-    tsbEl.style.color = tsb >= 0 ? 'var(--green)' : '#ff6b6b';
-    document.getElementById('pmc-weeks').textContent = data.weeks_to_race;
+    tsbEl.style.color = tsb >= 0 ? 'var(--green)' : 'var(--red)';
 
-    // Filter PMC to today
     const pmc = data.pmc.filter(d => d.date <= today);
-
-    // Downsample for chart performance
     const stride = pmc.length > 150 ? 2 : 1;
     const sp = pmc.filter((_, i) => i % stride === 0);
+    const fmtL = ds => { const p = ds.split('-'); return p[1]+'/'+p[2]; };
 
-    const fmtLabel = ds => {
-      const parts = ds.split('-');
-      return parts[1] + '/' + parts[2];
+    const TOOLTIP = {
+      backgroundColor: 'rgba(11,20,36,0.97)',
+      borderColor: 'rgba(255,255,255,0.07)', borderWidth: 1,
+      titleColor: '#e8f0ff', bodyColor: 'rgba(232,240,255,0.6)', padding: 10,
+      titleFont: { family: "'Space Grotesk', sans-serif", size: 11 },
+      bodyFont:  { family: "'Space Grotesk', sans-serif", size: 11 },
     };
-
-    const TOOLTIP_STYLE = {
-      backgroundColor: 'rgba(13,13,26,0.95)',
-      borderColor: 'rgba(255,255,255,0.07)',
-      borderWidth: 1,
-      titleColor: '#eaeaf2',
-      bodyColor: 'rgba(234,234,242,0.6)',
-      padding: 10,
-      titleFont: { family: "'JetBrains Mono', monospace", size: 11 },
-      bodyFont: { family: "'JetBrains Mono', monospace", size: 11 },
-    };
-    const TICK_STYLE = { color: 'rgba(234,234,242,0.3)', font: { family: "'JetBrains Mono', monospace", size: 10 } };
-    const GRID_COLOR = 'rgba(255,255,255,0.04)';
+    const TICK = { color: 'rgba(232,240,255,0.28)', font: { family: "'Space Grotesk', sans-serif", size: 10 } };
+    const GRID = 'rgba(255,255,255,0.04)';
 
     // PMC chart
-    const pmcCtx = document.getElementById('pmc-chart').getContext('2d');
-    new Chart(pmcCtx, {
+    new Chart(document.getElementById('pmc-chart').getContext('2d'), {
       data: {
-        labels: sp.map(d => fmtLabel(d.date)),
+        labels: sp.map(d => fmtL(d.date)),
         datasets: [
-          {
-            type: 'bar',
-            label: 'Form (TSB)',
-            data: sp.map(d => d.tsb),
-            backgroundColor: sp.map(d => d.tsb >= 0 ? 'rgba(82,214,138,0.35)' : 'rgba(255,107,107,0.35)'),
-            borderColor: sp.map(d => d.tsb >= 0 ? 'rgba(82,214,138,0.55)' : 'rgba(255,107,107,0.55)'),
-            borderWidth: 1,
-            yAxisID: 'y',
-            order: 3
-          },
-          {
-            type: 'line',
-            label: 'Fitness (CTL)',
-            data: sp.map(d => d.ctl),
-            borderColor: '#48cae4',
-            backgroundColor: 'rgba(72,202,228,0.07)',
-            borderWidth: 2.5,
-            pointRadius: 0,
-            fill: true,
-            tension: 0.4,
-            yAxisID: 'y',
-            order: 1
-          },
-          {
-            type: 'line',
-            label: 'Fatigue (ATL)',
-            data: sp.map(d => d.atl),
-            borderColor: 'rgba(245,166,35,0.8)',
-            backgroundColor: 'transparent',
-            borderWidth: 2,
-            pointRadius: 0,
-            borderDash: [5, 4],
-            tension: 0.4,
-            yAxisID: 'y',
-            order: 2
-          }
+          { type:'bar', label:'Form (TSB)', data:sp.map(d=>d.tsb), order:3, yAxisID:'y',
+            backgroundColor: sp.map(d => d.tsb>=0 ? 'rgba(74,222,128,0.35)' : 'rgba(248,113,113,0.35)'),
+            borderColor:     sp.map(d => d.tsb>=0 ? 'rgba(74,222,128,0.55)' : 'rgba(248,113,113,0.55)'),
+            borderWidth:1 },
+          { type:'line', label:'Fitness (CTL)', data:sp.map(d=>d.ctl), order:1, yAxisID:'y',
+            borderColor:'#38bdf8', backgroundColor:'rgba(56,189,248,0.07)',
+            borderWidth:2.5, pointRadius:0, fill:true, tension:0.4 },
+          { type:'line', label:'Fatigue (ATL)', data:sp.map(d=>d.atl), order:2, yAxisID:'y',
+            borderColor:'rgba(251,146,60,0.85)', backgroundColor:'transparent',
+            borderWidth:2, pointRadius:0, borderDash:[5,4], tension:0.4 }
         ]
       },
       options: {
-        responsive: true,
-        interaction: { mode: 'index', intersect: false },
-        plugins: {
-          legend: { display: false },
-          tooltip: { ...TOOLTIP_STYLE, callbacks: { label: item => ` ${item.dataset.label}: ${item.parsed.y.toFixed(1)}` } }
-        },
-        scales: {
-          x: { grid: { color: GRID_COLOR }, ticks: { ...TICK_STYLE, maxTicksLimit: 8 } },
-          y: { grid: { color: GRID_COLOR }, ticks: TICK_STYLE }
-        }
+        responsive:true,
+        interaction:{ mode:'index', intersect:false },
+        plugins:{ legend:{ display:false }, tooltip:{ ...TOOLTIP, callbacks:{ label: i => ` ${i.dataset.label}: ${i.parsed.y.toFixed(1)}` } } },
+        scales:{ x:{ grid:{color:GRID}, ticks:{...TICK, maxTicksLimit:8} }, y:{ grid:{color:GRID}, ticks:TICK } }
       }
     });
 
-    // Weekly volume chart
+    // Weekly chart
     const weekly = data.weekly.filter(w => w.week <= today);
-    const weekCtx = document.getElementById('weekly-chart').getContext('2d');
-    new Chart(weekCtx, {
-      type: 'bar',
+    new Chart(document.getElementById('weekly-chart').getContext('2d'), {
+      type:'bar',
       data: {
         labels: weekly.map(w => w.week.slice(5)),
         datasets: [
-          {
-            label: 'Run km',
-            data: weekly.map(w => w.run_km),
-            backgroundColor: 'rgba(245,166,35,0.75)',
-            borderColor: 'rgba(245,166,35,0.9)',
-            borderWidth: 1
-          },
-          {
-            label: 'Ride km',
-            data: weekly.map(w => w.ride_km),
-            backgroundColor: 'rgba(72,202,228,0.55)',
-            borderColor: 'rgba(72,202,228,0.75)',
-            borderWidth: 1
-          }
+          { label:'Run km', data:weekly.map(w=>w.run_km), backgroundColor:'rgba(251,146,60,0.75)', borderColor:'rgba(251,146,60,0.9)', borderWidth:1 },
+          { label:'Ride km', data:weekly.map(w=>w.ride_km), backgroundColor:'rgba(167,139,250,0.55)', borderColor:'rgba(167,139,250,0.75)', borderWidth:1 }
         ]
       },
       options: {
-        responsive: true,
-        interaction: { mode: 'index', intersect: false },
-        plugins: {
-          legend: { display: false },
-          tooltip: TOOLTIP_STYLE
-        },
-        scales: {
-          x: { stacked: true, grid: { color: GRID_COLOR }, ticks: TICK_STYLE },
-          y: { stacked: true, grid: { color: GRID_COLOR }, ticks: TICK_STYLE }
-        }
+        responsive:true,
+        interaction:{ mode:'index', intersect:false },
+        plugins:{ legend:{ display:false }, tooltip:TOOLTIP },
+        scales:{ x:{ stacked:true, grid:{color:GRID}, ticks:TICK }, y:{ stacked:true, grid:{color:GRID}, ticks:TICK } }
       }
     });
   }
@@ -966,13 +900,8 @@
 </script>
 <script>
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 50);
-  }, { passive: true });
-
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
-  }, { threshold: 0.08 });
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 50), { passive:true });
+  const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }), { threshold:0.08 });
   document.querySelectorAll('.fade').forEach(el => obs.observe(el));
 </script>
 </body>
