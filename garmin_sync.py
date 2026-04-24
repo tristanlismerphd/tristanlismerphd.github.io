@@ -15,23 +15,14 @@ so the dashboard can plot the TSS → sleep correlation without a browser-side j
 
 Usage
 -----
-  # First time — logs in and saves garth OAuth tokens to ~/.garth
-  GARMIN_EMAIL=you@example.com GARMIN_PASSWORD=secret python garmin_sync.py
-
-  # Subsequent runs reuse saved tokens (no password needed)
-  python garmin_sync.py
-
-  # GitHub Actions: set GARMIN_EMAIL + GARMIN_PASSWORD as repo secrets,
-  # OR encode your ~/.garth directory and store it as GARMIN_TOKENS_B64
-  # (see .github/workflows/update-garmin.yml for details).
+  GARMIN_EMAIL=you@example.com GARMIN_PASSWORD=secret python3 garmin_sync.py
 
 Env vars
 --------
-  GARMIN_EMAIL       Garmin Connect account email
-  GARMIN_PASSWORD    Garmin Connect account password
-  GARMIN_TOKENSTORE  Path to garth token directory (default: ~/.garth)
-  PMC_FILE           Path to training_analytics.json (default: ./training_analytics.json)
-  OUTPUT             Output path (default: ./garmin_data.json)
+  GARMIN_EMAIL     Garmin Connect account email
+  GARMIN_PASSWORD  Garmin Connect account password
+  PMC_FILE         Path to training_analytics.json (default: ./training_analytics.json)
+  OUTPUT           Output path (default: ./garmin_data.json)
 """
 
 import os
@@ -47,60 +38,35 @@ except ImportError:
     sys.exit(1)
 
 # ── Config ────────────────────────────────────────────────────────────────────
-DAYS_BACK  = 60
-PMC_FILE   = os.environ.get("PMC_FILE",  "training_analytics.json")
-OUTPUT     = os.environ.get("OUTPUT",    "garmin_data.json")
-TOKENSTORE = os.environ.get("GARMIN_TOKENSTORE", os.path.expanduser("~/.garth"))
+DAYS_BACK = 60
+PMC_FILE  = os.environ.get("PMC_FILE", "training_analytics.json")
+OUTPUT    = os.environ.get("OUTPUT",   "garmin_data.json")
 
 
 # ── Auth ──────────────────────────────────────────────────────────────────────
 def login() -> Garmin:
-    """Login to Garmin Connect, preferring saved garth tokens."""
-    if os.path.isdir(TOKENSTORE):
-        try:
-            api = Garmin()
-            api.login(TOKENSTORE)
-            print(f"Logged in via saved tokens ({TOKENSTORE}).")
-            return api
-        except Exception:
-            print("Saved tokens expired or invalid — falling back to password auth.")
-
     email    = os.environ.get("GARMIN_EMAIL", "")
     password = os.environ.get("GARMIN_PASSWORD", "")
     if not email or not password:
-        print(
-            "ERROR: No saved garth tokens found and GARMIN_EMAIL / GARMIN_PASSWORD "
-            "are not set.\n"
-            "Run once with credentials to save tokens, then subsequent runs are "
-            "credential-free."
-        )
+        print("ERROR: Set GARMIN_EMAIL and GARMIN_PASSWORD environment variables.")
         sys.exit(1)
 
     api = Garmin(email=email, password=password)
     try:
         api.login()
+        print("Logged in to Garmin Connect.")
     except GarminConnectAuthenticationError as exc:
-        print(
-            f"ERROR: Garmin authentication failed — {exc}\n"
-            "If your account has 2FA enabled, run this script interactively once so "
-            "garth can complete the MFA flow and save tokens."
-        )
+        print(f"ERROR: Garmin authentication failed — {exc}")
         sys.exit(1)
-
-    os.makedirs(TOKENSTORE, exist_ok=True)
-    api.garth.dump(TOKENSTORE)
-    print(f"Tokens saved to {TOKENSTORE} — future runs won't need your password.")
     return api
 
 
 # ── Data fetchers ─────────────────────────────────────────────────────────────
 def get_sleep(api: Garmin, d: date) -> dict | None:
-    """Return sleep score + duration for date d, or None if unavailable."""
     try:
         raw    = api.get_sleep_data(d.isoformat())
         dto    = raw.get("dailySleepDTO", {})
         scores = dto.get("sleepScores", {})
-        # Score field location varies across Garmin Connect API versions
         score = (
             scores.get("overall", {}).get("value")
             or scores.get("totalScore")
@@ -113,7 +79,7 @@ def get_sleep(api: Garmin, d: date) -> dict | None:
             "date":         d.isoformat(),
             "score":        int(score),
             "duration_hrs": round(dur_s / 3600, 2) if dur_s else None,
-            "prev_tss":     0,   # joined with PMC after fetch
+            "prev_tss":     0,
         }
     except Exception as exc:
         print(f"    sleep error {d}: {exc}")
@@ -121,7 +87,6 @@ def get_sleep(api: Garmin, d: date) -> dict | None:
 
 
 def get_hrv(api: Garmin, d: date) -> dict | None:
-    """Return last-night HRV (ms) for date d, or None."""
     try:
         raw     = api.get_hrv_data(d.isoformat())
         summary = raw.get("hrvSummary", {})
@@ -139,7 +104,6 @@ def get_hrv(api: Garmin, d: date) -> dict | None:
 
 
 def get_rhr(api: Garmin, d: date) -> dict | None:
-    """Return resting heart rate (bpm) for date d, or None."""
     try:
         stats = api.get_stats(d.isoformat())
         val   = stats.get("restingHeartRate")
@@ -153,7 +117,6 @@ def get_rhr(api: Garmin, d: date) -> dict | None:
 
 # ── PMC join ──────────────────────────────────────────────────────────────────
 def load_pmc_tss() -> dict[str, float]:
-    """Load {date_str: daily_tss} from training_analytics.json."""
     try:
         with open(PMC_FILE) as f:
             data = json.load(f)
@@ -170,13 +133,9 @@ def load_pmc_tss() -> dict[str, float]:
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="Sync Garmin Connect data to garmin_data.json"
-    )
-    parser.add_argument(
-        "--days", type=int, default=DAYS_BACK,
-        help=f"Days of history to fetch (default {DAYS_BACK})"
-    )
+    parser = argparse.ArgumentParser(description="Sync Garmin Connect data to garmin_data.json")
+    parser.add_argument("--days", type=int, default=DAYS_BACK,
+                        help=f"Days of history to fetch (default {DAYS_BACK})")
     args = parser.parse_args()
 
     api = login()
