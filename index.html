@@ -60,15 +60,10 @@
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
 
     /* ── HERO ────────────────────────────────────────────────────────── */
-    #hero {
-      display: grid;
-      grid-template-columns: 56% 44%;
-      min-height: 100vh;
-    }
+    #hero { display: grid; grid-template-columns: 56% 44%; min-height: 100vh; }
     .hero-left {
       display: flex; flex-direction: column; justify-content: center;
-      padding: 10rem 4rem 6rem 5rem;
-      position: relative;
+      padding: 10rem 4rem 6rem 5rem; position: relative;
     }
     .hero-grid-bg {
       position: absolute; inset: 0; z-index: 0;
@@ -85,49 +80,28 @@
       pointer-events: none; z-index: 0;
     }
     .hero-right { position: relative; }
-    .hero-right img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center top;
-    }
+    .hero-right img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
     .hero-right::after {
       content: ''; position: absolute; inset: 0; z-index: 1;
-      background:
-        linear-gradient(to right, var(--bg) 0%, transparent 25%),
-        linear-gradient(to top, var(--bg) 0%, transparent 20%),
-        linear-gradient(to bottom, rgba(6,12,24,.3) 0%, transparent 15%);
+      background: linear-gradient(to right, var(--bg) 0%, transparent 25%),
+                  linear-gradient(to top, var(--bg) 0%, transparent 20%),
+                  linear-gradient(to bottom, rgba(6,12,24,.3) 0%, transparent 15%);
     }
-
     .hero-eyebrow {
       font-size: .72rem; font-weight: 600; letter-spacing: .18em;
       text-transform: uppercase; color: var(--cyan); margin-bottom: 1.4rem;
     }
-    h1 {
-      font-size: clamp(2.6rem, 4.8vw, 4.2rem);
-      font-weight: 700;
-      line-height: 1.06;
-      letter-spacing: -.03em;
-      margin-bottom: 1.6rem;
-    }
+    h1 { font-size: clamp(2.6rem, 4.8vw, 4.2rem); font-weight: 700; line-height: 1.06; letter-spacing: -.03em; margin-bottom: 1.6rem; }
     h1 em { color: var(--cyan); font-style: normal; }
-    .hero-sub {
-      font-size: .95rem; font-weight: 400; color: var(--muted);
-      max-width: 480px; line-height: 1.85; margin-bottom: 2.5rem;
-    }
+    .hero-sub { font-size: .95rem; font-weight: 400; color: var(--muted); max-width: 480px; line-height: 1.85; margin-bottom: 2.5rem; }
     .hero-sub strong { color: var(--text); font-weight: 600; }
     .hero-actions { display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
-    .btn {
-      display: inline-block; text-decoration: none; font-family: inherit;
-      font-size: .8rem; font-weight: 600; letter-spacing: .04em;
-      padding: .7rem 1.6rem; transition: all .2s; border: none; cursor: pointer;
-    }
+    .btn { display: inline-block; text-decoration: none; font-family: inherit; font-size: .8rem; font-weight: 600; letter-spacing: .04em; padding: .7rem 1.6rem; transition: all .2s; border: none; cursor: pointer; }
     .btn-primary { background: var(--cyan); color: var(--bg); }
     .btn-primary:hover { background: #7dd3fc; transform: translateY(-2px); }
     .btn-ghost { border: 1px solid var(--border); color: var(--muted); }
     .btn-ghost:hover { border-color: rgba(255,255,255,.22); color: var(--text); transform: translateY(-2px); }
-    .hero-targets {
-      font-size: .75rem; color: var(--muted); display: flex; align-items: center; gap: .6rem; flex-wrap: wrap;
-    }
+    .hero-targets { font-size: .75rem; color: var(--muted); display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
     .hero-targets span { color: var(--text); font-weight: 500; }
     .hero-targets .dot { color: var(--cyan); }
 
@@ -137,10 +111,10 @@
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(7, 1fr);
     }
     .pb-item {
-      padding: 1.8rem 1rem;
+      padding: 1.8rem .8rem;
       border-right: 1px solid var(--border);
       text-align: center;
       transition: background .2s;
@@ -154,15 +128,11 @@
       transition: transform .3s;
     }
     .pb-item:hover::before { transform: scaleX(1); }
-    .pb-event {
-      font-size: .62rem; font-weight: 700; letter-spacing: .18em;
-      text-transform: uppercase; color: var(--cyan); margin-bottom: .55rem;
-    }
-    .pb-time {
-      font-size: 1.55rem; font-weight: 700; line-height: 1;
-      color: var(--text); letter-spacing: -.02em; margin-bottom: .3rem;
-    }
-    .pb-label { font-size: .6rem; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+    .pb-event { font-size: .58rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--cyan); margin-bottom: .55rem; }
+    .pb-time { font-size: 1.35rem; font-weight: 700; line-height: 1; color: var(--text); letter-spacing: -.02em; margin-bottom: .3rem; }
+    .pb-label { font-size: .58rem; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; font-weight: 500; }
+    .pb-item.pb-target .pb-time { color: var(--cyan); font-size: 1rem; }
+    .pb-item.pb-target .pb-event { color: var(--orange); }
 
     /* ── SECTION BASE ────────────────────────────────────────────────── */
     .wrap { max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; }
@@ -172,11 +142,7 @@
       display: flex; align-items: center; gap: .5rem;
     }
     .s-label::before { content: '//'; opacity: .4; font-weight: 400; }
-    h2 {
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      font-weight: 700; letter-spacing: -.025em; line-height: 1.1;
-      margin-bottom: 2.5rem;
-    }
+    h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; letter-spacing: -.025em; line-height: 1.1; margin-bottom: 2.5rem; }
 
     /* ── TRAINING ────────────────────────────────────────────────────── */
     #training { border-top: 1px solid var(--border); }
@@ -233,23 +199,14 @@
     #projects { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
     .proj-card { background: var(--bg2); padding: 2.4rem; position: relative; overflow: hidden; transition: background .25s; text-decoration: none; display: block; color: inherit; }
-    .proj-card::after {
-      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-      background: var(--cyan); transform: scaleY(0); transform-origin: top;
-      transition: transform .35s ease;
-    }
+    .proj-card::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--cyan); transform: scaleY(0); transform-origin: top; transition: transform .35s ease; }
     .proj-card:hover { background: var(--bg3); }
     .proj-card:hover::after { transform: scaleY(1); }
-    .proj-card-placeholder { background: var(--bg2); padding: 2.4rem; display: flex; flex-direction: column; justify-content: center; align-items: center; }
     .proj-tag { font-size: .63rem; font-weight: 700; color: var(--cyan); letter-spacing: .15em; text-transform: uppercase; margin-bottom: .75rem; }
     .proj-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: .6rem; line-height: 1.3; color: var(--text); }
     .proj-card > p { font-size: .82rem; color: var(--muted); line-height: 1.8; }
     .proj-chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: 1rem; }
-    .chip {
-      font-size: .68rem; font-weight: 500; padding: .2rem .65rem;
-      border: 1px solid var(--border); color: var(--muted);
-      transition: border-color .2s, color .2s, background .2s;
-    }
+    .chip { font-size: .68rem; font-weight: 500; padding: .2rem .65rem; border: 1px solid var(--border); color: var(--muted); transition: border-color .2s, color .2s, background .2s; }
     .chip:hover { border-color: rgba(56,189,248,.35); color: var(--cyan); background: rgba(56,189,248,.05); }
     .proj-link { display: inline-flex; align-items: center; gap: .45rem; margin-top: 1.2rem; font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--cyan); }
     .proj-link::before { content: '→'; }
@@ -278,31 +235,27 @@
     .clink:first-child { border-top: 1px solid var(--border); }
     .clink:hover { color: var(--text); }
     .clink .arr { color: var(--cyan); }
-    .open-badge {
-      display: inline-flex; align-items: center; gap: .5rem;
-      font-size: .72rem; font-weight: 600; color: var(--green);
-      padding: .45rem 1rem; border: 1px solid rgba(74,222,128,.22);
-      margin-bottom: 1.5rem; background: rgba(74,222,128,.05);
-    }
+    .open-badge { display: inline-flex; align-items: center; gap: .5rem; font-size: .72rem; font-weight: 600; color: var(--green); padding: .45rem 1rem; border: 1px solid rgba(74,222,128,.22); margin-bottom: 1.5rem; background: rgba(74,222,128,.05); }
     .open-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); animation: blink 2s infinite; }
     .target-list { margin-top: 1.5rem; }
     .target-item { display: flex; align-items: center; gap: .7rem; font-size: .78rem; color: var(--muted); padding: .5rem 0; border-bottom: 1px solid var(--border); font-weight: 500; }
     .target-item:first-child { border-top: 1px solid var(--border); }
     .target-item .arr { color: var(--cyan); font-size: .9rem; }
 
-    footer {
-      max-width: 1100px; margin: 0 auto;
-      padding: 1.8rem 3rem;
-      display: flex; justify-content: space-between; align-items: center;
-      border-top: 1px solid var(--border);
-      font-size: .68rem; color: var(--muted);
-    }
+    footer { max-width: 1100px; margin: 0 auto; padding: 1.8rem 3rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); font-size: .68rem; color: var(--muted); }
     footer a { color: var(--muted); text-decoration: none; transition: color .2s; }
     footer a:hover { color: var(--text); }
 
     .fade { opacity: 0; transform: translateY(14px); transition: opacity .65s ease, transform .65s ease; }
     .fade.in { opacity: 1; transform: none; }
 
+    @media (max-width: 960px) {
+      .pb-strip { grid-template-columns: repeat(4, 1fr); }
+      .pb-item:nth-child(4) { border-right: none; }
+      .pb-item:nth-child(5) { border-top: 1px solid var(--border); }
+      .pb-item:nth-child(6) { border-top: 1px solid var(--border); }
+      .pb-item:nth-child(7) { border-top: 1px solid var(--border); border-right: none; }
+    }
     @media (max-width: 860px) {
       nav { padding: 1rem 1.5rem; }
       .nav-badge { display: none; }
@@ -311,7 +264,9 @@
       .hero-right::after { background: linear-gradient(to top, var(--bg) 0%, transparent 35%); }
       .hero-left { padding: 3rem 1.5rem 4rem; }
       .pb-strip { grid-template-columns: repeat(3, 1fr); }
-      .pb-item:nth-child(3) { border-right: none; }
+      .pb-item { border-right: 1px solid var(--border) !important; border-top: 0 !important; }
+      .pb-item:nth-child(3n) { border-right: none !important; }
+      .pb-item:nth-child(n+4) { border-top: 1px solid var(--border) !important; }
       .wrap { padding: 4.5rem 1.5rem; }
       .sy-grid { grid-template-columns: 1fr 1fr; }
       .pmc-summary { grid-template-columns: 1fr 1fr; }
@@ -364,33 +319,38 @@
 <div class="pb-strip fade">
   <div class="pb-item">
     <div class="pb-event">5K</div>
-    <div class="pb-time" id="pb-5k">—</div>
+    <div class="pb-time">19:01</div>
     <div class="pb-label">Personal best</div>
   </div>
   <div class="pb-item">
     <div class="pb-event">10K</div>
-    <div class="pb-time" id="pb-10k">—</div>
+    <div class="pb-time">39:27</div>
     <div class="pb-label">Personal best</div>
   </div>
   <div class="pb-item">
     <div class="pb-event">Half Marathon</div>
-    <div class="pb-time" id="pb-hm">—</div>
+    <div class="pb-time">1:27:08</div>
     <div class="pb-label">Personal best</div>
   </div>
   <div class="pb-item">
     <div class="pb-event">Marathon</div>
-    <div class="pb-time" id="pb-m">—</div>
+    <div class="pb-time">3:23:10</div>
     <div class="pb-label">Personal best</div>
   </div>
   <div class="pb-item">
     <div class="pb-event">Ironman 70.3</div>
-    <div class="pb-time" id="pb-703">—</div>
+    <div class="pb-time">5:20:51</div>
     <div class="pb-label">Personal best</div>
   </div>
   <div class="pb-item">
     <div class="pb-event">Ironman</div>
-    <div class="pb-time" id="pb-im">—</div>
+    <div class="pb-time">11:17:33</div>
     <div class="pb-label">226 km · finisher</div>
+  </div>
+  <div class="pb-item pb-target">
+    <div class="pb-event">Ultra 80K</div>
+    <div class="pb-time">In training</div>
+    <div class="pb-label">Bromont · Oct 2026</div>
   </div>
 </div>
 
@@ -499,7 +459,7 @@
         </div>
         <span class="proj-link">View on GitHub</span>
       </a>
-      <div class="proj-card-placeholder fade" style="background:var(--bg2);padding:2.4rem;display:flex;flex-direction:column;justify-content:center;align-items:center;border-top:1px solid var(--border);">
+      <div style="background:var(--bg2);padding:2.4rem;display:flex;flex-direction:column;justify-content:center;align-items:center;border-top:1px solid var(--border);">
         <div style="font-size:2.5rem;color:var(--border);margin-bottom:1rem;font-weight:700;">+</div>
         <p style="font-size:.8rem;color:var(--muted);text-align:center;line-height:1.8;max-width:240px;">More projects dropping as the ultra build progresses.</p>
       </div>
@@ -519,10 +479,10 @@
             I'm a <strong>fourth-year PhD candidate</strong> at the Institute for Quantum Computing, Waterloo, where I build precision photonic experiments and the data pipelines that make sense of them. The work requires the same thing good sports analytics does: extracting clean signal from noisy, high-dimensional data under time pressure.
           </p>
           <p>
-            I'm an <strong>Ironman finisher</strong> (3.8 km swim · 180 km bike · 42.2 km run) and currently in training for the <strong>Bromont 80K ultra marathon</strong> in October 2026. Every long run and recovery ride goes into a dataset I analyse with the same tools that power Garmin and Strava.
+            I'm an <strong>Ironman finisher</strong> (11:17:33), have run a <strong>1:27 half marathon</strong> and a <strong>3:23 marathon</strong>, and I'm currently deep in training for the <strong>Bromont 80K ultra</strong> in October 2026 — building CTL with every early morning run. Every activity goes into a dataset I analyse with the same tools that power Garmin and Strava.
           </p>
           <p>
-            I'm looking to bring precision science to a <strong>sport tracking company</strong> — modelling training load, processing sensor streams, building the tools that help millions of athletes make smarter decisions.
+            I'm looking to bring precision science to a <strong>sport tracking company</strong> — modelling training load, processing sensor streams, and building tools that help millions of athletes make smarter decisions.
           </p>
         </div>
         <div class="about-tl">
@@ -544,45 +504,33 @@
         <div class="skill-group">
           <div class="skill-group-lbl">Data Science</div>
           <div style="display:flex;flex-wrap:wrap;gap:.35rem;">
-            <span class="chip">Python</span>
-            <span class="chip">NumPy / SciPy</span>
-            <span class="chip">Pandas</span>
-            <span class="chip">Time series</span>
-            <span class="chip">EMA filtering</span>
-            <span class="chip">Signal processing</span>
-            <span class="chip">Cross-validation</span>
+            <span class="chip">Python</span><span class="chip">NumPy / SciPy</span><span class="chip">Pandas</span>
+            <span class="chip">Time series</span><span class="chip">EMA filtering</span>
+            <span class="chip">Signal processing</span><span class="chip">Cross-validation</span>
             <span class="chip">Statistical modelling</span>
           </div>
         </div>
         <div class="skill-group">
           <div class="skill-group-lbl">APIs &amp; Visualisation</div>
           <div style="display:flex;flex-wrap:wrap;gap:.35rem;">
-            <span class="chip">Strava API</span>
-            <span class="chip">REST APIs</span>
-            <span class="chip">Plotly</span>
-            <span class="chip">Chart.js</span>
-            <span class="chip">matplotlib</span>
-            <span class="chip">Leaflet.js</span>
+            <span class="chip">Strava API</span><span class="chip">REST APIs</span>
+            <span class="chip">Plotly</span><span class="chip">Chart.js</span>
+            <span class="chip">matplotlib</span><span class="chip">Leaflet.js</span>
           </div>
         </div>
         <div class="skill-group">
           <div class="skill-group-lbl">Infrastructure</div>
           <div style="display:flex;flex-wrap:wrap;gap:.35rem;">
-            <span class="chip">Git / GitHub</span>
-            <span class="chip">GitHub Actions</span>
-            <span class="chip">SLURM</span>
-            <span class="chip">Compute Canada</span>
-            <span class="chip">joblib</span>
-            <span class="chip">LaTeX</span>
+            <span class="chip">Git / GitHub</span><span class="chip">GitHub Actions</span>
+            <span class="chip">SLURM</span><span class="chip">Compute Canada</span>
+            <span class="chip">joblib</span><span class="chip">LaTeX</span>
           </div>
         </div>
         <div class="skill-group">
           <div class="skill-group-lbl">Physics &amp; Optics</div>
           <div style="display:flex;flex-wrap:wrap;gap:.35rem;">
-            <span class="chip">Precision measurement</span>
-            <span class="chip">Photonics</span>
-            <span class="chip">LabVIEW</span>
-            <span class="chip">Mathematica</span>
+            <span class="chip">Precision measurement</span><span class="chip">Photonics</span>
+            <span class="chip">LabVIEW</span><span class="chip">Mathematica</span>
           </div>
         </div>
       </div>
@@ -623,9 +571,6 @@
           <a href="https://github.com/tristanlismerphd" class="clink" target="_blank" rel="noopener">
             <span class="arr">→</span> GitHub — tristanlismerphd
           </a>
-          <a href="https://www.strava.com" class="clink" target="_blank" rel="noopener">
-            <span class="arr">→</span> Strava profile
-          </a>
           <a href="cv_tristan_lismer.pdf" class="clink">
             <span class="arr">→</span> Download CV
           </a>
@@ -643,146 +588,97 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
-  // ── Polyline ──────────────────────────────────────────────────────────────
   function decodePolyline(str) {
-    const coords = [];
-    let index = 0, lat = 0, lng = 0;
+    const coords = []; let index = 0, lat = 0, lng = 0;
     while (index < str.length) {
       let shift = 0, result = 0, b;
       do { b = str.charCodeAt(index++) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20);
-      lat += (result & 1) ? ~(result >> 1) : (result >> 1);
-      shift = result = 0;
+      lat += (result & 1) ? ~(result >> 1) : (result >> 1); shift = result = 0;
       do { b = str.charCodeAt(index++) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20);
       lng += (result & 1) ? ~(result >> 1) : (result >> 1);
       coords.push([lat / 1e5, lng / 1e5]);
     }
     return coords;
   }
-
   function actTypeLabel(type) {
-    const labels = { Run:'Run', TrailRun:'Trail Run', Ride:'Ride', VirtualRide:'Virtual Ride',
-      GravelRide:'Gravel Ride', Hike:'Hike', NordicSki:'Nordic Ski', AlpineSki:'Alpine Ski',
-      WeightTraining:'Weights', Walk:'Walk', Workout:'Workout' };
-    return labels[type] || type;
+    const l = { Run:'Run', TrailRun:'Trail Run', Ride:'Ride', VirtualRide:'Virtual Ride', GravelRide:'Gravel Ride', Hike:'Hike', NordicSki:'Nordic Ski', WeightTraining:'Weights', Walk:'Walk', Workout:'Workout' };
+    return l[type] || type;
   }
-
   function isRun(t) { return t === 'Run' || t === 'TrailRun'; }
   function isRide(t) { return t === 'Ride' || t === 'VirtualRide' || t === 'GravelRide'; }
   function typeColor(t) { return isRun(t) ? '#fb923c' : isRide(t) ? '#a78bfa' : '#4ade80'; }
   function typeClass(t) { return isRun(t) ? 'act-type-run' : isRide(t) ? 'act-type-ride' : 'act-type-other'; }
 
-  // ── Heatmap ───────────────────────────────────────────────────────────────
   function renderHeatmap(heatmap, year) {
     const priority = { Run:4, TrailRun:4, Ride:3, VirtualRide:3, GravelRide:3 };
     const dayMap = {};
     for (const e of heatmap) {
       const ex = dayMap[e.date], p = priority[e.type] || 1;
-      if (!ex || p > (priority[ex.type]||1) || (p === (priority[ex.type]||1) && e.distance_km > ex.distance_km))
-        dayMap[e.date] = e;
+      if (!ex || p > (priority[ex.type]||1) || (p === (priority[ex.type]||1) && e.distance_km > ex.distance_km)) dayMap[e.date] = e;
     }
-    const startOfYear = new Date(year, 0, 1);
-    const endOfYear   = new Date(year, 11, 31);
-    const firstSunday = new Date(startOfYear);
-    firstSunday.setDate(firstSunday.getDate() - startOfYear.getDay());
-
-    const weeks = [];
-    const cur = new Date(firstSunday);
-    while (cur <= endOfYear) {
-      const week = [];
+    const soy = new Date(year, 0, 1), eoy = new Date(year, 11, 31);
+    const fs = new Date(soy); fs.setDate(fs.getDate() - soy.getDay());
+    const weeks = []; const cur = new Date(fs);
+    while (cur <= eoy) {
+      const wk = [];
       for (let d = 0; d < 7; d++) {
         const ds = cur.toISOString().slice(0, 10);
-        week.push({ date: ds, inYear: cur.getFullYear() === year, activity: dayMap[ds] || null });
+        wk.push({ date: ds, inYear: cur.getFullYear() === year, activity: dayMap[ds] || null });
         cur.setDate(cur.getDate() + 1);
       }
-      weeks.push(week);
+      weeks.push(wk);
     }
-
     const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    const monthWeekIdx = months.map((_, m) => Math.floor((new Date(year, m, 1) - firstSunday) / 86400000 / 7));
-
+    const mwi = months.map((_, m) => Math.floor((new Date(year, m, 1) - fs) / 86400000 / 7));
     const container = document.getElementById('strava-heatmap');
     container.innerHTML = '';
     const mRow = document.createElement('div');
     mRow.style.cssText = 'display:flex;padding-left:24px;margin-bottom:4px;';
     let lastWi = 0;
-    monthWeekIdx.forEach((wi, m) => {
+    mwi.forEach((wi, m) => {
       const span = document.createElement('span');
-      span.style.cssText = `display:inline-block;width:${(wi-lastWi)*13}px;font-size:.56rem;color:rgba(232,240,255,.35);letter-spacing:.08em;text-transform:uppercase;overflow:hidden;font-weight:600;`;
-      span.textContent = months[m];
-      mRow.appendChild(span);
-      lastWi = wi;
+      span.style.cssText = `display:inline-block;width:${(wi-lastWi)*13}px;font-size:.56rem;color:rgba(232,240,255,.32);letter-spacing:.08em;text-transform:uppercase;overflow:hidden;font-weight:600;font-family:'Space Grotesk',sans-serif;`;
+      span.textContent = months[m]; mRow.appendChild(span); lastWi = wi;
     });
     container.appendChild(mRow);
-
-    const body = document.createElement('div');
-    body.style.cssText = 'display:flex;gap:2px;';
-    const dCol = document.createElement('div');
-    dCol.style.cssText = 'display:flex;flex-direction:column;gap:2px;margin-right:2px;padding-top:1px;width:20px;';
+    const body = document.createElement('div'); body.style.cssText = 'display:flex;gap:2px;';
+    const dCol = document.createElement('div'); dCol.style.cssText = 'display:flex;flex-direction:column;gap:2px;margin-right:2px;padding-top:1px;width:20px;';
     ['','Mon','','Wed','','Fri',''].forEach(lbl => {
       const el = document.createElement('div');
       el.style.cssText = 'font-size:.52rem;color:rgba(232,240,255,.28);height:11px;line-height:11px;font-weight:500;';
-      el.textContent = lbl;
-      dCol.appendChild(el);
+      el.textContent = lbl; dCol.appendChild(el);
     });
     body.appendChild(dCol);
-
-    const grid = document.createElement('div');
-    grid.style.cssText = 'display:flex;gap:2px;';
-    for (const week of weeks) {
-      const wEl = document.createElement('div');
-      wEl.style.cssText = 'display:flex;flex-direction:column;gap:2px;';
-      for (const day of week) {
-        const cell = document.createElement('div');
-        cell.style.cssText = 'width:11px;height:11px;border-radius:2px;';
-        if (!day.inYear) {
-          cell.style.background = 'transparent';
-        } else if (day.activity) {
+    const grid = document.createElement('div'); grid.style.cssText = 'display:flex;gap:2px;';
+    for (const wk of weeks) {
+      const wEl = document.createElement('div'); wEl.style.cssText = 'display:flex;flex-direction:column;gap:2px;';
+      for (const day of wk) {
+        const cell = document.createElement('div'); cell.style.cssText = 'width:11px;height:11px;border-radius:2px;';
+        if (!day.inYear) { cell.style.background = 'transparent'; }
+        else if (day.activity) {
           const col = typeColor(day.activity.type);
           const maxD = isRun(day.activity.type) ? 20 : isRide(day.activity.type) ? 100 : 15;
-          const intensity = Math.min(1, 0.3 + (day.activity.distance_km / maxD) * 0.7);
           cell.style.background = col;
-          cell.style.opacity = intensity;
+          cell.style.opacity = Math.min(1, 0.3 + (day.activity.distance_km / maxD) * 0.7);
           cell.title = `${day.date} · ${actTypeLabel(day.activity.type)} · ${day.activity.distance_km} km`;
-        } else {
-          cell.style.background = 'rgba(255,255,255,0.05)';
-        }
+        } else { cell.style.background = 'rgba(255,255,255,0.05)'; }
         wEl.appendChild(cell);
       }
       grid.appendChild(wEl);
     }
-    body.appendChild(grid);
-    container.appendChild(body);
+    body.appendChild(grid); container.appendChild(body);
   }
 
-  // ── Activity cards ────────────────────────────────────────────────────────
   function renderActivities(activities) {
     const container = document.getElementById('strava-activities');
     activities.forEach((act, i) => {
-      const card = document.createElement('div');
-      card.className = 'act-card';
-      const date = new Date(act.date);
-      const dateStr = date.toLocaleDateString('en-US', { month:'short', day:'numeric' });
-      const h = Math.floor(act.moving_time / 3600);
-      const m = Math.floor((act.moving_time % 3600) / 60);
-      const s = act.moving_time % 60;
-      const timeStr = h > 0
-        ? `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`
-        : `${m}:${String(s).padStart(2,'0')}`;
+      const card = document.createElement('div'); card.className = 'act-card';
+      const dateStr = new Date(act.date).toLocaleDateString('en-US', { month:'short', day:'numeric' });
+      const h = Math.floor(act.moving_time/3600), m = Math.floor((act.moving_time%3600)/60), s = act.moving_time%60;
+      const timeStr = h > 0 ? `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}` : `${m}:${String(s).padStart(2,'0')}`;
       const mapId = `act-map-${i}`;
-      card.innerHTML = `
-        <div class="act-map" id="${mapId}"></div>
-        <div class="act-info">
-          <div class="act-type-badge ${typeClass(act.type)}">${actTypeLabel(act.type)}</div>
-          <div class="act-name">${act.name}</div>
-          <div class="act-date">${dateStr}</div>
-          <div class="act-stats">
-            <div class="act-stat"><div class="v">${act.distance_km}</div><div class="u">km</div></div>
-            <div class="act-stat"><div class="v">${timeStr}</div><div class="u">time</div></div>
-            <div class="act-stat"><div class="v">${Math.round(act.elevation_gain)}</div><div class="u">m elev</div></div>
-          </div>
-        </div>`;
+      card.innerHTML = `<div class="act-map" id="${mapId}"></div><div class="act-info"><div class="act-type-badge ${typeClass(act.type)}">${actTypeLabel(act.type)}</div><div class="act-name">${act.name}</div><div class="act-date">${dateStr}</div><div class="act-stats"><div class="act-stat"><div class="v">${act.distance_km}</div><div class="u">km</div></div><div class="act-stat"><div class="v">${timeStr}</div><div class="u">time</div></div><div class="act-stat"><div class="v">${Math.round(act.elevation_gain)}</div><div class="u">m elev</div></div></div></div>`;
       container.appendChild(card);
-
       if (act.polyline && act.polyline.length > 10) {
         setTimeout(() => {
           try {
@@ -802,15 +698,13 @@
     });
   }
 
-  // ── Strava ────────────────────────────────────────────────────────────────
   async function loadStrava() {
     let data;
-    try { const r = await fetch('/strava_data.json?v='+Date.now()); data = await r.json(); }
-    catch(e) { return; }
+    try { const r = await fetch('/strava_data.json?v='+Date.now()); data = await r.json(); } catch(e) { return; }
     const ys = data.year_stats;
-    document.getElementById('sy-run-km').textContent  = Math.round(ys.run_km).toLocaleString() + ' km';
-    document.getElementById('sy-ride-km').textContent = Math.round(ys.ride_km).toLocaleString() + ' km';
-    document.getElementById('sy-hours').textContent   = Math.round(ys.run_time_hrs + ys.ride_time_hrs) + 'h';
+    document.getElementById('sy-run-km').textContent   = Math.round(ys.run_km).toLocaleString() + ' km';
+    document.getElementById('sy-ride-km').textContent  = Math.round(ys.ride_km).toLocaleString() + ' km';
+    document.getElementById('sy-hours').textContent    = Math.round(ys.run_time_hrs + ys.ride_time_hrs) + 'h';
     document.getElementById('sy-elev-val').textContent = Math.round(ys.run_elevation + ys.ride_elevation).toLocaleString() + ' m';
     document.getElementById('sy-run-sub').textContent  = `${ys.run_count} runs · ${Math.round(ys.run_elevation).toLocaleString()} m elevation`;
     document.getElementById('sy-ride-sub').textContent = `${ys.ride_count} rides · ${Math.round(ys.ride_elevation).toLocaleString()} m elevation`;
@@ -819,19 +713,14 @@
     renderActivities(data.recent_activities);
   }
 
-  // ── Training analytics ────────────────────────────────────────────────────
   async function loadTrainingAnalytics() {
     let data;
-    try { const r = await fetch('/training_analytics.json?v='+Date.now()); data = await r.json(); }
-    catch(e) { return; }
-
+    try { const r = await fetch('/training_analytics.json?v='+Date.now()); data = await r.json(); } catch(e) { return; }
     const today = new Date().toISOString().slice(0,10);
-
-    document.getElementById('pmc-ctl').textContent = data.current.ctl.toFixed(1);
-    document.getElementById('pmc-atl').textContent = data.current.atl.toFixed(1);
+    document.getElementById('pmc-ctl').textContent   = data.current.ctl.toFixed(1);
+    document.getElementById('pmc-atl').textContent   = data.current.atl.toFixed(1);
     document.getElementById('pmc-weeks').textContent = data.weeks_to_race;
-    const tsbEl = document.getElementById('pmc-tsb');
-    const tsb = data.current.tsb;
+    const tsbEl = document.getElementById('pmc-tsb'), tsb = data.current.tsb;
     tsbEl.textContent = (tsb >= 0 ? '+' : '') + tsb.toFixed(1);
     tsbEl.style.color = tsb >= 0 ? 'var(--green)' : 'var(--red)';
 
@@ -840,58 +729,40 @@
     const sp = pmc.filter((_, i) => i % stride === 0);
     const fmtL = ds => { const p = ds.split('-'); return p[1]+'/'+p[2]; };
 
-    const TOOLTIP = {
-      backgroundColor: 'rgba(11,20,36,0.97)',
-      borderColor: 'rgba(255,255,255,0.07)', borderWidth: 1,
-      titleColor: '#e8f0ff', bodyColor: 'rgba(232,240,255,0.6)', padding: 10,
-      titleFont: { family: "'Space Grotesk', sans-serif", size: 11 },
-      bodyFont:  { family: "'Space Grotesk', sans-serif", size: 11 },
-    };
-    const TICK = { color: 'rgba(232,240,255,0.28)', font: { family: "'Space Grotesk', sans-serif", size: 10 } };
-    const GRID = 'rgba(255,255,255,0.04)';
+    const FONT = "'Space Grotesk', sans-serif";
+    const TOOLTIP = { backgroundColor:'rgba(11,20,36,0.97)', borderColor:'rgba(255,255,255,0.07)', borderWidth:1, titleColor:'#e8f0ff', bodyColor:'rgba(232,240,255,0.6)', padding:10, titleFont:{family:FONT,size:11}, bodyFont:{family:FONT,size:11} };
+    const TICK  = { color:'rgba(232,240,255,0.28)', font:{family:FONT,size:10} };
+    const GRID  = 'rgba(255,255,255,0.04)';
 
-    // PMC chart
     new Chart(document.getElementById('pmc-chart').getContext('2d'), {
       data: {
         labels: sp.map(d => fmtL(d.date)),
         datasets: [
-          { type:'bar', label:'Form (TSB)', data:sp.map(d=>d.tsb), order:3, yAxisID:'y',
+          { type:'bar',  label:'Form (TSB)',    data:sp.map(d=>d.tsb), order:3, yAxisID:'y',
             backgroundColor: sp.map(d => d.tsb>=0 ? 'rgba(74,222,128,0.35)' : 'rgba(248,113,113,0.35)'),
             borderColor:     sp.map(d => d.tsb>=0 ? 'rgba(74,222,128,0.55)' : 'rgba(248,113,113,0.55)'),
             borderWidth:1 },
           { type:'line', label:'Fitness (CTL)', data:sp.map(d=>d.ctl), order:1, yAxisID:'y',
-            borderColor:'#38bdf8', backgroundColor:'rgba(56,189,248,0.07)',
-            borderWidth:2.5, pointRadius:0, fill:true, tension:0.4 },
+            borderColor:'#38bdf8', backgroundColor:'rgba(56,189,248,0.07)', borderWidth:2.5, pointRadius:0, fill:true, tension:0.4 },
           { type:'line', label:'Fatigue (ATL)', data:sp.map(d=>d.atl), order:2, yAxisID:'y',
-            borderColor:'rgba(251,146,60,0.85)', backgroundColor:'transparent',
-            borderWidth:2, pointRadius:0, borderDash:[5,4], tension:0.4 }
+            borderColor:'rgba(251,146,60,0.85)', backgroundColor:'transparent', borderWidth:2, pointRadius:0, borderDash:[5,4], tension:0.4 }
         ]
       },
-      options: {
-        responsive:true,
-        interaction:{ mode:'index', intersect:false },
-        plugins:{ legend:{ display:false }, tooltip:{ ...TOOLTIP, callbacks:{ label: i => ` ${i.dataset.label}: ${i.parsed.y.toFixed(1)}` } } },
-        scales:{ x:{ grid:{color:GRID}, ticks:{...TICK, maxTicksLimit:8} }, y:{ grid:{color:GRID}, ticks:TICK } }
-      }
+      options: { responsive:true, interaction:{mode:'index',intersect:false},
+        plugins:{ legend:{display:false}, tooltip:{...TOOLTIP, callbacks:{label: i => ` ${i.dataset.label}: ${i.parsed.y.toFixed(1)}`}} },
+        scales:{ x:{grid:{color:GRID},ticks:{...TICK,maxTicksLimit:8}}, y:{grid:{color:GRID},ticks:TICK} } }
     });
 
-    // Weekly chart
     const weekly = data.weekly.filter(w => w.week <= today);
     new Chart(document.getElementById('weekly-chart').getContext('2d'), {
       type:'bar',
-      data: {
-        labels: weekly.map(w => w.week.slice(5)),
-        datasets: [
-          { label:'Run km', data:weekly.map(w=>w.run_km), backgroundColor:'rgba(251,146,60,0.75)', borderColor:'rgba(251,146,60,0.9)', borderWidth:1 },
-          { label:'Ride km', data:weekly.map(w=>w.ride_km), backgroundColor:'rgba(167,139,250,0.55)', borderColor:'rgba(167,139,250,0.75)', borderWidth:1 }
-        ]
-      },
-      options: {
-        responsive:true,
-        interaction:{ mode:'index', intersect:false },
-        plugins:{ legend:{ display:false }, tooltip:TOOLTIP },
-        scales:{ x:{ stacked:true, grid:{color:GRID}, ticks:TICK }, y:{ stacked:true, grid:{color:GRID}, ticks:TICK } }
-      }
+      data: { labels: weekly.map(w=>w.week.slice(5)), datasets: [
+        { label:'Run km',  data:weekly.map(w=>w.run_km),  backgroundColor:'rgba(251,146,60,0.75)',  borderColor:'rgba(251,146,60,0.9)',  borderWidth:1 },
+        { label:'Ride km', data:weekly.map(w=>w.ride_km), backgroundColor:'rgba(167,139,250,0.55)', borderColor:'rgba(167,139,250,0.75)', borderWidth:1 }
+      ]},
+      options: { responsive:true, interaction:{mode:'index',intersect:false},
+        plugins:{ legend:{display:false}, tooltip:TOOLTIP },
+        scales:{ x:{stacked:true,grid:{color:GRID},ticks:TICK}, y:{stacked:true,grid:{color:GRID},ticks:TICK} } }
     });
   }
 
