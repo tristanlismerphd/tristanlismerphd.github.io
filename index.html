@@ -21,6 +21,8 @@
       --green:  #4ade80;
       --purple: #a78bfa;
       --red:    #f87171;
+      --amber:  #fcd34d;
+      --indigo: #818cf8;
     }
     html { scroll-behavior: smooth; }
     body {
@@ -418,13 +420,25 @@
 
     <div class="pmc-wrap fade">
       <div class="pmc-header">
-        <span>Weekly Training Volume</span>
+        <span>Weekly Running Volume</span>
         <div class="chart-legend">
-          <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(251,146,60,0.75)"></div>Run km</div>
-          <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(167,139,250,0.6)"></div>Ride km</div>
+          <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(251,146,60,0.8)"></div>Trail Run</div>
+          <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(252,211,77,0.75)"></div>Road Run</div>
         </div>
       </div>
-      <canvas id="weekly-chart" height="60"></canvas>
+      <canvas id="weekly-run-chart" height="55"></canvas>
+    </div>
+
+    <div class="pmc-wrap fade">
+      <div class="pmc-header">
+        <span>Weekly Cycling Volume</span>
+        <div class="chart-legend">
+          <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(167,139,250,0.65)"></div>Road Bike</div>
+          <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(74,222,128,0.65)"></div>Gravel</div>
+          <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(129,140,248,0.65)"></div>MTB</div>
+        </div>
+      </div>
+      <canvas id="weekly-ride-chart" height="55"></canvas>
     </div>
 
     <div class="shm-legend fade">
@@ -601,16 +615,16 @@
     return coords;
   }
   function actTypeLabel(type) {
-    const l = { Run:'Run', TrailRun:'Trail Run', Ride:'Ride', VirtualRide:'Virtual Ride', GravelRide:'Gravel Ride', Hike:'Hike', NordicSki:'Nordic Ski', WeightTraining:'Weights', Walk:'Walk', Workout:'Workout' };
+    const l = { Run:'Run', TrailRun:'Trail Run', Ride:'Road Bike', VirtualRide:'Virtual Ride', GravelRide:'Gravel Ride', MountainBikeRide:'MTB', Hike:'Hike', NordicSki:'Nordic Ski', WeightTraining:'Weights', Walk:'Walk', Workout:'Workout' };
     return l[type] || type;
   }
   function isRun(t) { return t === 'Run' || t === 'TrailRun'; }
-  function isRide(t) { return t === 'Ride' || t === 'VirtualRide' || t === 'GravelRide'; }
+  function isRide(t) { return t === 'Ride' || t === 'VirtualRide' || t === 'GravelRide' || t === 'MountainBikeRide'; }
   function typeColor(t) { return isRun(t) ? '#fb923c' : isRide(t) ? '#a78bfa' : '#4ade80'; }
   function typeClass(t) { return isRun(t) ? 'act-type-run' : isRide(t) ? 'act-type-ride' : 'act-type-other'; }
 
   function renderHeatmap(heatmap, year) {
-    const priority = { Run:4, TrailRun:4, Ride:3, VirtualRide:3, GravelRide:3 };
+    const priority = { Run:4, TrailRun:4, Ride:3, VirtualRide:3, GravelRide:3, MountainBikeRide:3 };
     const dayMap = {};
     for (const e of heatmap) {
       const ex = dayMap[e.date], p = priority[e.type] || 1;
@@ -754,15 +768,29 @@
     });
 
     const weekly = data.weekly.filter(w => w.week <= today);
-    new Chart(document.getElementById('weekly-chart').getContext('2d'), {
-      type:'bar',
-      data: { labels: weekly.map(w=>w.week.slice(5)), datasets: [
-        { label:'Run km',  data:weekly.map(w=>w.run_km),  backgroundColor:'rgba(251,146,60,0.75)',  borderColor:'rgba(251,146,60,0.9)',  borderWidth:1 },
-        { label:'Ride km', data:weekly.map(w=>w.ride_km), backgroundColor:'rgba(167,139,250,0.55)', borderColor:'rgba(167,139,250,0.75)', borderWidth:1 }
+    const wlabels = weekly.map(w => w.week.slice(5));
+
+    new Chart(document.getElementById('weekly-run-chart').getContext('2d'), {
+      type: 'bar',
+      data: { labels: wlabels, datasets: [
+        { label:'Trail Run', data:weekly.map(w=>w.trail_run_km||0), backgroundColor:'rgba(251,146,60,0.8)',  borderColor:'rgba(251,146,60,0.95)',  borderWidth:1 },
+        { label:'Road Run',  data:weekly.map(w=>w.road_run_km||0),  backgroundColor:'rgba(252,211,77,0.7)',  borderColor:'rgba(252,211,77,0.9)',   borderWidth:1 }
       ]},
       options: { responsive:true, interaction:{mode:'index',intersect:false},
         plugins:{ legend:{display:false}, tooltip:TOOLTIP },
-        scales:{ x:{stacked:true,grid:{color:GRID},ticks:TICK}, y:{stacked:true,grid:{color:GRID},ticks:TICK} } }
+        scales:{ x:{stacked:true,grid:{color:GRID},ticks:TICK}, y:{stacked:true,grid:{color:GRID},ticks:{...TICK,callback:v=>v+'km'}} } }
+    });
+
+    new Chart(document.getElementById('weekly-ride-chart').getContext('2d'), {
+      type: 'bar',
+      data: { labels: wlabels, datasets: [
+        { label:'Road Bike', data:weekly.map(w=>w.road_ride_km||0), backgroundColor:'rgba(167,139,250,0.65)', borderColor:'rgba(167,139,250,0.85)', borderWidth:1 },
+        { label:'Gravel',    data:weekly.map(w=>w.gravel_km||0),    backgroundColor:'rgba(74,222,128,0.6)',   borderColor:'rgba(74,222,128,0.8)',   borderWidth:1 },
+        { label:'MTB',       data:weekly.map(w=>w.mtb_km||0),       backgroundColor:'rgba(129,140,248,0.65)', borderColor:'rgba(129,140,248,0.85)', borderWidth:1 }
+      ]},
+      options: { responsive:true, interaction:{mode:'index',intersect:false},
+        plugins:{ legend:{display:false}, tooltip:TOOLTIP },
+        scales:{ x:{stacked:true,grid:{color:GRID},ticks:TICK}, y:{stacked:true,grid:{color:GRID},ticks:{...TICK,callback:v=>v+'km'}} } }
     });
   }
 
