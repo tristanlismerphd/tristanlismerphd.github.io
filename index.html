@@ -6,6 +6,7 @@
   <title>Tristan Lismer — Quantum Physicist</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -60,9 +61,7 @@
       background: radial-gradient(circle, rgba(245,166,35,.05) 0%, transparent 65%);
       pointer-events: none; z-index: -1;
     }
-    .hero-right {
-      position: relative;
-    }
+    .hero-right { position: relative; }
     .hero-right img {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
@@ -167,6 +166,43 @@
     .p-card h3 { font-size: .82rem; font-weight: 600; margin-bottom: .2rem; }
     .p-card p { font-size: .75rem; color: var(--muted); line-height: 1.65; }
 
+    /* TRAINING */
+    #training { border-top: 1px solid var(--border); }
+    .sy-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); margin-bottom: 3rem; }
+    .sy-card { background: var(--bg2); padding: 1.6rem 1.8rem; transition: background .2s; }
+    .sy-card:hover { background: var(--bg3); }
+    .sy-val { font-size: 1.9rem; font-weight: 600; line-height: 1; }
+    .sy-unit { font-size: .63rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin: .35rem 0 .2rem; }
+    .sy-sub { font-size: .68rem; color: var(--muted); }
+    .sy-run .sy-val { color: var(--accent); }
+    .sy-ride .sy-val { color: var(--blue); }
+    .sy-elev .sy-val { color: var(--green); }
+    .shm-scroll { overflow-x: auto; padding-bottom: .5rem; margin-bottom: 3rem; }
+    .shm-scroll::-webkit-scrollbar { height: 3px; }
+    .shm-scroll::-webkit-scrollbar-track { background: transparent; }
+    .shm-scroll::-webkit-scrollbar-thumb { background: var(--border); }
+    .shm-legend { display: flex; gap: 1.2rem; align-items: center; margin-bottom: 1rem; }
+    .shm-legend-item { display: flex; align-items: center; gap: .4rem; font-size: .62rem; color: var(--muted); }
+    .shm-legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+    .act-scroll { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem; -webkit-overflow-scrolling: touch; }
+    .act-scroll::-webkit-scrollbar { height: 3px; }
+    .act-scroll::-webkit-scrollbar-track { background: transparent; }
+    .act-scroll::-webkit-scrollbar-thumb { background: var(--border); }
+    .act-card { flex: 0 0 250px; background: var(--bg2); border: 1px solid var(--border); transition: border-color .2s, transform .2s; }
+    .act-card:hover { border-color: rgba(255,255,255,.18); transform: translateY(-2px); }
+    .act-map { height: 150px; background: var(--bg3); }
+    .act-info { padding: .9rem 1rem; }
+    .act-type-badge { font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: .3rem; font-weight: 500; }
+    .act-type-run { color: var(--accent); }
+    .act-type-ride { color: var(--blue); }
+    .act-type-other { color: var(--green); }
+    .act-name { font-size: .8rem; font-weight: 600; margin-bottom: .25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .act-date { font-size: .62rem; color: var(--muted); margin-bottom: .75rem; }
+    .act-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .3rem; }
+    .act-stat .v { font-size: .82rem; font-weight: 600; line-height: 1; }
+    .act-stat .u { font-size: .55rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin-top: .12rem; }
+    .leaflet-container { background: #07070f !important; }
+
     /* TIMELINE */
     #timeline { border-top: 1px solid var(--border); }
     .tl { position: relative; padding-left: 2rem; }
@@ -211,6 +247,7 @@
       .wrap { padding: 4.5rem 1.5rem; }
       .research-grid, .skills-grid, .personal-grid, .contact-grid { grid-template-columns: 1fr; }
       .skills-grid { gap: 3rem; }
+      .sy-grid { grid-template-columns: 1fr 1fr; }
       footer { flex-direction: column; gap: .4rem; }
     }
   </style>
@@ -223,6 +260,7 @@
     <li><a href="#research">Research</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#personal">Personal</a></li>
+    <li><a href="#training">Training</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><span class="nav-open">Open to roles</span></li>
   </ul>
@@ -362,6 +400,49 @@
   </div>
 </div>
 
+<!-- TRAINING -->
+<div id="training">
+  <div class="wrap">
+    <p class="s-label fade">Training</p>
+    <h2 class="fade">2026 in motion.</h2>
+
+    <div class="sy-grid fade">
+      <div class="sy-card sy-run">
+        <div class="sy-val" id="sy-run-km">—</div>
+        <div class="sy-unit">km run</div>
+        <div class="sy-sub" id="sy-run-sub">loading…</div>
+      </div>
+      <div class="sy-card sy-ride">
+        <div class="sy-val" id="sy-ride-km">—</div>
+        <div class="sy-unit">km ridden</div>
+        <div class="sy-sub" id="sy-ride-sub">loading…</div>
+      </div>
+      <div class="sy-card">
+        <div class="sy-val" id="sy-hours">—</div>
+        <div class="sy-unit">hours moving</div>
+        <div class="sy-sub" id="sy-hours-sub">run + ride combined</div>
+      </div>
+      <div class="sy-card sy-elev">
+        <div class="sy-val" id="sy-elev-val">—</div>
+        <div class="sy-unit">metres climbed</div>
+        <div class="sy-sub" id="sy-elev-sub">run + ride elevation</div>
+      </div>
+    </div>
+
+    <div class="shm-legend fade">
+      <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--accent)"></div>Run / Trail</div>
+      <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--blue)"></div>Ride</div>
+      <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--green)"></div>Other</div>
+    </div>
+    <div class="shm-scroll fade">
+      <div id="strava-heatmap"></div>
+    </div>
+
+    <p class="s-label fade" style="margin-bottom:1.5rem;">Recent Activities</p>
+    <div class="act-scroll fade" id="strava-activities"></div>
+  </div>
+</div>
+
 <!-- TIMELINE -->
 <div id="timeline">
   <div class="wrap">
@@ -420,6 +501,200 @@
   <span>Quantum Optics · IQC Waterloo</span>
 </footer>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  function decodePolyline(str) {
+    const coords = [];
+    let index = 0, lat = 0, lng = 0;
+    while (index < str.length) {
+      let shift = 0, result = 0, b;
+      do { b = str.charCodeAt(index++) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20);
+      lat += (result & 1) ? ~(result >> 1) : (result >> 1);
+      shift = result = 0;
+      do { b = str.charCodeAt(index++) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20);
+      lng += (result & 1) ? ~(result >> 1) : (result >> 1);
+      coords.push([lat / 1e5, lng / 1e5]);
+    }
+    return coords;
+  }
+
+  function actTypeLabel(type) {
+    const labels = { Run:'Run', TrailRun:'Trail Run', Ride:'Ride', VirtualRide:'Virtual Ride',
+      GravelRide:'Gravel Ride', Hike:'Hike', NordicSki:'Nordic Ski', AlpineSki:'Alpine Ski',
+      WeightTraining:'Weights', Walk:'Walk', Workout:'Workout', IceSkate:'Ice Skate' };
+    return labels[type] || type;
+  }
+
+  function isRun(t) { return t === 'Run' || t === 'TrailRun'; }
+  function isRide(t) { return t === 'Ride' || t === 'VirtualRide' || t === 'GravelRide'; }
+  function typeColor(t) { return isRun(t) ? '#f5a623' : isRide(t) ? '#48cae4' : '#52d68a'; }
+  function typeClass(t) { return isRun(t) ? 'act-type-run' : isRide(t) ? 'act-type-ride' : 'act-type-other'; }
+
+  function renderHeatmap(heatmap, year) {
+    const priority = { Run:4, TrailRun:4, Ride:3, VirtualRide:3, GravelRide:3 };
+    const dayMap = {};
+    for (const e of heatmap) {
+      const ex = dayMap[e.date];
+      const p = priority[e.type] || 1;
+      if (!ex || p > (priority[ex.type] || 1) || (p === (priority[ex.type]||1) && e.distance_km > ex.distance_km)) {
+        dayMap[e.date] = e;
+      }
+    }
+
+    const startOfYear = new Date(year, 0, 1);
+    const endOfYear = new Date(year, 11, 31);
+    const startDay = startOfYear.getDay();
+    const firstSunday = new Date(startOfYear);
+    firstSunday.setDate(firstSunday.getDate() - startDay);
+
+    const weeks = [];
+    const cur = new Date(firstSunday);
+    while (cur <= endOfYear) {
+      const week = [];
+      for (let d = 0; d < 7; d++) {
+        const ds = cur.toISOString().slice(0, 10);
+        week.push({ date: ds, inYear: cur.getFullYear() === year, activity: dayMap[ds] || null });
+        cur.setDate(cur.getDate() + 1);
+      }
+      weeks.push(week);
+    }
+
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const monthWeekIdx = [];
+    for (let m = 0; m < 12; m++) {
+      const d = Math.floor((new Date(year, m, 1) - firstSunday) / 86400000);
+      monthWeekIdx.push(Math.floor(d / 7));
+    }
+
+    const container = document.getElementById('strava-heatmap');
+    container.innerHTML = '';
+
+    const mRow = document.createElement('div');
+    mRow.style.cssText = 'display:flex; padding-left:24px; margin-bottom:4px;';
+    let lastWi = 0;
+    for (let m = 0; m < 12; m++) {
+      const wi = monthWeekIdx[m];
+      const gap = wi - lastWi;
+      const span = document.createElement('span');
+      span.style.cssText = `display:inline-block; width:${gap * 13}px; font-size:.58rem; color:rgba(234,234,242,.4); letter-spacing:.06em; text-transform:uppercase; overflow:hidden;`;
+      span.textContent = months[m];
+      mRow.appendChild(span);
+      lastWi = wi;
+    }
+    container.appendChild(mRow);
+
+    const body = document.createElement('div');
+    body.style.cssText = 'display:flex; gap:2px;';
+
+    const dCol = document.createElement('div');
+    dCol.style.cssText = 'display:flex; flex-direction:column; gap:2px; margin-right:2px; padding-top:1px; width:20px;';
+    ['','Mon','','Wed','','Fri',''].forEach(lbl => {
+      const el = document.createElement('div');
+      el.style.cssText = 'font-size:.52rem; color:rgba(234,234,242,.3); height:11px; line-height:11px;';
+      el.textContent = lbl;
+      dCol.appendChild(el);
+    });
+    body.appendChild(dCol);
+
+    const grid = document.createElement('div');
+    grid.style.cssText = 'display:flex; gap:2px;';
+    for (const week of weeks) {
+      const wEl = document.createElement('div');
+      wEl.style.cssText = 'display:flex; flex-direction:column; gap:2px;';
+      for (const day of week) {
+        const cell = document.createElement('div');
+        cell.style.cssText = 'width:11px; height:11px; border-radius:2px;';
+        if (!day.inYear) {
+          cell.style.background = 'transparent';
+        } else if (day.activity) {
+          const col = typeColor(day.activity.type);
+          const maxD = isRun(day.activity.type) ? 20 : isRide(day.activity.type) ? 100 : 15;
+          const intensity = Math.min(1, 0.3 + (day.activity.distance_km / maxD) * 0.7);
+          cell.style.background = col;
+          cell.style.opacity = intensity;
+          cell.title = `${day.date} · ${actTypeLabel(day.activity.type)} · ${day.activity.distance_km} km`;
+        } else {
+          cell.style.background = 'rgba(255,255,255,0.05)';
+        }
+        wEl.appendChild(cell);
+      }
+      grid.appendChild(wEl);
+    }
+    body.appendChild(grid);
+    container.appendChild(body);
+  }
+
+  function renderActivities(activities) {
+    const container = document.getElementById('strava-activities');
+    activities.forEach((act, i) => {
+      const card = document.createElement('div');
+      card.className = 'act-card';
+      const date = new Date(act.date);
+      const dateStr = date.toLocaleDateString('en-US', { month:'short', day:'numeric' });
+      const h = Math.floor(act.moving_time / 3600);
+      const m = Math.floor((act.moving_time % 3600) / 60);
+      const s = act.moving_time % 60;
+      const timeStr = h > 0 ? `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}` : `${m}:${String(s).padStart(2,'0')}`;
+      const mapId = `act-map-${i}`;
+      card.innerHTML = `
+        <div class="act-map" id="${mapId}"></div>
+        <div class="act-info">
+          <div class="act-type-badge ${typeClass(act.type)}">${actTypeLabel(act.type)}</div>
+          <div class="act-name">${act.name}</div>
+          <div class="act-date">${dateStr}</div>
+          <div class="act-stats">
+            <div class="act-stat"><div class="v">${act.distance_km}</div><div class="u">km</div></div>
+            <div class="act-stat"><div class="v">${timeStr}</div><div class="u">time</div></div>
+            <div class="act-stat"><div class="v">${Math.round(act.elevation_gain)}</div><div class="u">m elev</div></div>
+          </div>
+        </div>`;
+      container.appendChild(card);
+
+      if (act.polyline && act.polyline.length > 10) {
+        setTimeout(() => {
+          try {
+            const coords = decodePolyline(act.polyline);
+            if (!coords.length) return;
+            const map = L.map(mapId, {
+              zoomControl: false, dragging: false, scrollWheelZoom: false,
+              doubleClickZoom: false, touchZoom: false, attributionControl: false
+            });
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
+            const poly = L.polyline(coords, { color: typeColor(act.type), weight: 2.5, opacity: 0.9 }).addTo(map);
+            map.fitBounds(poly.getBounds(), { padding: [8, 8] });
+          } catch(e) {}
+        }, 80 + i * 60);
+      } else {
+        const el = document.getElementById(mapId);
+        el.style.cssText = 'height:150px;background:var(--bg3);display:flex;align-items:center;justify-content:center;';
+        el.innerHTML = '<span style="font-size:2rem;opacity:.2">&#x1F4CD;</span>';
+      }
+    });
+  }
+
+  async function loadStrava() {
+    let data;
+    try {
+      const res = await fetch('/strava_data.json?v=' + Date.now());
+      data = await res.json();
+    } catch(e) { return; }
+
+    const ys = data.year_stats;
+    document.getElementById('sy-run-km').textContent = Math.round(ys.run_km).toLocaleString() + ' km';
+    document.getElementById('sy-ride-km').textContent = Math.round(ys.ride_km).toLocaleString() + ' km';
+    document.getElementById('sy-hours').textContent = Math.round(ys.run_time_hrs + ys.ride_time_hrs) + 'h';
+    document.getElementById('sy-elev-val').textContent = Math.round(ys.run_elevation + ys.ride_elevation).toLocaleString() + ' m';
+    document.getElementById('sy-run-sub').textContent = `${ys.run_count} runs · ${Math.round(ys.run_elevation).toLocaleString()} m elevation`;
+    document.getElementById('sy-ride-sub').textContent = `${ys.ride_count} rides · ${Math.round(ys.ride_elevation).toLocaleString()} m elevation`;
+    document.getElementById('sy-hours-sub').textContent = `${ys.run_time_hrs}h run + ${ys.ride_time_hrs}h ride`;
+    document.getElementById('sy-elev-sub').textContent = 'run + ride combined';
+
+    renderHeatmap(data.heatmap, data.year);
+    renderActivities(data.recent_activities);
+  }
+
+  loadStrava();
+</script>
 <script>
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
