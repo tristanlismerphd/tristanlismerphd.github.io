@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tristan Lismer — Quantum Physicist</title>
+  <title>Tristan Lismer — Data Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet"/>
   <style>
@@ -39,7 +39,7 @@
     .nav-open::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); display: block; box-shadow: 0 0 8px var(--green); animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
 
-    /* HERO — full-bleed split */
+    /* HERO */
     #hero {
       display: grid;
       grid-template-columns: 55% 45%;
@@ -60,9 +60,7 @@
       background: radial-gradient(circle, rgba(245,166,35,.05) 0%, transparent 65%);
       pointer-events: none; z-index: -1;
     }
-    .hero-right {
-      position: relative;
-    }
+    .hero-right { position: relative; }
     .hero-right img {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
@@ -74,7 +72,6 @@
       background: linear-gradient(to right, var(--bg) 0%, transparent 20%),
                   linear-gradient(to top, var(--bg) 0%, transparent 15%);
     }
-
     .hero-eyebrow {
       font-size: .7rem; font-weight: 500; letter-spacing: .14em;
       text-transform: uppercase; color: var(--accent); margin-bottom: 1.4rem;
@@ -100,25 +97,6 @@
     .btn-primary:hover { background: #ffc04a; transform: translateY(-2px); }
     .btn-ghost { border: 1px solid var(--border); color: var(--muted); }
     .btn-ghost:hover { border-color: rgba(255,255,255,.25); color: var(--text); transform: translateY(-2px); }
-    .hero-meta {
-      display: flex; gap: 2.5rem; padding-top: 2.5rem;
-      border-top: 1px solid var(--border); flex-wrap: wrap;
-    }
-    .meta-item .val { font-size: 1.5rem; font-weight: 600; line-height: 1; }
-    .meta-item .lbl { font-size: .65rem; color: var(--muted); margin-top: .25rem; letter-spacing: .04em; }
-
-    /* PILLARS */
-    .pillars {
-      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      background: var(--bg2);
-    }
-    .pillar { padding: 2rem 1.8rem; border-right: 1px solid var(--border); transition: background .2s; }
-    .pillar:last-child { border-right: none; }
-    .pillar:hover { background: var(--bg3); }
-    .pillar-icon { font-size: 1.1rem; margin-bottom: .75rem; }
-    .pillar h3 { font-size: .85rem; font-weight: 600; margin-bottom: .4rem; }
-    .pillar p { font-size: .73rem; color: var(--muted); line-height: 1.75; }
 
     /* SECTIONS */
     .wrap { max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; }
@@ -130,24 +108,26 @@
     .s-label::before { content: '//'; opacity: .35; }
     h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 600; letter-spacing: -.02em; line-height: 1.1; margin-bottom: 2.5rem; }
 
-    /* RESEARCH */
-    .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
-    .r-card {
+    /* PROJECTS */
+    .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin-bottom: 1px; }
+    .proj-card {
       background: var(--bg); padding: 2.2rem; position: relative;
-      overflow: hidden; transition: background .25s;
+      overflow: hidden; transition: background .25s; text-decoration: none;
+      display: block; color: inherit;
     }
-    .r-card::after {
+    .proj-card::after {
       content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
       background: var(--accent); transform: scaleX(0); transform-origin: left;
       transition: transform .35s ease;
     }
-    .r-card:hover { background: var(--bg2); }
-    .r-card:hover::after { transform: scaleX(1); }
-    .r-num { font-size: .62rem; color: var(--muted); letter-spacing: .1em; margin-bottom: .9rem; }
-    .r-card h3 { font-size: .95rem; font-weight: 600; margin-bottom: .6rem; line-height: 1.35; }
-    .r-card p { font-size: .8rem; color: var(--muted); line-height: 1.82; }
-    .r-tag { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1.2rem; font-size: .63rem; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); }
-    .r-tag::before { content: '→'; }
+    .proj-card:hover { background: var(--bg2); }
+    .proj-card:hover::after { transform: scaleX(1); }
+    .proj-num { font-size: .62rem; color: var(--muted); letter-spacing: .1em; margin-bottom: .9rem; }
+    .proj-card h3 { font-size: .95rem; font-weight: 600; margin-bottom: .6rem; line-height: 1.35; }
+    .proj-card p { font-size: .8rem; color: var(--muted); line-height: 1.82; }
+    .proj-chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: 1rem; }
+    .proj-tag { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1.2rem; font-size: .63rem; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); }
+    .proj-tag::before { content: '→'; }
 
     /* SKILLS */
     #skills { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
@@ -157,6 +137,25 @@
     .skill-chips { display: flex; flex-wrap: wrap; gap: .35rem; }
     .chip { font-size: .7rem; padding: .22rem .7rem; border: 1px solid var(--border); color: var(--muted); transition: border-color .2s, color .2s, background .2s; }
     .chip:hover { border-color: rgba(245,166,35,.4); color: var(--accent); background: rgba(245,166,35,.04); }
+
+    /* BACKGROUND */
+    .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
+    .r-card {
+      background: var(--bg); padding: 2.2rem; position: relative;
+      overflow: hidden; transition: background .25s;
+    }
+    .r-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: var(--blue); transform: scaleX(0); transform-origin: left;
+      transition: transform .35s ease;
+    }
+    .r-card:hover { background: var(--bg2); }
+    .r-card:hover::after { transform: scaleX(1); }
+    .r-num { font-size: .62rem; color: var(--muted); letter-spacing: .1em; margin-bottom: .9rem; }
+    .r-card h3 { font-size: .95rem; font-weight: 600; margin-bottom: .6rem; line-height: 1.35; }
+    .r-card p { font-size: .8rem; color: var(--muted); line-height: 1.82; }
+    .r-tag { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1.2rem; font-size: .63rem; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); }
+    .r-tag::before { content: '→'; }
 
     /* PERSONAL */
     .personal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
@@ -207,9 +206,8 @@
       .hero-right { min-height: 55vw; order: -1; }
       .hero-right::after { background: linear-gradient(to top, var(--bg) 0%, transparent 30%); }
       .hero-left { padding: 3rem 1.5rem 4rem; }
-      .pillars { grid-template-columns: 1fr 1fr; }
       .wrap { padding: 4.5rem 1.5rem; }
-      .research-grid, .skills-grid, .personal-grid, .contact-grid { grid-template-columns: 1fr; }
+      .proj-grid, .research-grid, .skills-grid, .personal-grid, .contact-grid { grid-template-columns: 1fr; }
       .skills-grid { gap: 3rem; }
       footer { flex-direction: column; gap: .4rem; }
     }
@@ -220,8 +218,9 @@
 <nav id="nav">
   <a href="#hero" class="nav-name">Tristan Lismer</a>
   <ul class="nav-links">
-    <li><a href="#research">Research</a></li>
+    <li><a href="#projects">Projects</a></li>
     <li><a href="#skills">Skills</a></li>
+    <li><a href="#background">Background</a></li>
     <li><a href="/personal.html">Personal</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><span class="nav-open">Open to roles</span></li>
@@ -232,13 +231,13 @@
 <div id="hero">
   <div class="hero-left">
     <div class="hero-glow"></div>
-    <p class="hero-eyebrow">PhD Candidate · Quantum Optics · Institute for Quantum Computing</p>
-    <h1>Testing the <em>axioms</em><br>of quantum mechanics.</h1>
+    <p class="hero-eyebrow">Data Engineer · PhD Candidate · Institute for Quantum Computing</p>
+    <h1>Building pipelines with <em>scientific</em> rigour.</h1>
     <p class="hero-sub">
-      Fourth-year PhD at the Institute for Quantum Computing, Waterloo. I use Generalised Probabilistic Theories to map out the space of possible physical theories, then build optical experiments to find out which one nature actually chose.
+      I'm a fourth-year PhD physicist transitioning into data engineering. I build end-to-end data systems — from raw API ingestion to transformed, queryable outputs — with the same precision I apply to quantum experiments. Based in Waterloo, open to roles in Vancouver and Calgary.
     </p>
     <div class="hero-actions">
-      <a href="#research" class="btn btn-primary">My Research</a>
+      <a href="#projects" class="btn btn-primary">See My Work</a>
       <a href="#contact" class="btn btn-ghost">Get In Touch</a>
       <a href="cv_tristan_lismer.pdf" class="btn btn-ghost">Download CV</a>
     </div>
@@ -248,35 +247,54 @@
   </div>
 </div>
 
-
-<!-- RESEARCH -->
-<div class="wrap" id="research">
-  <p class="s-label fade">Research</p>
-  <h2 class="fade">What I do.</h2>
-  <div class="research-grid">
-    <div class="r-card fade">
-      <div class="r-num">01 / EXPERIMENTAL</div>
-      <h3>Testing Born's Rule</h3>
-      <p>If Born's rule is wrong, every quantum mechanics textbook needs rewriting. I built a 4-slit photonic experiment to measure the Sorkin parameter I₃ and check. So far, quantum mechanics is holding up — but we keep looking.</p>
-      <span class="r-tag">Quantum Foundations</span>
+<!-- PROJECTS -->
+<div class="wrap" id="projects">
+  <p class="s-label fade">Projects</p>
+  <h2 class="fade">What I've built.</h2>
+  <div class="proj-grid">
+    <a href="/personal.html" class="proj-card fade">
+      <div class="proj-num">01 / PIPELINE · API · TIME-SERIES</div>
+      <h3>Strava + Garmin Training Analytics</h3>
+      <p>End-to-end data pipeline ingesting heart rate streams from the Strava and Garmin Connect APIs. Computes hrTSS per activity using the Banister/Coggan ATL·CTL·TSB model, applies EMA filtering, stores as JSON, and serves a live dashboard — the same model behind Garmin Training Status and Strava Fitness &amp; Freshness.</p>
+      <div class="proj-chips">
+        <span class="chip">Python</span>
+        <span class="chip">REST APIs</span>
+        <span class="chip">Time-series</span>
+        <span class="chip">EMA filtering</span>
+        <span class="chip">JSON storage</span>
+        <span class="chip">GitHub Actions</span>
+      </div>
+      <span class="proj-tag">View live dashboard →</span>
+    </a>
+    <a href="https://github.com/tristanlismerphd/higher_order_interference" target="_blank" rel="noopener" class="proj-card fade">
+      <div class="proj-num">02 / PIPELINE · HPC · STATISTICAL MODELLING</div>
+      <h3>GPT Rank Sweep — Quantum Data Pipeline</h3>
+      <p>Built a cross-validated bilinear ALS fitting pipeline that processes 1296-file experimental datasets, distributes jobs across Compute Canada via SLURM, and extracts the dimensionality of quantum state spaces from raw photon-count data. No assumed model — the data determines the answer.</p>
+      <div class="proj-chips">
+        <span class="chip">Python</span>
+        <span class="chip">NumPy / SciPy</span>
+        <span class="chip">SLURM / HPC</span>
+        <span class="chip">Cross-validation</span>
+        <span class="chip">joblib</span>
+        <span class="chip">Statistical modelling</span>
+      </div>
+      <span class="proj-tag">View on GitHub →</span>
+    </a>
+    <div class="proj-card fade" style="border-top:1px solid var(--border);">
+      <div class="proj-num">03 / IN PROGRESS · AWS</div>
+      <h3>Cloud Data Infrastructure</h3>
+      <p>Currently building on AWS — learning the core DE stack: S3 for storage, Lambda for event-driven ingestion, and IAM/VPC fundamentals. Goal: migrate local JSON pipelines to a proper cloud architecture with automated refresh.</p>
+      <div class="proj-chips">
+        <span class="chip">AWS S3</span>
+        <span class="chip">AWS Lambda</span>
+        <span class="chip">IAM</span>
+        <span class="chip">In progress</span>
+      </div>
+      <span class="proj-tag" style="color:var(--muted);">Coming soon</span>
     </div>
-    <div class="r-card fade">
-      <div class="r-num">02 / COMPUTATIONAL</div>
-      <h3>GPT Rank Fitting</h3>
-      <p>Built a cross-validated ALS rank-sweep pipeline from scratch that characterises quantum state spaces directly from experimental data — no assumption about the underlying theory required. The data tells you the rank.</p>
-      <span class="r-tag">Data Analysis · State Space Theory</span>
-    </div>
-    <div class="r-card fade">
-      <div class="r-num">03 / THEORETICAL</div>
-      <h3>Epistemic Restrictions in GPTs</h3>
-      <p>Proved a Trichotomy Theorem characterising exactly which Generalised Probabilistic Theories can be understood as theories of limited knowledge. The kind of result you can prove and then design an experiment around.</p>
-      <span class="r-tag">GPT Framework</span>
-    </div>
-    <div class="r-card fade">
-      <div class="r-num">04 / EXPERIMENTAL</div>
-      <h3>Interferometer Mastery</h3>
-      <p>HOM, Mach-Zehnder, Sagnac — aligned them all. SNSPDs, APDs, ICCD cameras, Ti:Sapphire at 790 nm. Precision free-space optics is one of those skills that takes years to build and is immediately obvious when someone has it.</p>
-      <span class="r-tag">Photonics · Optics</span>
+    <div class="proj-card fade" style="background:var(--bg2);display:flex;flex-direction:column;justify-content:center;align-items:center;border-top:1px solid var(--border);">
+      <div style="font-size:2.5rem;color:var(--border);margin-bottom:1rem;font-weight:700;">+</div>
+      <p style="font-size:.8rem;color:var(--muted);text-align:center;line-height:1.8;max-width:240px;">More in the pipeline. New projects as AWS work progresses.</p>
     </div>
   </div>
 </div>
@@ -285,52 +303,91 @@
 <div id="skills">
   <div class="wrap">
     <p class="s-label fade">Skills</p>
-    <h2 class="fade">What I bring to the (optical) table.</h2>
+    <h2 class="fade">What I bring to the table.</h2>
     <div class="skills-grid">
       <div>
         <div class="skill-group fade">
-          <div class="skill-group-lbl">Optics &amp; Lasers</div>
+          <div class="skill-group-lbl">Data Engineering</div>
           <div class="skill-chips">
-            <span class="chip">Ti:Sapphire (790 nm)</span>
-            <span class="chip">Sagnac SPDC</span>
-            <span class="chip">HOM Interferometer</span>
-            <span class="chip">Mach-Zehnder</span>
-            <span class="chip">Free-space alignment</span>
-            <span class="chip">Phase masks</span>
+            <span class="chip">Python</span>
+            <span class="chip">SQL</span>
+            <span class="chip">REST API ingestion</span>
+            <span class="chip">ETL pipelines</span>
+            <span class="chip">Time-series modelling</span>
+            <span class="chip">EMA / signal processing</span>
+            <span class="chip">Cross-validation</span>
           </div>
         </div>
         <div class="skill-group fade">
-          <div class="skill-group-lbl">Detectors &amp; Electronics</div>
+          <div class="skill-group-lbl">Cloud &amp; Infrastructure</div>
           <div class="skill-chips">
-            <span class="chip">SNSPDs</span>
-            <span class="chip">APDs</span>
-            <span class="chip">ICCD cameras</span>
-            <span class="chip">Coincidence counting</span>
-            <span class="chip">Timing electronics</span>
+            <span class="chip">AWS S3</span>
+            <span class="chip">AWS Lambda</span>
+            <span class="chip">SLURM / HPC</span>
+            <span class="chip">Compute Canada</span>
+            <span class="chip">GitHub Actions</span>
+            <span class="chip">Git</span>
           </div>
         </div>
       </div>
       <div>
         <div class="skill-group fade">
-          <div class="skill-group-lbl">Languages</div>
+          <div class="skill-group-lbl">Languages &amp; Libraries</div>
           <div class="skill-chips">
             <span class="chip">Python</span>
-            <span class="chip">LabVIEW</span>
-            <span class="chip">Mathematica</span>
+            <span class="chip">SQL</span>
+            <span class="chip">NumPy / SciPy</span>
+            <span class="chip">Pandas</span>
+            <span class="chip">joblib</span>
+            <span class="chip">matplotlib</span>
+            <span class="chip">Chart.js</span>
             <span class="chip">LaTeX</span>
           </div>
         </div>
         <div class="skill-group fade">
-          <div class="skill-group-lbl">Libraries &amp; Infrastructure</div>
+          <div class="skill-group-lbl">Scientific &amp; Domain</div>
           <div class="skill-chips">
-            <span class="chip">NumPy / SciPy</span>
-            <span class="chip">joblib</span>
-            <span class="chip">matplotlib</span>
-            <span class="chip">SLURM</span>
-            <span class="chip">Compute Canada</span>
-            <span class="chip">Git</span>
+            <span class="chip">Statistical modelling</span>
+            <span class="chip">Experimental design</span>
+            <span class="chip">Sensor data (Garmin / Strava)</span>
+            <span class="chip">LabVIEW</span>
+            <span class="chip">Mathematica</span>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BACKGROUND -->
+<div id="background">
+  <div class="wrap">
+    <p class="s-label fade">Background</p>
+    <h2 class="fade">Where the rigour comes from.</h2>
+    <div class="research-grid">
+      <div class="r-card fade">
+        <div class="r-num">PhD · EXPERIMENTAL</div>
+        <h3>Testing Born's Rule — 4-Slit Interferometer</h3>
+        <p>Built a precision photonic experiment to measure the Sorkin parameter I₃. Managing terabytes of camera data across 1296 experimental configurations per dataset — cleaning, normalising, fitting — is what taught me that data quality is everything.</p>
+        <span class="r-tag">Quantum Foundations · Photonics</span>
+      </div>
+      <div class="r-card fade">
+        <div class="r-num">PhD · COMPUTATIONAL</div>
+        <h3>GPT Rank Fitting Pipeline</h3>
+        <p>Designed and built a distributed ALS fitting pipeline from scratch — job scheduling, cross-validation, parallelism via joblib and SLURM. Every piece of infrastructure was custom. That's what a data engineer does.</p>
+        <span class="r-tag">HPC · Statistical Modelling</span>
+      </div>
+      <div class="r-card fade">
+        <div class="r-num">PhD · THEORETICAL</div>
+        <h3>Trichotomy Theorem</h3>
+        <p>Proved a classification theorem for Generalised Probabilistic Theories. The ability to reason carefully about abstract systems and constraints translates directly to data modelling and schema design.</p>
+        <span class="r-tag">GPT Framework · Mathematical Rigour</span>
+      </div>
+      <div class="r-card fade">
+        <div class="r-num">INTERNSHIPS · 2019–2022</div>
+        <h3>Research Scientist Roles</h3>
+        <p>Three summers at federal research agencies (Canadian Nuclear Safety Commission, Natural Resources Canada) — collecting, cleaning, and analysing scientific datasets in real operational environments.</p>
+        <span class="r-tag">Applied Research · Data Analysis</span>
       </div>
     </div>
   </div>
@@ -350,7 +407,7 @@
     <div class="p-card fade">
       <div class="p-big">80K</div>
       <div class="p-unit">Ultra Runner — in training</div>
-      <h3>Mountain ultra</h3>
+      <h3>Bromont 80K · Oct 2026</h3>
       <p>Because apparently an Ironman wasn't a strong enough signal that I enjoy suffering.</p>
     </div>
     <div class="p-card fade" style="cursor:pointer;" onclick="window.location='/personal.html'">
@@ -371,7 +428,7 @@
       <div class="tl-entry">
         <div class="tl-dot"></div>
         <div class="tl-year">2022 — Present</div>
-        <div class="tl-title">PhD Candidate · Quantum Optics</div>
+        <div class="tl-title">PhD Candidate · Quantum Optics &amp; Data Systems</div>
         <div class="tl-sub">Institute for Quantum Computing, University of Waterloo</div>
       </div>
       <div class="tl-entry">
@@ -400,11 +457,11 @@
 <div id="contact">
   <div class="wrap">
     <p class="s-label fade">Contact</p>
-    <h2 class="fade">Let's talk!</h2>
+    <h2 class="fade">Let's talk.</h2>
     <div class="contact-grid">
       <div class="fade">
-        <div class="open-badge">Open to roles in quantum tech</div>
-        <p class="contact-lede">If you're building something in quantum technology and want someone who can do the physics, write the code, and run an ultramarathon before the team standup — reach out. Always happy to talk research too.</p>
+        <div class="open-badge">Open to roles · Vancouver &amp; Calgary</div>
+        <p class="contact-lede">Looking for data engineering roles in Vancouver or Calgary. I bring scientific precision to data systems — if you're building pipelines, platforms, or anything that turns messy raw data into something useful, reach out.</p>
         <div class="contact-email">tlismer@uwaterloo.ca</div>
       </div>
       <div class="quote-box fade">
@@ -417,7 +474,7 @@
 
 <footer>
   <span>© 2026 Tristan Lismer</span>
-  <span>Quantum Optics · IQC Waterloo</span>
+  <span>Data Engineer · IQC Waterloo</span>
 </footer>
 
 <script>
