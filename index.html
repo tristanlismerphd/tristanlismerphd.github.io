@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tristan Lismer — Data Engineer</title>
+  <title>Tristan Lismer — Data Scientist</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet"/>
   <style>
@@ -231,10 +231,10 @@
 <div id="hero">
   <div class="hero-left">
     <div class="hero-glow"></div>
-    <p class="hero-eyebrow">Data Engineer · PhD Candidate · Institute for Quantum Computing</p>
-    <h1>Building pipelines with <em>scientific</em> rigour.</h1>
+    <p class="hero-eyebrow">Data Scientist · PhD Candidate · Institute for Quantum Computing</p>
+    <h1>Finding <em>signal</em> in noise with scientific rigour.</h1>
     <p class="hero-sub">
-      I'm a fourth-year PhD physicist transitioning into data engineering. I build end-to-end data systems — from raw API ingestion to transformed, queryable outputs — with the same precision I apply to quantum experiments. Based in Waterloo, open to roles in Vancouver and Calgary.
+      I'm a fourth-year PhD physicist transitioning into data science. I turn complex, messy datasets into clear insight — statistical modelling, machine learning, and interactive dashboards — with the same precision I apply to quantum experiments. Based in Waterloo, open to roles in Vancouver and Calgary.
     </p>
     <div class="hero-actions">
       <a href="#projects" class="btn btn-primary">See My Work</a>
@@ -253,48 +253,48 @@
   <h2 class="fade">What I've built.</h2>
   <div class="proj-grid">
     <a href="/personal.html" class="proj-card fade">
-      <div class="proj-num">01 / PIPELINE · API · TIME-SERIES</div>
+      <div class="proj-num">01 / DATA SCIENCE · TIME-SERIES · MODELLING</div>
       <h3>Strava + Garmin Training Analytics</h3>
-      <p>End-to-end data pipeline ingesting heart rate streams from the Strava and Garmin Connect APIs. Computes hrTSS per activity using the Banister/Coggan ATL·CTL·TSB model, applies EMA filtering, stores as JSON, and serves a live dashboard — the same model behind Garmin Training Status and Strava Fitness &amp; Freshness.</p>
+      <p>End-to-end data science project ingesting heart rate streams from the Strava and Garmin Connect APIs. Computes hrTSS per activity using the Banister/Coggan ATL·CTL·TSB model, applies EMA smoothing, and serves a live interactive dashboard — the same physiological model behind Garmin Training Status and Strava Fitness &amp; Freshness.</p>
       <div class="proj-chips">
         <span class="chip">Python</span>
         <span class="chip">REST APIs</span>
         <span class="chip">Time-series</span>
-        <span class="chip">EMA filtering</span>
-        <span class="chip">JSON storage</span>
+        <span class="chip">EMA smoothing</span>
+        <span class="chip">Physiological modelling</span>
         <span class="chip">GitHub Actions</span>
       </div>
       <span class="proj-tag">View live dashboard →</span>
     </a>
     <a href="https://github.com/tristanlismerphd/higher_order_interference" target="_blank" rel="noopener" class="proj-card fade">
-      <div class="proj-num">02 / PIPELINE · HPC · STATISTICAL MODELLING</div>
-      <h3>GPT Rank Sweep — Quantum Data Pipeline</h3>
-      <p>Built a cross-validated bilinear ALS fitting pipeline that processes 1296-file experimental datasets, distributes jobs across Compute Canada via SLURM, and extracts the dimensionality of quantum state spaces from raw photon-count data. No assumed model — the data determines the answer.</p>
+      <div class="proj-num">02 / STATISTICAL MODELLING · ML · HPC</div>
+      <h3>GPT Rank Sweep — Dimensionality of Quantum State Spaces</h3>
+      <p>Built a cross-validated bilinear ALS fitting pipeline that processes 1296-file experimental datasets, distributes jobs across Compute Canada via SLURM, and infers the dimensionality of quantum state spaces from raw photon-count data. Pure data-driven inference — no assumed model, the data determines the answer.</p>
       <div class="proj-chips">
         <span class="chip">Python</span>
         <span class="chip">NumPy / SciPy</span>
-        <span class="chip">SLURM / HPC</span>
+        <span class="chip">scikit-learn</span>
         <span class="chip">Cross-validation</span>
         <span class="chip">joblib</span>
-        <span class="chip">Statistical modelling</span>
+        <span class="chip">SLURM / HPC</span>
       </div>
       <span class="proj-tag">View on GitHub →</span>
     </a>
     <div class="proj-card fade" style="border-top:1px solid var(--border);">
-      <div class="proj-num">03 / IN PROGRESS · AWS</div>
-      <h3>Cloud Data Infrastructure</h3>
-      <p>Currently building on AWS — learning the core DE stack: S3 for storage, Lambda for event-driven ingestion, and IAM/VPC fundamentals. Goal: migrate local JSON pipelines to a proper cloud architecture with automated refresh.</p>
+      <div class="proj-num">03 / IN PROGRESS · ML</div>
+      <h3>Machine Learning Project</h3>
+      <p>Currently building out a supervised learning project to complement the statistical modelling work above. Exploring scikit-learn pipelines, feature engineering, and model evaluation — bridging the gap between physics-style inference and industry ML workflows.</p>
       <div class="proj-chips">
-        <span class="chip">AWS S3</span>
-        <span class="chip">AWS Lambda</span>
-        <span class="chip">IAM</span>
+        <span class="chip">scikit-learn</span>
+        <span class="chip">Pandas</span>
+        <span class="chip">Feature engineering</span>
         <span class="chip">In progress</span>
       </div>
       <span class="proj-tag" style="color:var(--muted);">Coming soon</span>
     </div>
     <div class="proj-card fade" style="background:var(--bg2);display:flex;flex-direction:column;justify-content:center;align-items:center;border-top:1px solid var(--border);">
       <div style="font-size:2.5rem;color:var(--border);margin-bottom:1rem;font-weight:700;">+</div>
-      <p style="font-size:.8rem;color:var(--muted);text-align:center;line-height:1.8;max-width:240px;">More in the pipeline. New projects as AWS work progresses.</p>
+      <p style="font-size:.8rem;color:var(--muted);text-align:center;line-height:1.8;max-width:240px;">More in the pipeline. New projects as ML work progresses.</p>
     </div>
   </div>
 </div>
@@ -307,22 +307,23 @@
     <div class="skills-grid">
       <div>
         <div class="skill-group fade">
-          <div class="skill-group-lbl">Data Engineering</div>
+          <div class="skill-group-lbl">Data Science &amp; Analysis</div>
           <div class="skill-chips">
             <span class="chip">Python</span>
             <span class="chip">SQL</span>
-            <span class="chip">REST API ingestion</span>
-            <span class="chip">ETL pipelines</span>
-            <span class="chip">Time-series modelling</span>
-            <span class="chip">EMA / signal processing</span>
+            <span class="chip">Statistical modelling</span>
+            <span class="chip">Machine learning</span>
+            <span class="chip">Time-series analysis</span>
             <span class="chip">Cross-validation</span>
+            <span class="chip">Experimental design</span>
+            <span class="chip">Data visualisation</span>
           </div>
         </div>
         <div class="skill-group fade">
-          <div class="skill-group-lbl">Cloud &amp; Infrastructure</div>
+          <div class="skill-group-lbl">Infrastructure &amp; Tooling</div>
           <div class="skill-chips">
-            <span class="chip">AWS S3</span>
-            <span class="chip">AWS Lambda</span>
+            <span class="chip">REST API ingestion</span>
+            <span class="chip">ETL pipelines</span>
             <span class="chip">SLURM / HPC</span>
             <span class="chip">Compute Canada</span>
             <span class="chip">GitHub Actions</span>
@@ -332,23 +333,22 @@
       </div>
       <div>
         <div class="skill-group fade">
-          <div class="skill-group-lbl">Languages &amp; Libraries</div>
+          <div class="skill-group-lbl">Libraries &amp; Frameworks</div>
           <div class="skill-chips">
-            <span class="chip">Python</span>
-            <span class="chip">SQL</span>
-            <span class="chip">NumPy / SciPy</span>
+            <span class="chip">scikit-learn</span>
             <span class="chip">Pandas</span>
-            <span class="chip">joblib</span>
+            <span class="chip">NumPy / SciPy</span>
             <span class="chip">matplotlib</span>
             <span class="chip">Chart.js</span>
+            <span class="chip">joblib</span>
             <span class="chip">LaTeX</span>
           </div>
         </div>
         <div class="skill-group fade">
           <div class="skill-group-lbl">Scientific &amp; Domain</div>
           <div class="skill-chips">
-            <span class="chip">Statistical modelling</span>
-            <span class="chip">Experimental design</span>
+            <span class="chip">Bayesian inference</span>
+            <span class="chip">Signal processing</span>
             <span class="chip">Sensor data (Garmin / Strava)</span>
             <span class="chip">LabVIEW</span>
             <span class="chip">Mathematica</span>
@@ -374,13 +374,13 @@
       <div class="r-card fade">
         <div class="r-num">PhD · COMPUTATIONAL</div>
         <h3>GPT Rank Fitting Pipeline</h3>
-        <p>Designed and built a distributed ALS fitting pipeline from scratch — job scheduling, cross-validation, parallelism via joblib and SLURM. Every piece of infrastructure was custom. That's what a data engineer does.</p>
+        <p>Designed and built a distributed ALS fitting pipeline from scratch — cross-validation, parallelism via joblib and SLURM, data-driven dimensionality inference. Every modelling decision was grounded in statistics. That's what a data scientist does.</p>
         <span class="r-tag">HPC · Statistical Modelling</span>
       </div>
       <div class="r-card fade">
         <div class="r-num">PhD · THEORETICAL</div>
         <h3>Trichotomy Theorem</h3>
-        <p>Proved a classification theorem for Generalised Probabilistic Theories. The ability to reason carefully about abstract systems and constraints translates directly to data modelling and schema design.</p>
+        <p>Proved a classification theorem for Generalised Probabilistic Theories. Reasoning carefully about abstract systems and constraints translates directly to data modelling, hypothesis testing, and knowing when a result is real versus an artefact.</p>
         <span class="r-tag">GPT Framework · Mathematical Rigour</span>
       </div>
       <div class="r-card fade">
@@ -461,7 +461,7 @@
     <div class="contact-grid">
       <div class="fade">
         <div class="open-badge">Open to roles · Vancouver &amp; Calgary</div>
-        <p class="contact-lede">Looking for data engineering roles in Vancouver or Calgary. I bring scientific precision to data systems — if you're building pipelines, platforms, or anything that turns messy raw data into something useful, reach out.</p>
+        <p class="contact-lede">Looking for data science roles in Vancouver or Calgary. I bring a physicist's rigour to analysis and modelling — if you're looking for someone who can find real signal in messy data, build statistically sound models, and communicate results clearly, reach out.</p>
         <div class="contact-email">tlismer@uwaterloo.ca</div>
       </div>
       <div class="quote-box fade">
@@ -474,7 +474,7 @@
 
 <footer>
   <span>© 2026 Tristan Lismer</span>
-  <span>Data Engineer · IQC Waterloo</span>
+  <span>Data Scientist · IQC Waterloo</span>
 </footer>
 
 <script>
