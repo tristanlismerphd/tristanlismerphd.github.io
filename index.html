@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tristan Lismer — Data Scientist</title>
+  <title>Tristan Lismer — Quantum Researcher</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet"/>
   <style>
@@ -15,7 +15,7 @@
       --border: rgba(255,255,255,0.07);
       --text:   #eaeaf2;
       --muted:  rgba(234,234,242,0.45);
-      --accent: #f5a623;
+      --accent: #a78bfa;
       --blue:   #48cae4;
       --green:  #52d68a;
     }
@@ -52,12 +52,12 @@
     }
     .hero-left::before {
       content: ''; position: absolute; inset: 0; z-index: -1;
-      background-image: radial-gradient(circle, rgba(255,255,255,.02) 1px, transparent 1px);
+      background-image: radial-gradient(circle, rgba(167,139,250,.03) 1px, transparent 1px);
       background-size: 28px 28px;
     }
     .hero-glow {
       position: absolute; top: 10%; left: -20%; width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(245,166,35,.05) 0%, transparent 65%);
+      background: radial-gradient(circle, rgba(167,139,250,.06) 0%, transparent 65%);
       pointer-events: none; z-index: -1;
     }
     .hero-right { position: relative; }
@@ -94,7 +94,7 @@
       padding: .65rem 1.5rem; transition: all .2s; border: none; cursor: pointer;
     }
     .btn-primary { background: var(--accent); color: var(--bg); }
-    .btn-primary:hover { background: #ffc04a; transform: translateY(-2px); }
+    .btn-primary:hover { background: #c4b5fd; transform: translateY(-2px); }
     .btn-ghost { border: 1px solid var(--border); color: var(--muted); }
     .btn-ghost:hover { border-color: rgba(255,255,255,.25); color: var(--text); transform: translateY(-2px); }
 
@@ -127,7 +127,7 @@
     .proj-card p { font-size: .8rem; color: var(--muted); line-height: 1.82; }
     .proj-chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: 1rem; }
     .proj-tag { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1.2rem; font-size: .63rem; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); }
-    .proj-tag::before { content: '→'; }
+    .proj-tag::before { content: '&#x2192;'; }
 
     /* SKILLS */
     #skills { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
@@ -136,7 +136,7 @@
     .skill-group-lbl { font-size: .63rem; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; margin-bottom: .7rem; }
     .skill-chips { display: flex; flex-wrap: wrap; gap: .35rem; }
     .chip { font-size: .7rem; padding: .22rem .7rem; border: 1px solid var(--border); color: var(--muted); transition: border-color .2s, color .2s, background .2s; }
-    .chip:hover { border-color: rgba(245,166,35,.4); color: var(--accent); background: rgba(245,166,35,.04); }
+    .chip:hover { border-color: rgba(167,139,250,.4); color: var(--accent); background: rgba(167,139,250,.04); }
 
     /* BACKGROUND */
     .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
@@ -155,10 +155,10 @@
     .r-card h3 { font-size: .95rem; font-weight: 600; margin-bottom: .6rem; line-height: 1.35; }
     .r-card p { font-size: .8rem; color: var(--muted); line-height: 1.82; }
     .r-tag { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1.2rem; font-size: .63rem; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); }
-    .r-tag::before { content: '→'; }
+    .r-tag::before { content: '&#x2192;'; }
 
     /* PERSONAL */
-    .personal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+    .personal-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); }
     .p-card { background: var(--bg); padding: 1.2rem 1.4rem; transition: background .2s; display: flex; flex-direction: column; gap: .25rem; }
     .p-card:hover { background: var(--bg2); }
     .p-big { font-size: 1.6rem; font-weight: 600; line-height: 1; color: var(--text); }
@@ -218,12 +218,11 @@
 <nav id="nav">
   <a href="#hero" class="nav-name">Tristan Lismer</a>
   <ul class="nav-links">
-    <li><a href="#projects">Projects</a></li>
+    <li><a href="#projects">Research</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#background">Background</a></li>
-    <li><a href="/personal.html">Personal</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><span class="nav-open">Open to roles</span></li>
+    <li><span class="nav-open">Open to quantum roles</span></li>
   </ul>
 </nav>
 
@@ -231,10 +230,10 @@
 <div id="hero">
   <div class="hero-left">
     <div class="hero-glow"></div>
-    <p class="hero-eyebrow">Data Scientist · PhD Candidate · Institute for Quantum Computing</p>
-    <h1>Finding <em>signal</em> in noise with scientific rigour.</h1>
+    <p class="hero-eyebrow">Quantum Optics &middot; Foundations of Quantum Theory &middot; IQC Waterloo</p>
+    <h1>Testing what <em>quantum mechanics</em> actually predicts.</h1>
     <p class="hero-sub">
-      I'm a fourth-year PhD physicist transitioning into data science. I turn complex, messy datasets into clear insight — statistical modelling, machine learning, and interactive dashboards — with the same precision I apply to quantum experiments. Based in Waterloo, open to roles in Vancouver and Calgary.
+      Fourth-year PhD physicist at the Institute for Quantum Computing. I design and operate precision photonic interferometers at the single-photon level, build rigorous statistical pipelines to analyse quantum experiment data, and prove theorems about the structure of quantum state spaces. Looking to bring deep experimental and theoretical quantum expertise to industry.
     </p>
     <div class="hero-actions">
       <a href="#projects" class="btn btn-primary">See My Work</a>
@@ -249,52 +248,62 @@
 
 <!-- PROJECTS -->
 <div class="wrap" id="projects">
-  <p class="s-label fade">Projects</p>
-  <h2 class="fade">What I've built.</h2>
+  <p class="s-label fade">Research &amp; Projects</p>
+  <h2 class="fade">What I work on.</h2>
   <div class="proj-grid">
-    <a href="/personal.html" class="proj-card fade">
-      <div class="proj-num">01 / DATA SCIENCE · TIME-SERIES · MODELLING</div>
-      <h3>Strava + Garmin Training Analytics</h3>
-      <p>End-to-end data science project ingesting heart rate streams from the Strava and Garmin Connect APIs. Computes hrTSS per activity using the Banister/Coggan ATL·CTL·TSB model, applies EMA smoothing, and serves a live interactive dashboard — the same physiological model behind Garmin Training Status and Strava Fitness &amp; Freshness.</p>
-      <div class="proj-chips">
-        <span class="chip">Python</span>
-        <span class="chip">REST APIs</span>
-        <span class="chip">Time-series</span>
-        <span class="chip">EMA smoothing</span>
-        <span class="chip">Physiological modelling</span>
-        <span class="chip">GitHub Actions</span>
-      </div>
-      <span class="proj-tag">View live dashboard →</span>
-    </a>
     <a href="https://github.com/tristanlismerphd/higher_order_interference" target="_blank" rel="noopener" class="proj-card fade">
-      <div class="proj-num">02 / STATISTICAL MODELLING · ML · HPC</div>
-      <h3>GPT Rank Sweep — Dimensionality of Quantum State Spaces</h3>
-      <p>Built a cross-validated bilinear ALS fitting pipeline that processes 1296-file experimental datasets, distributes jobs across Compute Canada via SLURM, and infers the dimensionality of quantum state spaces from raw photon-count data. Pure data-driven inference — no assumed model, the data determines the answer.</p>
+      <div class="proj-num">01 / QUANTUM FOUNDATIONS &middot; STATISTICAL MODELLING &middot; HPC</div>
+      <h3>GPT Rank Sweep &mdash; Dimensionality of Quantum State Spaces</h3>
+      <p>A data-driven test of Born&rsquo;s rule: does a 4-slit interference dataset require the full n&sup2;&minus;1&nbsp;=&nbsp;15 dimensional state space quantum mechanics predicts? Built a cross-validated bilinear ALS fitting pipeline processing 1296-file experimental datasets, distributed across Compute Canada via SLURM. No assumed model &mdash; the data determines the answer.</p>
       <div class="proj-chips">
         <span class="chip">Python</span>
         <span class="chip">NumPy / SciPy</span>
-        <span class="chip">scikit-learn</span>
+        <span class="chip">ALS fitting</span>
         <span class="chip">Cross-validation</span>
         <span class="chip">joblib</span>
         <span class="chip">SLURM / HPC</span>
       </div>
-      <span class="proj-tag">View on GitHub →</span>
+      <span class="proj-tag">View on GitHub</span>
     </a>
-    <div class="proj-card fade" style="border-top:1px solid var(--border);">
-      <div class="proj-num">03 / IN PROGRESS · ML</div>
-      <h3>Machine Learning Project</h3>
-      <p>Currently building out a supervised learning project to complement the statistical modelling work above. Exploring scikit-learn pipelines, feature engineering, and model evaluation — bridging the gap between physics-style inference and industry ML workflows.</p>
+    <div class="proj-card fade">
+      <div class="proj-num">02 / EXPERIMENTAL QUANTUM OPTICS &middot; PHOTONICS</div>
+      <h3>4-Slit Photonic Interferometer &mdash; Testing Born&rsquo;s Rule</h3>
+      <p>Designed and built a precision 4-rail photonic interferometer to measure the Sorkin parameter I&sub;3&sub; &mdash; a direct test of whether quantum mechanics produces higher-order interference terms. Operating at the single-photon level with an emICCD camera, phase controllers, and 1024&times;1024-pixel detection. 16 shutter configurations &times; 81 phase combinations per dataset.</p>
       <div class="proj-chips">
-        <span class="chip">scikit-learn</span>
-        <span class="chip">Pandas</span>
-        <span class="chip">Feature engineering</span>
-        <span class="chip">In progress</span>
+        <span class="chip">Quantum optics</span>
+        <span class="chip">Single-photon detection</span>
+        <span class="chip">emICCD</span>
+        <span class="chip">Optical alignment</span>
+        <span class="chip">LabVIEW</span>
+        <span class="chip">Phase control</span>
       </div>
-      <span class="proj-tag" style="color:var(--muted);">Coming soon</span>
+      <span class="proj-tag" style="color:var(--muted);">Experimental apparatus</span>
     </div>
-    <div class="proj-card fade" style="background:var(--bg2);display:flex;flex-direction:column;justify-content:center;align-items:center;border-top:1px solid var(--border);">
-      <div style="font-size:2.5rem;color:var(--border);margin-bottom:1rem;font-weight:700;">+</div>
-      <p style="font-size:.8rem;color:var(--muted);text-align:center;line-height:1.8;max-width:240px;">More in the pipeline. New projects as ML work progresses.</p>
+    <div class="proj-card fade" style="border-top:1px solid var(--border);">
+      <div class="proj-num">03 / QUANTUM FOUNDATIONS &middot; THEORY</div>
+      <h3>Trichotomy Theorem &mdash; Classification of Probabilistic Theories</h3>
+      <p>Proved a classification theorem for Generalised Probabilistic Theories (GPTs): a complete characterisation of how operational theories can assign probabilities to measurement outcomes. The result constrains what physical theories &mdash; beyond quantum mechanics &mdash; are self-consistent. Reasoning about abstract physical systems at this level translates directly to knowing when experimental evidence is actually decisive.</p>
+      <div class="proj-chips">
+        <span class="chip">GPT framework</span>
+        <span class="chip">Quantum foundations</span>
+        <span class="chip">State space geometry</span>
+        <span class="chip">Proof</span>
+        <span class="chip">Mathematica</span>
+      </div>
+      <span class="proj-tag" style="color:var(--muted);">Theory &mdash; in preparation</span>
+    </div>
+    <div class="proj-card fade" style="border-top:1px solid var(--border);">
+      <div class="proj-num">04 / SCIENTIFIC SOFTWARE &middot; TOOLING</div>
+      <h3>Scientific Computing &amp; Data Infrastructure</h3>
+      <p>Beyond the main research: an interactive physics equation solver covering optics, quantum mechanics, relativity, and thermodynamics (accepts unit-tagged inputs like 532&nbsp;nm, 2.5&nbsp;eV); automated data pipelines with GitHub Actions; and HPC job orchestration for large experimental datasets on Compute Canada clusters.</p>
+      <div class="proj-chips">
+        <span class="chip">Python</span>
+        <span class="chip">GitHub Actions</span>
+        <span class="chip">ETL pipelines</span>
+        <span class="chip">REST APIs</span>
+        <span class="chip">Compute Canada</span>
+      </div>
+      <span class="proj-tag">View physics solver on GitHub</span>
     </div>
   </div>
 </div>
@@ -307,50 +316,55 @@
     <div class="skills-grid">
       <div>
         <div class="skill-group fade">
-          <div class="skill-group-lbl">Data Science &amp; Analysis</div>
+          <div class="skill-group-lbl">Quantum &amp; Photonics</div>
+          <div class="skill-chips">
+            <span class="chip">Quantum optics</span>
+            <span class="chip">Photonic interferometry</span>
+            <span class="chip">Single-photon detection</span>
+            <span class="chip">emICCD imaging</span>
+            <span class="chip">Optical alignment</span>
+            <span class="chip">Phase control optics</span>
+            <span class="chip">Beam splitter networks</span>
+            <span class="chip">LabVIEW</span>
+          </div>
+        </div>
+        <div class="skill-group fade">
+          <div class="skill-group-lbl">Quantum Theory</div>
+          <div class="skill-chips">
+            <span class="chip">GPT framework</span>
+            <span class="chip">Quantum foundations</span>
+            <span class="chip">State space geometry</span>
+            <span class="chip">Born&rsquo;s rule</span>
+            <span class="chip">Sorkin parameter</span>
+            <span class="chip">Higher-order interference</span>
+            <span class="chip">Quantum information</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group fade">
+          <div class="skill-group-lbl">Data &amp; Computation</div>
           <div class="skill-chips">
             <span class="chip">Python</span>
-            <span class="chip">SQL</span>
+            <span class="chip">NumPy / SciPy</span>
             <span class="chip">Statistical modelling</span>
-            <span class="chip">Machine learning</span>
-            <span class="chip">Time-series analysis</span>
             <span class="chip">Cross-validation</span>
-            <span class="chip">Experimental design</span>
+            <span class="chip">Bilinear ALS fitting</span>
+            <span class="chip">Signal processing</span>
+            <span class="chip">Bayesian inference</span>
             <span class="chip">Data visualisation</span>
           </div>
         </div>
         <div class="skill-group fade">
           <div class="skill-group-lbl">Infrastructure &amp; Tooling</div>
           <div class="skill-chips">
-            <span class="chip">REST API ingestion</span>
-            <span class="chip">ETL pipelines</span>
             <span class="chip">SLURM / HPC</span>
             <span class="chip">Compute Canada</span>
             <span class="chip">GitHub Actions</span>
-            <span class="chip">Git</span>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="skill-group fade">
-          <div class="skill-group-lbl">Libraries &amp; Frameworks</div>
-          <div class="skill-chips">
             <span class="chip">scikit-learn</span>
             <span class="chip">Pandas</span>
-            <span class="chip">NumPy / SciPy</span>
             <span class="chip">matplotlib</span>
-            <span class="chip">Chart.js</span>
-            <span class="chip">joblib</span>
             <span class="chip">LaTeX</span>
-          </div>
-        </div>
-        <div class="skill-group fade">
-          <div class="skill-group-lbl">Scientific &amp; Domain</div>
-          <div class="skill-chips">
-            <span class="chip">Bayesian inference</span>
-            <span class="chip">Signal processing</span>
-            <span class="chip">Sensor data (Garmin / Strava)</span>
-            <span class="chip">LabVIEW</span>
             <span class="chip">Mathematica</span>
           </div>
         </div>
@@ -366,28 +380,28 @@
     <h2 class="fade">Where the rigour comes from.</h2>
     <div class="research-grid">
       <div class="r-card fade">
-        <div class="r-num">PhD · EXPERIMENTAL</div>
-        <h3>Testing Born's Rule — 4-Slit Interferometer</h3>
-        <p>Built a precision photonic experiment to measure the Sorkin parameter I₃. Managing terabytes of camera data across 1296 experimental configurations per dataset — cleaning, normalising, fitting — is what taught me that data quality is everything.</p>
-        <span class="r-tag">Quantum Foundations · Photonics</span>
+        <div class="r-num">PhD &middot; EXPERIMENTAL</div>
+        <h3>4-Slit Interferometer &mdash; Testing Born&rsquo;s Rule</h3>
+        <p>Built a precision photonic experiment to measure the Sorkin parameter I&sub;3&sub;. Managing terabytes of emICCD camera data across 1296 experimental configurations per dataset &mdash; cleaning, normalising, fitting &mdash; is what taught me that measurement precision and data quality are inseparable.</p>
+        <span class="r-tag">Quantum Foundations &middot; Photonics</span>
       </div>
       <div class="r-card fade">
-        <div class="r-num">PhD · COMPUTATIONAL</div>
+        <div class="r-num">PhD &middot; COMPUTATIONAL</div>
         <h3>GPT Rank Fitting Pipeline</h3>
-        <p>Designed and built a distributed ALS fitting pipeline from scratch — cross-validation, parallelism via joblib and SLURM, data-driven dimensionality inference. Every modelling decision was grounded in statistics. That's what a data scientist does.</p>
-        <span class="r-tag">HPC · Statistical Modelling</span>
+        <p>Designed and built a distributed ALS fitting pipeline from scratch &mdash; cross-validation, parallelism via joblib and SLURM, data-driven dimensionality inference. Every modelling decision grounded in statistics. The pipeline processes experimental quantum data and infers state space structure without assuming a model.</p>
+        <span class="r-tag">HPC &middot; Statistical Modelling</span>
       </div>
       <div class="r-card fade">
-        <div class="r-num">PhD · THEORETICAL</div>
+        <div class="r-num">PhD &middot; THEORETICAL</div>
         <h3>Trichotomy Theorem</h3>
-        <p>Proved a classification theorem for Generalised Probabilistic Theories. Reasoning carefully about abstract systems and constraints translates directly to data modelling, hypothesis testing, and knowing when a result is real versus an artefact.</p>
-        <span class="r-tag">GPT Framework · Mathematical Rigour</span>
+        <p>Proved a classification theorem for Generalised Probabilistic Theories. Working at the foundations of quantum theory &mdash; understanding which mathematical structures are physically admissible &mdash; gives a sharp sense for when experimental results are actually decisive versus when they leave room for alternative explanations.</p>
+        <span class="r-tag">GPT Framework &middot; Quantum Foundations</span>
       </div>
       <div class="r-card fade">
-        <div class="r-num">INTERNSHIPS · 2019–2022</div>
+        <div class="r-num">INTERNSHIPS &middot; 2019&ndash;2022</div>
         <h3>Research Scientist Roles</h3>
-        <p>Three summers at federal research agencies (Canadian Nuclear Safety Commission, Natural Resources Canada) — collecting, cleaning, and analysing scientific datasets in real operational environments.</p>
-        <span class="r-tag">Applied Research · Data Analysis</span>
+        <p>Three summers at federal research agencies (Canadian Nuclear Safety Commission, Natural Resources Canada) &mdash; collecting, cleaning, and analysing scientific datasets in real operational environments. Bridging rigorous scientific methodology with practical delivery.</p>
+        <span class="r-tag">Applied Research &middot; Data Analysis</span>
       </div>
     </div>
   </div>
@@ -396,25 +410,19 @@
 <!-- PERSONAL -->
 <div class="wrap" id="personal">
   <p class="s-label fade">Personal</p>
-  <h2 class="fade">Beyond the lab.</h2>
+  <h2 class="fade">Outside the lab.</h2>
   <div class="personal-grid">
     <div class="p-card fade">
       <div class="p-big">226 km</div>
       <div class="p-unit">Ironman Finisher</div>
-      <h3>3.8 swim · 180 bike · 42.2 run</h3>
-      <p>Both involve a lot of suffering and a stubborn refusal to stop.</p>
+      <h3>3.8 swim &middot; 180 bike &middot; 42.2 run</h3>
+      <p>The same obsessive attention to signal-to-noise that runs experiments also runs training blocks.</p>
     </div>
     <div class="p-card fade">
       <div class="p-big">80K</div>
-      <div class="p-unit">Ultra Runner — in training</div>
-      <h3>Bromont 80K · Oct 2026</h3>
-      <p>Because apparently an Ironman wasn't a strong enough signal that I enjoy suffering.</p>
-    </div>
-    <div class="p-card fade" style="cursor:pointer;" onclick="window.location='/personal.html'">
-      <div class="p-big" style="font-size:1.1rem;color:var(--accent);">Training Data →</div>
-      <div class="p-unit">Live dashboard</div>
-      <h3>PMC · Garmin · Strava</h3>
-      <p>Full training analytics — fitness, fatigue, form, sleep, HRV, activity heatmap.</p>
+      <div class="p-unit">Ultra Runner &mdash; in training</div>
+      <h3>Bromont 80K &middot; Oct 2026</h3>
+      <p>Because apparently an Ironman wasn&rsquo;t a strong enough signal that I enjoy suffering.</p>
     </div>
   </div>
 </div>
@@ -427,13 +435,13 @@
     <div class="tl fade">
       <div class="tl-entry">
         <div class="tl-dot"></div>
-        <div class="tl-year">2022 — Present</div>
-        <div class="tl-title">PhD Candidate · Quantum Optics &amp; Data Systems</div>
+        <div class="tl-year">2022 &mdash; Present</div>
+        <div class="tl-title">PhD Candidate &middot; Quantum Optics &amp; Foundations</div>
         <div class="tl-sub">Institute for Quantum Computing, University of Waterloo</div>
       </div>
       <div class="tl-entry">
         <div class="tl-dot muted"></div>
-        <div class="tl-year muted">Summer 2020 · 2021 · 2022</div>
+        <div class="tl-year muted">Summer 2020 &middot; 2021 &middot; 2022</div>
         <div class="tl-title">Research Scientist (Intern)</div>
         <div class="tl-sub">Canadian Nuclear Safety Commission</div>
       </div>
@@ -445,9 +453,9 @@
       </div>
       <div class="tl-entry">
         <div class="tl-dot muted"></div>
-        <div class="tl-year muted">2018 — 2022</div>
+        <div class="tl-year muted">2018 &mdash; 2022</div>
         <div class="tl-title">BScH Astrophysics</div>
-        <div class="tl-sub">Queen's University, Kingston</div>
+        <div class="tl-sub">Queen&rsquo;s University, Kingston</div>
       </div>
     </div>
   </div>
@@ -457,24 +465,24 @@
 <div id="contact">
   <div class="wrap">
     <p class="s-label fade">Contact</p>
-    <h2 class="fade">Let's talk.</h2>
+    <h2 class="fade">Let&rsquo;s talk.</h2>
     <div class="contact-grid">
       <div class="fade">
-        <div class="open-badge">Open to roles · Vancouver &amp; Calgary</div>
-        <p class="contact-lede">Looking for data science roles in Vancouver or Calgary. I bring a physicist's rigour to analysis and modelling — if you're looking for someone who can find real signal in messy data, build statistically sound models, and communicate results clearly, reach out.</p>
+        <div class="open-badge">Open to quantum industry roles</div>
+        <p class="contact-lede">Looking for roles at quantum computing companies, photonics hardware startups, and quantum software teams. I bring deep experimental quantum optics expertise, a strong theoretical foundation in quantum state spaces, and the data analysis skills to extract real results from real hardware. If you&rsquo;re building something in the quantum stack, reach out.</p>
         <div class="contact-email">tlismer@uwaterloo.ca</div>
       </div>
       <div class="quote-box fade">
-        <blockquote>"It's the questions we can't answer that teach us the most."</blockquote>
-        <cite>— Patrick Rothfuss, The Name of the Wind</cite>
+        <blockquote>&ldquo;If quantum mechanics hasn&rsquo;t profoundly shocked you, you haven&rsquo;t understood it yet.&rdquo;</blockquote>
+        <cite>&mdash; Niels Bohr</cite>
       </div>
     </div>
   </div>
 </div>
 
 <footer>
-  <span>© 2026 Tristan Lismer</span>
-  <span>Data Scientist · IQC Waterloo</span>
+  <span>&copy; 2026 Tristan Lismer</span>
+  <span>Quantum Researcher &middot; IQC Waterloo</span>
 </footer>
 
 <script>
