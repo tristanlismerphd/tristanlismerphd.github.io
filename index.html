@@ -255,7 +255,7 @@
     <a href="https://github.com/tristanlismerphd/higher_order_interference" target="_blank" rel="noopener" class="proj-card fade">
       <div class="proj-num">01 / QUANTUM FOUNDATIONS &middot; STATISTICAL MODELLING &middot; HPC</div>
       <h3>GPT Rank Sweep &mdash; Dimensionality of Quantum State Spaces</h3>
-      <p>A data-driven test of Born&rsquo;s rule: does a 4-slit interference dataset require the full n&sup2;&minus;1&nbsp;=&nbsp;15 dimensional state space quantum mechanics predicts? Built a cross-validated bilinear ALS fitting pipeline processing 1296-file experimental datasets, distributed across Compute Canada via SLURM. No assumed model &mdash; the data determines the answer.</p>
+      <p>A data-driven test of Born&rsquo;s rule: does a 4-slit interference dataset require the full n&sup2;&minus;1&nbsp;=&nbsp;15 dimensional state space quantum mechanics predicts? Built a cross-validated bilinear ALS fitting pipeline processing 1296-file experimental datasets, distributed across Compute Canada via SLURM. No assumed model &mdash; the rank of the data determines the answer. The GPT framework used here extends naturally to continuous-variable systems, including bosonic modes relevant to photonic quantum computing.</p>
       <div class="proj-chips">
         <span class="chip">Python</span>
         <span class="chip">NumPy / SciPy</span>
@@ -269,7 +269,7 @@
     <div class="proj-card fade">
       <div class="proj-num">02 / EXPERIMENTAL QUANTUM OPTICS &middot; PHOTONICS</div>
       <h3>4-Slit Photonic Interferometer &mdash; Testing Born&rsquo;s Rule</h3>
-      <p>Designed and built a precision 4-rail photonic interferometer to measure the Sorkin parameter I&sub;3&sub; &mdash; a direct test of whether quantum mechanics produces higher-order interference terms. Operating at the single-photon level with an emICCD camera, phase controllers, and 1024&times;1024-pixel detection. 16 shutter configurations &times; 81 phase combinations per dataset.</p>
+      <p>Designed and built a precision 4-rail photonic interferometer to measure the Sorkin parameter I&sub;3&sub; &mdash; a direct test of whether quantum mechanics produces higher-order interference terms. Operating at the single-photon level with an emICCD camera, phase controllers, and 1024&times;1024-pixel detection. 16 shutter configurations &times; 81 phase combinations per dataset. The controlled single-photon routing and detection at the core of this experiment is the same primitive that underlies photonic quantum processors and quantum networking nodes.</p>
       <div class="proj-chips">
         <span class="chip">Quantum optics</span>
         <span class="chip">Single-photon detection</span>
@@ -283,12 +283,12 @@
     <div class="proj-card fade" style="border-top:1px solid var(--border);">
       <div class="proj-num">03 / QUANTUM FOUNDATIONS &middot; THEORY</div>
       <h3>Trichotomy Theorem &mdash; Classification of Probabilistic Theories</h3>
-      <p>Proved a classification theorem for Generalised Probabilistic Theories (GPTs): a complete characterisation of how operational theories can assign probabilities to measurement outcomes. The result constrains what physical theories &mdash; beyond quantum mechanics &mdash; are self-consistent. Reasoning about abstract physical systems at this level translates directly to knowing when experimental evidence is actually decisive.</p>
+      <p>Proved a classification theorem for Generalised Probabilistic Theories (GPTs): a complete characterisation of how operational theories can assign probabilities to measurement outcomes. The GPT framework is theory-agnostic by design &mdash; it encompasses discrete-variable, continuous-variable, and bosonic systems equally. The same mathematical structure that underlies this theorem governs bosonic error-correcting codes, making it directly relevant to hardware-level quantum error correction.</p>
       <div class="proj-chips">
         <span class="chip">GPT framework</span>
         <span class="chip">Quantum foundations</span>
         <span class="chip">State space geometry</span>
-        <span class="chip">Proof</span>
+        <span class="chip">Bosonic systems</span>
         <span class="chip">Mathematica</span>
       </div>
       <span class="proj-tag" style="color:var(--muted);">Theory &mdash; in preparation</span>
@@ -326,6 +326,7 @@
             <span class="chip">Optical alignment</span>
             <span class="chip">Phase control optics</span>
             <span class="chip">Beam splitter networks</span>
+            <span class="chip">Quantum networking</span>
             <span class="chip">LabVIEW</span>
           </div>
         </div>
@@ -335,10 +336,11 @@
             <span class="chip">GPT framework</span>
             <span class="chip">Quantum foundations</span>
             <span class="chip">State space geometry</span>
+            <span class="chip">Bosonic modes</span>
+            <span class="chip">Quantum error correction</span>
+            <span class="chip">CV quantum computing</span>
             <span class="chip">Born&rsquo;s rule</span>
-            <span class="chip">Sorkin parameter</span>
             <span class="chip">Higher-order interference</span>
-            <span class="chip">Quantum information</span>
           </div>
         </div>
       </div>
@@ -348,12 +350,12 @@
           <div class="skill-chips">
             <span class="chip">Python</span>
             <span class="chip">NumPy / SciPy</span>
+            <span class="chip">PennyLane</span>
             <span class="chip">Statistical modelling</span>
             <span class="chip">Cross-validation</span>
             <span class="chip">Bilinear ALS fitting</span>
             <span class="chip">Signal processing</span>
             <span class="chip">Bayesian inference</span>
-            <span class="chip">Data visualisation</span>
           </div>
         </div>
         <div class="skill-group fade">
@@ -395,8 +397,8 @@
       <div class="r-card fade">
         <div class="r-num">PhD &middot; THEORETICAL</div>
         <h3>Trichotomy Theorem</h3>
-        <p>Proved a classification theorem for Generalised Probabilistic Theories. Working at the foundations of quantum theory &mdash; understanding which mathematical structures are physically admissible &mdash; gives a sharp sense for when experimental results are actually decisive versus when they leave room for alternative explanations.</p>
-        <span class="r-tag">GPT Framework &middot; Quantum Foundations</span>
+        <p>Proved a classification theorem for Generalised Probabilistic Theories. The GPT framework is technology-stack agnostic &mdash; it applies equally to discrete-variable photonic systems, continuous-variable encodings, and bosonic error-correcting codes. Understanding what any physical theory can and cannot do at this level is what makes experimental results legible.</p>
+        <span class="r-tag">GPT Framework &middot; Bosonic Systems</span>
       </div>
       <div class="r-card fade">
         <div class="r-num">INTERNSHIPS &middot; 2019&ndash;2022</div>
@@ -470,7 +472,7 @@
     <div class="contact-grid">
       <div class="fade">
         <div class="open-badge">Open to quantum industry roles</div>
-        <p class="contact-lede">Looking for roles at quantum computing companies, photonics hardware startups, and quantum software teams. I bring deep experimental quantum optics expertise, a strong theoretical foundation in quantum state spaces, and the data analysis skills to extract real results from real hardware. If you&rsquo;re building something in the quantum stack, reach out.</p>
+        <p class="contact-lede">Looking for roles at photonic quantum computing companies, bosonic and superconducting hardware startups, and quantum software teams. My single-photon photonics experience maps directly onto photonic quantum processors and networking nodes. My GPT and bosonic state space theory connects to quantum error correction at the hardware level. If you&rsquo;re building the quantum stack, reach out.</p>
         <div class="contact-email">tlismer@uwaterloo.ca</div>
       </div>
       <div class="quote-box fade">
