@@ -234,7 +234,7 @@
     <p class="hero-eyebrow">Quantum Optics &middot; Foundations of Quantum Theory &middot; IQC Waterloo</p>
     <h1>Testing what <em>quantum mechanics</em> actually predicts.</h1>
     <p class="hero-sub">
-      Fourth-year PhD physicist at the Institute for Quantum Computing. I design and operate precision photonic interferometers at the single-photon level, build rigorous statistical pipelines to analyse quantum experiment data, and prove theorems about the structure of quantum state spaces. Looking to bring deep experimental and theoretical quantum expertise to industry.
+      Fourth-year PhD physicist at the Institute for Quantum Computing. I design and operate free-space photonic interferometers with entangled photon pairs, build rigorous statistical pipelines to analyse quantum experiment data, and prove theorems about the structure of quantum state spaces. Looking to bring deep experimental and theoretical quantum expertise to industry.
     </p>
     <div class="hero-actions">
       <a href="#projects" class="btn btn-primary">See My Work</a>
@@ -255,7 +255,7 @@
     <a href="https://github.com/tristanlismerphd/higher_order_interference" target="_blank" rel="noopener" class="proj-card fade">
       <div class="proj-num">01 / QUANTUM FOUNDATIONS &middot; STATISTICAL MODELLING &middot; HPC</div>
       <h3>GPT Rank Sweep &mdash; Dimensionality of Quantum State Spaces</h3>
-      <p>A data-driven test of Born&rsquo;s rule: does a 4-slit interference dataset require the full n&sup2;&minus;1&nbsp;=&nbsp;15 dimensional state space quantum mechanics predicts? Built a cross-validated bilinear ALS fitting pipeline processing 1296-file experimental datasets, distributed across Compute Canada via SLURM. No assumed model &mdash; the rank of the data determines the answer. The GPT framework used here extends naturally to continuous-variable systems, including bosonic modes relevant to photonic quantum computing.</p>
+      <p>A data-driven test of Born&rsquo;s rule: does a 4-slit entangled-photon interference dataset require the full n&sup2;&minus;1&nbsp;=&nbsp;15 dimensional state space quantum mechanics predicts? Built a cross-validated bilinear ALS fitting pipeline processing 1296-file experimental datasets, distributed across Compute Canada via SLURM. No assumed model &mdash; the rank of the data determines the answer. The GPT framework used here extends naturally to continuous-variable systems, including bosonic modes relevant to photonic quantum computing.</p>
       <div class="proj-chips">
         <span class="chip">Python</span>
         <span class="chip">NumPy / SciPy</span>
@@ -267,11 +267,12 @@
       <span class="proj-tag">View on GitHub</span>
     </a>
     <div class="proj-card fade">
-      <div class="proj-num">02 / EXPERIMENTAL QUANTUM OPTICS &middot; PHOTONICS</div>
-      <h3>4-Slit Photonic Interferometer &mdash; Testing Born&rsquo;s Rule</h3>
-      <p>Designed and built a precision 4-rail photonic interferometer to measure the Sorkin parameter I&sub;3&sub; &mdash; a direct test of whether quantum mechanics produces higher-order interference terms. Operating at the single-photon level with an emICCD camera, phase controllers, and 1024&times;1024-pixel detection. 16 shutter configurations &times; 81 phase combinations per dataset. The controlled single-photon routing and detection at the core of this experiment is the same primitive that underlies photonic quantum processors and quantum networking nodes.</p>
+      <div class="proj-num">02 / EXPERIMENTAL QUANTUM OPTICS &middot; FREE-SPACE PHOTONICS</div>
+      <h3>4-Slit Free-Space Interferometer with Entangled Photon Pairs</h3>
+      <p>Designed and built a precision 4-rail free-space photonic interferometer using entangled photon pairs to measure the Sorkin parameter I&sub;3&sub; &mdash; a direct test of higher-order interference in quantum mechanics. Operating with an emICCD camera, phase controllers, and 1024&times;1024-pixel detection across 16 shutter configurations &times; 81 phase combinations per dataset. Free-space routing of entangled photons over a controlled optical path is the same core challenge as ground-station reception in satellite QKD.</p>
       <div class="proj-chips">
-        <span class="chip">Quantum optics</span>
+        <span class="chip">Entangled photon pairs</span>
+        <span class="chip">Free-space optics</span>
         <span class="chip">Single-photon detection</span>
         <span class="chip">emICCD</span>
         <span class="chip">Optical alignment</span>
@@ -283,7 +284,7 @@
     <div class="proj-card fade" style="border-top:1px solid var(--border);">
       <div class="proj-num">03 / QUANTUM FOUNDATIONS &middot; THEORY</div>
       <h3>Trichotomy Theorem &mdash; Classification of Probabilistic Theories</h3>
-      <p>Proved a classification theorem for Generalised Probabilistic Theories (GPTs): a complete characterisation of how operational theories can assign probabilities to measurement outcomes. The GPT framework is theory-agnostic by design &mdash; it encompasses discrete-variable, continuous-variable, and bosonic systems equally. The same mathematical structure that underlies this theorem governs bosonic error-correcting codes, making it directly relevant to hardware-level quantum error correction.</p>
+      <p>Proved a classification theorem for Generalised Probabilistic Theories (GPTs): a complete characterisation of how operational theories can assign probabilities to measurement outcomes. The GPT framework is technology-stack agnostic by design &mdash; it encompasses discrete-variable, continuous-variable, and bosonic systems equally. The same mathematical structure that underlies this theorem governs bosonic error-correcting codes, making it directly relevant to hardware-level quantum error correction.</p>
       <div class="proj-chips">
         <span class="chip">GPT framework</span>
         <span class="chip">Quantum foundations</span>
@@ -319,7 +320,8 @@
         <div class="skill-group fade">
           <div class="skill-group-lbl">Quantum &amp; Photonics</div>
           <div class="skill-chips">
-            <span class="chip">Quantum optics</span>
+            <span class="chip">Entangled photon pairs</span>
+            <span class="chip">Free-space quantum optics</span>
             <span class="chip">Photonic interferometry</span>
             <span class="chip">Single-photon detection</span>
             <span class="chip">emICCD imaging</span>
@@ -335,6 +337,7 @@
           <div class="skill-chips">
             <span class="chip">GPT framework</span>
             <span class="chip">Quantum foundations</span>
+            <span class="chip">Entanglement</span>
             <span class="chip">State space geometry</span>
             <span class="chip">Bosonic modes</span>
             <span class="chip">Quantum error correction</span>
@@ -384,9 +387,9 @@
     <div class="research-grid">
       <div class="r-card fade">
         <div class="r-num">PhD &middot; EXPERIMENTAL</div>
-        <h3>4-Slit Interferometer &mdash; Testing Born&rsquo;s Rule</h3>
-        <p>Built a precision photonic experiment to measure the Sorkin parameter I&sub;3&sub;. Managing terabytes of emICCD camera data across 1296 experimental configurations per dataset &mdash; cleaning, normalising, fitting &mdash; is what taught me that measurement precision and data quality are inseparable.</p>
-        <span class="r-tag">Quantum Foundations &middot; Photonics</span>
+        <h3>Free-Space Interferometer with Entangled Photons</h3>
+        <p>Built a precision free-space photonic experiment using entangled photon pairs to measure the Sorkin parameter I&sub;3&sub;. Managing terabytes of emICCD camera data across 1296 experimental configurations &mdash; cleaning, normalising, fitting. Free-space routing and detection of entangled photons at this precision is directly transferable to ground-station receiver design for satellite-based quantum key distribution.</p>
+        <span class="r-tag">Quantum Foundations &middot; Free-Space Photonics &middot; Entanglement</span>
       </div>
       <div class="r-card fade">
         <div class="r-num">PhD &middot; COMPUTATIONAL</div>
@@ -472,7 +475,7 @@
     <div class="contact-grid">
       <div class="fade">
         <div class="open-badge">Open to quantum industry roles</div>
-        <p class="contact-lede">Looking for roles at photonic quantum computing companies, bosonic and superconducting hardware startups, and quantum software teams. My single-photon photonics experience maps directly onto photonic quantum processors and networking nodes. My GPT and bosonic state space theory connects to quantum error correction at the hardware level. If you&rsquo;re building the quantum stack, reach out.</p>
+        <p class="contact-lede">Looking for roles at photonic quantum computing companies, satellite QKD and quantum networking teams, bosonic hardware startups, and quantum software teams. My free-space entangled-photon work maps directly onto photonic quantum processors, ground-station receiver systems, and entanglement distribution links. My GPT and bosonic state space theory connects to quantum error correction at the hardware level. If you&rsquo;re building the quantum stack, reach out.</p>
         <div class="contact-email">tlismer@uwaterloo.ca</div>
       </div>
       <div class="quote-box fade">
