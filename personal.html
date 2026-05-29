@@ -5,85 +5,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tristan Lismer — Personal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:     #07070f;
-      --bg2:    #0d0d1a;
-      --bg3:    #12121f;
-      --border: rgba(255,255,255,0.07);
-      --text:   #eaeaf2;
-      --muted:  rgba(234,234,242,0.45);
-      --accent: #f5a623;
-      --blue:   #48cae4;
-      --green:  #52d68a;
-      --orange: #fb923c;
-      --purple: #a78bfa;
-      --red:    #f87171;
-      --amber:  #fcd34d;
-      --cyan:   #38bdf8;
+      --bg:     #f8f6f2;
+      --bg2:    #f0ede8;
+      --bg3:    #e8e4de;
+      --border: #e2dfd9;
+      --text:   #1c1c1e;
+      --muted:  #6e6e73;
+      --accent: #2c5f8a;
+      --orange: #d4621a;
+      --purple: #7c5cbf;
+      --green:  #2d7a4f;
+      --red:    #c0392b;
+      --cyan:   #1a7a8a;
     }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.7; overflow-x: hidden; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', -apple-system, sans-serif; font-size: 15px; line-height: 1.65; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
     /* NAV */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 1.1rem 3rem;
-      transition: background .3s, border-color .3s;
-      border-bottom: 1px solid transparent;
+      padding: 1.2rem 4rem;
+      background: rgba(248,246,242,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
     }
-    nav.scrolled { background: rgba(7,7,15,.96); border-color: var(--border); backdrop-filter: blur(16px); }
-    .nav-name { font-weight: 600; font-size: .85rem; color: var(--text); text-decoration: none; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: .78rem; transition: color .2s; }
+    .nav-name { font-size: .85rem; font-weight: 600; color: var(--text); text-decoration: none; letter-spacing: .01em; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: .82rem; font-weight: 400; transition: color .15s; }
     .nav-links a:hover, .nav-links a.active { color: var(--text); }
-    .nav-open { display: flex; align-items: center; gap: .45rem; font-size: .72rem; color: var(--green); }
-    .nav-open::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); display: block; box-shadow: 0 0 8px var(--green); animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
-
-    /* SECTIONS */
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; }
-    .s-label {
-      font-size: .67rem; font-weight: 500; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: .8rem;
-      display: flex; align-items: center; gap: .55rem;
-    }
-    .s-label::before { content: '//'; opacity: .35; }
-    h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 600; letter-spacing: -.02em; line-height: 1.1; margin-bottom: 2.5rem; }
+    .nav-cv { font-size: .78rem !important; font-weight: 500 !important; color: var(--accent) !important; border: 1px solid var(--accent); padding: .3rem .85rem; transition: background .15s, color .15s !important; }
+    .nav-cv:hover { background: var(--accent) !important; color: white !important; }
 
     /* PAGE HERO */
-    .page-hero {
-      padding: 10rem 5rem 5rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .page-hero-eyebrow {
-      font-size: .7rem; font-weight: 500; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 1.4rem;
-      display: flex; align-items: center; gap: .6rem;
-    }
-    .page-hero-eyebrow::before { content: '//'; opacity: .35; }
-    .page-hero h1 { font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 600; line-height: 1.1; letter-spacing: -.02em; margin-bottom: 1.2rem; }
-    .page-hero h1 em { color: var(--accent); font-style: normal; }
-    .page-hero p { font-size: .9rem; font-weight: 300; color: var(--muted); max-width: 560px; line-height: 1.9; }
+    .page-hero { padding: 9rem 4rem 4rem; max-width: 1100px; margin: 0 auto; }
+    .page-label { font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+    .page-hero h1 { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2.4rem, 4vw, 3.6rem); font-weight: 600; line-height: 1.1; margin-bottom: 1rem; }
+    .page-hero h1 em { font-style: italic; color: var(--muted); }
+    .page-hero p { font-size: .9rem; font-weight: 300; color: var(--muted); max-width: 520px; line-height: 1.9; }
+
+    /* SECTIONS */
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 5rem 4rem; }
+    .s-label { font-size: .7rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: .9rem; }
+    h2 { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 600; line-height: 1.15; margin-bottom: 2.5rem; color: var(--text); }
 
     /* PB STRIP */
-    .pb-strip { display: grid; grid-template-columns: repeat(7, 1fr); background: var(--border); gap: 1px; margin-bottom: 4rem; }
-    .pb-item { background: var(--bg2); padding: 1.4rem 1.2rem; transition: background .2s; }
-    .pb-item:hover { background: var(--bg3); }
-    .pb-val { font-size: 1.25rem; font-weight: 700; line-height: 1; color: var(--text); letter-spacing: -.01em; }
-    .pb-dist { font-size: .6rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: .4rem; }
-    .pb-lbl { font-size: .62rem; color: var(--muted); margin-top: .2rem; }
+    .pb-strip { display: grid; grid-template-columns: repeat(7, 1fr); border: 1px solid var(--border); margin-bottom: 4rem; }
+    .pb-item { padding: 1.4rem 1.2rem; border-right: 1px solid var(--border); transition: background .15s; }
+    .pb-item:last-child { border-right: none; }
+    .pb-item:hover { background: var(--bg2); }
+    .pb-dist { font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: .4rem; }
+    .pb-val { font-size: 1.2rem; font-weight: 600; line-height: 1; color: var(--text); letter-spacing: -.01em; }
+    .pb-lbl { font-size: .62rem; color: var(--muted); margin-top: .25rem; }
 
     /* YEAR STATS */
-    .sy-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); margin-bottom: 3rem; }
-    .sy-card { background: var(--bg2); padding: 1.6rem 1.8rem; transition: background .2s; }
-    .sy-card:hover { background: var(--bg3); }
-    .sy-val { font-size: 2rem; font-weight: 600; line-height: 1; letter-spacing: -.02em; }
+    .sy-grid { display: grid; grid-template-columns: repeat(4,1fr); border: 1px solid var(--border); margin-bottom: 3rem; }
+    .sy-card { padding: 1.6rem 1.8rem; border-right: 1px solid var(--border); transition: background .15s; }
+    .sy-card:last-child { border-right: none; }
+    .sy-card:hover { background: var(--bg2); }
+    .sy-val { font-family: 'Playfair Display', Georgia, serif; font-size: 1.9rem; font-weight: 600; line-height: 1; letter-spacing: -.01em; }
     .sy-unit { font-size: .63rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin: .35rem 0 .25rem; }
     .sy-sub { font-size: .7rem; color: var(--muted); }
     .sy-run .sy-val { color: var(--orange); }
@@ -91,10 +76,11 @@
     .sy-elev .sy-val { color: var(--green); }
 
     /* PMC */
-    .pmc-summary { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); margin-bottom: 2.5rem; }
-    .pmc-kpi { background: var(--bg2); padding: 1.4rem 1.8rem; transition: background .2s; }
-    .pmc-kpi:hover { background: var(--bg3); }
-    .pmc-val { font-size: 1.7rem; font-weight: 600; line-height: 1; letter-spacing: -.02em; }
+    .pmc-summary { display: grid; grid-template-columns: repeat(4,1fr); border: 1px solid var(--border); margin-bottom: 2.5rem; }
+    .pmc-kpi { padding: 1.4rem 1.8rem; border-right: 1px solid var(--border); transition: background .15s; }
+    .pmc-kpi:last-child { border-right: none; }
+    .pmc-kpi:hover { background: var(--bg2); }
+    .pmc-val { font-family: 'Playfair Display', Georgia, serif; font-size: 1.6rem; font-weight: 600; line-height: 1; letter-spacing: -.01em; }
     .pmc-lbl { font-size: .62rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-top: .35rem; }
     .pmc-wrap { background: var(--bg2); border: 1px solid var(--border); padding: 1.4rem 1.4rem .8rem; margin-bottom: 1.5rem; }
     .pmc-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .6rem; margin-bottom: 1rem; font-size: .62rem; font-weight: 500; color: var(--muted); letter-spacing: .04em; }
@@ -111,7 +97,7 @@
     .lr-table th { padding: .65rem 1rem; text-align: left; font-size: .58rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border); background: var(--bg3); white-space: nowrap; }
     .lr-table td { padding: .72rem 1rem; border-bottom: 1px solid var(--border); color: var(--muted); white-space: nowrap; }
     .lr-table tbody tr:last-child td { border-bottom: none; }
-    .lr-table tbody tr:hover td { background: var(--bg3); }
+    .lr-table tbody tr:hover td { background: var(--bg2); }
     .lr-table .td-date { color: var(--cyan); font-size: .72rem; font-weight: 500; }
     .lr-table .td-name { color: var(--text); font-weight: 600; }
     .lr-table .td-dist { color: var(--orange); font-weight: 700; }
@@ -121,48 +107,36 @@
 
     /* Heatmap */
     .shm-scroll { overflow-x: auto; padding-bottom: .5rem; margin-bottom: 3rem; }
-    .shm-scroll::-webkit-scrollbar { height: 3px; }
-    .shm-scroll::-webkit-scrollbar-track { background: transparent; }
-    .shm-scroll::-webkit-scrollbar-thumb { background: var(--border); }
     .shm-legend { display: flex; gap: 1.2rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; }
     .shm-legend-item { display: flex; align-items: center; gap: .4rem; font-size: .65rem; color: var(--muted); font-weight: 500; }
     .shm-legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
 
     /* Activity cards */
     .act-scroll { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem; -webkit-overflow-scrolling: touch; }
-    .act-scroll::-webkit-scrollbar { height: 3px; }
-    .act-scroll::-webkit-scrollbar-track { background: transparent; }
-    .act-scroll::-webkit-scrollbar-thumb { background: var(--border); }
-    .act-card { flex: 0 0 255px; background: var(--bg2); border: 1px solid var(--border); transition: border-color .2s, transform .2s; }
-    .act-card:hover { border-color: rgba(72,202,228,.25); transform: translateY(-3px); }
+    .act-card { flex: 0 0 255px; background: var(--bg2); border: 1px solid var(--border); transition: border-color .15s; }
+    .act-card:hover { border-color: var(--accent); }
     .act-map { height: 150px; background: var(--bg3); }
     .act-info { padding: .9rem 1rem; }
     .act-type-badge { font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .3rem; font-weight: 700; }
     .act-type-run { color: var(--orange); }
     .act-type-ride { color: var(--purple); }
     .act-type-other { color: var(--green); }
-    .act-name { font-size: .83rem; font-weight: 600; margin-bottom: .25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .act-name { font-size: .83rem; font-weight: 600; margin-bottom: .25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text); }
     .act-date { font-size: .64rem; color: var(--muted); margin-bottom: .75rem; }
     .act-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .3rem; }
-    .act-stat .v { font-size: .85rem; font-weight: 700; line-height: 1; }
+    .act-stat .v { font-size: .85rem; font-weight: 700; line-height: 1; color: var(--text); }
     .act-stat .u { font-size: .56rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-top: .1rem; }
-    .leaflet-container { background: #07070f !important; }
 
-    /* chip */
-    .chip { font-size: .7rem; padding: .22rem .7rem; border: 1px solid var(--border); color: var(--muted); display: inline-block; }
+    .divider { height: 1px; background: var(--border); }
 
-    footer { max-width: 1100px; margin: 0 auto; padding: 1.8rem 3rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border); font-size: .67rem; color: var(--muted); }
-
-    .fade { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
-    .fade.in { opacity: 1; transform: none; }
+    footer { max-width: 1100px; margin: 0 auto; padding: 1.8rem 4rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border); font-size: .72rem; color: var(--muted); }
 
     @media (max-width: 860px) {
       nav { padding: 1rem 1.5rem; }
-      .nav-open { display: none; }
-      .page-hero { padding: 8rem 1.5rem 3rem; }
+      .page-hero { padding: 7rem 1.5rem 3rem; }
       .wrap { padding: 4rem 1.5rem; }
-      .sy-grid { grid-template-columns: 1fr 1fr; }
-      .pmc-summary { grid-template-columns: 1fr 1fr; }
+      .sy-grid, .pmc-summary { grid-template-columns: 1fr 1fr; }
+      .sy-card, .pmc-kpi { border-bottom: 1px solid var(--border); }
       .pmc-header { flex-direction: column; align-items: flex-start; }
       .chart-2col { grid-template-columns: 1fr; }
       .pb-strip { grid-template-columns: repeat(3,1fr); }
@@ -172,63 +146,41 @@
 </head>
 <body>
 
-<nav id="nav">
+<nav>
   <a href="/" class="nav-name">Tristan Lismer</a>
   <ul class="nav-links">
-    <li><a href="/#research">Research</a></li>
+    <li><a href="/#projects">Research</a></li>
     <li><a href="/#skills">Skills</a></li>
     <li><a href="/personal.html" class="active">Personal</a></li>
     <li><a href="/#contact">Contact</a></li>
-    <li><span class="nav-open">Open to roles</span></li>
+    <li><a href="/cv_tristan_lismer.pdf" target="_blank" class="nav-cv">CV</a></li>
   </ul>
 </nav>
 
 <!-- PAGE HERO -->
-<div class="page-hero fade">
-  <p class="page-hero-eyebrow">Beyond the lab</p>
+<div class="page-hero">
+  <p class="page-label">Beyond the lab</p>
   <h1>Athlete by <em>compulsion.</em></h1>
-  <p>Ironman finisher. Ultra runner in training. Every activity goes into a dataset — analysed with the same tools I use in the lab.</p>
+  <p>Ironman finisher. Ultra runner in training. Every activity goes into a dataset &mdash; analysed with the same tools I use in the lab.</p>
 </div>
 
+<div class="divider"></div>
+
 <!-- PERSONAL BESTS -->
-<div style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
-  <div style="max-width:1100px;margin:0 auto;padding:3rem;">
-    <p class="s-label fade">Personal Bests</p>
-    <div class="pb-strip fade">
-      <div class="pb-item">
-        <div class="pb-dist">5K</div>
-        <div class="pb-val">18:32</div>
-        <div class="pb-lbl">Road</div>
-      </div>
-      <div class="pb-item">
-        <div class="pb-dist">10K</div>
-        <div class="pb-val">38:55</div>
-        <div class="pb-lbl">Road</div>
-      </div>
-      <div class="pb-item">
-        <div class="pb-dist">Half</div>
-        <div class="pb-val">1:27:00</div>
-        <div class="pb-lbl">Road</div>
-      </div>
-      <div class="pb-item">
-        <div class="pb-dist">Marathon</div>
-        <div class="pb-val">3:23:00</div>
-        <div class="pb-lbl">Road</div>
-      </div>
-      <div class="pb-item">
-        <div class="pb-dist">70.3</div>
-        <div class="pb-val">4:52:00</div>
-        <div class="pb-lbl">Half Ironman</div>
-      </div>
-      <div class="pb-item">
-        <div class="pb-dist">Ironman</div>
-        <div class="pb-val">11:17:33</div>
-        <div class="pb-lbl">Full 226 km</div>
-      </div>
-      <div class="pb-item" style="border:1px solid rgba(245,166,35,.2);background:rgba(245,166,35,.03);">
+<div style="background:var(--bg2);border-bottom:1px solid var(--border);">
+  <div style="max-width:1100px;margin:0 auto;padding:3rem 4rem;">
+    <p class="s-label">Personal Bests</p>
+    <div class="pb-strip">
+      <div class="pb-item"><div class="pb-dist">5K</div><div class="pb-val">18:32</div><div class="pb-lbl">Road</div></div>
+      <div class="pb-item"><div class="pb-dist">10K</div><div class="pb-val">38:55</div><div class="pb-lbl">Road</div></div>
+      <div class="pb-item"><div class="pb-dist">Half</div><div class="pb-val">1:27:00</div><div class="pb-lbl">Road</div></div>
+      <div class="pb-item"><div class="pb-dist">Marathon</div><div class="pb-val">3:23:00</div><div class="pb-lbl">Road</div></div>
+      <div class="pb-item"><div class="pb-dist">70.3</div><div class="pb-val">4:52:00</div><div class="pb-lbl">Half Ironman</div></div>
+      <div class="pb-item"><div class="pb-dist">Ironman</div><div class="pb-val">11:17:33</div><div class="pb-lbl">Full 226 km</div></div>
+      <div class="pb-item" style="background:rgba(44,95,138,0.04);">
         <div class="pb-dist" style="color:var(--accent);">Bromont 80K</div>
         <div class="pb-val" style="color:var(--accent);font-size:1rem;">Oct 2026</div>
-        <div class="pb-lbl">In training ↗</div>
+        <div class="pb-lbl">In training &rarr;</div>
       </div>
     </div>
   </div>
@@ -236,114 +188,113 @@
 
 <!-- TRAINING DATA -->
 <div class="wrap" id="training">
-  <p class="s-label fade">Training Data</p>
-  <h2 class="fade">2026 in motion.</h2>
+  <p class="s-label">Training Data</p>
+  <h2>2026 in motion.</h2>
 
-  <div class="sy-grid fade">
-    <div class="sy-card sy-run"><div class="sy-val" id="sy-run-km">—</div><div class="sy-unit">km run</div><div class="sy-sub" id="sy-run-sub">loading…</div></div>
-    <div class="sy-card sy-ride"><div class="sy-val" id="sy-ride-km">—</div><div class="sy-unit">km ridden</div><div class="sy-sub" id="sy-ride-sub">loading…</div></div>
-    <div class="sy-card"><div class="sy-val" id="sy-hours">—</div><div class="sy-unit">hours moving</div><div class="sy-sub" id="sy-hours-sub">run + ride combined</div></div>
-    <div class="sy-card sy-elev"><div class="sy-val" id="sy-elev-val">—</div><div class="sy-unit">metres climbed</div><div class="sy-sub" id="sy-elev-sub">run + ride combined</div></div>
+  <div class="sy-grid">
+    <div class="sy-card sy-run"><div class="sy-val" id="sy-run-km">&mdash;</div><div class="sy-unit">km run</div><div class="sy-sub" id="sy-run-sub">loading&hellip;</div></div>
+    <div class="sy-card sy-ride"><div class="sy-val" id="sy-ride-km">&mdash;</div><div class="sy-unit">km ridden</div><div class="sy-sub" id="sy-ride-sub">loading&hellip;</div></div>
+    <div class="sy-card"><div class="sy-val" id="sy-hours">&mdash;</div><div class="sy-unit">hours moving</div><div class="sy-sub" id="sy-hours-sub">run + ride combined</div></div>
+    <div class="sy-card sy-elev"><div class="sy-val" id="sy-elev-val">&mdash;</div><div class="sy-unit">metres climbed</div><div class="sy-sub" id="sy-elev-sub">run + ride combined</div></div>
   </div>
 
-  <p class="s-label fade" style="margin-bottom:1.5rem;">Performance Management · Bromont 80K Build</p>
-  <div class="pmc-summary fade">
-    <div class="pmc-kpi"><div class="pmc-val" id="pmc-ctl" style="color:var(--cyan)">—</div><div class="pmc-lbl">Fitness · CTL</div></div>
-    <div class="pmc-kpi"><div class="pmc-val" id="pmc-atl" style="color:var(--orange)">—</div><div class="pmc-lbl">Fatigue · ATL</div></div>
-    <div class="pmc-kpi"><div class="pmc-val" id="pmc-tsb">—</div><div class="pmc-lbl">Form · TSB</div></div>
-    <div class="pmc-kpi"><div class="pmc-val" id="pmc-weeks" style="color:var(--green)">—</div><div class="pmc-lbl">Weeks to Bromont</div></div>
+  <p class="s-label" style="margin-bottom:1.5rem;">Performance Management &middot; Bromont 80K Build</p>
+  <div class="pmc-summary">
+    <div class="pmc-kpi"><div class="pmc-val" id="pmc-ctl" style="color:var(--cyan)">&mdash;</div><div class="pmc-lbl">Fitness &middot; CTL</div></div>
+    <div class="pmc-kpi"><div class="pmc-val" id="pmc-atl" style="color:var(--orange)">&mdash;</div><div class="pmc-lbl">Fatigue &middot; ATL</div></div>
+    <div class="pmc-kpi"><div class="pmc-val" id="pmc-tsb">&mdash;</div><div class="pmc-lbl">Form &middot; TSB</div></div>
+    <div class="pmc-kpi"><div class="pmc-val" id="pmc-weeks" style="color:var(--green)">&mdash;</div><div class="pmc-lbl">Weeks to Bromont</div></div>
   </div>
 
-  <div class="pmc-wrap fade">
+  <div class="pmc-wrap">
     <div class="pmc-header">
-      <span>Fitness · Fatigue · Form — Banister (1975) / Coggan (2003) · LTHR = 175 bpm</span>
+      <span>Fitness &middot; Fatigue &middot; Form &mdash; Banister (1975) / Coggan (2003) &middot; LTHR = 175 bpm</span>
       <div class="chart-legend">
         <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--cyan)"></div>CTL</div>
         <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--orange);opacity:.8"></div>ATL</div>
-        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(82,214,138,0.4)"></div>TSB</div>
+        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(45,122,79,0.4)"></div>TSB</div>
       </div>
     </div>
     <canvas id="pmc-chart" height="90"></canvas>
   </div>
 
-  <div class="pmc-wrap fade">
+  <div class="pmc-wrap">
     <div class="pmc-header">
       <span>Weekly Running Volume</span>
       <div class="chart-legend">
-        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(251,146,60,0.8)"></div>Trail Run</div>
-        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(252,211,77,0.75)"></div>Road Run</div>
+        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(212,98,26,0.7)"></div>Trail Run</div>
+        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(212,98,26,0.35)"></div>Road Run</div>
       </div>
     </div>
     <canvas id="weekly-run-chart" height="55"></canvas>
   </div>
 
-  <div class="pmc-wrap fade">
+  <div class="pmc-wrap">
     <div class="pmc-header">
       <span>Weekly Cycling Volume</span>
       <div class="chart-legend">
-        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(167,139,250,0.65)"></div>Road Bike</div>
-        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(82,214,138,0.65)"></div>Gravel</div>
-        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(129,140,248,0.65)"></div>MTB</div>
+        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(124,92,191,0.65)"></div>Road Bike</div>
+        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(45,122,79,0.55)"></div>Gravel</div>
+        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(124,92,191,0.35)"></div>MTB</div>
       </div>
     </div>
     <canvas id="weekly-ride-chart" height="55"></canvas>
   </div>
 
-  <div class="chart-2col fade">
+  <div class="chart-2col">
     <div class="pmc-wrap">
       <div class="pmc-header">
         <span>Weekly Elevation Gain</span>
-        <div class="chart-legend"><div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(82,214,138,0.65)"></div>metres climbed</div></div>
+        <div class="chart-legend"><div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(45,122,79,0.55)"></div>metres climbed</div></div>
       </div>
       <canvas id="weekly-elev-chart" height="120"></canvas>
     </div>
     <div class="pmc-wrap">
       <div class="pmc-header">
         <span>Weekly Training Stress Score</span>
-        <div class="chart-legend"><div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(56,189,248,0.55)"></div>TSS</div></div>
+        <div class="chart-legend"><div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(26,122,138,0.55)"></div>TSS</div></div>
       </div>
       <canvas id="weekly-tss-chart" height="120"></canvas>
     </div>
   </div>
 
-  <div class="pmc-wrap fade">
+  <div class="pmc-wrap">
     <div class="pmc-header">
-      <span>Long Run Progression ≥ 20 km — Bromont 80K Build</span>
+      <span>Long Run Progression &ge; 20 km &mdash; Bromont 80K Build</span>
       <div class="chart-legend">
         <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--orange)"></div>Distance (km)</div>
-        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(82,214,138,0.45)"></div>Elevation (m)</div>
+        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(45,122,79,0.4)"></div>Elevation (m)</div>
       </div>
     </div>
     <canvas id="longrun-chart" height="75"></canvas>
   </div>
 
-  <p class="s-label fade" style="margin-bottom:1.2rem;">Long Run Log <span style="font-weight:400;opacity:.5;font-size:.6rem;letter-spacing:.06em;">≥ 20 km</span></p>
-  <div class="lr-table-wrap fade">
+  <p class="s-label" style="margin-bottom:1.2rem;">Long Run Log <span style="font-weight:400;opacity:.5;font-size:.6rem;">&ge; 20 km</span></p>
+  <div class="lr-table-wrap">
     <table class="lr-table">
       <thead><tr><th>Date</th><th>Name</th><th>Distance</th><th>Elevation</th><th>Pace</th><th>Avg HR</th><th>TSS</th></tr></thead>
       <tbody id="lr-tbody"></tbody>
     </table>
   </div>
 
-  <!-- RECOVERY -->
-  <p class="s-label fade" style="margin-bottom:1.5rem;">Recovery &amp; Readiness · Garmin Connect</p>
+  <p class="s-label" style="margin-bottom:1.5rem;">Recovery &amp; Readiness &middot; Garmin Connect</p>
 
-  <div class="pmc-wrap fade">
+  <div class="pmc-wrap">
     <div class="pmc-header">
-      <span>Sleep Score — last 30 nights</span>
+      <span>Sleep Score &mdash; last 30 nights</span>
       <div class="chart-legend">
-        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(82,214,138,0.7)"></div>Good ≥ 80</div>
-        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(252,211,77,0.7)"></div>Fair 60–79</div>
-        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(248,113,113,0.7)"></div>Poor &lt; 60</div>
+        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(45,122,79,0.6)"></div>Good &ge; 80</div>
+        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(180,140,20,0.6)"></div>Fair 60&ndash;79</div>
+        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(192,57,43,0.6)"></div>Poor &lt; 60</div>
       </div>
     </div>
     <canvas id="sleep-chart" height="65"></canvas>
   </div>
 
-  <div class="chart-2col fade">
+  <div class="chart-2col">
     <div class="pmc-wrap">
       <div class="pmc-header">
-        <span>HRV — Heart Rate Variability</span>
+        <span>HRV &mdash; Heart Rate Variability</span>
         <div class="chart-legend"><div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--purple)"></div>ms</div></div>
       </div>
       <canvas id="hrv-chart" height="120"></canvas>
@@ -357,23 +308,22 @@
     </div>
   </div>
 
-  <div class="pmc-wrap fade">
+  <div class="pmc-wrap">
     <div class="pmc-header">
-      <span>Training Load vs Sleep Quality — TSS → next-night sleep score</span>
+      <span>Training Load vs Sleep Quality &mdash; TSS &rarr; next-night sleep score</span>
       <div class="chart-legend">
-        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(56,189,248,0.5);border-radius:50%"></div>Night</div>
+        <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(26,122,138,0.5);border-radius:50%"></div>Night</div>
         <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--cyan);opacity:.5"></div>Trend</div>
       </div>
     </div>
     <canvas id="tss-sleep-chart" height="80"></canvas>
   </div>
 
-  <!-- CROSS ANALYSIS -->
-  <p class="s-label fade" style="margin-top:2.5rem;margin-bottom:1.5rem;">Training × Recovery · Cross-Analysis</p>
+  <p class="s-label" style="margin-top:2.5rem;margin-bottom:1.5rem;">Training &times; Recovery &middot; Cross-Analysis</p>
 
-  <div class="pmc-wrap fade">
+  <div class="pmc-wrap">
     <div class="pmc-header">
-      <span>Fatigue (ATL) vs HRV — training load suppresses recovery markers</span>
+      <span>Fatigue (ATL) vs HRV &mdash; training load suppresses recovery markers</span>
       <div class="chart-legend">
         <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--orange);opacity:.85"></div>Fatigue (ATL)</div>
         <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--purple)"></div>HRV (ms)</div>
@@ -382,12 +332,12 @@
     <canvas id="atl-hrv-chart" height="80"></canvas>
   </div>
 
-  <div class="chart-2col fade">
+  <div class="chart-2col">
     <div class="pmc-wrap">
       <div class="pmc-header">
-        <span>Weekly Load vs Sleep — TSS and avg nightly sleep score</span>
+        <span>Weekly Load vs Sleep</span>
         <div class="chart-legend">
-          <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(56,189,248,0.5)"></div>Weekly TSS</div>
+          <div class="chart-legend-item"><div class="chart-legend-bar" style="background:rgba(26,122,138,0.5)"></div>Weekly TSS</div>
           <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--green)"></div>Avg Sleep</div>
         </div>
       </div>
@@ -395,31 +345,29 @@
     </div>
     <div class="pmc-wrap">
       <div class="pmc-header">
-        <span>Daily Readiness Score — composite of sleep, HRV, resting HR</span>
-        <div class="chart-legend">
-          <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--cyan)"></div>Readiness (0–100)</div>
-        </div>
+        <span>Daily Readiness Score</span>
+        <div class="chart-legend"><div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--cyan)"></div>Readiness (0&ndash;100)</div></div>
       </div>
       <canvas id="readiness-chart" height="120"></canvas>
     </div>
   </div>
 
   <!-- HEATMAP -->
-  <div class="shm-legend fade">
-    <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--orange)"></div>Run / Trail</div>
-    <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--purple)"></div>Ride</div>
-    <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--green)"></div>Other</div>
-    <div class="shm-legend-item"><div class="shm-legend-dot" style="background:var(--cyan);outline:1px solid var(--cyan);outline-offset:1px;"></div>Race day</div>
+  <div class="shm-legend">
+    <div class="shm-legend-item"><div class="shm-legend-dot" style="background:#d4621a"></div>Run / Trail</div>
+    <div class="shm-legend-item"><div class="shm-legend-dot" style="background:#7c5cbf"></div>Ride</div>
+    <div class="shm-legend-item"><div class="shm-legend-dot" style="background:#2d7a4f"></div>Other</div>
+    <div class="shm-legend-item"><div class="shm-legend-dot" style="background:#1a7a8a;outline:1px solid #1a7a8a;outline-offset:1px;"></div>Race day</div>
   </div>
-  <div class="shm-scroll fade"><div id="strava-heatmap"></div></div>
+  <div class="shm-scroll"><div id="strava-heatmap"></div></div>
 
-  <p class="s-label fade" style="margin-bottom:1.5rem;">Recent Activities</p>
-  <div class="act-scroll fade" id="strava-activities"></div>
+  <p class="s-label" style="margin-bottom:1.5rem;">Recent Activities</p>
+  <div class="act-scroll" id="strava-activities"></div>
 </div>
 
 <footer>
-  <span>© 2026 Tristan Lismer</span>
-  <span>Quantum Optics · IQC Waterloo</span>
+  <span>&copy; 2026 Tristan Lismer</span>
+  <span>Quantum Researcher &middot; IQC Waterloo</span>
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -445,7 +393,7 @@
   }
   function isRun(t) { return t === 'Run' || t === 'TrailRun'; }
   function isRide(t) { return t === 'Ride' || t === 'VirtualRide' || t === 'GravelRide' || t === 'MountainBikeRide'; }
-  function typeColor(t) { return isRun(t) ? '#fb923c' : isRide(t) ? '#a78bfa' : '#52d68a'; }
+  function typeColor(t) { return isRun(t) ? '#d4621a' : isRide(t) ? '#7c5cbf' : '#2d7a4f'; }
   function typeClass(t) { return isRun(t) ? 'act-type-run' : isRide(t) ? 'act-type-ride' : 'act-type-other'; }
 
   function renderHeatmap(heatmap, year) {
@@ -474,14 +422,14 @@
     let lastWi = 0;
     mwi.forEach((wi, m) => {
       const span = document.createElement('span');
-      span.style.cssText = `display:inline-block;width:${(wi-lastWi)*13}px;font-size:.56rem;color:rgba(234,234,242,.32);letter-spacing:.08em;text-transform:uppercase;overflow:hidden;font-weight:600;font-family:'JetBrains Mono',monospace;`;
+      span.style.cssText = `display:inline-block;width:${(wi-lastWi)*13}px;font-size:.56rem;color:#6e6e73;letter-spacing:.08em;text-transform:uppercase;overflow:hidden;font-weight:600;font-family:'Inter',sans-serif;`;
       span.textContent = months[m]; mRow.appendChild(span); lastWi = wi;
     });
     container.appendChild(mRow);
     const body = document.createElement('div'); body.style.cssText = 'display:flex;gap:2px;';
     const dCol = document.createElement('div'); dCol.style.cssText = 'display:flex;flex-direction:column;gap:2px;margin-right:2px;padding-top:1px;width:20px;';
     ['','Mon','','Wed','','Fri',''].forEach(lbl => {
-      const el = document.createElement('div'); el.style.cssText = 'font-size:.52rem;color:rgba(234,234,242,.28);height:11px;line-height:11px;font-weight:500;';
+      const el = document.createElement('div'); el.style.cssText = 'font-size:.52rem;color:#6e6e73;height:11px;line-height:11px;font-weight:500;';
       el.textContent = lbl; dCol.appendChild(el);
     });
     body.appendChild(dCol);
@@ -491,13 +439,13 @@
       for (const day of wk) {
         const cell = document.createElement('div'); cell.style.cssText = 'width:11px;height:11px;border-radius:2px;';
         if (!day.inYear) { cell.style.background = 'transparent'; }
-        else if (RACE_DAYS[day.date]) { cell.style.background = '#38bdf8'; cell.style.boxShadow = '0 0 5px rgba(56,189,248,0.8)'; cell.title = `${day.date} · RACE DAY · ${RACE_DAYS[day.date]}`; }
+        else if (RACE_DAYS[day.date]) { cell.style.background = '#1a7a8a'; cell.title = `${day.date} · RACE DAY · ${RACE_DAYS[day.date]}`; }
         else if (day.activity) {
           const col = typeColor(day.activity.type);
           const maxD = isRun(day.activity.type) ? 20 : isRide(day.activity.type) ? 100 : 15;
-          cell.style.background = col; cell.style.opacity = Math.min(1, 0.3 + (day.activity.distance_km / maxD) * 0.7);
+          cell.style.background = col; cell.style.opacity = Math.min(1, 0.25 + (day.activity.distance_km / maxD) * 0.75);
           cell.title = `${day.date} · ${actTypeLabel(day.activity.type)} · ${day.activity.distance_km} km`;
-        } else { cell.style.background = 'rgba(255,255,255,0.05)'; }
+        } else { cell.style.background = '#e2dfd9'; }
         wEl.appendChild(cell);
       }
       grid.appendChild(wEl);
@@ -521,15 +469,15 @@
             const coords = decodePolyline(act.polyline);
             if (!coords.length) return;
             const map = L.map(mapId, { zoomControl:false, dragging:false, scrollWheelZoom:false, doubleClickZoom:false, touchZoom:false, attributionControl:false });
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom:19 }).addTo(map);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { maxZoom:19 }).addTo(map);
             const poly = L.polyline(coords, { color: typeColor(act.type), weight: 2.5, opacity: 0.9 }).addTo(map);
             map.fitBounds(poly.getBounds(), { padding: [8, 8] });
           } catch(e) {}
         }, 80 + i * 60);
       } else {
         const el = document.getElementById(mapId);
-        el.style.cssText = 'height:150px;background:var(--bg3);display:flex;align-items:center;justify-content:center;';
-        el.innerHTML = '<span style="font-size:2rem;opacity:.15">📍</span>';
+        el.style.cssText = 'height:150px;background:#e8e4de;display:flex;align-items:center;justify-content:center;';
+        el.innerHTML = '<span style="font-size:2rem;opacity:.2">📍</span>';
       }
     });
   }
@@ -553,18 +501,17 @@
     let data;
     try { const r = await fetch('/training_analytics.json?v='+Date.now()); data = await r.json(); } catch(e) { return; }
     const today = new Date().toISOString().slice(0,10);
-
     document.getElementById('pmc-ctl').textContent  = data.current.ctl.toFixed(1);
     document.getElementById('pmc-atl').textContent  = data.current.atl.toFixed(1);
     document.getElementById('pmc-weeks').textContent = data.weeks_to_race;
     const tsbEl = document.getElementById('pmc-tsb'), tsb = data.current.tsb;
     tsbEl.textContent = (tsb >= 0 ? '+' : '') + tsb.toFixed(1);
-    tsbEl.style.color = tsb >= 0 ? 'var(--green)' : 'var(--red)';
+    tsbEl.style.color = tsb >= 0 ? '#2d7a4f' : '#c0392b';
 
-    const FONT = "'JetBrains Mono', monospace";
-    const TOOLTIP = { backgroundColor:'rgba(7,7,15,0.97)', borderColor:'rgba(255,255,255,0.07)', borderWidth:1, titleColor:'#eaeaf2', bodyColor:'rgba(234,234,242,0.6)', padding:10, titleFont:{family:FONT,size:11}, bodyFont:{family:FONT,size:11} };
-    const TICK = { color:'rgba(234,234,242,0.28)', font:{family:FONT,size:10} };
-    const GRID = 'rgba(255,255,255,0.04)';
+    const FONT = "'Inter', sans-serif";
+    const TOOLTIP = { backgroundColor:'rgba(248,246,242,0.97)', borderColor:'#e2dfd9', borderWidth:1, titleColor:'#1c1c1e', bodyColor:'#6e6e73', padding:10, titleFont:{family:FONT,size:11,weight:'600'}, bodyFont:{family:FONT,size:11} };
+    const TICK = { color:'#6e6e73', font:{family:FONT,size:10} };
+    const GRID = 'rgba(28,28,30,0.06)';
 
     const pmc = data.pmc.filter(d => d.date <= today);
     const stride = pmc.length > 150 ? 2 : 1;
@@ -574,12 +521,12 @@
     new Chart(document.getElementById('pmc-chart').getContext('2d'), {
       data: { labels: sp.map(d => fmtL(d.date)), datasets: [
         { type:'bar', label:'Form (TSB)', data:sp.map(d=>d.tsb), order:3, yAxisID:'y',
-          backgroundColor:sp.map(d=>d.tsb>=0?'rgba(82,214,138,0.35)':'rgba(248,113,113,0.35)'),
-          borderColor:sp.map(d=>d.tsb>=0?'rgba(82,214,138,0.55)':'rgba(248,113,113,0.55)'), borderWidth:1 },
+          backgroundColor:sp.map(d=>d.tsb>=0?'rgba(45,122,79,0.35)':'rgba(192,57,43,0.35)'),
+          borderColor:sp.map(d=>d.tsb>=0?'rgba(45,122,79,0.6)':'rgba(192,57,43,0.6)'), borderWidth:1 },
         { type:'line', label:'Fitness (CTL)', data:sp.map(d=>d.ctl), order:1, yAxisID:'y',
-          borderColor:'#48cae4', backgroundColor:'rgba(72,202,228,0.07)', borderWidth:2.5, pointRadius:0, fill:true, tension:0.4 },
+          borderColor:'#1a7a8a', backgroundColor:'rgba(26,122,138,0.08)', borderWidth:2.5, pointRadius:0, fill:true, tension:0.4 },
         { type:'line', label:'Fatigue (ATL)', data:sp.map(d=>d.atl), order:2, yAxisID:'y',
-          borderColor:'rgba(251,146,60,0.85)', backgroundColor:'transparent', borderWidth:2, pointRadius:0, borderDash:[5,4], tension:0.4 }
+          borderColor:'rgba(212,98,26,0.85)', backgroundColor:'transparent', borderWidth:2, pointRadius:0, borderDash:[5,4], tension:0.4 }
       ]},
       options: { responsive:true, interaction:{mode:'index',intersect:false},
         plugins:{ legend:{display:false}, tooltip:{...TOOLTIP, callbacks:{label:i=>` ${i.dataset.label}: ${i.parsed.y.toFixed(1)}`}} },
@@ -591,8 +538,8 @@
 
     new Chart(document.getElementById('weekly-run-chart').getContext('2d'), {
       type:'bar', data:{ labels:wlabels, datasets:[
-        { label:'Trail Run', data:weekly.map(w=>w.trail_run_km||0), backgroundColor:'rgba(251,146,60,0.8)', borderColor:'rgba(251,146,60,0.95)', borderWidth:1 },
-        { label:'Road Run',  data:weekly.map(w=>w.road_run_km||0),  backgroundColor:'rgba(252,211,77,0.7)', borderColor:'rgba(252,211,77,0.9)',  borderWidth:1 }
+        { label:'Trail Run', data:weekly.map(w=>w.trail_run_km||0), backgroundColor:'rgba(212,98,26,0.7)', borderColor:'rgba(212,98,26,0.9)', borderWidth:1 },
+        { label:'Road Run',  data:weekly.map(w=>w.road_run_km||0),  backgroundColor:'rgba(212,98,26,0.35)', borderColor:'rgba(212,98,26,0.6)', borderWidth:1 }
       ]},
       options:{ responsive:true, interaction:{mode:'index',intersect:false}, plugins:{legend:{display:false},tooltip:TOOLTIP},
         scales:{ x:{stacked:true,grid:{color:GRID},ticks:TICK}, y:{stacked:true,grid:{color:GRID},ticks:{...TICK,callback:v=>v+'km'}} } }
@@ -600,22 +547,22 @@
 
     new Chart(document.getElementById('weekly-ride-chart').getContext('2d'), {
       type:'bar', data:{ labels:wlabels, datasets:[
-        { label:'Road Bike', data:weekly.map(w=>w.road_ride_km||0), backgroundColor:'rgba(167,139,250,0.65)', borderColor:'rgba(167,139,250,0.85)', borderWidth:1 },
-        { label:'Gravel',    data:weekly.map(w=>w.gravel_km||0),    backgroundColor:'rgba(82,214,138,0.6)',   borderColor:'rgba(82,214,138,0.8)',   borderWidth:1 },
-        { label:'MTB',       data:weekly.map(w=>w.mtb_km||0),       backgroundColor:'rgba(129,140,248,0.65)', borderColor:'rgba(129,140,248,0.85)', borderWidth:1 }
+        { label:'Road Bike', data:weekly.map(w=>w.road_ride_km||0), backgroundColor:'rgba(124,92,191,0.6)', borderColor:'rgba(124,92,191,0.85)', borderWidth:1 },
+        { label:'Gravel',    data:weekly.map(w=>w.gravel_km||0),    backgroundColor:'rgba(45,122,79,0.55)', borderColor:'rgba(45,122,79,0.8)',   borderWidth:1 },
+        { label:'MTB',       data:weekly.map(w=>w.mtb_km||0),       backgroundColor:'rgba(124,92,191,0.35)', borderColor:'rgba(124,92,191,0.6)', borderWidth:1 }
       ]},
       options:{ responsive:true, interaction:{mode:'index',intersect:false}, plugins:{legend:{display:false},tooltip:TOOLTIP},
         scales:{ x:{stacked:true,grid:{color:GRID},ticks:TICK}, y:{stacked:true,grid:{color:GRID},ticks:{...TICK,callback:v=>v+'km'}} } }
     });
 
     new Chart(document.getElementById('weekly-elev-chart').getContext('2d'), {
-      type:'bar', data:{ labels:wlabels, datasets:[{ label:'Elevation (m)', data:weekly.map(w=>w.vert_m||0), backgroundColor:'rgba(82,214,138,0.55)', borderColor:'rgba(82,214,138,0.8)', borderWidth:1 }]},
+      type:'bar', data:{ labels:wlabels, datasets:[{ label:'Elevation (m)', data:weekly.map(w=>w.vert_m||0), backgroundColor:'rgba(45,122,79,0.5)', borderColor:'rgba(45,122,79,0.75)', borderWidth:1 }]},
       options:{ responsive:true, interaction:{mode:'index',intersect:false}, plugins:{legend:{display:false},tooltip:TOOLTIP},
         scales:{ x:{grid:{color:GRID},ticks:{...TICK,maxTicksLimit:6}}, y:{grid:{color:GRID},ticks:{...TICK,callback:v=>v+'m'}} } }
     });
 
     new Chart(document.getElementById('weekly-tss-chart').getContext('2d'), {
-      type:'bar', data:{ labels:wlabels, datasets:[{ label:'TSS', data:weekly.map(w=>w.tss||0), backgroundColor:'rgba(72,202,228,0.5)', borderColor:'rgba(72,202,228,0.75)', borderWidth:1 }]},
+      type:'bar', data:{ labels:wlabels, datasets:[{ label:'TSS', data:weekly.map(w=>w.tss||0), backgroundColor:'rgba(26,122,138,0.5)', borderColor:'rgba(26,122,138,0.75)', borderWidth:1 }]},
       options:{ responsive:true, interaction:{mode:'index',intersect:false}, plugins:{legend:{display:false},tooltip:TOOLTIP},
         scales:{ x:{grid:{color:GRID},ticks:{...TICK,maxTicksLimit:6}}, y:{grid:{color:GRID},ticks:TICK} } }
     });
@@ -624,8 +571,8 @@
     if (lr.length) {
       new Chart(document.getElementById('longrun-chart').getContext('2d'), {
         data:{ labels:lr.map(r=>r.date.slice(5)), datasets:[
-          { type:'bar', label:'Elevation (m)', data:lr.map(r=>r.elevation_m), yAxisID:'y2', order:2, backgroundColor:'rgba(82,214,138,0.3)', borderColor:'rgba(82,214,138,0.55)', borderWidth:1 },
-          { type:'line', label:'Distance (km)', data:lr.map(r=>r.distance_km), yAxisID:'y', order:1, borderColor:'#fb923c', backgroundColor:'rgba(251,146,60,0.1)', borderWidth:2.5, pointRadius:5, pointBackgroundColor:'#fb923c', pointBorderColor:'rgba(7,7,15,0.8)', pointBorderWidth:2, fill:true, tension:0.3 }
+          { type:'bar', label:'Elevation (m)', data:lr.map(r=>r.elevation_m), yAxisID:'y2', order:2, backgroundColor:'rgba(45,122,79,0.3)', borderColor:'rgba(45,122,79,0.55)', borderWidth:1 },
+          { type:'line', label:'Distance (km)', data:lr.map(r=>r.distance_km), yAxisID:'y', order:1, borderColor:'#d4621a', backgroundColor:'rgba(212,98,26,0.08)', borderWidth:2.5, pointRadius:5, pointBackgroundColor:'#d4621a', pointBorderColor:'rgba(248,246,242,0.8)', pointBorderWidth:2, fill:true, tension:0.3 }
         ]},
         options:{ responsive:true, interaction:{mode:'index',intersect:false}, plugins:{legend:{display:false},tooltip:TOOLTIP},
           scales:{ x:{grid:{color:GRID},ticks:TICK}, y:{grid:{color:GRID},ticks:{...TICK,callback:v=>v+'km'}}, y2:{grid:{display:false},ticks:{...TICK,callback:v=>v+'m'},position:'right'} } }
@@ -645,18 +592,18 @@
     let data;
     try { const r = await fetch('/garmin_data.json?v='+Date.now()); data = await r.json(); } catch(e) { return; }
 
-    const FONT = "'JetBrains Mono', monospace";
-    const TOOLTIP = { backgroundColor:'rgba(7,7,15,0.97)', borderColor:'rgba(255,255,255,0.07)', borderWidth:1, titleColor:'#eaeaf2', bodyColor:'rgba(234,234,242,0.6)', padding:10, titleFont:{family:FONT,size:11}, bodyFont:{family:FONT,size:11} };
-    const TICK = { color:'rgba(234,234,242,0.28)', font:{family:FONT,size:10} };
-    const GRID = 'rgba(255,255,255,0.04)';
+    const FONT = "'Inter', sans-serif";
+    const TOOLTIP = { backgroundColor:'rgba(248,246,242,0.97)', borderColor:'#e2dfd9', borderWidth:1, titleColor:'#1c1c1e', bodyColor:'#6e6e73', padding:10, titleFont:{family:FONT,size:11,weight:'600'}, bodyFont:{family:FONT,size:11} };
+    const TICK = { color:'#6e6e73', font:{family:FONT,size:10} };
+    const GRID = 'rgba(28,28,30,0.06)';
 
     const sleep = data.sleep.slice(-30);
     new Chart(document.getElementById('sleep-chart').getContext('2d'), {
       type:'bar',
       data:{ labels:sleep.map(s=>s.date.slice(5)), datasets:[{
         label:'Sleep Score', data:sleep.map(s=>s.score),
-        backgroundColor:sleep.map(s=>s.score>=80?'rgba(82,214,138,0.65)':s.score>=60?'rgba(252,211,77,0.65)':'rgba(248,113,113,0.65)'),
-        borderColor:sleep.map(s=>s.score>=80?'rgba(82,214,138,0.9)':s.score>=60?'rgba(252,211,77,0.9)':'rgba(248,113,113,0.9)'), borderWidth:1
+        backgroundColor:sleep.map(s=>s.score>=80?'rgba(45,122,79,0.6)':s.score>=60?'rgba(180,140,20,0.6)':'rgba(192,57,43,0.6)'),
+        borderColor:sleep.map(s=>s.score>=80?'rgba(45,122,79,0.85)':s.score>=60?'rgba(180,140,20,0.85)':'rgba(192,57,43,0.85)'), borderWidth:1
       }]},
       options:{ responsive:true, interaction:{mode:'index',intersect:false},
         plugins:{ legend:{display:false}, tooltip:{...TOOLTIP, callbacks:{label:i=>` Sleep score: ${i.parsed.y} · ${i.parsed.y>=80?'Good':i.parsed.y>=60?'Fair':'Poor'}`}} },
@@ -668,7 +615,7 @@
       type:'line',
       data:{ labels:hrv.map(h=>h.date.slice(5)), datasets:[{
         label:'HRV (ms)', data:hrv.map(h=>h.hrv_ms),
-        borderColor:'#a78bfa', backgroundColor:'rgba(167,139,250,0.07)', borderWidth:2, pointRadius:0, fill:true, tension:0.4
+        borderColor:'#7c5cbf', backgroundColor:'rgba(124,92,191,0.07)', borderWidth:2, pointRadius:0, fill:true, tension:0.4
       }]},
       options:{ responsive:true, interaction:{mode:'index',intersect:false},
         plugins:{ legend:{display:false}, tooltip:{...TOOLTIP, callbacks:{label:i=>` HRV: ${i.parsed.y} ms`}} },
@@ -680,7 +627,7 @@
       type:'line',
       data:{ labels:rhr.map(h=>h.date.slice(5)), datasets:[{
         label:'Resting HR', data:rhr.map(h=>h.bpm),
-        borderColor:'#f87171', backgroundColor:'rgba(248,113,113,0.07)', borderWidth:2, pointRadius:0, fill:true, tension:0.4
+        borderColor:'#c0392b', backgroundColor:'rgba(192,57,43,0.07)', borderWidth:2, pointRadius:0, fill:true, tension:0.4
       }]},
       options:{ responsive:true, interaction:{mode:'index',intersect:false},
         plugins:{ legend:{display:false}, tooltip:{...TOOLTIP, callbacks:{label:i=>` Resting HR: ${i.parsed.y} bpm`}} },
@@ -698,15 +645,12 @@
       const trendLine = [{ x: xMin, y: Math.round(slope*xMin+intercept) }, { x: xMax, y: Math.round(slope*xMax+intercept) }];
       new Chart(document.getElementById('tss-sleep-chart').getContext('2d'), {
         data:{ datasets:[
-          { type:'scatter', label:'Night', data:corrData, backgroundColor:'rgba(72,202,228,0.45)', borderColor:'rgba(72,202,228,0.8)', pointRadius:5, pointHoverRadius:7, order:1 },
-          { type:'line', label:'Trend', data:trendLine, borderColor:'rgba(72,202,228,0.35)', borderWidth:1.5, borderDash:[4,4], pointRadius:0, fill:false, order:2 }
+          { type:'scatter', label:'Night', data:corrData, backgroundColor:'rgba(26,122,138,0.45)', borderColor:'rgba(26,122,138,0.8)', pointRadius:5, pointHoverRadius:7, order:1 },
+          { type:'line', label:'Trend', data:trendLine, borderColor:'rgba(26,122,138,0.35)', borderWidth:1.5, borderDash:[4,4], pointRadius:0, fill:false, order:2 }
         ]},
         options:{ responsive:true, interaction:{mode:'nearest',intersect:true},
           plugins:{ legend:{display:false}, tooltip:{...TOOLTIP, callbacks:{ title:()=>'', label:i=>i.dataset.label==='Night'?` TSS ${i.parsed.x.toFixed(0)} → Sleep ${i.parsed.y}`:null }}},
-          scales:{
-            x:{ type:'linear', grid:{color:GRID}, ticks:{...TICK,callback:v=>v+' TSS'} },
-            y:{ grid:{color:GRID}, ticks:TICK, min:35, max:100 }
-          }
+          scales:{ x:{ type:'linear', grid:{color:GRID}, ticks:{...TICK,callback:v=>v+' TSS'} }, y:{ grid:{color:GRID}, ticks:TICK, min:35, max:100 } }
         }
       });
     }
@@ -721,10 +665,10 @@
       ]);
     } catch(e) { return; }
 
-    const FONT = "'JetBrains Mono', monospace";
-    const TOOLTIP = { backgroundColor:'rgba(7,7,15,0.97)', borderColor:'rgba(255,255,255,0.07)', borderWidth:1, titleColor:'#eaeaf2', bodyColor:'rgba(234,234,242,0.6)', padding:10, titleFont:{family:FONT,size:11}, bodyFont:{family:FONT,size:11} };
-    const TICK = { color:'rgba(234,234,242,0.28)', font:{family:FONT,size:10} };
-    const GRID = 'rgba(255,255,255,0.04)';
+    const FONT = "'Inter', sans-serif";
+    const TOOLTIP = { backgroundColor:'rgba(248,246,242,0.97)', borderColor:'#e2dfd9', borderWidth:1, titleColor:'#1c1c1e', bodyColor:'#6e6e73', padding:10, titleFont:{family:FONT,size:11,weight:'600'}, bodyFont:{family:FONT,size:11} };
+    const TICK = { color:'#6e6e73', font:{family:FONT,size:10} };
+    const GRID = 'rgba(28,28,30,0.06)';
     const today = new Date().toISOString().slice(0,10);
 
     const hrv_map = {};
@@ -736,17 +680,13 @@
       new Chart(document.getElementById('atl-hrv-chart').getContext('2d'), {
         data: { labels: pts.map(d => d.date.slice(5)), datasets: [
           { type:'line', label:'Fatigue (ATL)', data:pts.map(d=>d.atl), yAxisID:'yAtl', order:1,
-            borderColor:'rgba(251,146,60,0.9)', backgroundColor:'rgba(251,146,60,0.06)', borderWidth:2.5, pointRadius:0, fill:true, tension:0.4 },
+            borderColor:'rgba(212,98,26,0.9)', backgroundColor:'rgba(212,98,26,0.06)', borderWidth:2.5, pointRadius:0, fill:true, tension:0.4 },
           { type:'line', label:'HRV (ms)', data:pts.map(d=>hrv_map[d.date]), yAxisID:'yHrv', order:2,
-            borderColor:'#a78bfa', backgroundColor:'transparent', borderWidth:2, pointRadius:0, fill:false, tension:0.4 }
+            borderColor:'#7c5cbf', backgroundColor:'transparent', borderWidth:2, pointRadius:0, fill:false, tension:0.4 }
         ]},
         options: { responsive:true, interaction:{mode:'index',intersect:false},
           plugins:{ legend:{display:false}, tooltip:{...TOOLTIP, callbacks:{label:i=>i.datasetIndex===0?` ATL: ${i.parsed.y.toFixed(1)}`:`HRV: ${i.parsed.y.toFixed(1)} ms`}}},
-          scales:{
-            x:{ grid:{color:GRID}, ticks:{...TICK,maxTicksLimit:8} },
-            yAtl:{ grid:{color:GRID}, ticks:TICK },
-            yHrv:{ grid:{display:false}, ticks:{...TICK,callback:v=>v+'ms'}, position:'right' }
-          }
+          scales:{ x:{ grid:{color:GRID}, ticks:{...TICK,maxTicksLimit:8} }, yAtl:{ grid:{color:GRID}, ticks:TICK }, yHrv:{ grid:{display:false}, ticks:{...TICK,callback:v=>v+'ms'}, position:'right' } }
         }
       });
     }
@@ -766,8 +706,8 @@
     });
     new Chart(document.getElementById('weekly-tss-sleep-chart').getContext('2d'), {
       data: { labels: weeklyWithSleep.map(w=>w.week.slice(5)), datasets: [
-        { type:'bar', label:'Weekly TSS', data:weeklyWithSleep.map(w=>w.tss), yAxisID:'yTss', order:2, backgroundColor:'rgba(72,202,228,0.38)', borderColor:'rgba(72,202,228,0.65)', borderWidth:1 },
-        { type:'line', label:'Avg Sleep Score', data:weeklyWithSleep.map(w=>w.avg_sleep), yAxisID:'ySleep', order:1, borderColor:'#52d68a', backgroundColor:'rgba(82,214,138,0.07)', borderWidth:2.5, pointRadius:4, pointBackgroundColor:'#52d68a', pointBorderColor:'rgba(7,7,15,0.8)', pointBorderWidth:2, fill:true, tension:0.4, spanGaps:true }
+        { type:'bar', label:'Weekly TSS', data:weeklyWithSleep.map(w=>w.tss), yAxisID:'yTss', order:2, backgroundColor:'rgba(26,122,138,0.38)', borderColor:'rgba(26,122,138,0.65)', borderWidth:1 },
+        { type:'line', label:'Avg Sleep Score', data:weeklyWithSleep.map(w=>w.avg_sleep), yAxisID:'ySleep', order:1, borderColor:'#2d7a4f', backgroundColor:'rgba(45,122,79,0.07)', borderWidth:2.5, pointRadius:4, pointBackgroundColor:'#2d7a4f', pointBorderColor:'rgba(248,246,242,0.8)', pointBorderWidth:2, fill:true, tension:0.4, spanGaps:true }
       ]},
       options: { responsive:true, interaction:{mode:'index',intersect:false}, plugins:{legend:{display:false},tooltip:TOOLTIP},
         scales:{ x:{grid:{color:GRID},ticks:{...TICK,maxTicksLimit:6}}, yTss:{grid:{color:GRID},ticks:TICK}, ySleep:{grid:{display:false},ticks:TICK,position:'right',min:40,max:100} } }
@@ -791,7 +731,7 @@
         type:'line',
         data: { labels: readiness.map(r=>r.date.slice(5)), datasets:[{
           label:'Readiness', data:readiness.map(r=>r.score),
-          borderColor:'#48cae4', backgroundColor:'rgba(72,202,228,0.12)', borderWidth:2.5, pointRadius:0, fill:true, tension:0.4
+          borderColor:'#1a7a8a', backgroundColor:'rgba(26,122,138,0.1)', borderWidth:2.5, pointRadius:0, fill:true, tension:0.4
         }]},
         options: { responsive:true, interaction:{mode:'index',intersect:false},
           plugins:{ legend:{display:false}, tooltip:{...TOOLTIP, callbacks:{label:i=>{ const v=i.parsed.y; return ` Readiness: ${v} — ${v>=75?'Ready':v>=55?'Moderate':'Recovery needed'}`; }}}},
@@ -804,16 +744,6 @@
   loadTrainingAnalytics();
   loadGarmin();
   loadCrossCharts();
-</script>
-<script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 50);
-  }, { passive: true });
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>
