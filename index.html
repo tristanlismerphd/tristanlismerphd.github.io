@@ -5,236 +5,325 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tristan Lismer — Quantum Researcher</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --bg:     #07070f;
-      --bg2:    #0d0d1a;
-      --bg3:    #12121f;
-      --border: rgba(255,255,255,0.07);
-      --text:   #eaeaf2;
-      --muted:  rgba(234,234,242,0.45);
-      --accent: #a78bfa;
-      --blue:   #48cae4;
-      --green:  #52d68a;
+      --bg:     #f8f6f2;
+      --bg2:    #f0ede8;
+      --text:   #1c1c1e;
+      --muted:  #6e6e73;
+      --border: #e2dfd9;
+      --accent: #2c5f8a;
     }
+
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.7; overflow-x: hidden; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
 
     /* NAV */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 1.1rem 3rem;
-      transition: background .3s, border-color .3s;
-      border-bottom: 1px solid transparent;
+      padding: 1.2rem 4rem;
+      background: rgba(248, 246, 242, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
     }
-    nav.scrolled { background: rgba(7,7,15,.96); border-color: var(--border); backdrop-filter: blur(16px); }
-    .nav-name { font-weight: 600; font-size: .85rem; color: var(--text); text-decoration: none; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: .78rem; transition: color .2s; }
+    .nav-name {
+      font-size: .85rem; font-weight: 600;
+      color: var(--text); text-decoration: none;
+      letter-spacing: .01em;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: .82rem; font-weight: 400;
+      transition: color .15s;
+    }
     .nav-links a:hover { color: var(--text); }
-    .nav-open { display: flex; align-items: center; gap: .45rem; font-size: .72rem; color: var(--green); }
-    .nav-open::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); display: block; box-shadow: 0 0 8px var(--green); animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+    .nav-cv {
+      font-size: .78rem !important; font-weight: 500 !important;
+      color: var(--accent) !important;
+      border: 1px solid var(--accent);
+      padding: .3rem .85rem;
+      transition: background .15s, color .15s !important;
+    }
+    .nav-cv:hover { background: var(--accent) !important; color: white !important; }
 
     /* HERO */
     #hero {
-      display: grid;
-      grid-template-columns: 55% 45%;
       min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 4rem;
     }
     .hero-left {
       display: flex; flex-direction: column; justify-content: center;
-      padding: 9rem 4rem 6rem 5rem;
-      position: relative;
+      padding: 5rem 4rem 5rem 4rem;
     }
-    .hero-left::before {
-      content: ''; position: absolute; inset: 0; z-index: -1;
-      background-image: radial-gradient(circle, rgba(167,139,250,.03) 1px, transparent 1px);
-      background-size: 28px 28px;
-    }
-    .hero-glow {
-      position: absolute; top: 10%; left: -20%; width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(167,139,250,.06) 0%, transparent 65%);
-      pointer-events: none; z-index: -1;
-    }
-    .hero-right { position: relative; }
+    .hero-right { position: relative; overflow: hidden; }
     .hero-right img {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
       object-fit: cover; object-position: center top;
-      display: block;
     }
     .hero-right::after {
-      content: ''; position: absolute; inset: 0; z-index: 1;
-      background: linear-gradient(to right, var(--bg) 0%, transparent 20%),
-                  linear-gradient(to top, var(--bg) 0%, transparent 15%);
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, var(--bg) 0%, transparent 25%),
+                  linear-gradient(to top, var(--bg) 0%, transparent 12%);
     }
-    .hero-eyebrow {
-      font-size: .7rem; font-weight: 500; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 1.4rem;
-      display: flex; align-items: center; gap: .6rem;
+    .hero-label {
+      font-size: .72rem; font-weight: 500; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1.5rem;
     }
-    .hero-eyebrow::before { content: '//'; opacity: .35; }
-    h1 {
-      font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 600;
-      line-height: 1.1; letter-spacing: -.02em; margin-bottom: 1.6rem;
+    .hero-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 600; line-height: 1.08;
+      letter-spacing: -.01em;
+      margin-bottom: .6rem;
+      color: var(--text);
     }
-    h1 em { color: var(--accent); font-style: normal; }
-    .hero-sub {
-      font-size: .9rem; font-weight: 300; color: var(--muted);
-      max-width: 460px; line-height: 1.9; margin-bottom: 2.5rem;
+    .hero-tagline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 400; font-style: italic;
+      color: var(--muted); margin-bottom: 2rem;
     }
-    .hero-actions { display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
+    .hero-bio {
+      font-size: .88rem; font-weight: 300;
+      color: var(--muted); max-width: 440px;
+      line-height: 1.9; margin-bottom: 2.5rem;
+    }
+    .hero-actions { display: flex; gap: .75rem; flex-wrap: wrap; }
     .btn {
-      display: inline-block; text-decoration: none; font-family: inherit;
-      font-size: .75rem; font-weight: 500; letter-spacing: .06em;
-      padding: .65rem 1.5rem; transition: all .2s; border: none; cursor: pointer;
+      display: inline-block; text-decoration: none;
+      font-family: 'Inter', sans-serif;
+      font-size: .78rem; font-weight: 500;
+      letter-spacing: .04em;
+      padding: .65rem 1.6rem;
+      transition: all .15s;
+      border: none; cursor: pointer;
     }
-    .btn-primary { background: var(--accent); color: var(--bg); }
-    .btn-primary:hover { background: #c4b5fd; transform: translateY(-2px); }
-    .btn-ghost { border: 1px solid var(--border); color: var(--muted); }
-    .btn-ghost:hover { border-color: rgba(255,255,255,.25); color: var(--text); transform: translateY(-2px); }
+    .btn-primary { background: var(--text); color: var(--bg); }
+    .btn-primary:hover { background: #333; }
+    .btn-ghost { border: 1px solid var(--border); color: var(--muted); background: transparent; }
+    .btn-ghost:hover { border-color: var(--text); color: var(--text); }
 
-    /* SECTIONS */
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; }
-    .s-label {
-      font-size: .67rem; font-weight: 500; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: .8rem;
-      display: flex; align-items: center; gap: .55rem;
+    /* LAYOUT */
+    .divider { height: 1px; background: var(--border); }
+    .section { padding: 6rem 4rem; max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: .7rem; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1rem;
     }
-    .s-label::before { content: '//'; opacity: .35; }
-    h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 600; letter-spacing: -.02em; line-height: 1.1; margin-bottom: 2.5rem; }
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 600; line-height: 1.15;
+      margin-bottom: 3rem; color: var(--text);
+    }
 
     /* PROJECTS */
-    .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin-bottom: 1px; }
-    .proj-card {
-      background: var(--bg); padding: 2.2rem; position: relative;
-      overflow: hidden; transition: background .25s; text-decoration: none;
-      display: block; color: inherit;
+    .proj-item {
+      display: grid;
+      grid-template-columns: 4rem 1fr;
+      gap: 0 2.5rem;
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--border);
     }
-    .proj-card::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-      background: var(--accent); transform: scaleX(0); transform-origin: left;
-      transition: transform .35s ease;
+    .proj-item:last-child { border-bottom: 1px solid var(--border); }
+    .proj-num {
+      font-size: .7rem; font-weight: 600; color: var(--accent);
+      letter-spacing: .08em; padding-top: .2rem;
     }
-    .proj-card:hover { background: var(--bg2); }
-    .proj-card:hover::after { transform: scaleX(1); }
-    .proj-num { font-size: .62rem; color: var(--muted); letter-spacing: .1em; margin-bottom: .9rem; }
-    .proj-card h3 { font-size: .95rem; font-weight: 600; margin-bottom: .6rem; line-height: 1.35; }
-    .proj-card p { font-size: .8rem; color: var(--muted); line-height: 1.82; }
-    .proj-chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: 1rem; }
-    .proj-tag { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1.2rem; font-size: .63rem; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); }
-    .proj-tag::before { content: '&#x2192;'; }
+    .proj-content h3 {
+      font-size: 1rem; font-weight: 600;
+      margin-bottom: .65rem; line-height: 1.4;
+    }
+    .proj-content p {
+      font-size: .85rem; color: var(--muted);
+      line-height: 1.85; margin-bottom: 1rem; max-width: 700px;
+    }
+    .proj-chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .chip {
+      font-size: .68rem; padding: .2rem .65rem;
+      border: 1px solid var(--border); color: var(--muted);
+      background: transparent;
+    }
+    .proj-link {
+      display: inline-flex; align-items: center; gap: .4rem;
+      margin-top: 1rem; font-size: .75rem; font-weight: 500;
+      color: var(--accent); text-decoration: none; letter-spacing: .03em;
+    }
+    .proj-link::after { content: ' →'; }
 
     /* SKILLS */
     #skills { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .skills-wrap { max-width: 1100px; margin: 0 auto; padding: 6rem 4rem; }
     .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
-    .skill-group { margin-bottom: 1.8rem; }
-    .skill-group-lbl { font-size: .63rem; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; margin-bottom: .7rem; }
-    .skill-chips { display: flex; flex-wrap: wrap; gap: .35rem; }
-    .chip { font-size: .7rem; padding: .22rem .7rem; border: 1px solid var(--border); color: var(--muted); transition: border-color .2s, color .2s, background .2s; }
-    .chip:hover { border-color: rgba(167,139,250,.4); color: var(--accent); background: rgba(167,139,250,.04); }
-
-    /* BACKGROUND */
-    .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
-    .r-card {
-      background: var(--bg); padding: 2.2rem; position: relative;
-      overflow: hidden; transition: background .25s;
+    .skill-group { margin-bottom: 2.2rem; }
+    .skill-group-label {
+      font-size: .68rem; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: .85rem;
+      padding-bottom: .55rem;
+      border-bottom: 1px solid var(--border);
     }
-    .r-card::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-      background: var(--blue); transform: scaleX(0); transform-origin: left;
-      transition: transform .35s ease;
-    }
-    .r-card:hover { background: var(--bg2); }
-    .r-card:hover::after { transform: scaleX(1); }
-    .r-num { font-size: .62rem; color: var(--muted); letter-spacing: .1em; margin-bottom: .9rem; }
-    .r-card h3 { font-size: .95rem; font-weight: 600; margin-bottom: .6rem; line-height: 1.35; }
-    .r-card p { font-size: .8rem; color: var(--muted); line-height: 1.82; }
-    .r-tag { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1.2rem; font-size: .63rem; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); }
-    .r-tag::before { content: '&#x2192;'; }
-
-    /* PERSONAL */
-    .personal-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); }
-    .p-card { background: var(--bg); padding: 1.2rem 1.4rem; transition: background .2s; display: flex; flex-direction: column; gap: .25rem; }
-    .p-card:hover { background: var(--bg2); }
-    .p-big { font-size: 1.6rem; font-weight: 600; line-height: 1; color: var(--text); }
-    .p-unit { font-size: .63rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: .4rem; }
-    .p-card h3 { font-size: .82rem; font-weight: 600; margin-bottom: .2rem; }
-    .p-card p { font-size: .75rem; color: var(--muted); line-height: 1.65; }
+    .skill-chips { display: flex; flex-wrap: wrap; gap: .4rem; }
 
     /* TIMELINE */
-    #timeline { border-top: 1px solid var(--border); }
-    .tl { position: relative; padding-left: 2rem; }
-    .tl::before { content: ''; position: absolute; left: 0; top: .35rem; bottom: 0; width: 1px; background: var(--border); }
-    .tl-entry { position: relative; padding: 0 0 2.2rem 2rem; }
-    .tl-entry:last-child { padding-bottom: 0; }
-    .tl-dot { position: absolute; left: -2rem; top: .35rem; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); transform: translateX(-3px); }
-    .tl-dot.muted { background: var(--border); }
-    .tl-year { font-size: .63rem; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .3rem; }
+    .tl-entry {
+      display: grid;
+      grid-template-columns: 9rem 1fr;
+      gap: 0 3rem;
+      padding: 1.8rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .tl-entry:last-child { border-bottom: 1px solid var(--border); }
+    .tl-year {
+      font-size: .75rem; color: var(--accent);
+      font-weight: 500; padding-top: .15rem; line-height: 1.4;
+    }
     .tl-year.muted { color: var(--muted); }
-    .tl-title { font-size: .9rem; font-weight: 600; margin-bottom: .15rem; }
-    .tl-sub { font-size: .75rem; color: var(--muted); }
+    .tl-title { font-size: .92rem; font-weight: 600; margin-bottom: .25rem; }
+    .tl-sub { font-size: .8rem; color: var(--muted); }
+
+    /* PERSONAL */
+    .personal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border: 1px solid var(--border);
+    }
+    .p-card {
+      padding: 2.5rem;
+      border-right: 1px solid var(--border);
+    }
+    .p-card:last-child { border-right: none; }
+    .p-big {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.6rem; font-weight: 600; line-height: 1;
+      color: var(--text); margin-bottom: .4rem;
+    }
+    .p-unit {
+      font-size: .68rem; color: var(--accent);
+      text-transform: uppercase; letter-spacing: .1em;
+      font-weight: 600; margin-bottom: .9rem;
+    }
+    .p-card h3 { font-size: .85rem; font-weight: 600; margin-bottom: .35rem; }
+    .p-card p { font-size: .82rem; color: var(--muted); line-height: 1.75; }
+    .p-card a { color: var(--accent); text-decoration: none; font-weight: 500; }
 
     /* CONTACT */
-    #contact { background: var(--bg); }
+    #contact { background: var(--bg2); border-top: 1px solid var(--border); }
+    .contact-wrap { max-width: 1100px; margin: 0 auto; padding: 6rem 4rem; }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
-    .contact-lede { font-size: .88rem; color: var(--muted); line-height: 1.9; margin-bottom: 2rem; max-width: 380px; }
-    .contact-email { font-size: 1.4rem; font-weight: 500; color: var(--text); letter-spacing: -.01em; margin-top: .5rem; }
-    .clink { display: flex; align-items: center; gap: .8rem; text-decoration: none; font-size: .78rem; color: var(--muted); padding: .75rem 0; border-bottom: 1px solid var(--border); transition: color .2s; }
-    .clink:first-child { border-top: 1px solid var(--border); }
+    .open-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .7rem; color: #2d7a4f;
+      padding: .4rem .9rem;
+      border: 1px solid rgba(45, 122, 79, 0.3);
+      margin-bottom: 1.5rem;
+      background: rgba(45, 122, 79, 0.05);
+      font-weight: 500; letter-spacing: .04em;
+    }
+    .open-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: #2d7a4f; flex-shrink: 0;
+    }
+    .contact-lede { font-size: .88rem; color: var(--muted); line-height: 1.9; margin-bottom: 1.8rem; max-width: 420px; }
+    .contact-email {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.5rem; font-weight: 400;
+      color: var(--text); margin-bottom: 2rem;
+      display: block; text-decoration: none;
+      transition: color .15s;
+    }
+    .contact-email:hover { color: var(--accent); }
+    .clink {
+      display: flex; align-items: center; justify-content: space-between;
+      text-decoration: none; font-size: .82rem; color: var(--muted);
+      padding: .9rem 0; border-bottom: 1px solid var(--border);
+      transition: color .15s;
+    }
+    .clink:first-of-type { border-top: 1px solid var(--border); }
     .clink:hover { color: var(--text); }
     .clink .arr { color: var(--accent); }
-    .open-badge { display: inline-flex; align-items: center; gap: .5rem; font-size: .7rem; color: var(--green); padding: .4rem .9rem; border: 1px solid rgba(82,214,138,.2); margin-bottom: 1.5rem; background: rgba(82,214,138,.04); }
-    .open-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); animation: pulse 2s infinite; }
-    .quote-box { border-left: 2px solid var(--accent); padding: 2rem 2rem 2rem 2.2rem; background: var(--bg2); }
-    .quote-box blockquote { font-size: .86rem; font-style: italic; font-weight: 300; color: var(--muted); line-height: 1.9; }
-    .quote-box cite { display: block; margin-top: 1.2rem; font-style: normal; font-size: .63rem; letter-spacing: .1em; color: var(--blue); text-transform: uppercase; }
+    .quote-box {
+      border-left: 3px solid var(--border);
+      padding: 2rem 0 2rem 2.2rem;
+    }
+    .quote-box blockquote {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: .95rem; font-style: italic; font-weight: 400;
+      color: var(--muted); line-height: 1.9;
+    }
+    .quote-box cite {
+      display: block; margin-top: 1rem; font-style: normal;
+      font-size: .72rem; letter-spacing: .08em; color: var(--muted);
+      text-transform: uppercase; font-weight: 500;
+    }
 
-    footer { max-width: 1100px; margin: 0 auto; padding: 1.8rem 3rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border); font-size: .67rem; color: var(--muted); }
-
-    .fade { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
-    .fade.in { opacity: 1; transform: none; }
+    footer {
+      max-width: 1100px; margin: 0 auto;
+      padding: 1.8rem 4rem;
+      display: flex; justify-content: space-between;
+      border-top: 1px solid var(--border);
+      font-size: .72rem; color: var(--muted);
+    }
 
     @media (max-width: 860px) {
       nav { padding: 1rem 1.5rem; }
-      .nav-open { display: none; }
       #hero { grid-template-columns: 1fr; }
-      .hero-right { min-height: 55vw; order: -1; }
+      .hero-right { min-height: 60vw; order: -1; }
       .hero-right::after { background: linear-gradient(to top, var(--bg) 0%, transparent 30%); }
-      .hero-left { padding: 3rem 1.5rem 4rem; }
-      .wrap { padding: 4.5rem 1.5rem; }
-      .proj-grid, .research-grid, .skills-grid, .personal-grid, .contact-grid { grid-template-columns: 1fr; }
-      .skills-grid { gap: 3rem; }
+      .hero-left { padding: 2.5rem 1.5rem 4rem; }
+      .section { padding: 4rem 1.5rem; }
+      .skills-wrap, .contact-wrap { padding: 4rem 1.5rem; }
+      .skills-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .personal-grid { grid-template-columns: 1fr; }
+      .p-card { border-right: none; border-bottom: 1px solid var(--border); }
+      .p-card:last-child { border-bottom: none; }
+      .tl-entry { grid-template-columns: 5.5rem 1fr; gap: 0 1.5rem; }
+      .proj-item { grid-template-columns: 2.5rem 1fr; gap: 0 1.5rem; }
       footer { flex-direction: column; gap: .4rem; }
     }
   </style>
 </head>
 <body>
 
-<nav id="nav">
+<nav>
   <a href="#hero" class="nav-name">Tristan Lismer</a>
   <ul class="nav-links">
     <li><a href="#projects">Research</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#background">Background</a></li>
+    <li><a href="/personal.html">Personal</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="cv_tristan_lismer.pdf" target="_blank">CV</a></li>
-    <li><span class="nav-open">Open to quantum roles</span></li>
+    <li><a href="cv_tristan_lismer.pdf" target="_blank" class="nav-cv">CV</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <div id="hero">
   <div class="hero-left">
-    <div class="hero-glow"></div>
-    <p class="hero-eyebrow">Quantum Optics &middot; Foundations of Quantum Theory &middot; IQC Waterloo</p>
-    <h1>Testing what <em>quantum mechanics</em> actually predicts.</h1>
-    <p class="hero-sub">
-      Fourth-year PhD physicist at the Institute for Quantum Computing. I design and operate free-space photonic interferometers with entangled photon pairs, build rigorous statistical pipelines to analyse quantum experiment data, and prove theorems about the structure of quantum state spaces. Looking to bring deep experimental and theoretical quantum expertise to industry.
+    <p class="hero-label">Quantum Optics &middot; Foundations &middot; IQC Waterloo</p>
+    <h1 class="hero-name">Tristan Lismer</h1>
+    <p class="hero-tagline">Testing what quantum mechanics actually predicts.</p>
+    <p class="hero-bio">
+      Fourth-year PhD physicist at the Institute for Quantum Computing. I design and operate free-space photonic interferometers with entangled photon pairs, build rigorous statistical pipelines to analyse quantum experiment data, and prove theorems about the structure of quantum state spaces.
     </p>
     <div class="hero-actions">
       <a href="#projects" class="btn btn-primary">See My Work</a>
@@ -247,78 +336,91 @@
   </div>
 </div>
 
-<!-- PROJECTS -->
-<div class="wrap" id="projects">
-  <p class="s-label fade">Research &amp; Projects</p>
-  <h2 class="fade">What I work on.</h2>
-  <div class="proj-grid">
-    <a href="https://github.com/tristanlismerphd/higher_order_interference" target="_blank" rel="noopener" class="proj-card fade">
-      <div class="proj-num">01 / QUANTUM FOUNDATIONS &middot; STATISTICAL MODELLING &middot; HPC</div>
-      <h3>GPT Rank Sweep &mdash; Dimensionality of Quantum State Spaces</h3>
-      <p>A data-driven test of Born&rsquo;s rule: does a 4-slit entangled-photon interference dataset require the full n&sup2;&minus;1&nbsp;=&nbsp;15 dimensional state space quantum mechanics predicts? Built a cross-validated bilinear ALS fitting pipeline processing 1296-file experimental datasets, distributed across Compute Canada via SLURM. No assumed model &mdash; the rank of the data determines the answer. The GPT framework used here extends naturally to continuous-variable systems, including bosonic modes relevant to photonic quantum computing.</p>
-      <div class="proj-chips">
-        <span class="chip">Python</span>
-        <span class="chip">NumPy / SciPy</span>
-        <span class="chip">ALS fitting</span>
-        <span class="chip">Cross-validation</span>
-        <span class="chip">joblib</span>
-        <span class="chip">SLURM / HPC</span>
+<div class="divider"></div>
+
+<!-- RESEARCH -->
+<div id="projects">
+  <div class="section">
+    <p class="section-label">Research &amp; Projects</p>
+    <h2 class="section-title">What I work on.</h2>
+
+    <div class="proj-item">
+      <div class="proj-num">01</div>
+      <div class="proj-content">
+        <h3>GPT Rank Sweep &mdash; Dimensionality of Quantum State Spaces</h3>
+        <p>A data-driven test of Born&rsquo;s rule: does a 4-slit entangled-photon interference dataset require the full n&sup2;&minus;1&nbsp;=&nbsp;15 dimensional state space quantum mechanics predicts? Built a cross-validated bilinear ALS fitting pipeline processing 1296-file experimental datasets, distributed across Compute Canada via SLURM. No assumed model &mdash; the rank of the data determines the answer.</p>
+        <div class="proj-chips">
+          <span class="chip">Python</span>
+          <span class="chip">NumPy / SciPy</span>
+          <span class="chip">ALS fitting</span>
+          <span class="chip">Cross-validation</span>
+          <span class="chip">joblib</span>
+          <span class="chip">SLURM / HPC</span>
+        </div>
+        <a href="https://github.com/tristanlismerphd/higher_order_interference" target="_blank" rel="noopener" class="proj-link">View on GitHub</a>
       </div>
-      <span class="proj-tag">View on GitHub</span>
-    </a>
-    <div class="proj-card fade">
-      <div class="proj-num">02 / EXPERIMENTAL QUANTUM OPTICS &middot; FREE-SPACE PHOTONICS</div>
-      <h3>4-Slit Free-Space Interferometer with Entangled Photon Pairs</h3>
-      <p>Designed and built a precision 4-rail free-space photonic interferometer using entangled photon pairs to measure the Sorkin parameter I&sub;3&sub; &mdash; a direct test of higher-order interference in quantum mechanics. Operating with an emICCD camera, phase controllers, and 1024&times;1024-pixel detection across 16 shutter configurations &times; 81 phase combinations per dataset. Free-space routing of entangled photons over a controlled optical path is the same core challenge as ground-station reception in satellite QKD.</p>
-      <div class="proj-chips">
-        <span class="chip">Entangled photon pairs</span>
-        <span class="chip">Free-space optics</span>
-        <span class="chip">Single-photon detection</span>
-        <span class="chip">emICCD</span>
-        <span class="chip">Optical alignment</span>
-        <span class="chip">LabVIEW</span>
-        <span class="chip">Phase control</span>
-      </div>
-      <span class="proj-tag" style="color:var(--muted);">Experimental apparatus</span>
     </div>
-    <div class="proj-card fade" style="border-top:1px solid var(--border);">
-      <div class="proj-num">03 / QUANTUM FOUNDATIONS &middot; THEORY</div>
-      <h3>Trichotomy Theorem &mdash; Classification of Probabilistic Theories</h3>
-      <p>Proved a classification theorem for Generalised Probabilistic Theories (GPTs): a complete characterisation of how operational theories can assign probabilities to measurement outcomes. The GPT framework is technology-stack agnostic by design &mdash; it encompasses discrete-variable, continuous-variable, and bosonic systems equally. The same mathematical structure that underlies this theorem governs bosonic error-correcting codes, making it directly relevant to hardware-level quantum error correction.</p>
-      <div class="proj-chips">
-        <span class="chip">GPT framework</span>
-        <span class="chip">Quantum foundations</span>
-        <span class="chip">State space geometry</span>
-        <span class="chip">Bosonic systems</span>
-        <span class="chip">Mathematica</span>
+
+    <div class="proj-item">
+      <div class="proj-num">02</div>
+      <div class="proj-content">
+        <h3>Experimental Test of Tomographic Locality</h3>
+        <p>First direct experimental test of tomographic locality &mdash; a foundational axiom in every reconstruction of quantum mechanics. Analysed two-photon polarization data using bootstrap GPT tomography on a pair of qubits, demonstrating no evidence for a failure of tomographic locality, and confirming that real-amplitude quantum theory violates the principle as predicted.</p>
+        <div class="proj-chips">
+          <span class="chip">GPT tomography</span>
+          <span class="chip">Entangled photon pairs</span>
+          <span class="chip">Stabilizer states</span>
+          <span class="chip">Bootstrap fitting</span>
+          <span class="chip">Python / SciPy</span>
+        </div>
+        <span class="proj-link" style="color:var(--muted);pointer-events:none;">In preparation</span>
       </div>
-      <span class="proj-tag" style="color:var(--muted);">Theory &mdash; in preparation</span>
     </div>
-    <div class="proj-card fade" style="border-top:1px solid var(--border);">
-      <div class="proj-num">04 / SCIENTIFIC SOFTWARE &middot; TOOLING</div>
-      <h3>Scientific Computing &amp; Data Infrastructure</h3>
-      <p>Beyond the main research: an interactive physics equation solver covering optics, quantum mechanics, relativity, and thermodynamics (accepts unit-tagged inputs like 532&nbsp;nm, 2.5&nbsp;eV); automated data pipelines with GitHub Actions; and HPC job orchestration for large experimental datasets on Compute Canada clusters.</p>
-      <div class="proj-chips">
-        <span class="chip">Python</span>
-        <span class="chip">GitHub Actions</span>
-        <span class="chip">ETL pipelines</span>
-        <span class="chip">REST APIs</span>
-        <span class="chip">Compute Canada</span>
+
+    <div class="proj-item">
+      <div class="proj-num">03</div>
+      <div class="proj-content">
+        <h3>4-Slit Free-Space Interferometer with Entangled Photon Pairs</h3>
+        <p>Designed and built a precision 4-rail free-space photonic interferometer to measure the Sorkin parameter I&sub;3&sub; &mdash; a direct test of higher-order interference in quantum mechanics. Operating with an emICCD camera, phase controllers, and 1024&times;1024-pixel detection across 16 shutter configurations &times; 81 phase combinations per dataset.</p>
+        <div class="proj-chips">
+          <span class="chip">Entangled photon pairs</span>
+          <span class="chip">Free-space optics</span>
+          <span class="chip">Single-photon detection</span>
+          <span class="chip">emICCD</span>
+          <span class="chip">LabVIEW</span>
+        </div>
       </div>
-      <span class="proj-tag">View physics solver on GitHub</span>
     </div>
+
+    <div class="proj-item">
+      <div class="proj-num">04</div>
+      <div class="proj-content">
+        <h3>Trichotomy Theorem &mdash; Classification of Probabilistic Theories</h3>
+        <p>Proved a classification theorem for Generalised Probabilistic Theories: a complete characterisation of how operational theories can assign probabilities to measurement outcomes. The GPT framework is technology-stack agnostic &mdash; it applies equally to discrete-variable, continuous-variable, and bosonic systems.</p>
+        <div class="proj-chips">
+          <span class="chip">GPT framework</span>
+          <span class="chip">Quantum foundations</span>
+          <span class="chip">State space geometry</span>
+          <span class="chip">Mathematica</span>
+        </div>
+        <span class="proj-link" style="color:var(--muted);pointer-events:none;">In preparation</span>
+      </div>
+    </div>
+
   </div>
 </div>
 
+<div class="divider"></div>
+
 <!-- SKILLS -->
 <div id="skills">
-  <div class="wrap">
-    <p class="s-label fade">Skills</p>
-    <h2 class="fade">What I bring to the optical table.</h2>
+  <div class="skills-wrap">
+    <p class="section-label">Skills</p>
+    <h2 class="section-title">What I bring to the table.</h2>
     <div class="skills-grid">
       <div>
-        <div class="skill-group fade">
-          <div class="skill-group-lbl">Quantum &amp; Photonics</div>
+        <div class="skill-group">
+          <div class="skill-group-label">Quantum &amp; Photonics</div>
           <div class="skill-chips">
             <span class="chip">Entangled photon pairs</span>
             <span class="chip">Free-space quantum optics</span>
@@ -327,49 +429,42 @@
             <span class="chip">emICCD imaging</span>
             <span class="chip">Optical alignment</span>
             <span class="chip">Phase control optics</span>
-            <span class="chip">Beam splitter networks</span>
-            <span class="chip">Quantum networking</span>
             <span class="chip">LabVIEW</span>
           </div>
         </div>
-        <div class="skill-group fade">
-          <div class="skill-group-lbl">Quantum Theory</div>
+        <div class="skill-group">
+          <div class="skill-group-label">Quantum Theory</div>
           <div class="skill-chips">
             <span class="chip">GPT framework</span>
             <span class="chip">Quantum foundations</span>
             <span class="chip">Entanglement</span>
             <span class="chip">State space geometry</span>
             <span class="chip">Bosonic modes</span>
-            <span class="chip">Quantum error correction</span>
-            <span class="chip">CV quantum computing</span>
-            <span class="chip">Born&rsquo;s rule</span>
             <span class="chip">Higher-order interference</span>
+            <span class="chip">Tomographic locality</span>
           </div>
         </div>
       </div>
       <div>
-        <div class="skill-group fade">
-          <div class="skill-group-lbl">Data &amp; Computation</div>
+        <div class="skill-group">
+          <div class="skill-group-label">Data &amp; Computation</div>
           <div class="skill-chips">
             <span class="chip">Python</span>
             <span class="chip">NumPy / SciPy</span>
-            <span class="chip">PennyLane</span>
             <span class="chip">Statistical modelling</span>
             <span class="chip">Cross-validation</span>
             <span class="chip">Bilinear ALS fitting</span>
             <span class="chip">Signal processing</span>
-            <span class="chip">Bayesian inference</span>
+            <span class="chip">Pandas</span>
+            <span class="chip">matplotlib</span>
           </div>
         </div>
-        <div class="skill-group fade">
-          <div class="skill-group-lbl">Infrastructure &amp; Tooling</div>
+        <div class="skill-group">
+          <div class="skill-group-label">Infrastructure</div>
           <div class="skill-chips">
             <span class="chip">SLURM / HPC</span>
             <span class="chip">Compute Canada</span>
             <span class="chip">GitHub Actions</span>
-            <span class="chip">scikit-learn</span>
-            <span class="chip">Pandas</span>
-            <span class="chip">matplotlib</span>
             <span class="chip">LaTeX</span>
             <span class="chip">Mathematica</span>
           </div>
@@ -381,104 +476,88 @@
 
 <!-- BACKGROUND -->
 <div id="background">
-  <div class="wrap">
-    <p class="s-label fade">Background</p>
-    <h2 class="fade">Where the rigour comes from.</h2>
-    <div class="research-grid">
-      <div class="r-card fade">
-        <div class="r-num">PhD &middot; EXPERIMENTAL</div>
-        <h3>Free-Space Interferometer with Entangled Photons</h3>
-        <p>Built a precision free-space photonic experiment using entangled photon pairs to measure the Sorkin parameter I&sub;3&sub;. Managing terabytes of emICCD camera data across 1296 experimental configurations &mdash; cleaning, normalising, fitting. Free-space routing and detection of entangled photons at this precision is directly transferable to ground-station receiver design for satellite-based quantum key distribution.</p>
-        <span class="r-tag">Quantum Foundations &middot; Free-Space Photonics &middot; Entanglement</span>
+  <div class="section">
+    <p class="section-label">Background</p>
+    <h2 class="section-title">How I got here.</h2>
+    <div class="tl">
+      <div class="tl-entry">
+        <div class="tl-year">2022 &mdash; Present</div>
+        <div>
+          <div class="tl-title">PhD Candidate &middot; Quantum Optics &amp; Foundations</div>
+          <div class="tl-sub">Institute for Quantum Computing, University of Waterloo</div>
+        </div>
       </div>
-      <div class="r-card fade">
-        <div class="r-num">PhD &middot; COMPUTATIONAL</div>
-        <h3>GPT Rank Fitting Pipeline</h3>
-        <p>Designed and built a distributed ALS fitting pipeline from scratch &mdash; cross-validation, parallelism via joblib and SLURM, data-driven dimensionality inference. Every modelling decision grounded in statistics. The pipeline processes experimental quantum data and infers state space structure without assuming a model.</p>
-        <span class="r-tag">HPC &middot; Statistical Modelling</span>
+      <div class="tl-entry">
+        <div class="tl-year muted">2020 &ndash; 2022</div>
+        <div>
+          <div class="tl-title">Research Scientist (Intern)</div>
+          <div class="tl-sub">Canadian Nuclear Safety Commission &middot; Three summers</div>
+        </div>
       </div>
-      <div class="r-card fade">
-        <div class="r-num">PhD &middot; THEORETICAL</div>
-        <h3>Trichotomy Theorem</h3>
-        <p>Proved a classification theorem for Generalised Probabilistic Theories. The GPT framework is technology-stack agnostic &mdash; it applies equally to discrete-variable photonic systems, continuous-variable encodings, and bosonic error-correcting codes. Understanding what any physical theory can and cannot do at this level is what makes experimental results legible.</p>
-        <span class="r-tag">GPT Framework &middot; Bosonic Systems</span>
+      <div class="tl-entry">
+        <div class="tl-year muted">Summer 2019</div>
+        <div>
+          <div class="tl-title">Research Scientist (Intern)</div>
+          <div class="tl-sub">Natural Resources Canada</div>
+        </div>
       </div>
-      <div class="r-card fade">
-        <div class="r-num">INTERNSHIPS &middot; 2019&ndash;2022</div>
-        <h3>Research Scientist Roles</h3>
-        <p>Three summers at federal research agencies (Canadian Nuclear Safety Commission, Natural Resources Canada) &mdash; collecting, cleaning, and analysing scientific datasets in real operational environments. Bridging rigorous scientific methodology with practical delivery.</p>
-        <span class="r-tag">Applied Research &middot; Data Analysis</span>
+      <div class="tl-entry">
+        <div class="tl-year muted">2018 &ndash; 2022</div>
+        <div>
+          <div class="tl-title">BScH Astrophysics</div>
+          <div class="tl-sub">Queen&rsquo;s University, Kingston</div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<div class="divider"></div>
 
 <!-- PERSONAL -->
-<div class="wrap" id="personal">
-  <p class="s-label fade">Personal</p>
-  <h2 class="fade">Outside the lab.</h2>
-  <div class="personal-grid">
-    <div class="p-card fade">
-      <div class="p-big">226 km</div>
-      <div class="p-unit">Ironman Finisher</div>
-      <h3>3.8 swim &middot; 180 bike &middot; 42.2 run</h3>
-      <p>The same obsessive attention to signal-to-noise that runs experiments also runs training blocks.</p>
-    </div>
-    <div class="p-card fade">
-      <div class="p-big">80K</div>
-      <div class="p-unit">Ultra Runner &mdash; in training</div>
-      <h3>Bromont 80K &middot; Oct 2026</h3>
-      <p>Because apparently an Ironman wasn&rsquo;t a strong enough signal that I enjoy suffering.</p>
+<div id="personal">
+  <div class="section">
+    <p class="section-label">Personal</p>
+    <h2 class="section-title">Outside the lab.</h2>
+    <div class="personal-grid">
+      <div class="p-card">
+        <div class="p-big">226 km</div>
+        <div class="p-unit">Ironman Finisher</div>
+        <h3>3.8 swim &middot; 180 bike &middot; 42.2 run</h3>
+        <p>The same obsessive attention to signal-to-noise that runs experiments also runs training blocks.</p>
+      </div>
+      <div class="p-card">
+        <div class="p-big">80K</div>
+        <div class="p-unit">Ultra Runner &mdash; in training</div>
+        <h3>Bromont 80K &middot; Oct 2026</h3>
+        <p>Because apparently an Ironman wasn&rsquo;t a strong enough signal that I enjoy suffering. <a href="/personal.html">Training data &rarr;</a></p>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- TIMELINE -->
-<div id="timeline">
-  <div class="wrap">
-    <p class="s-label fade">Timeline</p>
-    <h2 class="fade">How I got here.</h2>
-    <div class="tl fade">
-      <div class="tl-entry">
-        <div class="tl-dot"></div>
-        <div class="tl-year">2022 &mdash; Present</div>
-        <div class="tl-title">PhD Candidate &middot; Quantum Optics &amp; Foundations</div>
-        <div class="tl-sub">Institute for Quantum Computing, University of Waterloo</div>
-      </div>
-      <div class="tl-entry">
-        <div class="tl-dot muted"></div>
-        <div class="tl-year muted">Summer 2020 &middot; 2021 &middot; 2022</div>
-        <div class="tl-title">Research Scientist (Intern)</div>
-        <div class="tl-sub">Canadian Nuclear Safety Commission</div>
-      </div>
-      <div class="tl-entry">
-        <div class="tl-dot muted"></div>
-        <div class="tl-year muted">Summer 2019</div>
-        <div class="tl-title">Research Scientist (Intern)</div>
-        <div class="tl-sub">Natural Resources Canada</div>
-      </div>
-      <div class="tl-entry">
-        <div class="tl-dot muted"></div>
-        <div class="tl-year muted">2018 &mdash; 2022</div>
-        <div class="tl-title">BScH Astrophysics</div>
-        <div class="tl-sub">Queen&rsquo;s University, Kingston</div>
-      </div>
-    </div>
-  </div>
-</div>
+<div class="divider"></div>
 
 <!-- CONTACT -->
 <div id="contact">
-  <div class="wrap">
-    <p class="s-label fade">Contact</p>
-    <h2 class="fade">Let&rsquo;s talk.</h2>
+  <div class="contact-wrap">
+    <p class="section-label">Contact</p>
+    <h2 class="section-title">Let&rsquo;s talk.</h2>
     <div class="contact-grid">
-      <div class="fade">
+      <div>
         <div class="open-badge">Open to quantum industry roles</div>
-        <p class="contact-lede">Looking for roles at photonic quantum computing companies, satellite QKD and quantum networking teams, bosonic hardware startups, and quantum software teams. My free-space entangled-photon work maps directly onto photonic quantum processors, ground-station receiver systems, and entanglement distribution links. My GPT and bosonic state space theory connects to quantum error correction at the hardware level. If you&rsquo;re building the quantum stack, reach out.</p>
-        <div class="contact-email">tlismer@uwaterloo.ca</div>
+        <p class="contact-lede">Looking for roles at photonic quantum computing companies, satellite QKD and quantum networking teams, bosonic hardware startups, and quantum software teams. If you&rsquo;re building the quantum stack, reach out.</p>
+        <a href="mailto:tlismer@uwaterloo.ca" class="contact-email">tlismer@uwaterloo.ca</a>
+        <a href="https://github.com/tristanlismerphd" target="_blank" class="clink">
+          <span>GitHub</span>
+          <span class="arr">&rarr;</span>
+        </a>
+        <a href="cv_tristan_lismer.pdf" target="_blank" class="clink">
+          <span>Download CV</span>
+          <span class="arr">&rarr;</span>
+        </a>
       </div>
-      <div class="quote-box fade">
+      <div class="quote-box">
         <blockquote>&ldquo;It&rsquo;s the questions we can&rsquo;t answer that teach us the most. They teach us how to think. If you give a man an answer, all he gains is a little fact. But give him a question and he&rsquo;ll look for his own answers.&rdquo;</blockquote>
         <cite>&mdash; Patrick Rothfuss, The Name of the Wind</cite>
       </div>
@@ -491,16 +570,5 @@
   <span>Quantum Researcher &middot; IQC Waterloo</span>
 </footer>
 
-<script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 50);
-  }, { passive: true });
-
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
-</script>
 </body>
 </html>
