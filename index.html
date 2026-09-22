@@ -214,33 +214,6 @@
     .tl-title { font-size: .92rem; font-weight: 600; margin-bottom: .25rem; }
     .tl-sub { font-size: .78rem; color: var(--muted); }
 
-    /* PERSONAL */
-    .personal-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      border: 1px solid var(--border);
-    }
-    .p-card {
-      padding: 2.5rem;
-      border-right: 1px solid var(--border);
-      background: var(--bg2);
-    }
-    .p-card:last-child { border-right: none; }
-    .p-big {
-      font-size: 3rem; font-weight: 800; line-height: 1;
-      letter-spacing: -.03em;
-      color: var(--text); margin-bottom: .4rem;
-    }
-    .p-unit {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .63rem; color: var(--accent);
-      text-transform: uppercase; letter-spacing: .1em;
-      font-weight: 500; margin-bottom: .9rem;
-    }
-    .p-card h3 { font-size: .85rem; font-weight: 600; margin-bottom: .35rem; }
-    .p-card p { font-size: .82rem; color: var(--muted); line-height: 1.75; }
-    .p-card a { color: var(--accent); text-decoration: none; font-weight: 500; }
-
     /* CONTACT */
     #contact { background: var(--bg2); border-top: 1px solid var(--border); }
     .contact-wrap { max-width: 1100px; margin: 0 auto; padding: 6rem 4rem; }
@@ -312,9 +285,6 @@
       .section { padding: 4rem 1.5rem; }
       .skills-wrap, .contact-wrap { padding: 4rem 1.5rem; }
       .skills-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .personal-grid { grid-template-columns: 1fr; }
-      .p-card { border-right: none; border-bottom: 1px solid var(--border); }
-      .p-card:last-child { border-bottom: none; }
       .tl-entry { grid-template-columns: 5.5rem 1fr; gap: 0 1.5rem; }
       .proj-item { grid-template-columns: 2.5rem 1fr; gap: 0 1.5rem; }
       footer { flex-direction: column; gap: .4rem; }
@@ -329,7 +299,7 @@
     <li><a href="#projects">Research</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#background">Background</a></li>
-    <li><a href="/personal.html">Personal</a></li>
+    <li><a href="#proud">Proud Of</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="cv_tristan_lismer.pdf" target="_blank" class="nav-cv">CV</a></li>
   </ul>
@@ -533,25 +503,28 @@
 
 <div class="divider"></div>
 
-<!-- PERSONAL -->
-<div id="personal">
+<!-- PROUD OF -->
+<div id="proud">
   <div class="section">
-    <p class="section-label">Personal</p>
-    <h2 class="section-title">Outside the lab.</h2>
-    <div class="personal-grid">
-      <div class="p-card">
-        <div class="p-big">226 km</div>
-        <div class="p-unit">Ironman Finisher</div>
-        <h3>3.8 swim &middot; 180 bike &middot; 42.2 run</h3>
-        <p>The same obsessive attention to signal-to-noise that runs experiments also runs training blocks.</p>
-      </div>
-      <div class="p-card">
-        <div class="p-big">80K</div>
-        <div class="p-unit">Ultra Runner &mdash; in training</div>
-        <h3>Bromont 80K &middot; Oct 2026</h3>
-        <p>Because apparently an Ironman wasn&rsquo;t a strong enough signal that I enjoy suffering. <a href="/personal.html">Training data &rarr;</a></p>
+    <p class="section-label">Proud Of</p>
+    <h2 class="section-title">Things I&rsquo;m proud of.</h2>
+
+    <div class="proj-item">
+      <div class="proj-num">01</div>
+      <div class="proj-content">
+        <h3>Ironman Finisher &mdash; 11:17:33</h3>
+        <p>Completed the full 226 km: 3.8 km swim, 180 km bike, 42.2 km run. The same obsessive attention to signal-to-noise that runs experiments also ran every training block that got me to that finish line.</p>
       </div>
     </div>
+
+    <div class="proj-item">
+      <div class="proj-num">02</div>
+      <div class="proj-content">
+        <h3>Bromont 80K Ultra Marathon</h3>
+        <p>80 km trail race through the mountains of Bromont, QC &mdash; October 2026. Training while finishing a PhD, because apparently an Ironman wasn&rsquo;t a strong enough signal that I enjoy suffering.</p>
+      </div>
+    </div>
+
   </div>
 </div>
 
