@@ -197,22 +197,82 @@
     .skill-chips { display: flex; flex-wrap: wrap; gap: .4rem; }
 
     /* TIMELINE */
-    .tl-entry {
+    .tl-visual {
       display: grid;
-      grid-template-columns: 9rem 1fr;
-      gap: 0 3rem;
-      padding: 1.8rem 0;
-      border-top: 1px solid var(--border);
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      position: relative;
     }
-    .tl-entry:last-child { border-bottom: 1px solid var(--border); }
+    /* centre spine */
+    .tl-visual::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 1px;
+      transform: translateX(-50%);
+      background: linear-gradient(to bottom, var(--accent) 0%, var(--border) 100%);
+    }
+    .tl-node {
+      padding: 0 3.5rem 4rem;
+      position: relative;
+    }
+    /* left node: content on left, dot on right edge */
+    .tl-node.left { text-align: right; padding-right: 3.5rem; padding-left: 0; }
+    .tl-node.right { text-align: left; padding-left: 3.5rem; padding-right: 0; }
+    /* dot */
+    .tl-node::after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 1px var(--accent), 0 0 16px rgba(75,141,248,0.35);
+    }
+    .tl-node.left::after  { right: -6px; }
+    .tl-node.right::after { left: -6px; }
+    /* horizontal connector line from dot to card */
+    .tl-node.left::before {
+      content: '';
+      position: absolute;
+      top: 11px; right: 6px;
+      width: 2.8rem; height: 1px;
+      background: linear-gradient(to left, var(--accent), transparent);
+    }
+    .tl-node.right::before {
+      content: '';
+      position: absolute;
+      top: 11px; left: 6px;
+      width: 2.8rem; height: 1px;
+      background: linear-gradient(to right, var(--accent), transparent);
+    }
+    .tl-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 1.8rem 2rem;
+      transition: border-color .2s;
+    }
+    .tl-card:hover { border-color: rgba(75,141,248,0.35); }
     .tl-year {
       font-family: 'JetBrains Mono', monospace;
-      font-size: .68rem; color: var(--accent);
-      font-weight: 500; padding-top: .15rem; line-height: 1.5;
+      font-size: .65rem; font-weight: 500;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: .65rem;
     }
-    .tl-year.muted { color: var(--muted); }
-    .tl-title { font-size: .92rem; font-weight: 600; margin-bottom: .25rem; }
-    .tl-sub { font-size: .78rem; color: var(--muted); }
+    .tl-title {
+      font-size: 1rem; font-weight: 700;
+      line-height: 1.3; letter-spacing: -.01em;
+      margin-bottom: .3rem;
+    }
+    .tl-sub {
+      font-size: .8rem; color: var(--muted); line-height: 1.6;
+    }
+    .tl-detail {
+      font-size: .78rem; color: var(--muted);
+      margin-top: .75rem; line-height: 1.75;
+    }
 
     /* CONTACT */
     #contact { background: var(--bg2); border-top: 1px solid var(--border); }
@@ -285,8 +345,23 @@
       .section { padding: 4rem 1.5rem; }
       .skills-wrap, .contact-wrap { padding: 4rem 1.5rem; }
       .skills-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .tl-entry { grid-template-columns: 5.5rem 1fr; gap: 0 1.5rem; }
       .proj-item { grid-template-columns: 2.5rem 1fr; gap: 0 1.5rem; }
+      .tl-visual {
+        grid-template-columns: 1fr;
+        padding-left: 2rem;
+      }
+      .tl-visual::before { left: 0; }
+      .tl-node.left, .tl-node.right {
+        text-align: left;
+        padding-left: 2.5rem;
+        padding-right: 0;
+      }
+      .tl-node.left::after  { left: -6px; right: auto; }
+      .tl-node.left::before {
+        left: 6px; right: auto;
+        background: linear-gradient(to right, var(--accent), transparent);
+      }
+      .tl-node.right::after { left: -6px; }
       footer { flex-direction: column; gap: .4rem; }
     }
   </style>
@@ -468,35 +543,27 @@
   <div class="section">
     <p class="section-label">Background</p>
     <h2 class="section-title">How I got here.</h2>
-    <div class="tl">
-      <div class="tl-entry">
-        <div class="tl-year">2022 &mdash; Present</div>
-        <div>
+
+    <div class="tl-visual">
+
+      <div class="tl-node left">
+        <div class="tl-card">
+          <div class="tl-year">2022 &mdash; Present</div>
           <div class="tl-title">PhD Candidate &middot; Quantum Optics &amp; Foundations</div>
           <div class="tl-sub">Institute for Quantum Computing, University of Waterloo</div>
+          <div class="tl-detail">Designing and operating free-space photonic interferometers, proving theorems in the GPT framework, and building statistical pipelines to test the foundations of quantum mechanics.</div>
         </div>
       </div>
-      <div class="tl-entry">
-        <div class="tl-year muted">2020 &ndash; 2022</div>
-        <div>
-          <div class="tl-title">Research Scientist (Intern)</div>
-          <div class="tl-sub">Canadian Nuclear Safety Commission &middot; Three summers</div>
-        </div>
-      </div>
-      <div class="tl-entry">
-        <div class="tl-year muted">Summer 2019</div>
-        <div>
-          <div class="tl-title">Research Scientist (Intern)</div>
-          <div class="tl-sub">Natural Resources Canada</div>
-        </div>
-      </div>
-      <div class="tl-entry">
-        <div class="tl-year muted">2018 &ndash; 2022</div>
-        <div>
+
+      <div class="tl-node right">
+        <div class="tl-card">
+          <div class="tl-year">2018 &ndash; 2022</div>
           <div class="tl-title">BScH Astrophysics</div>
           <div class="tl-sub">Queen&rsquo;s University, Kingston</div>
+          <div class="tl-detail">Honours degree in astrophysics. Developed a foundation in mathematical physics, statistical inference, and computational modelling.</div>
         </div>
       </div>
+
     </div>
   </div>
 </div>
