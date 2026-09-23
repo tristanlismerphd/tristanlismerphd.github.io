@@ -141,29 +141,58 @@
       margin-bottom: 3rem; color: var(--text);
     }
 
-    /* PROJECTS */
-    .proj-item {
+    /* RESEARCH — parent + sub-items */
+    .research-parent {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 2.5rem 0 0;
+    }
+    .research-parent-header {
       display: grid;
       grid-template-columns: 4.5rem 1fr;
       gap: 0 2.5rem;
-      padding: 2.5rem 0;
-      border-top: 1px solid var(--border);
-      transition: border-color .15s;
+      margin-bottom: 2rem;
     }
-    .proj-item:last-child { border-bottom: 1px solid var(--border); }
-    .proj-num {
+    .research-parent-num {
       font-family: 'JetBrains Mono', monospace;
-      font-size: .65rem; font-weight: 500; color: var(--muted);
+      font-size: .65rem; font-weight: 500; color: var(--accent);
       letter-spacing: .08em; padding-top: .25rem;
     }
-    .proj-content h3 {
-      font-size: 1.02rem; font-weight: 700;
-      margin-bottom: .65rem; line-height: 1.35;
+    .research-parent-title {
+      font-size: 1.15rem; font-weight: 800;
+      line-height: 1.25; letter-spacing: -.02em;
+      margin-bottom: .55rem;
+    }
+    .research-parent-desc {
+      font-size: .85rem; color: var(--muted);
+      line-height: 1.9; max-width: 700px;
+    }
+    .research-subs {
+      border-left: 1px solid var(--border);
+      margin-left: 4.5rem;
+      margin-bottom: 0;
+    }
+    .sub-item {
+      display: grid;
+      grid-template-columns: 3.5rem 1fr;
+      gap: 0 2rem;
+      padding: 2rem 2rem 2rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .sub-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .63rem; font-weight: 500; color: var(--muted);
+      letter-spacing: .08em; padding-top: .2rem;
+      text-align: right;
+    }
+    .sub-content h4 {
+      font-size: .95rem; font-weight: 700;
+      margin-bottom: .55rem; line-height: 1.35;
       letter-spacing: -.01em;
     }
-    .proj-content p {
-      font-size: .85rem; color: var(--muted);
-      line-height: 1.9; margin-bottom: 1rem; max-width: 700px;
+    .sub-content p {
+      font-size: .83rem; color: var(--muted);
+      line-height: 1.9; margin-bottom: .85rem; max-width: 660px;
     }
     .proj-chips { display: flex; flex-wrap: wrap; gap: .4rem; }
     .chip {
@@ -174,7 +203,7 @@
     }
     .proj-link {
       display: inline-flex; align-items: center; gap: .4rem;
-      margin-top: 1rem; font-size: .73rem; font-weight: 600;
+      margin-top: .85rem; font-size: .73rem; font-weight: 600;
       color: var(--accent); text-decoration: none;
       letter-spacing: .04em; text-transform: uppercase;
       font-family: 'JetBrains Mono', monospace;
@@ -203,7 +232,6 @@
       gap: 0;
       position: relative;
     }
-    /* centre spine */
     .tl-visual::before {
       content: '';
       position: absolute;
@@ -217,10 +245,8 @@
       padding: 0 3.5rem 4rem;
       position: relative;
     }
-    /* left node: content on left, dot on right edge */
     .tl-node.left { text-align: right; padding-right: 3.5rem; padding-left: 0; }
     .tl-node.right { text-align: left; padding-left: 3.5rem; padding-right: 0; }
-    /* dot */
     .tl-node::after {
       content: '';
       position: absolute;
@@ -233,7 +259,6 @@
     }
     .tl-node.left::after  { right: -6px; }
     .tl-node.right::after { left: -6px; }
-    /* horizontal connector line from dot to card */
     .tl-node.left::before {
       content: '';
       position: absolute;
@@ -272,6 +297,30 @@
     .tl-detail {
       font-size: .78rem; color: var(--muted);
       margin-top: .75rem; line-height: 1.75;
+    }
+
+    /* PROUD OF */
+    .proj-item {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      gap: 0 2.5rem;
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .proj-item:last-child { border-bottom: 1px solid var(--border); }
+    .proj-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem; font-weight: 500; color: var(--muted);
+      letter-spacing: .08em; padding-top: .25rem;
+    }
+    .proj-content h3 {
+      font-size: 1.02rem; font-weight: 700;
+      margin-bottom: .65rem; line-height: 1.35;
+      letter-spacing: -.01em;
+    }
+    .proj-content p {
+      font-size: .85rem; color: var(--muted);
+      line-height: 1.9; max-width: 700px;
     }
 
     /* CONTACT */
@@ -345,22 +394,14 @@
       .section { padding: 4rem 1.5rem; }
       .skills-wrap, .contact-wrap { padding: 4rem 1.5rem; }
       .skills-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .research-parent-header { grid-template-columns: 2.5rem 1fr; gap: 0 1.5rem; }
+      .research-subs { margin-left: 2.5rem; }
       .proj-item { grid-template-columns: 2.5rem 1fr; gap: 0 1.5rem; }
-      .tl-visual {
-        grid-template-columns: 1fr;
-        padding-left: 2rem;
-      }
+      .tl-visual { grid-template-columns: 1fr; padding-left: 2rem; }
       .tl-visual::before { left: 0; }
-      .tl-node.left, .tl-node.right {
-        text-align: left;
-        padding-left: 2.5rem;
-        padding-right: 0;
-      }
+      .tl-node.left, .tl-node.right { text-align: left; padding-left: 2.5rem; padding-right: 0; }
       .tl-node.left::after  { left: -6px; right: auto; }
-      .tl-node.left::before {
-        left: 6px; right: auto;
-        background: linear-gradient(to right, var(--accent), transparent);
-      }
+      .tl-node.left::before { left: 6px; right: auto; background: linear-gradient(to right, var(--accent), transparent); }
       .tl-node.right::after { left: -6px; }
       footer { flex-direction: column; gap: .4rem; }
     }
@@ -408,66 +449,50 @@
     <p class="section-label">Research &amp; Projects</p>
     <h2 class="section-title">What I work on.</h2>
 
-    <div class="proj-item">
-      <div class="proj-num">01</div>
-      <div class="proj-content">
-        <h3>GPT Rank Sweep &mdash; Dimensionality of Quantum State Spaces</h3>
-        <p>A data-driven test of Born&rsquo;s rule: does a 4-slit entangled-photon interference dataset require the full n&sup2;&minus;1&nbsp;=&nbsp;15 dimensional state space quantum mechanics predicts? Built a cross-validated bilinear ALS fitting pipeline processing 1296-file experimental datasets, distributed across Compute Canada via SLURM. No assumed model &mdash; the rank of the data determines the answer.</p>
-        <div class="proj-chips">
-          <span class="chip">Python</span>
-          <span class="chip">NumPy / SciPy</span>
-          <span class="chip">ALS fitting</span>
-          <span class="chip">Cross-validation</span>
-          <span class="chip">joblib</span>
-          <span class="chip">SLURM / HPC</span>
-        </div>
-        <a href="https://github.com/tristanlismerphd/higher_order_interference" target="_blank" rel="noopener" class="proj-link">View on GitHub</a>
-      </div>
-    </div>
-
-    <div class="proj-item">
-      <div class="proj-num">02</div>
-      <div class="proj-content">
-        <h3>Experimental Test of Tomographic Locality</h3>
-        <p>First direct experimental test of tomographic locality &mdash; a foundational axiom in every reconstruction of quantum mechanics. Analysed two-photon polarization data using bootstrap GPT tomography on a pair of qubits, demonstrating no evidence for a failure of tomographic locality, and confirming that real-amplitude quantum theory violates the principle as predicted.</p>
-        <div class="proj-chips">
-          <span class="chip">GPT tomography</span>
-          <span class="chip">Entangled photon pairs</span>
-          <span class="chip">Stabilizer states</span>
-          <span class="chip">Bootstrap fitting</span>
-          <span class="chip">Python / SciPy</span>
-        </div>
-        <span class="proj-link" style="color:var(--muted);pointer-events:none;">In preparation</span>
-      </div>
-    </div>
-
-    <div class="proj-item">
-      <div class="proj-num">03</div>
-      <div class="proj-content">
-        <h3>4-Slit Free-Space Interferometer with Entangled Photon Pairs</h3>
-        <p>Designed and built a precision 4-rail free-space photonic interferometer to measure the Sorkin parameter I&sub;3&sub; &mdash; a direct test of higher-order interference in quantum mechanics. Operating with an emICCD camera, phase controllers, and 1024&times;1024-pixel detection across 16 shutter configurations &times; 81 phase combinations per dataset.</p>
-        <div class="proj-chips">
-          <span class="chip">Entangled photon pairs</span>
-          <span class="chip">Free-space optics</span>
-          <span class="chip">Single-photon detection</span>
-          <span class="chip">emICCD</span>
-          <span class="chip">LabVIEW</span>
+    <div class="research-parent">
+      <div class="research-parent-header">
+        <div class="research-parent-num">01</div>
+        <div>
+          <div class="research-parent-title">Experimental Tests of Quantum Theory</div>
+          <div class="research-parent-desc">I design and run photonic experiments to directly probe the foundational axioms of quantum mechanics &mdash; treating the theory as a falsifiable scientific claim and putting its core predictions to the test.</div>
         </div>
       </div>
-    </div>
 
-    <div class="proj-item">
-      <div class="proj-num">04</div>
-      <div class="proj-content">
-        <h3>Trichotomy Theorem &mdash; Classification of Probabilistic Theories</h3>
-        <p>Proved a classification theorem for Generalised Probabilistic Theories: a complete characterisation of how operational theories can assign probabilities to measurement outcomes. The GPT framework is technology-stack agnostic &mdash; it applies equally to discrete-variable, continuous-variable, and bosonic systems.</p>
-        <div class="proj-chips">
-          <span class="chip">GPT framework</span>
-          <span class="chip">Quantum foundations</span>
-          <span class="chip">State space geometry</span>
-          <span class="chip">Mathematica</span>
+      <div class="research-subs">
+
+        <div class="sub-item">
+          <div class="sub-num">01</div>
+          <div class="sub-content">
+            <h4>Experimental Test of Tomographic Locality</h4>
+            <p>First direct experimental test of tomographic locality &mdash; a foundational axiom in every reconstruction of quantum mechanics. Analysed two-photon polarization data using bootstrap GPT tomography on a pair of qubits, demonstrating no evidence for a failure of tomographic locality, and confirming that real-amplitude quantum theory violates the principle as predicted.</p>
+            <div class="proj-chips">
+              <span class="chip">GPT tomography</span>
+              <span class="chip">Entangled photon pairs</span>
+              <span class="chip">Stabilizer states</span>
+              <span class="chip">Bootstrap fitting</span>
+              <span class="chip">Python / SciPy</span>
+            </div>
+            <span class="proj-link" style="color:var(--muted);pointer-events:none;">In preparation</span>
+          </div>
         </div>
-        <span class="proj-link" style="color:var(--muted);pointer-events:none;">In preparation</span>
+
+        <div class="sub-item">
+          <div class="sub-num">02</div>
+          <div class="sub-content">
+            <h4>Experimental Test of Born&rsquo;s Rule &mdash; GPT Rank Sweep</h4>
+            <p>A data-driven test of Born&rsquo;s rule: does a 4-slit entangled-photon interference dataset require the full n&sup2;&minus;1&nbsp;=&nbsp;15 dimensional state space quantum mechanics predicts? Built a cross-validated bilinear ALS fitting pipeline processing 1296-file experimental datasets, distributed across Compute Canada via SLURM. No assumed model &mdash; the rank of the data determines the answer.</p>
+            <div class="proj-chips">
+              <span class="chip">Python</span>
+              <span class="chip">NumPy / SciPy</span>
+              <span class="chip">ALS fitting</span>
+              <span class="chip">Cross-validation</span>
+              <span class="chip">joblib</span>
+              <span class="chip">SLURM / HPC</span>
+            </div>
+            <a href="https://github.com/tristanlismerphd/higher_order_interference" target="_blank" rel="noopener" class="proj-link">View on GitHub</a>
+          </div>
+        </div>
+
       </div>
     </div>
 
