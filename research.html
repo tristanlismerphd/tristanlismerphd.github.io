@@ -1,10 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta http-equiv="refresh" content="0; url=/"/>
-  <title>Tristan Lismer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research &mdash; Tristan Lismer</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: #111; line-height: 1.65; font-size: 16px; }
+    a { color: #1d4ed8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    nav { border-bottom: 1px solid #e5e7eb; padding: 0 2rem; }
+    .nav-inner { max-width: 720px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 50px; }
+    .nav-brand { font-weight: 600; color: #111; font-size: .9rem; text-decoration: none; }
+    .nav-brand:hover { text-decoration: none; }
+    .nav-links { display: flex; gap: 1.6rem; list-style: none; }
+    .nav-links a { color: #6b7280; font-size: .85rem; }
+    .nav-links a:hover, .nav-links a.active { color: #111; text-decoration: none; }
+    main { max-width: 720px; margin: 0 auto; padding: 4rem 2rem 5rem; }
+    h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 2.5rem; }
+    .project { margin-bottom: 3rem; }
+    .project h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: .5rem; }
+    .project p { color: #374151; max-width: 600px; margin-bottom: .6rem; }
+    .tag { display: inline-block; font-size: .72rem; color: #6b7280; border: 1px solid #d1d5db; padding: .15rem .55rem; margin-right: .3rem; margin-top: .4rem; }
+    footer { max-width: 720px; margin: 0 auto; padding: 1.5rem 2rem; border-top: 1px solid #e5e7eb; font-size: .78rem; color: #9ca3af; }
+  </style>
 </head>
-<body></body>
+<body>
+  <script>if (sessionStorage.getItem('auth') !== '1') location.replace('/');</script>
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">Tristan Lismer</a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/research.html" class="active">Research</a></li>
+        <li><a href="/personal.html">Personal</a></li>
+        <li><a href="/cv_tristan_lismer.pdf" target="_blank">CV</a></li>
+      </ul>
+    </div>
+  </nav>
+  <main>
+    <h1>Research</h1>
+    <div class="project">
+      <h2>Higher-Order Quantum Interference</h2>
+      <p>Standard quantum mechanics predicts that Born&rsquo;s rule limits interference to pairwise (second-order) terms &mdash; higher-order terms vanish exactly. We test this prediction experimentally using controlled multi-slit configurations with single-photon detection and coincidence counting.</p>
+      <p>The goal is to bound any deviation from Born&rsquo;s rule and constrain possible extensions of quantum theory, providing a direct experimental test of the Sorkin parameter.</p>
+      <span class="tag">Quantum Optics</span><span class="tag">Single-Photon Detection</span><span class="tag">Foundations of QM</span>
+    </div>
+    <div class="project">
+      <h2>PPKTP SPDC Source</h2>
+      <p>We generate entangled photon pairs via spontaneous parametric down-conversion (SPDC) in a periodically-poled KTP crystal, pumped with a 405&thinsp;nm Topmode laser. The source feeds our multi-slit interference setup for coincidence-resolved measurements.</p>
+      <span class="tag">SPDC</span><span class="tag">PPKTP</span><span class="tag">Entangled Photons</span>
+    </div>
+    <div class="project">
+      <h2>Generalized Probabilistic Theories (GPTs)</h2>
+      <p>We use GPT rank methods to statistically analyse multi-slit data, providing a model-independent framework for testing quantum theory against broader classes of physical theories.</p>
+      <span class="tag">GPTs</span><span class="tag">Statistical Analysis</span><span class="tag">Theory Testing</span>
+    </div>
+  </main>
+  <footer>&copy; 2026 Tristan Lismer &middot; IQC Waterloo</footer>
+</body>
 </html>

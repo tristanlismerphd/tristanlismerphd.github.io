@@ -7,24 +7,137 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: #0c0c0e;
-      color: #88888f;
-      font-family: -apple-system, 'Inter', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #fff;
+      color: #111;
+      line-height: 1.65;
+      font-size: 16px;
+    }
+    a { color: #1d4ed8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* --- password gate --- */
+    #gate {
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      text-align: center;
     }
-    .wrap { padding: 2rem; }
-    h1 { font-size: 1.1rem; font-weight: 600; color: #f0efed; margin-bottom: 0.5rem; }
-    p { font-size: 0.85rem; line-height: 1.7; }
+    .gate-box { text-align: center; }
+    .gate-box h1 { font-size: 1.1rem; font-weight: 600; margin-bottom: 1.5rem; }
+    .gate-box input {
+      border: 1px solid #d1d5db;
+      padding: .5rem .8rem;
+      font-size: .9rem;
+      outline: none;
+      width: 180px;
+      text-align: center;
+      letter-spacing: .05em;
+    }
+    .gate-box input:focus { border-color: #1d4ed8; }
+    .gate-box button {
+      display: block;
+      margin: .8rem auto 0;
+      background: #1d4ed8;
+      color: #fff;
+      border: none;
+      padding: .5rem 1.4rem;
+      font-size: .85rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .gate-box button:hover { background: #1e40af; }
+    .gate-error { font-size: .8rem; color: #dc2626; margin-top: .6rem; min-height: 1.2em; }
+
+    /* --- site content --- */
+    #site { display: none; }
+    nav { border-bottom: 1px solid #e5e7eb; padding: 0 2rem; }
+    .nav-inner {
+      max-width: 720px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; height: 50px;
+    }
+    .nav-brand { font-weight: 600; color: #111; font-size: .9rem; text-decoration: none; }
+    .nav-brand:hover { text-decoration: none; }
+    .nav-links { display: flex; gap: 1.6rem; list-style: none; }
+    .nav-links a { color: #6b7280; font-size: .85rem; }
+    .nav-links a:hover, .nav-links a.active { color: #111; text-decoration: none; }
+    main { max-width: 720px; margin: 0 auto; padding: 4rem 2rem 5rem; }
+    h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: .4rem; }
+    .role { color: #6b7280; font-size: .9rem; margin-bottom: 2rem; }
+    p { color: #374151; margin-bottom: 1rem; max-width: 600px; }
+    .section { margin-top: 3rem; }
+    .section h2 { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: #111; margin-bottom: 1rem; }
+    .link-list { list-style: none; display: flex; flex-direction: column; gap: .4rem; }
+    .link-list li a { font-size: .9rem; }
+    footer {
+      max-width: 720px; margin: 0 auto; padding: 1.5rem 2rem;
+      border-top: 1px solid #e5e7eb; font-size: .78rem; color: #9ca3af;
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>Tristan Lismer</h1>
-    <p>This site is temporarily offline. Check back soon.</p>
+
+  <div id="gate">
+    <div class="gate-box">
+      <h1>Tristan Lismer</h1>
+      <input type="password" id="pw" placeholder="Password" autofocus/>
+      <button onclick="check()">Enter</button>
+      <p class="gate-error" id="err"></p>
+    </div>
   </div>
+
+  <div id="site">
+    <nav>
+      <div class="nav-inner">
+        <a href="/" class="nav-brand">Tristan Lismer</a>
+        <ul class="nav-links">
+          <li><a href="/" class="active">Home</a></li>
+          <li><a href="/research.html">Research</a></li>
+          <li><a href="/personal.html">Personal</a></li>
+          <li><a href="/cv_tristan_lismer.pdf" target="_blank">CV</a></li>
+        </ul>
+      </div>
+    </nav>
+    <main>
+      <h1>Tristan Lismer</h1>
+      <p class="role">PhD Candidate &middot; Institute for Quantum Computing, University of Waterloo</p>
+      <p>
+        I work on experimental quantum optics, testing the foundations of quantum theory
+        through photonic systems. My main project investigates higher-order quantum interference
+        using multi-slit configurations and single-photon coincidence detection.
+      </p>
+      <p>
+        Outside the lab I compete in Ironman triathlons and ultra-trail running.
+      </p>
+      <div class="section">
+        <h2>Links</h2>
+        <ul class="link-list">
+          <li><a href="/research.html">Research &rarr;</a></li>
+          <li><a href="/personal.html">Personal &rarr;</a></li>
+          <li><a href="/cv_tristan_lismer.pdf" target="_blank">CV (PDF) &rarr;</a></li>
+          <li><a href="https://github.com/YuumiLismer" target="_blank">GitHub &rarr;</a></li>
+        </ul>
+      </div>
+    </main>
+    <footer>&copy; 2026 Tristan Lismer &middot; IQC Waterloo</footer>
+  </div>
+
+  <script>
+    const PW = 'Yuumi';
+    function unlock() {
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('site').style.display = 'block';
+    }
+    function check() {
+      if (document.getElementById('pw').value === PW) {
+        sessionStorage.setItem('auth', '1');
+        unlock();
+      } else {
+        document.getElementById('err').textContent = 'Incorrect password.';
+      }
+    }
+    document.getElementById('pw').addEventListener('keydown', e => { if (e.key === 'Enter') check(); });
+    if (sessionStorage.getItem('auth') === '1') unlock();
+  </script>
 </body>
 </html>

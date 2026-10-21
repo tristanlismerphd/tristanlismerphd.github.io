@@ -1,10 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta http-equiv="refresh" content="0; url=/"/>
-  <title>Tristan Lismer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV &mdash; Tristan Lismer</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: #111; line-height: 1.65; font-size: 16px; }
+    a { color: #1d4ed8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    nav { border-bottom: 1px solid #e5e7eb; padding: 0 2rem; }
+    .nav-inner { max-width: 720px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 50px; }
+    .nav-brand { font-weight: 600; color: #111; font-size: .9rem; text-decoration: none; }
+    .nav-brand:hover { text-decoration: none; }
+    .nav-links { display: flex; gap: 1.6rem; list-style: none; }
+    .nav-links a { color: #6b7280; font-size: .85rem; }
+    .nav-links a:hover, .nav-links a.active { color: #111; text-decoration: none; }
+    main { max-width: 720px; margin: 0 auto; padding: 4rem 2rem 5rem; }
+    h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; }
+    p { color: #374151; margin-bottom: 1.5rem; }
+    .dl-btn { display: inline-block; background: #1d4ed8; color: #fff; padding: .55rem 1.2rem; font-size: .88rem; font-weight: 500; text-decoration: none; }
+    .dl-btn:hover { background: #1e40af; text-decoration: none; }
+    footer { max-width: 720px; margin: 0 auto; padding: 1.5rem 2rem; border-top: 1px solid #e5e7eb; font-size: .78rem; color: #9ca3af; }
+  </style>
 </head>
-<body></body>
+<body>
+  <script>if (sessionStorage.getItem('auth') !== '1') location.replace('/');</script>
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">Tristan Lismer</a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/research.html">Research</a></li>
+        <li><a href="/personal.html">Personal</a></li>
+        <li><a href="/cv_tristan_lismer.pdf" target="_blank" class="active">CV</a></li>
+      </ul>
+    </div>
+  </nav>
+  <main>
+    <h1>CV</h1>
+    <p>Download the full PDF version of my curriculum vitae.</p>
+    <a href="/cv_tristan_lismer.pdf" target="_blank" class="dl-btn">Download CV (PDF)</a>
+  </main>
+  <footer>&copy; 2026 Tristan Lismer &middot; IQC Waterloo</footer>
+</body>
 </html>
